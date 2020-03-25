@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+	<meta charset="utf-8">
+	<title>폼요소연습</title>
+	</head>
+	<body>
+		<form method="post">
+			<fieldset>
+				<legend>폼 요소</legend>
+				<label>
+				텍스트 <input type="text" name="text">
+				</label>
+				<label>비밀번호
+					<input type="text" name="pwd">
+					<input type="submit" name="전송" value="전송">
+					<input type="reset" name="삭제" value="삭제">
+					<input type="button"/>
+				</label>
+				<hr/>
+				<input type="submit">
+				<input type="reset">
+				<input type="button" value="button">
+				<input type="image" src="img/loginbutton.jpg" alt="로그인이미지입니다" width="50" height="auto">
+				<input type="file">
+				<textarea cols="5" rows="7"></textarea>
+			</fieldset>
+			<fieldset>
+				<legend>라디오버튼</legend>
+					<label><input type="radio" name="동물" value="사자">사자
+					</label>
+					<label><input type="radio" name="동물" value="호랑이">호랑이
+					</label>
+					<label><input type="radio" name="애완동물" value="강아지">강아지
+					</label>
+					<label><input type="radio" name="애완동물" value="햄스터">햄스터
+					</label>
+			</fieldset>
+			<fieldset>
+				<legend>체크박스</legend>
+				<label><input type="checkbox" name="과일" value="사과">사과
+				</label>
+				<label><input type="checkbox" name="과일" value="수박">수박
+				</label>
+				<label><input type="checkbox" name="과일" value="파인애플">파인애플
+				</label>
+			</fieldset>
+		</form>
+	</body>
+</html>
