@@ -1,0 +1,100 @@
+# 변수 (Variable)
+# => 다양한 데이터를 저장하는 공간(메모리)을 할당
+#       지정한 값을 언제든지 다시 사용할수 있고,
+#        경우에 따라 데이터 값을 덮어 씌울수 있음
+
+# 변수 명명법(작명규칙)
+#  1. 영문자, 숫자, 언더바(_),  한글
+#  2. 영문자 사용경우 대소문자 구분
+#       ex) Sum, SUm, suM, ... (변수로 사용할떄 모두 다름)
+#  3. 변수명의 *시작은 숫자 사용이 불가함 only 영문자, 숫자
+#       ex) Sum(o), _Sum(o), 1sum(x)
+#  4. 하나의 변수명에 띄어쓰기 불가능   
+#       ex) odd_num(o), odd num(x)
+#  5. python 예약어/명령어 불가능(중복사용 가능 but 예약어 안됨)
+#       ex)  명령어: if, for, while, break, continue    (capitalized는 가능)
+
+# 변수의 사용(정의)
+# 1. 변수명  =  값(데이터)     #하나의 변수 처리
+# 2 . 변수명1 , 변수명2 = 값1, 값2              변수명:1 = 값1 
+# 3. 여러개의 변수를 처리하는 경우
+# 4. 변수명 1 = 변수명 2 = 값1(결과 ==> 변수명 1,2 = 값1
+'''
+x = 10
+y = 20
+z = x + y 
+print(z)
+print('x={}, y={}, z={}'.format(x,y,z))
+
+x,y,z = 1, 1.0,'1'         
+print(x), print(y); print(z)
+
+# type() : 데이터의 타입(자료형)을 반환
+print(type(x))      #   <class 'int'>
+print(type(y))      #   <class 'float'>
+print(type(z))      #   <class 'str'>
+print('')       #null =>> 비어있는 문자 but 띄어쓰기 하면 x 
+
+print(x+y);print(type(x+y))         #데이터 타입을 변경하는 행위"자동형변환"(묵시적 형변환: 숫자인경우)
+
+# TypeError : 문자열(str) + 정수/실수(int, float) = Error(묵시적 형변환 불가)
+
+#변수의 자료형
+#    1. 정수(int)    : 0, 양의정수, 음의정수로 구성된 숫자
+#    2. 실수 (float) : 소수점을 사용하는 숫자값
+#    3. 문자열(str)  :  ''/""  표시하는 문자들
+#    4. bool: True, False 
+#-------------프로그램 언어 기본자료형---------
+
+#                 나열(sequence) 자료형들 
+#    5. 리스트(list)  : 정수, 실수 및 문자열 등 자료들의 집합(값의 집합)  => '[값1, 값2,..] 로 표시'
+#    6. 튜플(tuple)    : 정수, 실수 및 문자열 등 자료들의 집합(값의 집합) => '(값1, 값2,..) 로 표시'
+#    7. 사전(dict): 정수, 실수 및 문자열 등 자료들의 집합(키와 값이 쌍으로 존재)
+#               => '{키1: 값1, 키2: 값2,..} 로 표시'
+# 자료형 변환 함수
+# - bool()  => True or False 을판별 0, 'null'인경우 거짓(False)
+#        나머지 전부 True
+print(bool(1))          #True
+print(bool(0))          #False
+print(bool(-1))         #True
+print(bool(''))         #False (null)
+print(bool(' '))        #True (' ')
+print(bool('a'))        #True
+print(bool([]))         #False(리스트 자료 안에 값이 없음)
+print(bool([-1]))       #True(리스트 자료 안에 값이 있음)
+'''
+# -int()    => 숫자,문자 또는 숫자를 정수로 변환
+print(int(1.0))     # => 실수를 정수로
+print(int(1.1))     # => 실수를 정수로 : 실수를 정수로 변환시 소수점이하 삭제 
+print(int('1'))     # => 숫자문자를 정수로 바꿈 (글자 불가)
+# print(int('1.0'))   # ValueError : 이유: 문자열 -> 실수 -> 정수 2번 변경 x  
+print(int(float('1.0')))
+
+# int()의 확장사용자 기본 10진수로 표현
+print(int('0xA',16))        # 16진수로 표기 해줘야함
+print(int('0b1010',2))        # 2진수로 표기 해줘야함
+print(int('A', 16))
+# -float()      => 숫자,문자 또는 숫자를 실수로 변환
+print(float(1))
+print(float('1'))
+print(float('1.0'))
+# -str()        => 입력값 문자로
+print(str(1))
+print(str(0))
+print(str(-1))
+print(str(True))
+print(str([]))
+print(str([1]))
+
+# -list() =>리스트 자료형으로 변환
+print(list('12345'))       #문자열에 대해: ['1','2','3','4','5']
+print(list(1,2,3,4,5))  # 튜플에 대해 [1,2,3,4,5] 
+# -tuple()
+print(tuple('12345'))       #문자열에 대해: ('1','2','3','4','5')
+print(tuple([1,2,3,4,5]))     #리스트에 대해 (1,2,3,4,5) 
+
+# -dict()
+print(dict((('a',1),('b',2))))      # {'a':1, 'b':2}
+# -set()    :집합자료로 변환
+print(set('12345'))         # 문자열이기 떄문에 출력시 값 매번 변경['3','2','5'...]
+print(set([1,2,3,4,5]))     # {1,2,3,4,5}로 출력
