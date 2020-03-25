@@ -1,0 +1,12 @@
+print('최소값 :', min(32,45,48,57,84),"최대값 :", max(32,45,48,57,84))
+print('총합계 :',sum([29,95,15,85,66]))
+print('평균 :', sum([29,95,15,85,66])/5)
+print('몫,나머지 :', divmod(sum([29,95,15,85,66]),5))
+print('거듭제곱 :', pow(max(3,4,8,5), min(3,4,8,5)))
+
+print(hex(0x3d5f))
+print(hex(1024))
+print(bin(0x35))
+print(hex(0o35))
+print(hex(3452+5785))
+print(bin(0xAC+200))
