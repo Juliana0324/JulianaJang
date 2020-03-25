@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.group{
+    border: 1px solid black;
+    position: relative;
+    width: 1000px;
+    height: 1000px;
+}
+.red{
+    width: 300px;
+    height: 100px;
+    background-color: red;
+    float: left;
+}
+.blue{
+    width:100px;
+    height: 100px;
+    background-color: blue;
+    float: right;
+}
+.green{
+    width: 150px;
+    height: 300px;
+    background-color: green;
+    float: right;
+}
+.yellow{
+    background-color: yellow;
+    width: 200px;
+    height: 200px;
+    float: left;
+    clear: both;
+    margin-left: 200px;
+}
+.purple{
+    background-color: purple;
+    width:200px;
+    height: 300px;
+    float: left;   
+}
+.orange{
+    background-color: orange;
+    width: 400px;
+    height: 200px;
+    float: left;
+}
+.pink{
+    background-color: pink;
+    width: 500px;
+    height:300px;
+    float: left;
+    clear: both;
+}
+.skyblue{
+    background-color: skyblue;
+    width: 200px;
+    height: 200px;
+    float: right;
+}

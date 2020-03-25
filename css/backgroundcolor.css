@@ -1,0 +1,14 @@
+div{width:200px;
+    height: 200px;}
+.box1{background-color: blue}
+.box2{background-color: black}
+.box3{background-color: red}
+.box4{background-color: lightpink}
+.text01{color: white;
+text-align:center;}
+.text02{color:white;
+text-align: center;
+line-height: 200px;}
+span{background-color: white;
+color: green;
+}

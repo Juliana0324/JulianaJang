@@ -1,0 +1,42 @@
+ div>div{width: 200px;
+height: 200px;
+background-color: red;}
+.box1 a{
+    color: pink;
+    text-decoration: none;
+}
+.box1 a:visited{
+    color: red;
+}
+.box1:hover{
+    background-color: skyblue;
+}
+div>div:active{
+    background-color: grey;
+}
+div>div:hover{
+    background-color: pink;
+}
+.group1 a{
+    text-decoration: none;
+    color: darkgrey;
+}
+.group1 a:visited{
+    text-decoration:underline;
+    color: pink;
+}
+.group2 a{
+    text-decoration: none;
+    background-color: black;
+}
+.group2 a:visited{
+    color: grey;
+}
+.group3 a {
+    text-decoration: none;
+    color: red;
+}
+.group3 a:active{
+    background-color: black;
+    color:yellow;
+}
