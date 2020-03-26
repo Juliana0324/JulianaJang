@@ -5,7 +5,7 @@
 
 # print(input())  # input()입력받은 내용을 print로 출력
 #print(input('test입력을 처리합니다. 문자열을 입력하세요:'))
-'''
+
 #예제1 두수를 입력받아 합을 출력하세요
 num1 = input('값1 :')
 num2 = input('값2 :')
@@ -80,3 +80,52 @@ turtle.forward(100)
 turtle.left(120)
 turtle.mainloop()
 
+
+# 예제2) 한변의 길이입력 input 이용해서 정삼각형
+x = int(input('한변의 길이: '))
+import turtle 
+turtle.forward(x)
+turtle.left(120)            # 각이 모두 같은 도형: angle 값은 360/n(각형)
+turtle.forward(x)
+turtle.left(120)
+turtle.forward(x)
+turtle.left(120)
+turtle.mainloop()
+
+# 예제3) input 이용해서 사각형
+x = int(input('가로: '))
+y = int(input('세로 :'))
+import turtle
+turtle.forward(x)
+turtle.left(90)
+turtle.forward(y)
+turtle.left(90)
+turtle.forward(x)
+turtle.left(90)
+turtle.forward(y)
+turtle.left(90)
+turtle.mainloop()
+'''
+
+# 예제4) input 이용해서 정육각형
+x = int(input('정육각형의 한변: '))
+import turtle
+turtle.color('red')
+turtle.forward(x)
+turtle.left(60)
+turtle.color('orange')
+turtle.forward(x)
+turtle.left(60)
+turtle.color('pink')
+turtle.forward(x)
+turtle.left(60)
+turtle.color('blue')
+turtle.forward(x)
+turtle.left(60)
+turtle.color('green')
+turtle.forward(x)
+turtle.color('yellow')
+turtle.left(60)
+turtle.forward(x)
+turtle.left(60)
+turtle.mainloop()
