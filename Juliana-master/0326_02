@@ -1,0 +1,82 @@
+# input 함수 
+# print와 반대 개념으로 사용자로부터 입력받는 함수
+# 사용자로 부터 입력받는 데이터는 자료형'str-' 문자열
+# - 사용 용도(연산 및 기타작업)에 따라 형변환 작업해야한다
+
+# print(input())  # input()입력받은 내용을 print로 출력
+#print(input('test입력을 처리합니다. 문자열을 입력하세요:'))
+'''
+#예제1 두수를 입력받아 합을 출력하세요
+num1 = input('값1 :')
+num2 = input('값2 :')
+print(type(num1),type(num2))        
+Sum=num1+num2 
+print(Sum)      # 문자열 + 로 인식 출력: 'num1''num2'
+# ... 형변환시켜줘야함
+Sum2 = int(num1)+int(num2)
+print(Sum2)
+
+# 입력값을 두개받아서 출력예제
+su1= int(input('정수 입력: '))
+su2= float(input('실수 입력: '))
+print('su1 = {}\n su2={}'.format(type(su1),type(su2)))
+
+# 예제3. 두정수 입력받아서 사칙연산
+num1 = int(input('값1: '))
+num2 = int(input('값2: '))
+print('num1+num2={}'.format(num1+num2))
+print('num1-num2={}'.format(num1-num2))
+print('num1*num2={}'.format(num1*num2))
+print('num1/num2={}'.format(num1/num2))
+
+# 예제4. ====학생정보====
+# 이름과 국어, 영어, 수학 점수를 입력받아 출력하세요
+
+name = input('이름 : ')
+국어 = int(input('국어: '))
+영어 = int(input('영어: '))
+수학 = int(input('수학: '))
+sum = 국어+영어+수학
+avg= sum/3
+print('='*20,'학생정보','='*20)
+print('{}\t{}\t{}\t{}\t{}'.format('이름','국어','영어','수학','합계','평균'))
+print('{}\t{}\t{}\t{}\t{:.2f}'.format(name,국어,영어,수학,sum,avg))
+
+name = input('이름 : ')
+height = float(input('키: '))
+weight = float(input('몸무게: '))
+
+std= (height-100)*0.9
+fat = weight/std *100
+
+print('{}님의 비만도는 {:.2f}%입니다.'.format(name,fat))
+'''
+# Turtle 모듈 입력
+# 그림및 표를 만드는 모듈
+# 사용법 :
+# import turtle => turtle 모듈을 불러와 사용!
+# ㅅturtle 에서 사용하는 함수
+#   -forward(distance): distance 값 만큼 앞으로 이동 (pix)
+#   -backward(distance): distance 값 만큼 뒤로 이동 (pix)
+#   -left(angle): angle 값 만큼 좌회전 
+#   -right(angle): angle 값 만큼 우회전
+#   -goto(x,y): 그림의 포인터를 좌표(x,y축만큼) 이동
+#   -color(color): 지정한 color(문자열)로 색 설정(선)
+#   -width(width): 선두께를 width 설정
+#   -bgcolor(color): 지정한 color(문자열)로 배경색 설정  
+#   -speed(int): 지정된 int(0~10)값으로 속도 지정 
+#   -penup(): 선 x
+#   -pendown(): 선 o
+#   -mainloop(): 프로그램 종료 하지 않고 유지할수 있게 함
+
+# 예제1) 정삼각형 그리기
+import turtle
+
+turtle.forward(100)
+turtle.left(120)
+turtle.forward(100)
+turtle.left(120)
+turtle.forward(100)
+turtle.left(120)
+turtle.mainloop()
+
