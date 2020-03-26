@@ -1,0 +1,37 @@
+#1
+num1,num2 = 10, 20
+Sum=num1 + num2
+print('{}+{}={}'.format(num1,num2,Sum))
+
+#2
+num1,num2 = 7,5
+Sum = num1+num2
+Sub = num1-num2
+Mul = num1*num2
+Div = num1/num2
+print('{}+{} = {}'.format(num1,num2,Sum))
+print('{}-{} = {}'.format(num1,num2,Sub))
+print('{}*{} = {}'.format(num1,num2,Mul))
+print('{}/{} = {}'.format(num1,num2,Div))
+
+#3
+py = 100
+print('Python {}점!!!'.format(py))
+str2 = '나는 오늘 행복합니다.!!!'
+print(str2)
+c언어 = 80
+jv=70
+
+tot=py+c언어+jv
+avg=tot/3
+print('합계: {}'.format(tot))
+print('평균: {:.2f}'.format(avg))  
+
+#4
+su = 100
+num= '100'
+flt = 1.111
+print(su + int(num))
+print(su + flt)             #print(int(num)+flt)
+print(str(su)+num)          # print(num+num)
+
