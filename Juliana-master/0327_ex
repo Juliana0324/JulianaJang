@@ -36,9 +36,11 @@ else:
 #예제 4. 
 x = int(input('값1: '))
 y = int(input('값2: '))
-if x > y :
+if x == y:
+    print('값1과 값2는 같습니다.')
+if x != y and x > y :
     print(x)
-else :
+if x != y and x < y:
     print(y)
 
 # 예제 5
