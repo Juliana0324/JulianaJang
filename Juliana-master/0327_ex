@@ -1,0 +1,57 @@
+
+# 예제1 
+num=int(input('정수의 값을 입력하세요: '))
+if num % 3 == 0: 
+    print('3의 배수입니다')
+else :
+    print('3의 배수가 아닙니다')
+
+#예제 2.
+x = int(input('정수의 값을 입력하세요: '))
+if x > 0 : 
+    print(x)
+else :
+    print('{}'.format(-x))
+
+#예제 3.
+x = int(input('정수의 값: '))
+if x % 2 == 0:
+    print('짝수이며 2의 배수입니다.')
+else: 
+    print('홀수 입니다')
+
+#예제 4. 
+x = int(input('값1: '))
+y = int(input('값2: '))
+if x > y :
+    print(x)
+else :
+    print(y)
+
+# 예제 5
+x = int(input('값1: '))
+y = int(input('값2: '))
+z=  int(input('값3: '))
+
+if x > y and x > z : 
+    print(x)
+if y > x and y> z :
+    print(y)
+if z > x and z>y:
+    print(z) 
+
+# 예제 6
+x = int(input('값1: '))
+y = int(input('값2: '))
+if x > y and x % 2 ==0:
+    print(x)
+if x < y and y % 2 == 0:
+    print(y)
+
+
+# 예제 7. 
+x = int(input('값1: '))
+y = int(input('값2: '))
+Sum = x + y
+if Sum % 2 ==0 and Sum % 3 == 0:
+    print(Sum)
