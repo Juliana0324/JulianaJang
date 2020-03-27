@@ -21,6 +21,11 @@ if x > 0 :
 else :
     print('{}'.format(-x))
 
+# 선생님 풀이
+# if x < 0:
+#    x = -x
+# print('입력값은 : ',x) 
+
 #예제 3.
 x = int(input('정수의 값: '))
 if x % 2 == 0:
