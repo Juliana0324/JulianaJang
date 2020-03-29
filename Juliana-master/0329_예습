@@ -1,0 +1,56 @@
+# 사용자로부터 키, 이름, 체중을 입력받아 비만도를 구하시오
+name = input('이름: ')
+hei = int(input('키: '))
+wei = int(input('체중: '))
+std = (hei-100)*0.9
+fat = wei/std * 100
+
+if fat < 100:
+    print('{}님의 비만도는 {:.2f}%로 저체중입니다'.format(name, fat))
+elif 100 <= fat < 110:
+    print('{}님의 비만도는 {:.2f}%로 정상입니다'.format(name, fat))
+elif 110 <= fat < 120:
+    print('{}님의 비만도는 {:.2f}%로 과체중입니다'.format(name, fat))
+elif 120 <= fat < 130:
+    print('{}님의 비만도는 {:.2f}%로 비만입니다'.format(name, fat))
+else:
+    print('{}님의 비만도는 {:.2f}%로 과체중입니다'.format(name, fat))
+    
+# 4의 배수는 윤년이 된다 그외는 평년, 
+# 4의 배수이면서 100의 배수는 평년, 그외는 윤년
+# 4 그리고 100의 배수이면서 400의 배수는 윤년
+year = int(input('연도를 입력하세요:'))
+if year % 4 == 0:
+    if year % 100 == 0:
+        if year % 400 == 0:
+            print('{}는 윤년 입니다'.format(year))
+        else:
+            print('{}는 평년입니다.'.format(year))
+    else:
+        print('{}는 윤년입니다'.format(year))  
+else:
+    print('{}는 평년입니다.'.format(year))
+    
+# 1~20까지의 정수중에 짝수에 해당하는 것만 출력
+for x in range(1,21):
+    if x % 2==0:
+       print(x, end= ' ')
+
+# 100~51 까지의 정수주에 홀수 값만 해당하는것 출력
+for x in range(101, 50,-2):
+    print(x, end= ' ')
+# 1 ~ 50 까지의 정수값을 출력할떄 한줄에 5개의 값이 출력되도록
+*** 헷갈림 
+for x in range(1,51):
+    if x % 5 == 0 :
+        print(x)
+    else: 
+        print(x, end= ' ')
+# 1 ~ 100 까지 더한값을 구하시오
+tot = 0
+for x in range(1,101):
+    tot = tot + x 
+print(tot)
+
+
+   
