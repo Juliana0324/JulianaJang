@@ -1,0 +1,255 @@
+#다중 if 구문
+# : if 조건문의 참인지 아닌지 구분., 아니라면 다음 if 구문 비교
+# 조건문 확인, 마지막 else를 사용하면 마지막 else로 종료되는 구문
+# : elif
+
+# 형식: 
+# if (조건식):
+#      if 종속문장
+#      if 종속문장
+# elif (조건식):
+#      elif 종속문장
+#      elif 종속문장
+# (elif의 갯수는 n개 까지 가능)
+# ... 
+# else :
+#       else 종속문장
+# 언제 다중 if 구문을 사용할까? 메뉴 등급, 동등위치에서 비교
+
+# 중복 if 구문
+# : if 구문안에 또 다른 if  구문을 만든 형태
+# 첫번째 if가 참인 경우에 두번째 if 구문의 조건을 봄
+#
+# 형식:
+# if (조건식1):
+#   종속문장 1(첫번째 if) 
+#   if (조건식 2):
+#       종속문장1 (두번째 if)
+# else:
+#   종속문장2
+# 
+'''
+# 예제1. 두수를 입력받아 큰수가 짝수면 출력
+x = int (input('값1:')) 
+y = int (input('값2:')) 
+if x > y :
+    if x % 2 ==0:
+        print('값1{}은 큰수이면서 짝수입니다'.format(x))
+    else:
+        print('값1{}은 큰수이면서 홀수입니다'.format(x))
+elif x < y:
+    if y % 2 ==0:
+        print('값1{}은 큰수이면서 짝수입니다'.format(y))
+    else:
+        print('값1{}은 큰수이면서 홀수입니다'.format(y))
+else:
+    print('{}와 {}는 같습니다.'.format(x,y))
+'''
+'''
+
+# 문제1.
+name = input('이름: ')
+hei = float(input('키: '))
+wei = float(input('몸무게: '))
+
+std = (hei-100)*0.9
+fat = wei/std*100
+
+if fat < 100:
+    level ='저체중'
+elif 100<=fat < 110:
+    level ='정상'
+elif 110<= fat < 120:
+    level ='과체중'
+elif 120<= fat < 130:
+    level ='비만' 
+else 130<= fat: 
+    level ='고도비만'
+print('{}님의 비만도는 {:.2f}%로 {}입니다.'.format(name,fat,level))
+
+'''
+# 문제 2. 3~10까지 입력받아 삼각형 부터 10각형까지 그리는 코드
+x = int(input('그리실 도형의 변의 갯수를 입력하세요:'))
+import turtle
+if x == 3 : 
+    turtle.left(120)      #다음엔 360/x로 변의 각 주기
+    turtle.forward(100)
+    turtle.left(120)
+    turtle.forward(100)
+    turtle.left(120)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 4:
+    turtle.left(90)
+    turtle.forward(100)
+    turtle.left(90)
+    turtle.forward(100)
+    turtle.left(90)
+    turtle.forward(100)
+    turtle.left(90)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 5:
+    turtle.left(72)
+    turtle.forward(100)
+    turtle.left(72)
+    turtle.forward(100)
+    turtle.left(72)
+    turtle.forward(100)
+    turtle.left(72)
+    turtle.forward(100)
+    turtle.left(72)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 6:
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.left(60)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 7:
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.left(360/7)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 8:
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.left(45)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 9:
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.left(40)
+    turtle.forward(100)
+    turtle.mainloop()
+elif x == 10:
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.left(36)
+    turtle.forward(100)
+    turtle.mainloop()
+else:
+    print('그릴수 없습니다.')
+    
+     
+'''
+# 문제 3. 
+year = int(input('연도를 구하세요'))
+if year % 4 == 0: 
+    if year % 100==0:
+        if year % 400 ==0:
+            print('{}는 윤년입니다.'.format(year))
+        else:
+            print('{}는 평년입니다'.format(year))
+    else:
+        print('{}는 윤년입니다.'.format(year))
+else:
+    print('{}는 평년입니다'.format(year))
+    '''
+
+# 문제 4. 이름 성적을 입력받아 ABCDF를 출력하세요
+name = input('이름 :')
+sc1 = int(input('국어 :'))
+sc2 = int(input('영어 :'))
+sc3 = int(input('수학 :'))
+avg =(sc1 + sc2 + sc3)/3
+if avg >= 90:
+    print('A')
+elif avg >= 80:
+    print('B')
+elif avg >= 70:
+    print('C')
+elif avg >= 60:
+    print('D')
+elif avg < 60:
+    print('F')
+
+# 문제 5. 커피의 개당 가격 2000원. 10개 초과하면 초과하는 것에 대해 개당 1500
+# 커피 갯수와 금액
+
+cof = int(input('커피 개수: '))
+if cof <= 10:
+    tot = cof * 2000
+    print('{}개를 주문하셔서 값은 {:,}원입니다. '.format(cof, tot))
+else:
+    el = (cof - 10)*3500
+    tot = 20000+ el
+    print('{}개를 주문하셔서 값은 {:,}원입니다. '.format(cof, tot))
+'''
+
+#문제 6. 
+x = int(input('값 1: '))
+if x ==0:
+    print('0은 3의 배수도 4의 배수도 아닙니다.')
+elif x % 4==0 and x % 3==0:
+    print('{}는 4의 배수이며 3의 배수입니다.'.format(x))
+elif num % 3 ==0:
+    print('{}는 3의 배수입니다'.format(x))
+elif num % 4==0:
+    print('{}는 4의 배수입니다'.format(x))
+else:
+    print('{}는 3의 배수도 4의 배수도 아닙니다.'.format(x))
+
