@@ -235,7 +235,7 @@ if cof <= 10:
     tot = cof * 2000
     print('{}개를 주문하셔서 값은 {:,}원입니다. '.format(cof, tot))
 else:
-    el = (cof - 10)*3500
+    el = (cof - 10)*1500
     tot = 20000+ el
     print('{}개를 주문하셔서 값은 {:,}원입니다. '.format(cof, tot))
 '''
