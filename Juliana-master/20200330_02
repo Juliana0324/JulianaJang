@@ -1,0 +1,62 @@
+# 반복문 (for, while)
+# For 구문
+# : 가장 대표적인 반복 구문중 하나로 주어진 조건에 따른 회차 반복
+# 
+# for 기본형식
+#  for 변수명 in range(반복횟수):
+#       종속문장1(for)
+#       종속문장2(for)
+# (메인 프로그램 실행 코드)
+# 
+# 
+# 
+# range() 함수: 파이썬 내장 함수로 정해진 범위 연속된 값을 만드는 함수
+# 
+# 사용법 (range())
+# 1. range(종료값)
+#  : 0~종료값 미만의 값의 범위
+# 예] range(10) => [0,1,2,3,4,5,6,7,8,9]
+# 2. range(시작값, 종료값)
+#  : 시작값 ~ 종료값 미만까지의 범위
+# 예] range(5,10) => [5,6,7,8,9]
+# 3.  range(시작값, 종료값, 증가값)
+# : 시작값 ~ 종료값 미만까지의 증가값 간격의 값 범위
+# 예] range(0,10,2) =>[0,2,4,6,8] 
+
+# 예제 1) 
+for x in range(10):
+    print(x, end=' ')   #print에 있는 인자값 end는 print()동작후 
+                        #마지막에 사용될 문자를 지정(기본= '\n')
+print() # 줄바꿈
+# 예제 2) 
+for x in range(5,10):
+    print(x, end=' ')
+print()
+
+# 예제 3)
+for x in range(0,10,2):
+    print(x, end=' ')
+print()
+
+# 예제 4) 증감값
+for x in range(10, 0, -2):
+    print(x, end=' ')
+print()
+
+# 예제 5) 
+for x in 'string':
+    print(x,end=' ')
+print()
+    # 출력 : s t r i n g
+
+# 예제 6) 
+i = 0 # 반복회수 셀 변수
+for x in [1,4,18,'test','a', 1.80, 100]:
+    print(x, end = ' ')
+    i +=1
+print('\n', 'for 구문은 {}번 반복했습니다.'.format(i))
+
+# 예제 7
+print(list(range(10)))
+    #list 개수나열 : [0,1,2,3,4,5,6,7,8,9]
+
