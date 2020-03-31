@@ -60,3 +60,93 @@ print('\n', 'for 구문은 {}번 반복했습니다.'.format(i))
 print(list(range(10)))
     #list 개수나열 : [0,1,2,3,4,5,6,7,8,9]
 
+***
+# 이중 for 구문 : For 구문 안에 중첩해서 사용하는것
+# 예제1.
+Sum = 0     #반복회차
+for x in range(5):              #[0~5]
+    print('상위 For 구문 시작전 :',Sum)
+    for y in range(5):
+        Sum += 1
+        print('하위 For 구문의 동작:' ,Sum)
+print('최종결과:', Sum)
+
+# 중첩 (이중)for 구문: For문은 상위 For문이 한번 실행할때에 하위 For문은 
+# 자신에 정해진 반복 횟수 만큼 실행(상위 1회=하위 5회)
+# 형식
+# for x in range(반복회차) : 
+#   for y in range(반복회차): 
+#       종속문장1 (하위 For문)
+#       종속문장2 (하위 For문)
+#   종속문장3 (상위 For문)
+# (메인 실행 코드)
+# 
+
+# 예제 2. 이중 For 구문 구동
+i = 0
+for x in range(1,5,3):      #[1,4]
+    for y in range(5,0,-1):
+        print('{}는 상위 For문, {}는 하위 For 문'.format(x,y))
+        i += 1
+print('{}횟수 만큼 반복'.format(i))
+# 1에대해 - 5,4,3,2,1
+# 4에대해 - 5,4,3,2,1
+
+
+# 문제1. 중첩 for문을 이용하여 구구단표 작성
+for x in range(2,10):
+    print("{}단 출력".format(x))
+    for y in range(1,10):
+        print("{} x {} = {:<3}".format(x,y,x*y))
+    print()  # 단과 단사이 간격
+print('\n')  # 그다음 코드와 간격
+
+# 문제2. 
+for x in range(2,10):
+    for y in range(1,10):
+        if y % 9 ==0:
+            print('{} * {} = {:<3}'.format(x,y,x*y))
+        else:
+            print('{} * {} = {:<3}'.format(x,y,x*y),end = ' ')
+print('\n')
+
+for x in range(1,10):
+    for y in range(2, 10):
+        print('{} * {} = {:<3}'.format(y,x,x*y),end=" ")
+    print()
+print('\n')
+
+
+#3. 다음과 같이 출력되게 For 구문 작성
+# 상위 For 구문이 0일때, 하위 for구문: 0 0 0 0 0
+# 상위 For 구문이 1일때, 하위 for구문: 0 1 2 3 4
+# 상위 For 구문이 2일때, 하위 for구문: 0 2 4 6 8
+# 상위 For 구문이 3일때, 하위 for구문: 0 3 6 9 12
+#  ...
+for x in range(5):
+    print('상위 For문 {}일때, 하위 For문:'.format(x),end=" ")
+    for y in range(5):
+        print(x*y, end=' ')
+    print()
+'''
+
+# 문제 4. 다음과 같이 출력하게 만드시오.
+for x in range(5):
+    for y in range(1,6):
+        print(y+x*5,end='\t')
+    print()
+print('\n')
+
+for x in range(5,0,-1):
+    for y in range(5):
+        print(x*5-y,end='\t')
+    print()
+print('\n')
+
+i = 0
+for x in range(5):
+    for y in range(5):
+        print((x+y)%5+1,end=' ')        # +1은 0: 값
+    print()
+print('\n')
+
