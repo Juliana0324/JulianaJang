@@ -1,0 +1,81 @@
+'''
+i = 0
+odd = 0
+even = 0
+while i <= 10:
+   if i % 2 == 0:
+      even += i
+   else:
+      odd += i
+   i += 1
+print('짝수의 합: {}, 홀수의 합:{}'.format(even, odd))
+
+i = 0
+while i < 5:
+   i += 1
+   print('{}번 종속문장 실행'.format(i))
+else:
+   print('조건식이 거짓인 경우 실행하는 코드')
+while True:
+   i = int(input('정수 입력(0을 입력하면 프로그램종료):'))
+   if i == 0:
+      break
+   print('입력한 a의 값: ', i) 
+
+i = 0
+while i < 5:
+   i += 1
+   if i == 3:
+      continue
+   print('i=',i) 
+
+# 문제 1) 쌀 100통(쌀 1통 = 100g)==> 총 10,000g
+#       2)  쥐 1마리가 하루에 20g, 쥐 2마리       ==> 하루에 40g
+#       3) 10일 마다 쥐의 수가 2배씩 증가       
+#       4) 이때 몇일만에 모두 없어지나? 쥐는 몇마리?
+# rice = 10000g
+
+rice = 10000
+day = 1
+mice=2
+while True:
+   if day % 10==0:
+      mice *= 2
+   if rice == 0:
+      day += 1
+      tot = rice - (mice*day*20)
+      break
+   print('{}일에 쌀이 모두 없어지며, 쥐는 {}입니다.'.format(day,mice))
+'''
+
+day = 1
+while day < 10:
+   day += 1
+   if day%10 == 0:
+      day += 1
+   if day >= 10000:
+      break
+   print('{}일에 쌀이 모두 없어지며, 쥐는 {}마리입니다.'.format((day-1)*10,pow(2,day)))
+
+'''
+tot = 0
+x = 0
+
+while x < 100:
+   x += 1
+   tot = x + tot
+print(tot)
+
+while True:
+   x += 1
+   tot = tot+x
+   if tot > 10000:
+      break
+print(tot, x)
+
+x=0
+while x < 5:
+   x += 1
+   print('*'*x)
+
+'''
