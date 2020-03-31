@@ -1,0 +1,104 @@
+#while 구문
+# : 조건문이 참인 경우에 반복하는 반복문
+#   형식
+# while(조건문):
+#       종속문장1
+#       종속문장2
+# (메인 프로그램 실행코드)
+# 
+# 예) 
+# while x < 10:
+#   종속문장 1
+#   종속문장 2
+#  x = x+1  or x+=1  ==> ***조건식에 변화를 주는 값
+# (메인 프로그램 실행코드)
+# 
+# 예제3) While 구문을 이용한 반복문,(짝수의 합과 홀수의 합)
+'''
+i = 0
+odd, even = 0,0
+while i <= 10: 
+    if i % 2 ==0:
+        even += i
+    else:
+        odd += i
+    i += 1
+print('짝수의 합: {}, 홀수의 합: {}'.format(even,odd))
+'''
+# while ~else
+i = 0
+while i < 5:
+    print('{}번 종속문장 실행'.format(i))
+    i+=1
+else:
+    print('조건식이 거짓인경우 실행하는 코드') 
+
+# while 무한반복 
+# : while 구문을 항상 참이 되게 설정후 반복문 내에 
+# 제어를 위해 명령어 실행하여 반복구문 종료(break),
+#  또는 다시조건을 보게 만든다(continue)
+# 형식
+# while True: 
+#   종속문장1
+#   종속문장2
+# (메인 프로그램 실행코드)
+# 위와 같은 형시으로 while에 반복문을 사용하면, 무한이 종속문장을 실행하게 된다.
+# break명려어를 사용하여 반복을 종료
+# (while, for 모두 사용 가능)
+# 
+# (break사용예)
+# while True:
+#       종속문장 1
+#       break
+#       종속문장 2
+#       (메인 프로그램 실행코드)
+# 프로그램 진행 흐름: 1) while 조건(True), 2) 종속문장1
+#                     3) break 명령어       4) 메인프로그램 실행코드
+#  break명령어를 반복문 중에 만나면. 더이상 반복없이 종료
+# 
+# continue: While/for 문에서 반복문을 종료하는 것이 아니라 반복중
+#  continue를 만나면,흐름이 반복문의 조건식으로 이용
+#  continue 예시
+# while True:
+#       종속문장 1 
+#       continue
+#       종속문장 2
+# (메인프로그램 실행코드)
+# 
+# 프로그램 진행 흐름: 1) while True (조건식) 2) 종속문장1
+#                       3) continue     4) while 조건식(True) 5) 종속문장1
+#                       6) continue     7) while 조건식(True) 8) 종속문장1
+#                       9) continue     10) while 조건식(True) 12) 종속문장1 
+'''
+#예제1) break, continue사용예제
+# break
+while True:
+    a = int(input('정수 입력(0입력시 프로그램 종료): '))
+    if a == 0:
+        break
+    print('입력한 a의 값:',a)
+
+# continue
+a = 0
+while a < 5:
+    a += 1
+    if a == 3:
+        continue                # continue를 입력해준 3을 제외시키고 4로 넘어감
+    print('a={}'.format(a))
+'''
+
+# 문제 1) 쌀 100통(쌀 1통 = 100g), 쥐 2마리==> 총 10,000g
+#       2)  쥐 1마리가 하루에 20g       ==> 하루에 40g
+#       3) 10일 마다 쥐의 수가 2배씩 증가       
+#       4) 이때 몇일만에 모두 없어지나? 쥐는 몇마리?
+
+#40*10= 400,
+#80*10= 1200
+day=1
+rat = 2
+while day > 10:
+    day += 1
+    if rat < 10 :
+        rat*40
+    else:
+        rat*day*40
