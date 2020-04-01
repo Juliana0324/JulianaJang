@@ -1,0 +1,149 @@
+'''
+# 문제 1] 
+# 쌀 100통이 저장되어 있는 창고에 암수 1쌍의 쥐가 있습니다. 
+# 쥐 한 마리가 하루 20g씩 쌀을 먹고 있습니다. 
+# 10일 마다 쥐의 수가 2배씩 증가하고 있다면, 
+# 며칠 만에 창고의 쌀이 모두 쥐의 먹이가 될까? 
+# 또, 이때에 쥐는 총 몇마리가 되어 있을까? 
+# (쌀 한통는 1kg, 쥐는 쌀은 먹은 후 2배로 증가하는 조건)
+# [결과] : 80일, 512마리
+#
+rice = 100 * 1000
+mice = 2
+day = 1
+while rice > 0 :
+    rice -= mice * 20
+    if day % 10 == 0:
+        mice *= 2
+    if rice <= 0:
+        break
+    day += 1
+print("{}일만에 쥐는 {} 마리가 됨.".format(day,mice))
+
+# https://ko.khanacademy.org/ => 수학관련 사이트
+
+# 문제2] turtle을 통해서 만든 다각형 그리는 코드를 반복문으로 
+#   사용하여 작성 (3 ~ 12까지의 값을 입력 받아서 하시오)
+# 
+import turtle
+su = int(input("3 ~ 12까지 정수 입력 : "))
+if su >=3 and su <= 12:
+    for x in range(su):
+        turtle.forward(100)
+        turtle.left(360/su)
+    turtle.mainloop()
+else:
+    print("그릴 수 없습니다.")
+
+# 문제3] 1 ~ 100까지의 합을 구하는 코드를 작성
+# 
+Sum=0
+for x in range(1,101):
+    Sum += x
+print(Sum)
+
+
+
+# 문제4] 1부터 1씩 증가하는 값에 대해 누적합을 구할 때 10,000보다 
+#   큰 누적합 값에 대해 마지막에 더해진 값이 얼마인지 구하시오
+x = 1     # 증가값
+Sum = 0   # 누적합
+while True:
+    Sum += x
+    if Sum > 10000:
+        break
+    x += 1
+print(x,"는 10000 되기전에 더한 누적값!!")
+
+# 문제5] 1부터 100 사이의 소수(prime number)를 출력하고 개수를 
+#     구하시오 ("1은 소수가 아니다...")
+
+count = 0   #소수의 개수
+for x in range(2,101):
+    flag=True
+    for y in range(2,x):
+        if x%y ==0:     # 이 조건을 충족하면 소수가 아님
+            flag=False  # 소수가 아닌경우를 구분... 
+            break
+    if flag:
+        print(x,end=" ")    #소수 출력
+        count += 1
+print() # \n 개행을 위해서
+print(count,"개의 소수가 존재함!!!")
+
+
+# 문제6] 다음과 같은 모형으로 출력되게 하세요. 
+# (단, 파이썬 서식을 사용안함. )
+6-1         6-2         6-3         6-4
+*           *****           *       *****
+**          ****           **        ****
+***         ***           ***         ***
+****        **           ****          **
+*****       *           *****           *
+'''
+# 6-1
+for i in range(5):  #[0,1,2,3,4]
+    for j in range(0,i+1): #[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4]
+        print("*",end='')
+    print()  # \n 개행
+print("\n")
+
+# 6-2
+for i in range(5):  #[0,1,2,3,4]
+    for j in range(0,5-i): #[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]
+        print("*",end='')
+    print()  # \n 개행
+print("\n")
+
+# 6-3
+for i in range(5):  #[0,1,2,3,4]
+    x = 4
+    for j in range(0,x-i): #[0,1,2,3],[0,1,2],[0,1],[0]
+        print(end=' ')
+    for j in range(0,i+1): #[0],[0,1],[0,1,2],[0,1,2,3],[0,1,2,3,4]
+        print("*",end='')
+    print()  # \n 개행
+print("\n")
+
+# 6-4
+for i in range(5):  #[0,1,2,3,4]
+    for j in range(0,i): #[],[0],[0,1],[0,1,2],[0,1,2,3]
+        print(end=' ')
+    x = 5
+    for j in range(0,x-i): #[0,1,2,3,4],[0,1,2,3],[0,1,2],[0,1],[0]
+        print(end='*')
+    print()  # \n 개행
+print("\n")
+
+'''
+6-5 출력 줄수를 입력하면 다음과 같이 출력
+  입력 줄은 홀수이여야만 함. 
+
+홀수 줄수를 입력: 7
+   *
+  ***
+ *****
+*******
+ *****
+  ***
+   *
+'''
+# sp(여백),st(별),ln(줄수),flag(조건반적-bool형)
+ln = int(input("홀수 줄수를 입력: "))
+sp,st,flag = ln//2,1,True  #sp=ln//2, st=1, flag=True
+for i in range(ln):
+    for j in range(sp): print(end=' ')  # 공백 출력
+    for j in range(st): print(end='*')  # 별출력
+    print()
+    if i == (ln//2): flag=False # i는 반복회수가 반이되면, 반전
+    if flag: sp -= 1; st += 2
+    else: sp +=1; st-= 2
+
+
+
+
+
+
+
+
+
