@@ -34,19 +34,19 @@ while i < 5:
 #       3) 10일 마다 쥐의 수가 2배씩 증가       
 #       4) 이때 몇일만에 모두 없어지나? 쥐는 몇마리?
 # rice = 10000g
-
-rice = 10000
+답:
+rice = 100000
 day = 1
 mice=2
-while True:
-   if day % 10==0:
-      mice *= 2
-   if rice == 0:
-      day += 1
-      tot = rice - (mice*day*20)
-      break
-   print('{}일에 쌀이 모두 없어지며, 쥐는 {}입니다.'.format(day,mice))
-'''
+while rice > 0:                 #True 여도 상관없음
+    rice -= mice * 20
+    if day % 10 == 0:
+        mice *= 2
+    if rice <= 0:
+        break                   # 날짜증가 하기 전에 break
+    day += 1
+    print('{}일에 쌀이 모두 없어지며, 쥐는 {}입니다.'.format(day,mice))
+
 
 day = 1
 while day < 10:
