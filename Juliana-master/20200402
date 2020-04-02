@@ -141,11 +141,11 @@ print(chr(0x41))
 '''
 # 문제 4] 1~99까지 랜덤값 중 짝순 True, 홀수는 False
 from random import random
-x= int(random()*100)+1
+x= int(random()*99)+1
 if x % 2==0:
-    print(x,',짝수입니다')
+    print(x,',짝수이며 True입니다')
 else:
-    print(x,'홀수입니다')
+    print(x,'홀수이며 False입니다')
 
 # 문제 5] 'A'~'Z'까지 임의의 문자 3자리 출력
 from random import randint
