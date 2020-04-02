@@ -1,0 +1,84 @@
+'''
+In = int(input('홀수 줄수 입력: '))
+sp = In //2
+st = 1
+flag=True
+for i in range(In):
+    for j in range(sp):
+        print(end =' ')
+    for j in range(st):
+        print(end='*')
+    print()
+    if i == (In //2):
+        flag=False
+    if flag: 
+        sp-=1;st+=2
+    else:
+        sp += 1;st -= 2
+
+from random import random
+for x in range(6):
+    print(int(random()*45)+1,end=' ')
+print()
+print('\n')
+
+from random import randint
+for x in range(10):
+    for y in range(8):
+        print(randint(1,101),end=' ')
+    print()
+
+from random import randint
+while True:
+    x = randint(1,101)
+    print(x, end=' ')
+    if x == 50:
+        break
+print() 
+
+from random import randint
+while True:
+    num1=randint(1,15)
+    num2=randint(1,15)
+    num3=randint(1,15)
+    if num1!=num2 and num1!=num3:
+        if num2!=num3:
+            break
+print('{},{},{}'.format(num1,num2,num3))
+
+from random import randint
+x = randint(1,99)
+if x % 2 == 0:
+    print(x,'True')
+else:
+    print(x,'False')
+
+from random import randint
+for x in range(3):
+    print(chr(randint(65,90)),end=' ')
+print()
+
+from random import randint
+for y in range(10):
+    for x in range(8):
+        i = randint(97,122)
+        print(chr(i),end=' ')
+    print()
+print('\n')
+
+from random import randint
+for y in range(10):
+    for x in range(16):
+        z = randint(0,2)
+        if z == 0:
+            i = randint(97,122)
+            print(chr(i),end=' ')
+        elif z == 1:
+            i = randint(65,90)
+            print(chr(i),end=' ')
+        elif z == 2:
+            i = randint(0,9)
+            print(i,end=' ')
+    print()
+print('\n')
+'''
