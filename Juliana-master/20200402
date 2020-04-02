@@ -1,0 +1,154 @@
+'''
+import os   # os는 시스템관련함수들을 포함한 모듈
+            # system => os의 cmd 명령어를 실행
+num = 1     # 정수, 0 이아니라면 반복적 실행(bool형으로 1=> True)
+while num:
+    os.system('cls')             #cls= clear, 정리 // 메뉴작업할경우// 'pause': 일시정지
+    # sp(여백),st(별),ln(줄수),flag(조건반적-bool형)
+    ln = int(input("홀수 줄수를 입력: "))
+    sp=ln//2        # 여백 반
+    st=1
+    flag=True
+    for i in range(ln):
+        for j in range(sp): print(end=' ')  # 공백 출력
+        for j in range(st): print(end='*')  # 별출력
+        print()
+        if i == (ln//2): flag=False # i는 반복회수가 반이되면, 반전
+        if flag: sp -= 1; st += 2
+        else: sp +=1; st-= 2
+    num = int(input('계속하겠습니까? 0.종료, 1.계속: '))
+print('프로그램 종료')
+
+# random 함수 
+# : 임의의 값을 생성하는 함수 , 이때 생성된 값을 '난수'라고 합니다. 
+# 
+# 랜덤함수를 사용하기 위한 모듈
+# : random
+# 
+# 모듈사용방법: import[모듈]
+# 
+#   ex) import random     #랜덤 모듈을 로딩한다
+#   or 
+#   ex) from random import random # 랜덤 모듈에서 랜덤 함수를 로딩
+#
+
+from random import random
+print(random())            # 랜덤함수의 원형 0.0~1.0미만의 값 출력(float)
+
+# 0.0~10.0미만의 값을 출력(float)
+from random import random
+print(random()*10)
+print(int(random()*10))         # 0~10 미만의 정수 출력
+print(int(random()*10)+1)       # 1~10 까지의 정수 출력
+
+
+# 예제1. 1~45까지의 임의의 값 6개 출력
+from random import random
+for x in range(6):
+    print(int(random()*45)+1,end=' ')
+print()
+
+# 문제1. 1~100까지의 랜덤값을 6개 출력
+from random import random
+for x in range(6):
+    print(int(random()*100)+1)
+print()
+
+# 문제2. 1~100까지 랜덤값을 출력하되, 출력값이 50이 출력되는 순간 종료하는 코드
+from random import random
+while True:
+    x =int(random()*100)+1
+    print(x,end=' ')
+    if x ==50:
+        break
+print('\n')
+
+# 문제 3. 1~15까지 랜덤값을 중복없이 3개 생성하여 출력하는 코드 작성
+num1, num2, num3=0,0,0
+while True:
+    su = int(random()*15)+1
+    if num1 != su:
+        num1 = su
+        break
+while True:
+    su = int(random()*15)+1
+    if num1 != su and num2 != su:
+        num2 = su
+        break
+while True:
+    su = int(random()*15)+1
+    if num1 != su and num2 != su and num3 != su:
+        num3 = su
+        break
+print('{},{},{}'.format(num1,num2,num3))
+print('\n')
+
+while True :
+    num1= int(random()*15)+1
+    num2= int(random()*15)+1
+    num3= int(random()*15)+1
+    if num1 != num2 and num1 !=3:
+        if num2 != num3:
+            break
+print('{},{},{}'.format(num1,num2,num3))
+
+# random 모듈 내에 있는 다른형태의 random 함수들...
+# -randint(): int형 값을 임의로 출력하는 함수 
+# 
+# 사용방법
+#   randint(a,b)
+#       a => 시작값
+#       b => 마지막 값
+# 예시) 1 ~ 6 까.지.의 임의의 값을 출력하는 예시
+from random import random, randint
+print(randint(1,6))
+
+# 예제2) randint()를 사용하여 1~6,100~200사이의 임의값 출력
+from random import random,randint
+
+print(randint(1,6))
+print(randint(100,200))
+
+# -randrange(): 범위 내에 임의의 값 출력 random과 range의 혼합
+# 
+# 예시1)
+# randrange(5,10) == > 5~10미만의 값 중 하나를 출력 5,6,7,8,9
+# 예시 2)
+# randrange(5,10,2)==>  5,7,9중에 하나의 값 출력
+from random import random, randint, randrange
+print(randrange(10))
+print(randrange(5,10))
+print(randrange(5,10,2))
+
+# -choice: 리스트와 같은 자료중 일부를 랜덤하게 추출하는 함수
+# 예시 1.
+#dice=[1,2,3,4,5,6]
+#choice(dice)        # dice리스트 값 중에 하나를 추출
+
+import random
+dice=[1,2,3,4,5,6]
+x = random.choice(dice)
+print(x)
+# or
+from random import choice
+dice=[1,2,3,4,5,6]
+x = choice(dice)
+print(x)
+
+# 숫자를 문자(ASCII)변경하는 함수 : chr
+# chr() 숫자값을 입력하면 해당 인코딩 문자로 출력
+print(chr(0x41))
+'''
+# 문제 4] 1~99까지 랜덤값 중 짝순 True, 홀수는 False
+from random import random
+x= int(random()*100)+1
+if x % 2==0:
+    print(x,',짝수입니다')
+else:
+    print(x,'홀수입니다')
+
+# 문제 5] 'A'~'Z'까지 임의의 문자 3자리 출력
+from random import randint
+for x in range(3):
+    print(chr(randint(65,90)),end=' ')
+print()
