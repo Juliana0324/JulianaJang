@@ -44,7 +44,7 @@ print(lst)        # [1,2,3,4,9,6,7,8,9,10]
 
 # 리스트의 반복
 print(lst2*3)       # [9,10,9,10,9,10]
-'''
+
 # max(), min()
 lst = [1,2,3,4,9,6,7,8,9,10]
 print(max(lst))
@@ -66,4 +66,163 @@ lst[1]= int(input('정수2:'))
 lst[2]= int(input('정수3:'))
 Sum=lst[0]+lst[1]+lst[2]
 print('{}={}'.format(lst[3],Sum))
+
+# List 인덱싱
+# : 인덱스 값을 이용한 참조
+# 
+#       lst = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+# 양의 인덱스 ; 0  1  2  3  4  5  6  7  8  9
+# 음의 인덱스 :-10 -9 -8 -7 -6 -5 -4 -3 -2 -1  
+
+# 예제 3. list 인덱싱
+lst = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] 
+# 양   0  1  2  3  4  5  6  7  8  9
+# 음  -10 -9 -8 -7 -6 -5 -4 -3 -2 -1
+print('lst[]=',lst)
+print('lst[-1]:',lst[-1])        #10출력
+print('lst[-2]:',lst[-2])       #9
+print('lst[-3]:',lst[-3])       #8
+# slicing 방식을 이용한 시퀸스(자료) 접근
+# -slicing 이란 : 리스트와 같은 시퀸스 자료값들을 범위로 접근하기 위해서 사용하는 방식
+#           시퀸스 자료들의 일부를 잘라서 새롭게 생성하는 것
+
+#  (형식)
+#      변수명[시작인덱스:끝인덱스]      끝 인덱스 이전까지(range와동일)
+#      변수명[시작인덱스:끝인덱스:증감값]
+# 예) lst= [ 1, 2, 3, 4, 5, 6]
+#   index:   0  1  2  3  4  5
+#           -6 -5 -4 -3 -2 -1
+#       lst[0:3]=[1,2,3], lst[0:3:2]=[1,3]
+#   
+# 예제4) slicing을 이용한 리스트에 대한접근
+lst=[1,2,3,4,5,6]
+print(lst[0:3])     #[1,2,3]
+print(lst[0:3])     #[1,2,3]
+print(lst[5:0:3])   #[6,3]
+
+# 인덱스 생략
+print(lst[:3])  # 0부터라는값 => 1,2,3 
+print(lst[3:])  # 3부터 마지막까지 => 4,5,6
+# 슬라이싱후 새로운 리스트 생성
+slc = lst[3:6]      #[4,5,6]
+print(slc)
+slc2= lst[1:5:2]     #[2,4]
+print(slc2)
+slc3=lst[5::-1]     #[6,5,4,3,2,1]
+print(slc3)
+slc4=lst[-3:-1]     #[4,5]
+print(slc4)
+
+# 리스트 함수들...
+# -append(value): 리스트 끝에 값(멤버)추가
+# -extend(iter): 리스트의 끝에 list,tuple,dict의값(멤버들)을 하나씩 추가해서 확장    
+# -insert(idx,value) : inx(인덱스)에 위치한 인덱스에 특정값을 추가
+# -pop([idx]]) : 인덱스 값을 지정하지 않으면, 마지막 인덱스 값을 반환후 삭제
+#                인덱스 값이 있는경우, 해당 인덱스 위치의 값을 반환후 삭제
+# -remove(value): 특정값을 찾아서 삭제
+# -clear(): 리스트내에 있는 모든 멤버를 삭제, 빈 리스트로 만드는 함수
+# -count(value): 리스트내에 있는 특정값의 개수를 반환
+# -index(value): 리스트 내에 있는 특정값의 인덱스 위치값을 반환
+# -reverse(): 리스트 멤버의 순서를 뒤집어서 나열하는 함수
+# -sort([reverse=False]): 리스트의 값을 오름차순(reverse=False) 
+#                        또는 내림차순(reverse=True)으로 정렬해주는 함수
+# append()
+lst1= [1,2,3,4,5,6,7,8]
+lst1.append('a')            # [1,2,3,4,5,6,7,8,'a']
+print(lst1)
+lst1.append([9,10])         # [1,2,3,4,5,6,7,8,'a',[9,10]]
+print(lst1)
+print(lst1([-1])        #[9,10]   append는 리스트,튜플,딕셔너리를 하나의 멤버로봄 
  
+# extend()  
+lst1 = [1,2,3,4,5,6,7,8]
+lst1.extend(['a','b','c','d','e','f'])      # [1,2,3,4,5,6,7,8,'a','b','c','d','e','f']
+print(lst1)
+
+# insert(idx,value)
+lst1=[1,2,3,4,5]
+lst1.insert(3,'a')
+print(lst1)             #[1,2,3,'a',4,5]
+
+# pop()
+lst1= [1,2,3,4,5,6]
+a = lst1.pop()           # 결과, a=6(마지막)반환 후 삭제 => lst1=[1,2,3,4,5]
+print(a,lst1)
+b = lst.pop(2)          # b = 3 반환, lst1=[1,2,4,5]
+print(b,lst1)
+
+# remove(value)
+lst1=[1,2,3,2,5,6,2,8]
+lst1.remove(2)          #첫번째 2가 삭제  =>  [1,3,4,2,5,6,2,8]
+lst1.remove(2)         # 두번째 2 삭제  = > [1,3,5,6,2,8]
+lst1.remove(2)         # 세번째 2 삭제  => [1,3,5,6,8]
+lst1.remove(2)      #네번째 2 삭제시 Error발생 : ValueError(삭제할 value없음)
+
+# clear()
+lst1=[1,2,3,2,5,6,2,8]
+print(lst1)
+lst1.clear()
+print(lst1)
+            # []
+# count(value) 
+lst1=[1,2,3,2,5,6,2,8]
+su= lst1.count(2)       #3
+print('2를가진 멤버의 수:')
+
+# index(value)
+lst1=[1,2,3,4]
+idx=lst.index(2)        # 1
+print('2의 값을 가진 인덱스값:',idx)
+
+idx = lst.index(5)
+print(idx)          # ValueError: 값이 없음
+
+if 5 in lst1:
+    idx = lst.index(5)      #그냥 사용하면 에러임으로 if x in : 값으로 검증해주기
+
+# reverse()
+lst1=[4,5,2,3,1,7,6,8]
+print('reverse()동작전:',lst1)              #[4,5,2,3,1,7,6,8]
+lst1.reverse()
+print('reverse()동작후',lst1)               #[8,6,7,1,3,2,5,4]
+'''
+#   sort() : 리스트를 정렬하는 함수
+#  옵션에 따라서 정렬 방식 달라짐, reverse=False=>오름차순
+#  reverse=True => 내림차순
+lst1=[4,5,2,3,1,7,6,8]
+lst1.sort()
+print('lst1을 오름차순으로 정렬',lst1)
+lst1.sort(reverse=True)
+print('lst1을 내림차순으로 정렬',lst1)
+
+# sort() 사용시 주의사항
+# 1. : 숫자 형식 또는 문자형식으로 분리해서 정렬한다: 숫자는 숫자끼리 문자는 문자끼리
+# 2. : 정수와 실수는 같은 숫자이기 떄문에 정렬이 가능함. 
+# 3. : 정렬된 리스트를 새롭게 만들고 싶은경우: sorted() 사용
+lst1=[4,5,2,3,1,7,6,8]
+lst2=sorted(lst1)
+print(lst2)         # [1,2,3,4,5,6,7,8]로 새롭게리스트로 만든다
+
+lst3=sorted('I am a student'.split())
+print(lst3)     # ['I','a','am','student']   ASCII순서대로 대문자, 소문자 
+
+lst4= sorted('I am a student'.split(),key=str.lower)
+# key: 정렬기준     str.lower(소문자) 기준 - 앞에 문자 순서대로 
+print(lst4)
+# **split() 문자열을 분리하는 함수
+#  '()' 안에 아무것도 넣어주지 않으면, 공백(스페이스, 탭, 엔터등)을 기준으로 나열
+# 기준으로 문자열을 나눠서 사용함;. 만역 split(';')을 이용하면, ';'을 기쥰으로 
+# 문자열을 나누겠다는의미
+str = 'I am a student' 
+print(str.split())      # 공백을 기준으로 print되면 'I','am', 'a','student'
+
+# Copy 기능
+# -Shallow copy: 서로 다른 두 변수가 같은 윛의 데이터를 가르키는 경우
+# -deep copy: 두개의 변수가 같은 값을 가진 다른 공간의 데이터를 가르키는 경우
+
+
+
+
+
+# Tuple 튜플:
+# dic 딕셔너리: 
