@@ -1,0 +1,154 @@
+'''
+# while 구문을 이용하여 짝수의 합과 홀수의 합
+i = 0
+odd = 0
+even = 0
+while i <= 10:
+    if i%2==0:
+        even += i
+    else:
+        odd += i
+    i += 1
+print('짝수의 합:{}, 홀수의 합:{}'.format(even, odd))
+
+# 예제2. break 사용 예제
+while True:
+    a = int(input('정수값을 입력하세요(0입력시 종료):'))
+    if a==0:
+        break
+
+#예제3. continue 예제
+a=0
+while a < 5:
+    a += 1
+    if a == 3:
+        continue
+    print('a={}'.format(a))
+
+#예제4, 쌀 100통이있는데 1통에 1kg, 암수 2쌍 
+# 쥐 1마리: 20g먹음
+# 10 일마다 두배씩 는다
+# 이때 쌀은 언제 없어지고 쥐는 몇마리인가
+rice = 100*1000
+mice = 2
+day = 1
+while rice > 0:
+    rice = rice-(mice*20)
+    if day % 10 == 0:
+        mice *= 2
+    if rice <= 0:
+        break
+    day += 1
+print(day,'에 없어지며, 쥐는 {}마리 입니다.'.format(mice))
+
+#예제5, Turtle을 이용해서 다각형을 그리는 코드
+import turtle
+i = int(input('3~12각형내에 다각형을 그리시오:'))
+if 3<=i and 12>=i:
+    for x in range(i):
+        turtle.left(360/i)
+        turtle.forward(100)
+    turtle.mainloop
+else:
+    print('그릴수 없습니다')
+
+# 1~100까지 합을 구하는 방법
+i=0
+for x in range(1,101):
+    i += x
+print(i)
+
+# 1부터 1씩 증가하는 값에 대해 누적값을 구할때 10,000보다
+# 큰 누적값에 대해 마지막에 더해진값이 얼마인지 구하시오
+Sum=0
+i = 1
+while True:
+    Sum += i
+    if Sum>10000:
+        break
+    i += 1
+    print('마지막 더해진값은',i)
+
+# 1부터 100 까지의 소수 출력
+Sum=0
+for x in range(2,101):
+    flag=True
+    for y in range(2,x):
+        if x%y == 0:
+            flag=False
+            break
+    if flag:
+        print(x,end=' ')
+        Sum += 1
+print('소수의 개수는:',Sum)
+
+
+for x in range(5):
+    for y in range(5):
+        print(x, end='')
+    print()
+print('\n')
+
+# *
+# **
+# ***
+# ****
+# *****
+for x in range(5):
+    for y in range(0,x+1):
+        print('*', end='')
+    print()
+print('\n')
+
+# *****
+# ****
+# ***
+# **
+# *
+for x in range(5):
+    for y in range(0,5-x):
+        print('*', end='')
+    print()
+print('\n')
+
+#     *
+#    **
+#   ***
+#  ****
+# *****
+for x in range(5):
+    i = 4
+    for y in range(0,i-x):
+        print(end=' ')
+    for y in range(0,x+1):
+        print('*',end='')
+    print()
+print('\n')
+
+# *****
+#  ****
+#   ***
+#    **
+#     *
+for x in range(5):
+    for y in range(0,x):
+        print(end=' ')
+    i=5
+    for y in range(0,i-x):
+        print('*',end='')
+    print()
+print('\n')
+
+from random import random
+for x in range(6):
+    print(int(random()*45)+1,end=' ')
+print('\n')
+'''
+# 1~1oo 까지 입력하되 50이 나오면 멈추기
+from random import randint
+while True:
+    x = randint(1,100)
+    print(x,end=' ')
+    if x == 50:
+        break
+print('\n')
