@@ -1,0 +1,45 @@
+'''
+# 문제 3. 1~15까지 랜덤값을 중복없이 3개 생성하여 출력하는 코드 작성
+from random import randint
+while True:
+    num1=randint(1,15)
+    num2=randint(1,15)
+    num3=randint(1,15)
+    if num1 != num2 and num1!=num3:
+        if num2 != num3:
+            break
+print(num1,num2,num3)
+
+import random
+dice=[1,2,3,4,5,6]
+x= random.choice(dice)
+print(x)
+
+from random import randint
+x= randint(1,99)
+if x % 2== 0:
+    print(x,'는 짝수입니다')
+else:
+    print(x,'는 홀수입니다')
+
+#'A'~'Z'까지 임의의 문자 3자리 출력
+from random import randint
+for x in range(3):
+    print(chr(randint(65,90)),end=' ')
+print()
+
+#  비빔밥과 돈가스의 가격을 출력하시오
+menu= [['칼국수',6000],['비빔밥',5500],['돼지국밥',7000],['돈까스',7000],['김밥',2000],['라면',2500]]
+print(menu[1],menu[3])
+
+# 사용자의 입력으로 메뉴와 가격을 입력받아 menu변수에 자료를 추가하는 코드
+m = input('추가할 메뉴를 입력하세요:')
+p = int(input('추가할 메뉴의 가격을 입력하세요:'))
+menu.append([m,p])
+print(menu)
+'''
+menu= [['칼국수',6000],['비빔밥',5500],['돼지국밥',7000],['돈까스',7000],['김밥',2000],['라면',2500]]
+from random import randint
+rand=randint(0,5)
+pic = menu[rand]
+print(pic)
