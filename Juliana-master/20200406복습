@@ -1,0 +1,51 @@
+'''
+ -------------------------
+ 1. 친구 리스트 출력          #등록한 친구 목록 보기
+ 2. 친구 추가                #친구 등록하기(정보는 문제3번 참조)            
+ 3. 친구 삭제                #등록 친구 삭제
+ 4. 이름 변경                #이름 변경
+ 0. 종료                     #프로그램 종료
+ 메뉴를 선택하세요 : 2
+ 이름을 입력하시오 : 홍길동
+ -------------------------
+
+friend=[]
+import os
+print('1.친구리스트 출력 \n2.친구 추가\n3.친구삭제\n4.이름변경\n0.종료')
+num = 1
+flag= 0
+menu = int(input('메뉴를 입력하세요: ')) 
+print('\n')
+while num:
+    if menu == 1:
+        print(friend)
+        menu = int(input('메뉴를 입력하세요: '))
+    elif menu==2:
+        name=input('친구의 이름:')
+        age= int(input('친구의 나이:'))
+        friend.append([name,age])
+        print(friend)
+        
+        menu = int(input('메뉴를 입력하세요: '))
+
+    elif menu==3:
+        del_fri=input('삭제하고자하는 친구이름:')
+        friend.remove(del_fri)
+        menu = int(input('메뉴를 입력하세요: '))
+    
+    elif menu == 4:
+        na=int('기존 이름')
+        ch_na=input('바꿀 이름:')
+        for idx in range(len(friend)):
+            if friend[idx][0]==ch_na:
+        print(friend)
+    elif menu == 0:
+        break
+print('프로그램종료')
+print('\n')
+'''
+lst_sec=[['홍길동','남',36],['김수양','여',32],['박담수','남',28]]
+for val in lst_sec:
+    print('이름:{}'.format(val[0]))
+    print('성별:{}'.format(val[1]))
+    print('나이:{}'.format(val[2]))
