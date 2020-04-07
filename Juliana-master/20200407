@@ -1,0 +1,83 @@
+'''
+#(실습)
+# 위에서 학습한 내용을 토대로 다음과 같은 내용을 프로그램하세요.
+#  
+#  아래와 같은 메뉴를 만들고, 친구 이름을 관리하는 코드를 작성
+#  (리스트를 사용해서 작성하세요) 
+ 
+ -------------------------
+ 1. 친구 리스트 출력          #등록한 친구 목록 보기
+ 2. 친구 추가                #친구 등록하기(정보는 문제3번 참조)            
+ 3. 친구 삭제                #등록 친구 삭제
+ 4. 이름 변경                #이름 변경
+ 0. 종료                     #프로그램 종료
+ 메뉴를 선택하세요 : 2
+ 이름을 입력하시오 : 홍길동
+ -------------------------
+
+friend=[]
+print('1.친구리스트 출력 \n 2.친구추가 \n 3.친구삭제 \n 4.이름변경 \n 0.종료')
+num=1
+while True : 
+    menu=int(input('메뉴를 입력하세요:'))
+    if menu == 1:
+        print(friend)
+        menu=int(input('메뉴를 입력하세요:'))
+    elif menu == 2:
+        name=input('추가할 친구 이름:')
+        age = int(input('친구의 나이:'))
+        friend.append([name,age])
+        print(friend)
+    elif menu==3:
+        x=int(input('삭제할 친구순서:'))
+        friend.pop(x-1)
+        print(friend)
+    elif menu ==4:
+        ch_name=input('편집할 친구이름:')
+        if ch_name==friend[name]:
+            ch_name2=input('바꿀 친구이름:')
+            friend.insert(ch_name2)
+        print(friend)
+    else:
+        break
+    print('\n')
+print('프로그램 종료')
+'''
+# 선생님 풀이
+import os
+fr=[]       #친구리스트 변수
+idx=0       #검색시 인덱스 값 저장
+while True:
+    os.system('cls')
+    print('-'*30)
+    print('1.친구리스트 출력 \n 2.친구추가 \n 3.친구삭제 \n 4.이름변경 \n 0.종료')
+    print('-'*30)
+    menu=int(input('메뉴를 입력하세요:'))
+    if menu == 1:           #친구리스트 출력
+        print(fr)
+        os.system('pause')
+    elif menu ==2:          # 친구추가
+        name=input('이름을 입력하세요:')
+        fr.append(name)
+        os.system('pause')
+    elif menu ==3:          # 친구삭제
+        name=input('삭제할 이름을 입력하세요:')
+        if name in fr:
+            fr.remove(name)
+        os.system('pause')
+    elif menu ==4:          # 이름변경
+        name=input('수정할 친구의 이름:')
+        if name in fr:
+            idx = fr.index(name)
+            name_mod=input('변경할 이름을 입력하세요:')
+            fr[idx]=name_mod
+            print('변경했습니다')
+            os.system('pause')
+        else:    
+            print('변경할 친구가 없습니다')
+    elif menu ==0:          # 종료
+        pass
+    else:
+        print('메뉴선택 오류: 다시입력!!')
+        print('선택메뉴는 0~4까지 입니다.')
+        os.system('pause')
