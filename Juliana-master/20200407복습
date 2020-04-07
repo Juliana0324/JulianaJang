@@ -1,0 +1,66 @@
+'''
+ -------------------------
+ 1. 친구 리스트 출력          #등록한 친구 목록 보기
+ 2. 친구 추가                #친구 등록하기(정보는 문제3번 참조)            
+ 3. 친구 삭제                #등록 친구 삭제
+ 4. 이름 변경                #이름 변경
+ 0. 종료                     #프로그램 종료
+ 메뉴를 선택하세요 : 2
+ 이름을 입력하시오 : 홍길동
+ -------------------------
+'''
+
+import os
+friend=[]
+idx=0
+while True:
+    os.system('cls')
+    print('1.친구리스트 출력 \n 2.친구추가 \n 3.친구삭제 \n 4.이름변경 \n 0.종료')
+    menu=int(input('메뉴를 입력하세요:'))
+    if menu==1:
+        print(friend)
+        os.system('pause')
+    elif menu==2:
+        name=input('추가할 친구를 입력하세요:')
+        friend.append([name])
+        os.system('pause')
+    elif menu==3:
+        print(friend)
+        name=input('삭제할 친구의 이름을 입력하세요:')
+        if name in friend:
+            friend.remove(name)
+        os.system('pause')
+    elif menu==4:
+        print(friend)
+        name=input('수정할 친구의 이름을 입력하세요:')
+        if name in friend:
+            idx=friend.index(name)
+            ch_name= input('변경할 친구의 이름을 입력하세요:')
+            friend[idx]=ch_name
+            print(friend)
+            os.system('pause')
+    elif menu==0:
+        print('프로그램 종료')
+        break
+    else:
+        print('메뉴선택 오류! 다시입력세요')
+        os.system('pause')
+'''
+tu=10,20,30,'파이썬',20.31
+lst=[]
+for x in range(len(tu)):
+    lst.append(tu[x])
+print(lst)
+
+tu2= '회사정보', '제품명','가격정보','출시일'
+lst=['삼성전자','Galaxy','100원','미정']
+idx1= lst.index('100원')
+idx2= lst.index('미정')
+lst.remove('100원')
+lst.remove('미정')
+lst.insert(idx1,'110원')
+lst.insert(idx2,'이번달말')
+for x in range(len(tu2)):
+    print('{:^15}:{:^15}'.format(tu2[x],lst[x]))
+
+'''
