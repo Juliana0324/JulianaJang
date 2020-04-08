@@ -1,0 +1,82 @@
+'''
+<문제>
+1. 이름, 전화번호,이메일 주소를 키로 사용하는 사전자료를 생성하세요
+2. 리스트형 변수에 1번문제와 같은 
+사전 자료가 여러개 생성될수 있게 하시오.(입력값을 받아서 자료생성)
+3. 2번에서 입력한 자료가 출력될수 있도록 하세요:
+
+#2.
+import os
+ld = []
+while True:
+    dic2={}
+    dic2.update({'이름:':input('name:')})
+    dic2.update({'전화번호:':input('phone num:')})
+    dic2.update({'이메일:':input('email:')})
+    ld.append(dic2)
+    if (input('계속하겠습니까?(y/n):')=='n'):
+        break
+    os.system('cls')
+#    print(ld)
+print('\n')
+
+#3.
+for d in ld:
+    print('이름:{}'.format(d['이름']))
+    print('전화번호:{}'.format(d['전화번호']))
+    print('이메일:{}'.format(d['이메일']))
+    print() 
+            # 예제4번 참고
+'''
+# <<아래의 내용을 토대로 프로그램을 작성해보세요.>>
+# 1. 다음과 같은 메뉴와 가격을 key와 value로 사용하여
+# 사전형 자료를 만들어보세요(변수명은 menu)
+#  칼국수(6000원), 비빕밥(5500원), 돼지국밥(7000원),
+#  돈까스(7000원), 깁밥(2000원), 라면(2500원) 
+
+# 2. 위에서 만든 사전형 자료 menu 변수에서 가격이 6000원 미만에
+# 해당하는 메뉴와 가격을 출력하는 코드를 작성하세요. 
+
+# 3. 사용자 입력으로 메뉴와 가격을 입력 받아  menu 변수에 자료를
+# 추가 할 수 있도록 하시오.(동일한 메뉴는 가격만 변경)
+
+# 4. 메뉴를 자동으로 선택하여 출력하게 만들어 보세요.   
+
+menu={'칼국수':6000,'비빔밥':5500,
+    '돼지국밥':7000, '돈까스':7000,
+    '김밥':2000,'라면':2500
+}
+#2.
+for k in menu.keys():
+    if menu[k]<6000:
+        print(k,menu[k])
+'''
+#3. 
+dic2={'menu':'price'}
+dic2={input('메뉴를 입력하세요:'):int(input('가격을 입력하세요:'))}
+menu.update(dic2)
+if dic2.values==menu.values:
+    menu.update(dic[price])
+print(menu)
+'''
+#3. 선생님 풀이
+add_menu= input('메뉴를 입력하세요')
+add_price=int(input('가격을 입력하세요'))
+if add_menu in menu:
+    menu[add_menu] = add_value
+else:
+    mene.update({add_menu:add_value})
+#4.
+'''
+sel=input('메뉴를 출력하겠습니까? (y/n)')
+if sel =='y' or sel!='n':
+    for me in menu:
+        print(me,menu[me],'원')
+    print()
+'''
+from random import randint
+tu_menu=menu.items()
+rand=random(len(menu)
+print(rand(tu_menu))
+
+ 
