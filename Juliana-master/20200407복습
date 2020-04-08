@@ -22,7 +22,7 @@ while True:
         os.system('pause')
     elif menu==2:
         name=input('추가할 친구를 입력하세요:')
-        friend.append([name])
+        friend.append(name)
         os.system('pause')
     elif menu==3:
         print(friend)
