@@ -1,0 +1,51 @@
+# strip()예제
+st= '파이썬파'
+print(st)
+print(st.strip('파'))       #이썬
+print(st.lstrip('파'))      # 이썬파
+print(st.rstrip('파'))      #파이썬
+
+st2='---파이썬---'
+print(st2)
+print(st2.strip('-'))       
+print(st2.lstrip('-'))      
+print(st2.rstrip('-'))      
+
+# replace 함수
+st = '2015-04-09'
+#     0123456789    (index)
+print(st)
+print(st.replace('2015','2020'))
+print(st[:4])
+print(st.replace(st[:4],'2020'))
+
+# split(str) 함수: 특정문자를 기준으로 문자열을 나누는 함수
+st = 'Never Ever Give Up'
+a = st.split() 
+print(st,type(st))
+print(a,type(a))
+
+st2 = '하나:둘:셋'
+st3= '1,2,3'
+b=st2.split(':')
+c=st3.split(',')
+print(b,type(b))
+print(c,type(c))
+
+st4 = '하나둘셋넷다섯'
+d= st4.split()
+print(d,type(d))
+
+# splitlines()  개행(\n) 문자를 기준으로 문자열을 구분하는함수
+st5='Never \nEver \nGive \nup'
+f=st5.splitlines()
+print(f,type(f))
+
+st="""Never Ever Give UP
+Never Ever Give UP
+Never Ever Give UP
+Never Ever Give UP
+Never Ever Give UP"""
+                        # 여러줄 문자열 표기방법
+print(st.split())
+print(st.splitlines())
