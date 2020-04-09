@@ -1,0 +1,220 @@
+'''
+ # 파이썬 문자열
+ # : 파이썬 문자열 처리방식
+ #
+ # 특징
+ #  1. 인덱싱을 이용한 참조
+st='python string'
+ #     0123456789..
+print(st[0])   #p
+print(st[6])   #' '
+
+# 2. slicing을 이용한 참조
+print(st[:6])       # python
+print(st[7:])       # string
+
+# 3. 문자열의 반복문(For)
+st='python for'
+for x in st:
+    print(x,end='') # p y t h o n  f o r
+print()
+
+# 4. 문자열 함수들.. 
+# -find(str): 문자열에서 특정 문자열을 찾아 해당 문자의 index값을 출력
+# -count(str): 문자열에서 특정 문자열을 찾아 문자열의 개수를 반환
+# -lower(): 문자열에서 영문자를 소문자로 변경
+# -upper(): 문자열에서 영문자를 대문자로 변경
+# -strip([str]): 문자열에서 양쪽 공백 또는 문자를 제거하는 함수
+# -lstrip([str]): 문자열에서 왼쪽공백 또는 문자를 제거하는 함수
+# -rstrip([str]):    ""      오른쪽          ""
+# -replace(old,new): (바꿀단어, 변경할 문자) 오른쪽 문자열(old)을 찾아서,
+#                      왼쪽 문자열(new)로 변경
+# -split([str]): 문자열을 특정문자 기준으로 분리하는 함수
+#               (분리된 문자열들은 list형자료로 반환)
+
+# find 예제
+st='python string'
+print(st.find('string'))    #[7:] 
+
+# find(str,시작인덱스)
+print(st.find('t'))     #2
+print(st.find('t',3))
+print(st.index('m'))    #==> ValueError: substring not found
+print(st.find('m'))     #==> 찾는 문자열 없을시 반환값은 ** -1
+
+# count(str)
+st='python string'
+print(st.count('t'))        # 2
+
+# count(str[,시작[,끝 인덱스]])
+print(st.count('t',6))      # 1
+
+# lower() => 원 문자열의 값을 변경한 내용의 결과반환(원 문자는 변경이 x.)
+st= 'PYTHON STRING'
+st1=st.lower()
+print(st)
+print(st1)
+
+# upper() 
+st2 = st1.upper()
+print(st,st1,st2)
+
+# strip() : 양쪽에 인자로 받은 문자열 제거. 없는 경우 공백제거(원문자 변경 x.)
+st='   python string   '
+print('[{}]'.format(st))
+st1 = st.strip()
+print('[{}]'.format(st1))
+
+# -lstrip([str]) / - rstrip
+st='   python string   '
+print('[{}]'.format(st))
+st1 = st.lstrip()
+print('[{}]'.format(st1))
+st2 = st.rstrip()
+print('[{}]'.format(st2))
+
+# -replace(old,new) : old를 문자열에서 찾아서 new로 변경
+st = 'python string'
+st1 =st.replace('string','문자열')
+print(st)
+print(st1)
+
+# -split([str]) : 문자열 'str'문자를 기준으러 분리=> 리스트 형태 변환
+st = 'python string'
+st1= st.split()
+print(st1)      #'python','string'
+
+# ** split()이용한 입력문자 값 분리: unpacking
+values= input('입력받습니다:').split(' ')       # 입력값 == > I am a student
+print(values,type(values))
+
+#** 리스트 값 하나하나가 변수
+
+
+# 예제1] 문자열의 결합 및 반복
+A = 'Have a'
+B = 'Nice day'
+C = A+B         # 병허ㅏㅂ
+print(C)
+print(C*3)      # 반복
+
+A += ' Nice day'     #확장
+print(A)
+
+
+# 예제2] 
+str1='Python is Easy. 괜찮죠?? 쉽지 않나요?? Python 짱!!'
+print(str1)
+print(str1.lower())
+print(str1.upper())
+
+# swapcase(): 영문대문자를 소문자로/ 영문소문자를 대문자로
+print(str1.swapcase())
+
+# title(): 영문단어의 시작을 대문자로 변경
+print(str1.title())
+'''
+#문제1 NevEr-eVer 100gIVe Up
+# 변경후  Never-Ever 100Give Up
+give= 'NevEr-eVer 100gIVe Up'
+give1= give.lower()
+print(give1.title())
+
+
+# Have a nice day 문자열에서 다음 알아 오기
+# a, day, dak 의 갯수 
+day= 'Have a nice day'
+a= day.count('a')
+day2 = day.count('day')
+dak = day.count('dak')
+print('a의 개수는',a)
+print('day의 개수는',day2)
+print('dak의 개수',dak)
+
+
+#문제2 'It is a fun python class'
+# a의 개수, s의 개수 출력하는 코딩 (함수쓰지 말것)
+py='It is a fun python class' 
+print(py.count('a'))
+print(py.count('s'))
+
+# 선생님 풀이
+cnt, cnt_a, cnt_s = 0,0,0
+for i in py:
+    cnt += 1
+    if i == 'a':
+        cnt_a += 1
+    elif i =='s':
+        cnt_s += 1
+print('문자열의 길이:',cnt)
+print('문자열 a의개수:',cnt_a)
+print('문자열의 s의 개수:',cnt_s)
+
+
+
+# 문제3. "Have a nice day" 문자열을 가지고 다음을 처리하세요.
+#  - 각각 find와 index를 사용하여 "day"문자의 위치를 찾으세요.
+#  - 각각 find와 index를 사용하여 "kkk"문자의 위치를 찾으세요. 
+#  - find를 사용하여 첫번째, 두번째, 세번째, 네번째 'a'의 위치를 
+#   출력하세요.
+
+day= 'Have a nice day'
+print(day.find('day'))
+print(day.find('kkk'))
+
+fi= day.find('a')
+sec= day.find('a',fi+1)
+th=day.find('a',sec+1)
+fo = day.find('a',th+1)
+print('첫번째 a는',fi)
+print('두번째 a는',sec)
+print('세번째 a는',th)
+print('네번째 a는',fo)
+
+# 선생님 풀이 
+str3= 'Have a nice day'
+# 값이 존재하는 경우
+print('Find \"day\":{}'.format(str3.find('day'))) 
+print('Index \"day\":{}'.format(str3.index('day'))) 
+# 값이 존재하지 않는 경우
+print('Find \"day\":{}'.format(str3.find('dak')))
+
+idx =str3.find('a')
+print('find 첫번쨰 a의 위치',idx)
+idx=str3.find('a',idx+1)
+print('find 두번쨰 a의 위치',idx)
+idx=str3.find('a',idx+1)
+print('find 세번쨰 a의 위치',idx)
+idx=str3.find('a',idx+1)
+print('find 네번쨰 a의 위치',idx)
+
+#[ Quiz ] : List 정의하여 첨자 위치 저장
+# a의 총 개수와 첨자의 위치를 출력 하시오
+# st = 'Have a nice day Have a nice day Have a nice day'
+# (결과) 
+# a 개수 : 9
+# 첨자 : [1, 5, 13, 17, 21, 29, 33, 37, 45]
+
+st= 'Have a nice day Have a nice day Have a nice day'
+lst=[]
+idx=0
+while True:
+    idx = st.find('a',idx)
+    if idx==-1:
+        break
+    else:
+        lst.append(idx)
+        idx += 1
+print('a의 개수:',st.count('a'))
+print('첨자:',lst)
+
+
+'''
+st='Have a nice day Have a nice day Have a nice day'
+a=st.count('a')
+print('a의 개수:',a)
+for x in range(a):
+    i= st.find('a',i+1)
+    print(i,end=' ')
+'''
+
