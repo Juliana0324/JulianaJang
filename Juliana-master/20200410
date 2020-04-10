@@ -1,0 +1,52 @@
+'''
+# join(): 정해진 문자열을 기준으로 문자열로 결합(split과 반대)
+#   '{}'.join(iter):'{}' 문자를 기준으로 iter자료형을 문자열로 결합
+st='123'
+print(st.join('%%'))    # %123%
+print('%'.join(st))     # 1%2%3%
+
+lst1=['','123','456']
+print(" ".join(lst1))
+str1=''.join(lst1)
+print(str1)
+print(str1.split())
+
+lst2=['','안녕','반가워','또만나']
+print('\n'.join(lst2))
+
+# Python문자열 실습문제
+# 문제1. input함수로 이름과 나이를 입력받아 한번에 입략받아 처리하고 출력하는코드
+name,age =  input('이름과 나이 입력[예) 홍길동 25]').split()
+print('{}님의 나이는{}살입니다'.format(name,age))
+'''
+
+#문제2. input() 함수로 입력 받은 수의 더하기,빼기,곱하기,나누기의 
+#      간단한 수식을 처리할 수 있도록 코드를 작성하시오.
+#      예) 5+5 입력시에 결과를 출력 : 10 
+import os
+while True:
+    os.system('cls')
+    calc=input('계산할 수식을 입력하세요[ex) 5+5]:')
+    if '+' in calc:
+        num1,num2= calc.split('+')
+        num1 = int(num1) ; num2 = int(num2)
+        print('계산결과는 {}입니다'.format(num1+num2))
+    elif '-' in calc:
+        num1,num2= calc.split('-')
+        num1 = int(num1) ; num2 = int(num2)
+        print('계산결과는 {}입니다'.format(num1-num2))
+    elif '*' in calc:
+        num1,num2= calc.split('*')
+        num1 = int(num1) ; num2 = int(num2)
+        print('계산결과는 {}입니다'.format(num1*num2))
+    elif '/' in calc:
+        num1,num2= calc.split('/')
+        num1 = int(num1) ; num2 = int(num2)
+        print('계산결과는 {}입니다'.format(num1/num2))
+    else:
+        print('수식입력이 잘못되었습니다.')
+    sel=input('계속하시겠습니까?(y/n)')
+    if sel=='n':
+        break
+print('프로그램 종료합니다.')
+
