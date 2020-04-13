@@ -103,6 +103,7 @@ while True:
     cal= input('계산할 수식을 입력하세요:')
     result=calc(cal)
     sel = input("계속하겠습니까?(y/n) : ")
+    print('계산결과는 ',result)
     if sel == 'n':
         break
 print("프로그램 종료합니다.!!!")
