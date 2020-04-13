@@ -1,0 +1,212 @@
+# 함수 인자 기본값(default) 설정
+# : 함수 인자 default값이란?
+#   입력인자값이 없는 경우 기본적으로 적용되는값
+# 
+# (형식)
+# def 함수이름(인자1,인자2
+#       종속문장1
+#       종속문장2 
+#
+# 함수 정의에 기본값 설정은 '인자2=1'
+# 이렇게 정의된 함수 있는 경우. 인자2는 1이라는 디폴트 값을 가지게됨
+# 즉, 인자2는 입력하지 않아도 기본적으로 1이라는 값 가짐
+'''
+# 예제4) 함수 인자의 기본값 설정(인자 1개인 경우)
+def pr4(arg4=10):
+    print(arg4)
+# 함수 호출하는 메인
+pr4(10)     # 10 입력함
+pr4(20)     # 20
+pr4(5)      # 5
+pr4()       # 기본값 10
+
+# 예제5) 함수 인자의 기본값 설정(인자 2개인 경우)
+def pr5(arg1=10,arg2=20):
+    print(arg1,arg2)
+
+# 메인
+pr5(100,200)    # 100 200
+pr5(100)        # 100 20
+pr5(200)        # 200 20
+pr5()           # 10 20
+# 값을 입력하면 인자는 순서대로 처리가 된다
+# 입력값에 대상을 지정하지 않는 한 순서대로 처리
+pr5(arg2=100)       #10 100
+
+# 예제6. 함수 인자가 설정에 기본 인자값과 일반인자가 섞여서 사용하는 경우
+def pr6(arg1,arg2=100):
+    print(arg1,arg2)
+# 메인
+pr6(100,200)
+pr6(100)
+pr6(200)
+pr6()       # TypeError : 인자값 설정이 안됨(arg1)
+
+
+# 인자의 기본값을 앞으로 둔경우
+def pr7(arg1=100,arg2):     # Syntax Error: 기본값은 반듯이 뒤로 빼기! 기본값인자 뒤에는 일반 인자값이 존재 x 
+    print(arg1,arg2)
+
+# 기본값인자가 인자들 사이에 있는 경우
+def pr8(arg1,arg2=100,arg3):       # *기본값인자 뒤에는 일반 인자값이 존재x      
+    print(arg1,arg2,arg3)
+
+# Quiz. 
+# 1.짝수 홀수 구분하는 함수
+def Qu(arg1):
+    if arg1%2==0:
+        return('짝수')
+    else:
+        return ('홀수')
+su = int(input('정수입력:'))
+result=Qu(su)
+print(result)
+
+# 2. '3'의 배수를 판별하는 함수
+def Qu2(arg2):
+    if arg2%3==0:
+        return('3의 배수')
+    else:
+        return('3의 배수가 아닙니다')
+su1= int(input('정수 입력:'))
+result=Qu2(su1)
+print(result)
+
+# 3.계산기를 입력, 출력, 연산기능으로 나누어 실행되게 작성해 주세요 
+def cnt(num1,num2,giho):
+    if giho == "+":
+        return num1+num2
+    elif giho == "-":
+        return num1-num2
+    elif giho == "*":
+        return num1*num2
+    elif giho == "/":
+        return num1/num2     
+def Output(num1,num2,giho,result):
+    print(num1,giho,num2,'=',result)
+def display():
+    num1,giho,num2=int(input('첫번째 정수 입력:'))\
+        ,input('계산기호 입력(+,-,*,/):'),int(input('두번째 정수 입력:'))
+    result= cnt(num1,num2,giho)
+    Output(num1,num2,giho,result)
+# 메인
+display()
+
+# 4. 거꾸로 수를 반환하는 함수를 계산, 출력 기능으로 나눠서 작성 (%연산)
+def reversecode(x):
+    tmp, su=0,0
+    while True:
+        tmp =x % 10
+        x = x//10
+        re= (re+tmp)*10
+        if x == 0:
+            return re//10
+def display():
+    result,su = 0,0
+    result = int(input('정수입력:'))
+    su = reversecode(result)
+    print('변환전값:{} 변환후값{}:'.format(result,su))
+
+display()
+
+
+# 질문 
+# def Qu3(arg3):
+    arg3 = int(input('정수 입력:'))
+    lst1 =[arg3]
+    a = lst1.reverse(arg3)
+    print(a)
+
+# 5.친구이름 관리를 함수로 기능을 나눠서 작성해 주세요
+def friend():
+    if menu == 1:
+        print(friend)
+        menu = int(input('메뉴를 입력하세요: '))
+    elif menu==2:
+        name=input('친구의 이름:')
+        age= int(input('친구의 나이:'))
+        friend.append([name,age])
+        print(friend)
+        menu = int(input('메뉴를 입력하세요: '))
+    elif menu==3:
+        del_fri=input('삭제하고자하는 친구이름:')
+        friend.remove(del_fri)
+        menu = int(input('메뉴를 입력하세요: '))
+    elif menu == 4:
+        na=int('기존 이름')
+        ch_na=input('바꿀 이름:')
+        for idx in range(len(friend)):
+            if friend[idx][0]==ch_na:
+                print(friend)
+    elif menu == 0:
+        print('프로그램종료')
+
+friend()
+import os
+print('1.친구리스트 출력 \n2.친구 추가\n3.친구삭제\n4.이름변경\n0.종료')
+num = 1
+while num:
+    menu = int(input('메뉴를 입력하세요: ')) 
+'''
+
+# 5. 예제 친구이름 관리를 함수로 기능을 나눠서 작성해주세요.
+#    (1.친구목록보기,
+#     2.친구추가,
+#     3.친구삭제,
+#     4.친구수정,
+#     0.종료)
+import os
+def fr_list(lst):
+    print("========= 친구 목록 보기 ========")
+    if lst != []:
+        for i in range(len(lst)):
+            print("{} : {}".format(i,lst[i]))
+    else:
+        print("등록된 친구가 없습니다.")
+def fr_add(lst):
+    name = input("추가할 친구 이름 입력 : ")
+    lst.append(lst)
+def fr_del(lst):
+    name = input("삭제할 친구 이름 입력 : ")
+    if name in lst:
+        lst.remove(name)
+    else: print("삭제할 친구가 없습니다.")
+def fr_mod(lst):
+    name = input("수정할 친구 이름 입력 : ")
+    if name in lst:
+        idx = lst.index(name)
+    else:
+        print("수정할 친구가 없습니다.")
+        return
+    name_mod = input("변경할 이름 입력하세요 : ")
+    lst[idx] = name_mod
+
+fr_lst=[]
+while True:
+    os.system('cls')
+    print("="*15," 친구 관리 프로그램 ","="*15)
+    print(" 1. 친구 목록 보기")
+    print(" 2. 친구 추가")
+    print(" 3. 친구 삭제")
+    print(" 4. 친구 수정")
+    print(" 0. 종료")
+    sel = input("메뉴를 선택해 주세요[0 ~ 4] : ")
+    if sel == '1':
+        fr_list(fr_lst)    # 친구 목록을 보여주는 함수
+        os.system('pause')
+    elif sel == '2':
+        fr_add(fr_lst)      # 친구 추가
+        os.system('pause')
+    elif sel == '3':
+        fr_del(fr_lst)      # 친구 삭제
+        os.system('pause')
+    elif sel == '4':
+        fr_mod(fr_lst)      # 친구 수정
+    elif sel == '0':
+        print("프로그램을 종료합니다.!!!")
+        break
+    else :
+        print("메뉴 선택이 잘 못됐습니다.\n다시 선택하세요!!")
+        os.system('pause')
+
+
