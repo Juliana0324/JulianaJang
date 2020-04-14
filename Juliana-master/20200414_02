@@ -143,3 +143,28 @@ def display():
         return
     
 display()
+
+
+def transfer(dest,su=1,won=500):
+    for i in range(1,su):
+        won *= 2
+        if won >= 10000:
+            won = 10000
+    return "{}까지 요금 : {:,}원 입니다.".format(dest,won)
+def display():
+    dest="";su=0
+    num = input("1.환승안함\n2.환승 함\n3.장거리\n번호 선택>>")
+    dest = input("목적지 입력 : ")
+    if num == '1':
+        result = transfer(dest)
+    elif num == '2':
+        su = int(input("환승 횟 수 입력 : "))
+        result = transfer(dest,su)
+    elif num == '3':
+        result = transfer(dest,1,10000)
+    else:
+        print("번호를 다시 선택하세요. ")
+        return
+    print(result)
+# 메인
+display()
