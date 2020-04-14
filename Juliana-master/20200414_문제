@@ -1,0 +1,43 @@
+# 문제1. 알바 시급 프로그램
+# 시급 8500원, 하루 8시간, 한달30일
+
+# 1. 기본급
+# 일한날짜 입력
+'''
+num=int(input('1.기본급\n2.일한 날짜 입력\n번호 입력:'))
+if num==1:
+    def payment(aday):
+        return ('기본급은')
+    month=30
+    day=8
+    pay=8500
+    monthly=day * pay *month
+    print('기본급은',monthly)
+
+elif num==2:
+    def dlong(dday):
+        return ('일한 날짜')
+    su=int(input('일한 날짜를 입력하세요:'))
+    day=8
+    pay=8500
+    monthly=day * pay *su
+    print('일한날짜에 따른 급여는 {:,}입니다'.format(monthly))
+else:
+    print('잘못 입력하셨습니다.')
+'''
+#선생님 풀이
+def alba(day=30):       #기본값
+    time=8
+    price=8500
+    monthly=time * price *month
+    return result
+def display():
+    num = int(input('1.기본급\n2.일한 날짜 입력\n번호 입력:'))
+    if num==1:
+        re= alba()
+    elif num==2:
+        day=int(input('일한일수:'))
+        re= alba(day)
+    print('당신의 급여는 {:,}입니다'.format(re))
+
+display()
