@@ -1,0 +1,145 @@
+
+# 인자값 처리 방식 ==> 연속된 자료를 처리하는 함슈의 인자처리방식
+# 예제
+def pr(a,b,c):
+    print(a)
+    print(b)
+    print(c)
+
+pr(10,20,30)
+# '*'로 이용하여 리스트 또는 튜플과 같은 자료를 연속된 인자의 값으로 처리
+# 리스트 또는 튜플의 변수값을 받아서 'unpacking'
+x= [100,200,300]
+pr(*x)          # 그대로 a,b,c에 할당=> unpacking ('*'를 사용!!)
+
+
+# 가변인자값을 처리하는 함수예제
+# 고정인자? 인자값을 반듯이 정해진 값으로 1:1로 인자를 전달해야하는 경우
+# 가변인자? 인자값을 정해진 개수로 전달하지 않고, 가변적으로 전달 처리하는 경우
+
+# 가변인자 설정은 함수 정의시에 매개변수(인자) 앞에 '*'를 사용
+
+# 전달된 인자값들의 합을 구하는 예제
+def sum_func(*par):
+    result =0
+    print(par,type(par))        # 전달된 인자값과 그타입을 보기 위해서 : 리스트,class = 튜플
+    for su in par:
+        result += su
+    return result
+def display():
+    Sum = 0
+    Sum = sum_func()
+    print(Sum)
+    Sum=sum_func(10,20)
+    print('인자값이 두개(10,20)인경우 결과:',Sum)
+    Sum=sum_func(10,20,30,40,50)
+    print('인자값이 5개(10,20,30,40,50)인 경우',Sum)
+
+#메인
+display()
+
+# 주의) 인자값 처리에 있어서 고정인자와 가변인자를 동시에 사용하는 경우, 
+# 고정인자를 먼저 처리하도록 한다. 가변인자는 마지막에 처리되도록 한다
+
+
+# '**': 딕셔너리에 대한 unpacking을 시도한다는 의미로 처리
+#예제) 딕셔너리 자료형을 받아서 처리하는 함수
+def dic_func(**par):            # par= dictionary
+    print(par, type(par))
+    for k in par:               # k= 키(key) 값
+        print('{}:{}'.format(k, par[k]))
+
+# 메인
+dic_func(피카츄='1마리',파이리='2마리',꼬부기='없음')
+
+# 변수의 범위(variable scope)
+# - global(전역변수) ==> 상위 영역에서 선언된 변수로 프로그램 전반에 걸쳐 영향
+# - local(지역변수) ==> 블록 영역에서 선언된 변수로 해당영역에서만 영향을 줌
+var= 2                 # 전역변수 
+def func(arg):
+    var=1              # 지역변수
+    print(var,arg)
+
+#메인
+func(var)
+print(var)
+
+
+
+var1= 2                 # 전역변수 
+def func(arg):
+    var2=1              # 지역변수
+    print(var1,var2,arg)
+        # 2     1   2       # var1=arg
+#메인
+func(var1)
+print(var2)
+
+
+# 전역변수를 변경하고자 할때
+var1= 2                 # 전역변수 
+print('var1변수의 주소: ',id(var1))
+def func(arg):
+    var2=1              # 지역변수
+    global var1
+    var1= 3
+    print(var1,var2,arg)
+        # 3     1   2       # var1=arg
+    print('var1변수의 주소:',id(var1)\
+        ,'\nvar2변수의 주소:',id(var2)\
+        ,'\nvar3변수의 주소:',id(arg))
+#메인
+func(var1)
+print(var1)
+'''
+'''
+#[Quiz]
+디폴트 매개변수를 이용한 요금 구하는 프로그램 만들기.
+기본 요금은 500원 환승이 없거나 환승 1회까지는 기본요금.
+1회를 초과하는 환승의 경우 환승 1회마다 요금의 2배씩 증가된다.
+[EX) 환승 2회인 경우 : 1000원, 환승 3회일 경우 : 2000원]
+[장거리는 10000원으로 처리한다.]
+1. 환승 안함
+2. 환승 함         #(몇번환승하는지 질의 후 요금 계산)
+3. 장거리
+<<** 함수화하여 작업하세요>>
+'''
+
+num = int(input('1.환승안함 \n2.환승함 \n3.장거리:'))
+if num==2:
+    def tran(port):
+        return('환승')
+    mo_tran=int(input('몇번환승 했나?:'))
+    global pr
+    pr=500
+    su= pr * pow(2,mo_tran-1)
+    print('요금은 {:,}원 입니다.'.format(su)) 
+elif num ==3:
+    print('요금은 10,000원 입니다')
+else:
+    print('요금은 {}원 입니다'.format(pr))
+
+
+
+def tran(dest,su=1, won=500):
+    for i in range(1,su):
+        won *= 2
+        if won >= 10000:
+            won = 10000
+    return '{}까지 요금: {:,}원 입니다'.format(dest,won)
+def display():
+    dest=''; su=0
+    num = int(input('1.환승안함 \n2.환승함 \n3.장거리 :'))
+    dest= input('목적지 입력:')
+    if num ==1:
+        re=tran(dest)
+    elif num==2:
+        su =int(input('몇번환승 했나?:'))
+        result=tran(dest,su)
+    elif num==3:
+        result = tran(dest,1,10000)
+    else: 
+        print('잘못 선택하셨습니다')
+        return
+    
+display()
