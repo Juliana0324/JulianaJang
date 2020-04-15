@@ -1,0 +1,112 @@
+'''
+def alba(day=30):
+    time=8
+    pay=8500
+    monthly=day*time*pay
+    return monthly
+def display():
+    num=int(input('1.기본급 \n2.일한날짜 \n번호입력: '))
+    if num ==1:
+        result = alba()
+    elif num==2:
+        day=int(input('일한 일수:'))
+        result=alba(day)
+    print('급여는 {:,}입니다.'.format(result))
+display()
+
+def sum_func(*summit):
+    re=0
+    for su in summit:
+        re+=su
+    return re
+def display():
+    Su=sum_func(1,2,3,4,5)
+    print(Su)
+display()    
+
+var=2
+def func(arg):
+    var=1
+    print(var,arg)
+
+func(var)
+print(var)
+print('\n')
+
+var1=2
+def func(arg):
+    var2=1
+    print(var1,var2,arg)
+
+func(var1)
+print(var1)
+print('\n')
+
+var1=2
+print('var1변수의 주소:',id(var1))
+def func(arg):
+    var2=1
+    global var1
+    var1=3
+    print(var1,var2,arg)
+    print('var1 변수의 주소: ',id(var1)
+        ,'\nvar2 변수의 주소: ',id(var2)
+        ,'\narg 변수의 주소: ',id(arg))
+
+func(var1)
+print(var1)
+'''
+'''
+#[Quiz]
+디폴트 매개변수를 이용한 요금 구하는 프로그램 만들기.
+기본 요금은 500원 환승이 없거나 환승 1회까지는 기본요금.
+1회를 초과하는 환승의 경우 환승 1회마다 요금의 2배씩 증가된다.
+[EX) 환승 2회인 경우 : 1000원, 환승 3회일 경우 : 2000원]
+[장거리는 10000원으로 처리한다.]
+1. 환승 안함
+2. 환승 함         #(몇번환승하는지 질의 후 요금 계산)
+3. 장거리
+<<** 함수화하여 작업하세요>>
+'''
+
+def transfer(dest,su=1,won=500):
+    for i in range(1,su):
+        won *=2
+        if won >= 10000:
+            won=10000
+    return '{}까지 요금: {:,}원입니다'.format(dest,won)
+def display():
+    dest=''
+    su=0
+    num=int(input("1.환승안함\n2.환승 함\n3.장거리\n번호 선택>>"))
+    dest=input('목적지 입력:')
+    if num==1:
+        re = transfer(dest,1)
+    elif num==2:
+        su=int(input('환승 횟수 입력:'))
+        re = transfer(dest,su)
+    elif num==3:
+        re=transfer(dest,1,10000)
+    else:
+        print('번호를 다시 선택하세요')
+        return
+    print(re)
+display()
+
+'''
+num = int(input('1.환승안함 \n2.환승함 \n3.장거리:'))
+if num==2:
+    def tran(transport):
+        global port
+        port=500
+        mo_tran=int(input('몇번 환승하셨습니까?'))
+        su= port*pow(2,mo_tran)
+        if su > 10000:
+            print('장거리 입니다')
+        else:
+            print('요금은 {:,}원입니다'.format(su))
+if num==1:
+    print('요금은 {}원입니다'.format(500))
+elif num==3:
+    su=10000 
+'''
