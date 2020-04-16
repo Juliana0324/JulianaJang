@@ -1,0 +1,88 @@
+# lambda함수
+# : 익명함수로 일시적인 함수를 의미함; 사용은 함수가 생선된 곳에서 필요하고, 
+# 사용 후에는 버리는 함수를 의미함
+
+# 형식
+# lambda 인자리스트 : 표현식
+# 변수명 = lambda 인자리스트 : 표현식
+#
+# 예) lam =lambda x : x**2
+#   print(lam(8))==> 결과 = 64   
+'''
+lam =lambda x : x**2
+print(lam(8))
+
+#   lam2=lambda x,y:x+y
+#   print(lam2(10,20))==> 결과 30
+
+lam2=lambda x,y:x+y
+print(lam2(10,20))
+
+# 람다는 어디서든지 사용 가능한 함수
+
+# 예제1) 다음과 같은 함수를 lambda로
+def swap(x,y):
+    return y,x
+a = 100
+b= 200
+print(a,b)      #100 200
+a, b=swap(a,b)
+print(a,b)      # 200,100
+
+# 람다의 사용 예제
+swapv = lambda a,b : [b,a]
+a= swapv(10,20)
+print(a,type(a))    # [20,10],<class list>
+
+# 2)
+lam = lambda a:a*10
+lam2=lambda a,b: a+b
+noData=lambda:print('인자없는 lambda')
+
+print(lam(10))
+print(lam2(10,20))
+noData()
+
+# 문제1. 람다 함수 사용해 두수의 '+',-,*,/의 사직 연산
+a=int(input('정수1: '))
+b=int(input('정수2: '))
+lam1=lambda a,b: a+b
+lam2=lambda a,b: a-b
+lam3=lambda a,b: a*b
+lam4=lambda a,b: a/b
+
+print('{} + {} = {}'.format(a,b,lam1(a,b)))
+print('{} - {} = {}'.format(a,b,lam2(a,b)))
+print('{} * {} = {}'.format(a,b,lam3(a,b)))
+print('{} / {} = {}'.format(a,b,lam4(a,b)))
+
+while True:
+    in_txt = input('수식을 입력하세요[ex) 5+5]:')
+    if '+' in in_txt:
+        num1,num2= in_txt.split('+')
+        num1=int(num1)
+        num2=int(num2)
+        print('계산결과:',lam1(num1,num2))
+    elif '-' in in_txt:
+        num1,num2= in_txt.split('-')
+        num1=int(num1)
+        num2=int(num2)
+        print('계산결과:',lam2(num1,num2))
+    elif '*' in in_txt:
+        num1,num2= in_txt.split('*')
+        num1=int(num1)
+        num2=int(num2)
+        print('계산결과:',lam3(num1,num2))
+    elif '/' in in_txt:
+        num1,num2= in_txt.split('/')
+        num1=int(num1)
+        num2=int(num2)
+        print('계산결과:',lam4(num1,num2))
+    else: 
+        print('잘못된 수식을 입력하였습니다')
+        continue
+    sel=input('계속하시겠습니까?(y/n)')
+    if sel == 'n':
+        print('프로그램 종료')
+        break
+'''
