@@ -1,0 +1,165 @@
+
+# python의 모듈 및 패키지 사용
+# 모듈(module): 함수, 변수, 클래스들을 모아 놓은 파일
+# (모듈은 만들어 놓은 다른 파이썬 프로그램에서 불러와 사용하는 것 가능)
+
+# 모듈을 만드는 방법
+# : *.py 확장자를 이용하여 직접 만드는 것이 가능함
+#  다른 사용자가 만들어 놓은 모듈을 불러다 사용이 가능함
+
+# 모듈을 불러오는 방법: import 명령어를 사용하여 모듈불러옴
+# (표준 library를 불러올때에도 import사용)
+
+import datetime,time    # 시간과 관련된 모듈
+
+s = datetime.datetime.now()         # 현재시각을 알아오는 함수
+print(s)
+t = time.localtime()        # 현재 동작중인 지역의 시간
+print(t)
+print(t.tm_year)            # 연도 = 2020
+print(t.tm_mday)            # 시 = 16
+
+start = time.time()
+print(start)            # 현재 시각의 주소
+                        # 1970.01.01 00시를 기준으로 계산
+
+time.sleep(5)           # time.sleep은 주어진 시간동안 정지 후 다음 값 실행
+end= time.time()
+print(end)
+
+# 모듈을 만들어 보자
+# 사칙연산(계산기) 모듈을 만들기
+# 모듈 명은 : calc.py           ==> 폴더에서 생성 시키기
+
+# 모듈을 불러와 사용하기
+# (형식)
+# import 모듈명
+# ==> 모듈내에 있는 모든 함수, 클래스, 변수를 호출
+
+# 사용할 경우 : 모듈명.함수(클래스,변수)
+import calc
+a=100
+b=200
+c=10
+Sum=calc.Sum(a,b)
+Sub=calc.Sub(b,a)
+Mul = calc.Mul(a,c)
+Div= calc.Div((a*b),c)
+
+print('변수 abc의 계산결과')
+print('a+b= ',Sum)
+print('b-a= ',Sub)
+print('a*c= ',Mul)
+print('(a*b)/c= ',Div)
+
+# 형식 2)
+# from <모듈> import *
+# ==> 모듈 내에 있는 모든 함수, 변수 클래스를 호출
+# 
+# 사용할 경우 : 함수(변수, 클래스)를 그대로 사용
+
+from calc import *  
+a=100
+b=200
+c=10
+Sum=Sum(a,b)
+Sub=Sub(b,a)
+Mul=Mul(a,c)
+Div=Div((a*b),c)
+
+print('변수 abc의 계산결과')
+print('a+b= ',Sum)
+print('b-a= ',Sub)
+print('a*c= ',Mul)
+print('(a*b)/c= ',Div)
+
+# 형식 3) 
+# from <모듈 명> import <함수,변수,클래스>
+# == > 모듈내에 있는 특정 함수, 변수, 클래스를 호출
+
+# 사용방법: 함수(변수, 클래스)를 그대로 사용
+
+from calc import Sum, Sub, Div, Mul          # 특정 모듈내에 함수 사용하고자 할때
+a=100
+b=200
+c=10
+Sum=Sum(a,b)
+Sub=Sub(b,a)
+Mul=Mul(a,c)
+Div=Div((a*b),c)
+
+print('변수 abc의 계산결과')
+print('a+b= ',Sum)
+print('b-a= ',Sub)
+print('a*c= ',Mul)
+print('(a*b)/c= ',Div)
+'''
+'''
+calc.py 파일 작성
+def Sum(a,b):
+    return a+b
+def Sub(a,b):
+    return a-b
+def Mul(a,b):
+    return a*b
+def Div(a,b):
+    return a/b
+'''
+
+'''
+# Package 생성후 사용하기
+# 패키지란> 여러 동작과 관련된 모듈을 모아 놓은 것을 의미함
+# 
+# (패키지 생성 순서)
+# 1. 패키지로 사용할 폴더를 생성
+# 2. 패키지 폴더에 묶어서 사용할 모듈을 저장
+#    (*[주의 사항]python 3.3이하 버전에서능 폴더에'__init__.py' 파일을 생성해야함
+#       파일내에 내용은 따로 없어도 됨)
+# 3. 패키지를 import명령어를 사용하여 불러와 사용
+#      (패키지 폴더 명이 패키지 명이 된다)
+#   from <패키지명> import <모듈명>
+#   from <패키지명.모듈명> import <함수/변수/클래스명>
+from testpack import Sum,Sub,Mul,Div
+
+print(Sum.Sum_func(10,20))
+print(Sub.Sub_func(100,50))
+print(Mul.Mul_func(10,5))
+print(Div.Div_func(100,5))
+'''
+
+# python 파일 입출력
+# - 디스크에 파일을 읽어 들이거나
+# - 디스크에 파일을 생성하여 저장하는 기능
+# - 많은 양의 데이터를 처리(저장)할때에 유용하게 사용됨.
+# ex) 홈페이지 이미지, 데이터, 음악, 파일 정보등을 저장할때에 사용
+
+# [과정-순서]
+# 1. open함수를 이용하여 파일열기
+# 2. read(읽기) 또는 write(쓰기) 관련 함수를 이용하여 파일에 대한 작업
+#     진행 처리하는 단계
+# 3. open함수로 열린 파일의 내용을 close함수로 닫기
+
+# 1. open함수 사용
+file=open('test.txt','a',encoding='utf-8')           # 같은 폴더 안에 만들기
+
+# open 함수시 모드 설정값
+# 'r'     ==> read(읽기)    ==> 파일이 있는 경우, 파일에 대한 읽기 동작을 실행
+#                           ==> 파일이 없는 경우, Error 출력(file not found)
+
+# 'w'     ==> write(쓰기)   ==> 파일이 있는 경우, 해당 파일에 있는 내용을 *삭제 후 쓰기
+#                           ==> 파일이 없는 경우, 해당파일을 생성 후 쓰기
+
+# 'a'   ==> append(추가)    ==> 파일이 있는 경우, 해당 파일에 있는 내용 마지막에 추가로 쓰기
+#                           ==> 파일이 없는 경우, 해당파일을 생성 후 쓰기
+
+# * Mode 값에 '+' 추가로 사용하는 경우 : 추가 기능이 더해짐.
+# ** Mode 값에 'b'를 사용할 경우 binary 값으로 데이터를 처리함(2진수)
+
+# 예제
+str1= input('파일의 내용을 입력합니다')
+i = file.write(str1+'\n')
+print('file.write()의 반환값:',i)
+file.close()
+
+
+
