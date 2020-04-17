@@ -1,0 +1,157 @@
+'''
+# ord(): 문자를 인코딩 값으로 출력,
+# chr(): 정수 인코딩 값을 문자로 출력
+print(ord('안'))
+print(ord('녕'))
+print(ord('하'))
+print(ord('세'))
+print(ord('요'))
+print(ord('1'))     # ASCII code
+print(ord('a'))     # ASCII code
+
+print(chr(50504))
+print(chr(45397))
+print(chr(54616))
+print(chr(49464))
+print(chr(50836))
+print(chr(49))
+print(chr(97))
+
+# 1bit 암호화
+# 예제 5) 문자의 암호화
+readstr, content ='',''
+key = 100
+choice = input('1.파일저장 \n2.파일불러오기 \n번호선택 : ')
+fileName=input('파일명 입력:')
+if choice=='1':     # 파일 저장, key만큼 값을 변경한 후에 저장
+    content=input('단일 문자 입력:')
+    outFile = open(fileName,'w',encoding='utf-8')
+    chNum=ord(content)
+    chNum += key
+    content = chr(chNum)
+    outFile.write(content)
+    outFile.close()
+ 
+elif choice=='2':   # 파일을 읽기, key만큼 값을 변경한 후에 읽기
+    readFile= open(fileName,'r',encoding='utf-8')
+    readstr=readFile.read()
+    chNum=ord(readstr)
+    chNum -=key
+    readstr=chr(chNum)
+    print('파일에 저장된 값: ',readstr)
+    readFile.close()
+else:
+    print('잘못된 값 입력')
+
+
+# 문제1]
+readstr, content,savestr ='','',''
+key = 100
+choice = input('1.파일저장 \n2.파일불러오기 \n번호선택 : ')
+fileName=input('파일명 입력:')
+if choice=='1':     # 파일 저장, key만큼 값을 변경한 후에 저장
+    content=input('문자 입력:')
+    outFile = open(fileName,'w',encoding='utf-8')
+    for x in content:
+        chNum=ord(x)
+        chNum +=key
+        savestr += chr(chNum)
+    outFile.write(savestr)
+    outFile.close()
+elif choice=='2':   # 파일을 읽기, key만큼 값을 변경한 후에 읽기
+    readFile= open(fileName,'r',encoding='utf-8')
+    readstr=readFile.read()
+    for i in readstr:
+        chNum=ord(i)
+        chNum -=key
+        savestr +=chr(chNum)
+    print('파일에 저장된 값: ',savestr)
+    readFile.close()
+else:
+    print('잘못된 값 입력')
+'''
+# 문자열을 반복적으로 입력하도록 하여 처리후 입력
+# 문자열 만들기-문자열 모두 암호화- 계속하시겠습니까 입력y/n - y= 다시반복  
+
+readstr, content, savestr='','',''
+key= 100
+choice = input('1.파일저장 \n2.파일불러오기 \n번호선택 : ')
+fileName=input('파일명 입력:')
+if choice =='1':
+    while True:
+        content=input('문자열 입력: (종료 문구:exit)')
+        if content != 'exit':
+            outFile=open(fileName,'a',encoding='utf-8')
+            for i in content:
+                chNum=ord(i)
+                chNum += key
+                savestr += chr(chNum)
+            print('\n')
+        else:
+            break
+    outFile.write(savestr)
+    outFile.close()
+elif choice=='2':     
+    readFile= open(fileName,'r',encoding='utf-8')
+    readstr=readFile.read()
+    for i in readstr:
+        chNum=ord(i)
+        chNum -=key
+        savestr +=chr(chNum)
+    print('파일에 저장된 값: ',savestr)
+    readFile.close()
+else:
+    print('잘못된 값 입력')
+
+
+x= content + '\n'
+
+
+# 선생님 풀리
+
+import os
+readstr,fileName= "",""
+secu = 100          #암호화 key
+while True:
+    os.system('cls')
+    choice = int(input("1.파일 저장\n2.파일 불러오기\n0.종료\n번호선택>>> "))
+    if choice == 1:
+        savestr=""
+        fileName = input("파일명 입력 : ")
+        outFile = open(fileName,"a",encoding='utf-8')
+        while True:
+            content = input("문자열 입력  : ")            
+            for i in content:   # 암호화
+                chNum = ord(i)
+                chNum += secu
+                savestr += chr(chNum)
+            savestr +="\n"
+            sel = input("문서입력을 계속하겠습니까?(Y/N) : ")
+            if sel != 'N':
+                continue
+            else :
+                outFile.write(savestr)
+                outFile.close() 
+                break
+    
+    elif choice == 2:
+        fileName = input("파일명 입력 : ")
+        readFile = open(fileName,"r",encoding='utf-8')
+        printstr = ""
+        while True:
+            readstr = readFile.readline()
+            if readstr == "":
+                readFile.close()
+                break
+            readstr = readstr.strip("\n")
+            for i in readstr:   # 복호화
+                chNum = ord(i)
+                chNum -= secu
+                printstr += chr(chNum)
+            printstr +="\n"
+        print("\"{}\"파일에 있는 내용\n{}".format(fileName,printstr))
+        os.system('pause')
+    elif choice == 0:
+        print("프로그램을 종료합니다.")
+        break
+
