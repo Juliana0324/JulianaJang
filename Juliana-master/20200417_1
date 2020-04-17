@@ -1,0 +1,60 @@
+'''
+# 파일 쓰기
+# 1) open
+file = open('test.txt','w',encoding='utf-8')
+#2) write
+str1 = input('파일에 저장할 내용:')
+i = file.write(str1+'\n')
+print('file.write()의 반환값:(데이터 처리길이)',i)
+# 3. close 
+file.close()
+
+# 파일 읽기
+# 1. open
+file = open('test.txt','r',encoding='utf-8')
+# 2. read
+str2=file.read()        # 문자열로 넘겨줌/()는 적혀진 수만큼만 ex) file.read(10) 10글자
+print(str2)
+
+# 3. close
+file.close()
+
+# 본인의 인적사항의 파일 저장후 출력
+file= open('pinfo.txt','w',encoding='utf-8')
+str1=input('당신의 이름:')
+str2=input('{}님의 나이는:'.format(str1))
+str3=input('{}님의 주소는:'.format(str1))
+Name=file.write(str1+'\n')
+age=file.write(str2+'살\n')
+Address=file.write(str3+'\n')
+# file.write(str1+'\n'+str2+'살\n'+str3+'\n')
+# print(Name,age,Address)
+file.close()
+
+file=open('pinfo.txt','r',encoding='utf-8')
+Su2=file.read()
+print(Su2)
+file.close()
+
+# 예제2) readline() : 개행문자를 기준으로 데이터를 읽어들임
+file = open('pinfo.txt','r',encoding='utf-8')
+while True:
+    readfile1= file.readline()
+    if readfile1=='':
+        print('더이상 값이 존재하지 않습니다')
+        file.close()
+        break
+    print(readfile1, end='')
+
+# 예제3) readlines(): 개행 문자를 기준으로 데이터를 list로 반환
+file= open('pinfo.txt','r',encoding='utf-8')
+buf= file.readlines()       # ==> list 형태
+print(buf,type(buf))
+
+for i in range(len(buf)):
+    buf[i] = buf[i].strip('\n')     # \n 제외 시키기 
+    print(buf[i])
+print(buf,type(buf))        # \n 제외 되어서 출력
+'''
+
+
