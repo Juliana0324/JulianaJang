@@ -140,7 +140,7 @@ while True:
         printstr = ""
         while True:
             readstr = readFile.readline()
-            if readstr == "":
+            if readstr == "":                           ???
                 readFile.close()
                 break
             readstr = readstr.strip("\n")
