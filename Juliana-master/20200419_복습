@@ -1,0 +1,119 @@
+'''
+readstr,content='',''
+key=100
+choice=int(input('1.파일 저장 \n2. 파일 불러오기 \n번호선택:'))
+fileName=input('파일 명:')
+if choice==1:
+    content = input('단일 문자 입력:')
+    outFile = open(fileName,'w',encoding='utf-8')
+    chNum=ord(content)
+    chNum += key
+    content=chr(chNum)
+    outFile.write(content)
+    outFile.close()
+elif choice ==2:
+    readFile=open(fileName,'r',encoding='utf-8')
+    readstr=readFile.read()
+    chNum=ord(readstr)
+    chNum-=key
+    readstr= chr(chNum)
+    print('파일에 저장된 값: ',readstr)
+    readFile.close()
+else:
+    print('잘못입력되었습니다')
+
+readstr,content='',''
+key=100
+choice=int(input('1.파일저장 \n2.파일 불러오기 \n번호선택:'))
+fileName= input('파일명:')
+if choice==1:
+    content= input('단일문자 입력:')
+    outFile= open(fileName,'w',encoding='utf-8')
+    chNum=ord(content)
+    chNum += key
+    content=chr(chNum)
+    outFile.write(content)
+    outFile.close()
+elif choice==2:
+    readFile=open(fileName,'r',encoding='utf-8')
+    readstr=readFile.read()
+    chNum=ord(readstr)
+    chNum-=key
+    readstr=chr(chNum)
+    print('파일에 저장된 값:')
+    readFile.close()
+else:
+    print('잘못된 값을 입력하셨습니다')
+
+readstr,content,savestr = '','',''
+key=100
+choice = int(input('1.파일저장 ,2. 파일 읽기 \n번호 입력:'))
+fileName= input('파일 명: ')
+if choice==1:
+    content=input('문자입력:')
+    outFile=open(fileName,'w', encoding='utf-8')
+    for x in content:
+        chNum=ord(x)
+        chNum += key
+        savestr +=chr(chNum)
+    outFile.write(savestr)
+    outFile.close()
+elif choice==2:
+    readFile=open(fileName,'r',encoding='utf-8')
+    readstr= readFile.read()
+    for i in readstr:
+        chNum=ord(i)
+        chNum-=key
+        savestr+=chr(chNum)
+    print('파일에 입력된 값: ',savestr)
+    readFile.close()
+else:
+    print('잘못입력하셨습니다.')
+'''
+
+import os
+readstr,content= '',''
+key=100
+while True: 
+    os.system('cls')
+    choice = int(input('1.파일저장 ,2. 파일 읽기 \n0.종료 \n번호 입력:'))    if choice == 1:
+    if choice == 1:
+        savestr=''
+        fileName=input('파일명: ')
+        outFile=open(fileName,'a',encoding='utf-8')
+        while True:
+            content= input('문자열 입력:')
+            for x in content:
+                chNum=ord(x)
+                chNum+=key
+                savestr +=chr(chNum)
+            savestr+='\n'
+            sel= input('계속 입력하시겠습니까?(y/n)')
+            if sel == 'y':
+                continue
+            else:
+                outFile.write(savestr)
+                outFile.close()
+                break
+    elif choice ==2:
+        fileName=input('파일명입력: ')
+        readFile=open(fileName,'r',encoding='utf-8')
+        printstr=''
+        while True:
+            readstr = readFile.readline()
+            if readstr == '':
+                readFile.close()
+                break
+            readstr=readstr.strip('\n')
+            for i in readstr:
+                chNum=ord(i)
+                chNum-=key
+                printstr += chr(chNum)
+            printstr += '\n'
+        print('파일에 있는 내용: ',printstr)
+        os.system('pause')
+    elif choice == 0:
+        print('프로그램을 종료합니다')
+        break
+    else: 
+        print('잘못 입력하셨습니다.')
