@@ -133,4 +133,20 @@ finally:
     print('프로그램을 종료합니다')  
 
 
-
+# 파이썬 실행 파일 생성하기 
+# 1) pyinstaller 를 설치하시
+#    python -m pip install pyinstaller
+# 2) pyinstaller [파이썬 스크립트 파일] => 컴파일
+#  
+#  [옵션]
+# '--onefile'			    실행파일 하나만 생성
+# '--onedir'			    디렉토리 하나만 생성
+# '--tk'				    TCL/TK 인터페이스 포함
+# '--windowed, --noconsole'	실행할 때에 도스창을 열지 않음
+# '--nowindowed, --console'	도스창을 사용함
+# '--strip'			        exe라이브러들을 Strip로 실행
+# '--upx'				    UPX를 설치한 경우 실행 파일 압축
+# '--out'				    -o DIR로 해당 경로에 파일 생성
+# '--paths'			        -p DIR로 해당 경로의 path 사용
+# '--icon'			        실행파일 아이콘 선택
+#  
