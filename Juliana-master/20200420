@@ -124,9 +124,9 @@ try :
     age= int(input('나이를 입력하세요: '))
     if age < 0:
         raise Exception('나이가 0보다는 적을수는 없습니다')
-        age = int(input('나이를 입력하세요'))
 except ValueError:
     print('정수를 입력하세요')    
+    age = int(input('나이를 입력하세요'))    
 else: 
     print('당신의 나이는 {}살 입니다'.format(age))
 finally:
