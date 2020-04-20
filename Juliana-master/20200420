@@ -102,3 +102,30 @@ else:
     file.close()
     print('문제없이 잘 실행했습니다.')
     
+# 강제 예외처리
+# raise Exception(): 예외발생 시킴 (일반적인 예외에 존재하지 않는 경우 예외를 발생시킴)
+# Exception()은 ()안에 예외에 대한 내용을 기술 
+
+# try ~ except ~ else ~ finally ~:
+# 1) try 조건 확인 2) except 발생시 except를 발생안하면, else를실행
+# 3) finally는 무조건 실행
+
+ 
+# 문제 나이를 입력받아 프로그램을 만들때에, 입력값이 잘못된 경우 예외 처리:
+# 발생 가능예외 :
+#   1) ValueError ===> 정수값 이외의 입력
+#   2) raise Exceptrion('예외 사항') ==> 0보다 적을때에
+#
+# 예외 검증후 정상 출력은 : '당신의 나이는 20살입니다.' else 
+# 마지막에 '프로그램을 종료합니다' 출력 ==> finally
+#    
+
+try :
+    age= int(input('나이를 입력하세요: '))
+    raise Exception(age < 0)
+except ValueError:
+    print('정수를 입력하세요')    
+else: 
+    print('당신의 나이는 {}살 입니다'.format(age))
+finally:
+    print('프로그램을 종료합니다')  
