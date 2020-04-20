@@ -118,16 +118,19 @@ else:
 #
 # 예외 검증후 정상 출력은 : '당신의 나이는 20살입니다.' else 
 # 마지막에 '프로그램을 종료합니다' 출력 ==> finally
-#    
-
+#
 try :
     age= int(input('나이를 입력하세요: '))
     if age < 0:
         raise Exception('나이가 0보다는 적을수는 없습니다')
 except ValueError:
-    print('정수를 입력하세요')    
+    print('양의 정수를 입력하세요')
+    
+except Exception as e: 
+    print(e,'0보다 작은나이는 존재하지 않습니다.')
     age = int(input('나이를 입력하세요'))    
 else: 
     print('당신의 나이는 {}살 입니다'.format(age))
 finally:
     print('프로그램을 종료합니다')  
+
