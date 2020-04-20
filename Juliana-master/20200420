@@ -90,3 +90,15 @@ else:
 
 print('예외문이외에 프로그램 코드 실행')
 
+
+# 파일 관련 예외 처리(FileNotFoundError => 파일이나 디렉토리 못찾는 경우)
+try : 
+    file = open('test10.txt','r',encoding='utf-8')
+    buf = file.read()
+    print(buf)
+except FileNotFoundError:
+    print('파일이나 디렉터리가 존재하지 않습니다.')
+else:
+    file.close()
+    print('문제없이 잘 실행했습니다.')
+    
