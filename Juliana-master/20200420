@@ -45,4 +45,48 @@ file.close()
 # try:                  # 예외 처리 시작(예외 검증) 
 #       예외 처리 검증 사항1
 #       예외 처리 검증 사항2
-#    
+# except: (예외 코드 = Error 코드)
+#       예외 처리 상황에 따른 진행코드1
+#       에외 처리 상황에 따른 진행코드2
+
+# 예제1) 검증 내용은 두수를 나누기 할때 검증\
+try : 
+    num1 = int(input('첫번쨰 정수 입력:'))
+    num2 = int(input('두번쨰 정수 입력: '))
+    Div = num1/num2
+    print('나눗셈 결과 : ', Div)
+
+# 입력값 오류: ValueError
+# 0으로 나누었을떄 오류 : ZeroDivisionError
+except ValueError: 
+    print('정수값을 입력하세요!!')
+except ZeroDivisionError:
+    print('0으로 나눌수 없습니다.')
+print('예외처리 이후 프로그램 진행')
+
+# 예제 2) try ~ except ~ else 구문
+# try :         # 예외 검증
+#   종속문장 (예외검증1)
+#   종속문장 (예외검증2)
+#   종속문장 (예외검증3)
+#
+# ...
+# except (예외코드): 
+#   종속문장 (예외검증1)
+#   종속문장 (예외검증2)
+# ... 
+# else:
+#   종속문장 (예외발생하지 않은 경우)1
+#   종속문장 (예외발생하지 않은 경우)2
+
+
+# 입력값에 대한 예외 처리
+try : 
+    num = int(input('수 입력: '))
+except ValueError:
+    print('정수만 입력하세요')
+else: 
+    print('입력한 값 출력 {} -> 예외 처리 없는 경우 실행'.format(num))
+
+print('예외문이외에 프로그램 코드 실행')
+
