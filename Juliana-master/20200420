@@ -122,7 +122,8 @@ else:
 
 try :
     age= int(input('나이를 입력하세요: '))
-    raise Exception(age < 0)
+    if age < 0:
+        raise Exception('나이가 0보다는 적을수는 없습니다')
 except ValueError:
     print('정수를 입력하세요')    
 else: 
