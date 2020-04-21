@@ -20,6 +20,62 @@ object= oriented
 * 자동 메모리 관리
 자바 가상머신
 안토츠리터와 같은 자바 프로그램의 실행환경을 가상적인 운영체제라는 뜻에서 자바 가상머신
-
 ftp://118.130.22.132
 Id,Pw: java04
+file-new-java project
+src-class- 제목:Main-
+inherited체크 제거 후 public.. 체크
+window - preference-Appearance= colors and Fonts - Basic-Text Font
+Class 안에서만 작동가능
+
+메인 중 가장먼저 작동되는 함수:
+// TODO Auto-generated method stub
+모든 명령어의 마지막은 ;(세미콜론)
+
+데이터가 없는 것: Void
+public static void : 고정되어 있는것
+객체를 . 으로 구분
+() : method ==> 함수선언
+
+System.out.println("Hello World");
+의미 :
+class System{
+	class out{
+		int println(char * str){
+		}
+	}
+}
+jvm이 JAVA의 언어로 출력
+==> 위치: bin
+
+실행시키는 방법(콘솔에 출력) 
+ctrl + F11
+
+컴파일 하지 말라는 의미(주석): 
+한줄(line) 단위 : // ==> enter를 마주하기 전까지
+//asdfjijeaowejoijaero
+//aoeirjojaweoirj
+//aweiojrwerj */
+
+다량 줄(lines) 단위: /*~ */
+/* asdfjijeaowejoijaero
+aoeirjojaweoirj
+aweiojrwerj */
+
+이름을 정해줄때에 
+1 첫글자는 $,_,영문 대소문자여야함
+	한글도 가능하지만 권장하지는 않음
+2 글자수에는제한이 없음
+3 공백 문자는 포함할 수 없음
+4 숫자가 앞으로 올수 없음
+
+***
+5. ***클래스의 이름은 always 대문자
+
+이름 구분시에 
+ex)**카멜방식 :  kssAddress 사용
+or kss_address
+
+
+1 bit = 8개의 bit
+
