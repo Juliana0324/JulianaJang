@@ -15,3 +15,10 @@ Float 일 경우,또한 변수에 F 혹은 f작성
 
 double 형일 경우
 double b = 10.4 ==> double 형일 경우는 8byte
+
+
+char과 short는 16비트
+byte a = 10;
+char b= (char)a     #char는 음수값 지정못함
+short c = (short)b
+char d = char(c)
