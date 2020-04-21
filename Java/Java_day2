@@ -1,0 +1,17 @@
+자바의 형변환
+1. promotion : 작은 사이즈에서 큰사이즈로 ==> 자동 형변환
+2. demotion : 작은 사이즈로 이동 ==> 강제 지정
+
+long의 변수 선언시 L 혹은 l을 작성해준다
+# long a = 10; ==> 여기서 10은 int로 인식 그러므로 
+long a= 8byte / int=4byte
+두번 일
+...
+long a ==10L; 로 작성
+
+
+Float 일 경우,또한 변수에 F 혹은 f작성
+# float a = 10.4F / float a = 10.4f
+
+double 형일 경우
+double b = 10.4 ==> double 형일 경우는 8byte
