@@ -22,3 +22,11 @@ byte a = 10;
 char b= (char)a     #char는 음수값 지정못함
 short c = (short)b
 char d = char(c)
+
+상수 : 
+변하지 않는 값
+상수선언 예
+파이값은 변경 x: 3.141592..
+# public static final double PI =3.141592;
+
+상수는 모두 대문자로 구분: 변수와 구분하기 위해
