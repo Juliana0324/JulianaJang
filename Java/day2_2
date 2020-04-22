@@ -176,9 +176,9 @@ char code = '\u0041';
 System.out.println("ch="+ch);
 System.out.println("code="+code);
 		
-ch = '가';
+char ch = '가';
 System.out.println("ch="+ch);
-System.out.println((int)ch);		
+System.out.println((int)ch);	#44032		
 //사용자의 의지대로 앞에 (int)로 연산자 변경 ==> ASCII코드로 44032
 
 97 = a
