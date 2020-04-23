@@ -214,12 +214,13 @@ int jscore=sc.nextInt();
 System.out.print("C언어점수: ");
 int Cscore=sc.nextInt();
 		
-sc.nextLine();
+sc.nextInt();		#위의 nextInt의 Enter제거
+
 System.out.print("이름 :");
 String name=sc.nextLine();
 		
 int Su = jscore+Cscore;
-float Su1= (jscore+Cscore)/2;
+float Su1= (float)Su/2;
 		
 System.out.printf("[\t%s님의 성적\t]\n",name);
 System.out.printf("자바 : %d점\n",jscore);
