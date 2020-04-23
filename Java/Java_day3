@@ -227,4 +227,11 @@ System.out.printf("c언어 점수 : %d점\n",Cscore);
 System.out.println("합계: "+Su);
 System.out.println("평균:"+ Su1);
 
-		
+
+
+#줄맞춤
+System.out.printf("[%s님의 성적]\n",name);
+System.out.printf("%-10s : %d점\n","자바점수",jscore);
+System.out.printf("%-10s : %d점\n","C언어 점수",Cscore);
+System.out.printf("%-10s: %d점\n","합계",Su);
+System.out.printf("%-10s:%d점\n", "평균점수",Su1);
