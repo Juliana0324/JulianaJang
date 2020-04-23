@@ -80,3 +80,36 @@ ex) a +=5	==> a=a+5
 *=
 /=
 %=
+
+
+연산시 주의
+자바연산자는 연산대상이 되지 않는 데이터 형이 정해져있음
+예> String a = "ab";
+   string b = a-"b"		
+   x
+   스트링은 +(더하기만 가능)'
+   
+//예제
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		int a = 10;
+		int b=++a;
+		System.out.println("a="+a);
+		System.out.println("a="+b);
+
+		int a1 = 10;
+		int b1=a++;
+		System.out.println("a="+a1);
+		System.out.println("a="+b1);
+		
+		byte a2 =10;
+		a2+=5;
+		System.out.println("a2="+a2);
+		
+
+	}
+
+}
