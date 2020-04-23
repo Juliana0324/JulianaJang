@@ -193,13 +193,7 @@ System.out.print("나이: ");
 int age = sc.nextInt();
 		
 System.out.print("이름입력: ");
-String name = sc.next();	//여기서 nextLine을 쓰지않는 이유는 한줄만 입력받기때문에 다음 입력받지 x 
-				// 공백이 포함될 여지가 있으면 nextLine() 쓰기
-혹은 
-sc.nextLine();  //초기화 시키기
-System.out.print("이름입력: ");
 String name = sc.nextLine();
-
 
 System.out.println("이름: "+name);
 System.out.println("나이: "+age);
@@ -214,9 +208,15 @@ int jscore=sc.nextInt();
 System.out.print("C언어점수: ");
 int Cscore=sc.nextInt();
 		
-sc.nextLine();
+
 System.out.print("이름 :");
-String name=sc.nextLine();
+String name=sc.next();		//여기서 nextLine을 쓰지않는 이유는 한줄만 입력받기때문에 다음 입력받지 x 
+				// 공백이 포함될 여지가 있으면 nextLine() 쓰기
+혹은 
+sc.nextLine();  //초기화 시키기
+System.out.print("이름입력: ");
+String name = sc.nextLine();
+
 		
 int Su = jscore+Cscore;
 float Su1= (float)Su/2;
