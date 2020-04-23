@@ -214,8 +214,7 @@ int jscore=sc.nextInt();
 System.out.print("C언어점수: ");
 int Cscore=sc.nextInt();
 		
-sc.nextInt();		#위의 nextInt의 Enter제거
-
+sc.nextLine();
 System.out.print("이름 :");
 String name=sc.nextLine();
 		
