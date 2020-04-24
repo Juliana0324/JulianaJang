@@ -1,0 +1,218 @@
+Casting ==> 
+크기가 4byte 이하인 자료형을 int형으로 변환한다
+
+자바 연산자
+
+최우선연산자 
+ - ( )괄호 연산자
+ -  .  참조 연산자 
+ - [ ] 배열연산자 
+
+단항 연산자
+- +,- 부호 연산자
+- ! 부정연산자 
+- ~ 비트부정 연산자 
+	ex) byte a =10 ;  ==> 0000 1010 
+
+	     ~a 라고 했을때 
+	==> 1111 0101 
+
+- ++a ==> 연산전 a 값 1 증가
+	#예제 1
+	int a =10 b=20 c;
+	int b=++a; ==> a =a+1
+	... a= 11, b=21
+	
+	#예제2
+	int a =10 b=20 c;
+	c = ++a + b;
+	    11  + 20
+ 
+- a++ ==> 연산후 a 값 1 증가
+	#예제1
+	int a = 10;
+	int b= a++  
+	==> b에 a대입 b=10
+	==> a = b+1 ... a=11
+
+	int a =10 b=20 c;
+	c = a++ + b;
+	    10  + 20
+	    11 
+	==> c= 30/ a = 11
+
+
+- --a ==> 연산전 a 값 1 감소
+	# 예제 
+	int a=10;
+	int b = --a
+	순서
+	1. b= a에 10 대입 b= a - 1 ==> 9
+	2. a= 9(b)-1 	 
+	
+	int a;
+	int b;
+	a=10;
+	b = --a;
+		
+	System.out.println("--a의 값은 =" + --a);
+	System.out.println("b의 값은 =" + b);
+
+- a-- ==> 연산후 a 값 1 감소
+	#예제
+	int a;
+	int b;
+	a= 10;
+	b=a--;
+
+	System.out.println("--a의 값은 =" + a--);
+	System.out.println("b의 값은 =" + b);
+	
+	순서
+	b에 먼저 a 대입
+	a에서 -1
+
+
+후위 증가 => 우선순위 맨뒤  
+
+cast연산자 ==> 자료형(byte,int...)
+int a=10;
+byte b=(byte)a;
+
+instanceof: 다형성연산자
+
+Shift 연산자
+<< left 
+>> right
+>>>부호없는 right 
+
+비교연산자
+== 수학적의미의 같다		# = 대입연산자
+!= 같지않다
+>,< 크다,작다
+<= 
+>=
+예제)
+int num = 5;
+System.out.println("5는 0보다 크고, 9보다 작다:"+(num>0 && num<9));
+
+비트 연산자
+- & and 연산자
+==> 좌우 모두 값이 참일때 참
+ 
+- | or 연산자
+==> 한개라도 참인 경우 참
+
+- ^ xor연산자
+==> 둘다 다른경우 참
+
+# 논리연산자
+- &&(and, *라는 의미)
+==> 모두 참일 경우
+#예시
+True && True = True
+ 1   *   1	1
+True && False = False
+ 0   *   1	0
+False && True = False
+  0   *   1	0
+False && False = False
+  0    *   0	  0
+
+- || (or, + 의미)
+==> 모두 false, 그렇지 않을 경우 true
+#예시
+True || True = True
+  1   +   1	1
+True || False = True
+  1   +   0	1
+False || True = True
+  0   +   1	1
+False || False = False
+  0   +   0	0
+
+- ! (not, )
+==> 현재 상태 부정
+
+1 0 	! ==> 0 1 	False True
+0 1 	! ==> 1 0 	True  False
+
+# ** 예시
+Scanner sc = new Scanner(System.in);
+System.out.println("문자입력 :");
+char ch = (char)System.in.read();
+boolean lower=(ch >= 'a' && ch <= 'z');		// 소문자 범위
+boolean upper = (ch >= 'A' && ch <= 'Z');  //대문자 범위
+System.out.println(ch >= 'a' && ch <= 'z');
+
+ 		
+//두개를 다 만족을 해야
+if (lower || upper) {
+System.out.println("입력하신 문자 : "+ ch+"유효한 문자입니다"); 
+
+삼항 연산자(조건연산자)
+?: ex) a>b ? A:B
+==> True이면 A실행/False 이면 B실행
+ex)
+a=10;
+b=8;
+a1 = a>b ? "크다":"작다"	# True
+a1 = 크다
+
+# 예시
+int x=10;
+int y = -10;
+	
+int absX = (x>=10)? x:-x;
+int absY = (y>=10)? y:-y;
+		
+System.out.println("absX:" + absX);
+System.out.println("absY:" + absY);
+
+
+배정연산자
++= 
+ex) a +=5	==> a=a+5
+	※string만 예외적으로 문자결합 + 가능
+-=
+*=
+/=
+%=
+
+	※모듈러 연산자
+int share = 10/8;
+int remain = 10%8;
+		
+System.out.println("10/8의 값은 "+share);
+System.out.println("10%8의 나머지값은 "+ remain);
+		
+System.out.println("-10%8= "+(-10%8));	//-2	10%8절대값 지정후 왼쪽의 값 부호 따름
+System.out.println("10%8= "+(10%-8));	//2		
+System.out.println("-10%-8= "+(-10%-8));//-2
+
+
+실수 예제]
+float f = 0.1f;
+double d= 0.1;
+double df = (double)f;
+
+System.out.println("d==f: " +(d==f));		//false
+System.out.println("d==df: " +(d==df));		//false 
+System.out.println("f==df: " +(f==df));		//true
+
+문자열 예제]
+String str = "Hello World";
+String str1 = "Hello Java";
+String strstr = new String("Hello World");
+				
+System.out.println("str == str1:" + str == str1);	//false
+System.out.println("str.equals(str1):"+str.equals(str1));	//false
+System.out.println("str == strstr:"+str == strstr);	//false
+System.out.println("str.equals(strstr):"+str.equals(strstr));	//true	
+			==> equals ==> 안에 객체값만 보고 비교
+
+
+oracle 들어가면 소스 얻을 수 있음
+https://docs.oracle.com/javase/6/docs/api/
+
+
