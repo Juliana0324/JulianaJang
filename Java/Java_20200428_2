@@ -1,0 +1,74 @@
+==반복문==
+1. while 문 : 조건에의한 반복 
+while(조건){
+	조건이 참이면 실행
+}
+
+#예제1
+a=6
+while(a>5){
+	System.out.println("안녕")
+a--; 	==> 조건: -1
+}
+#예제2
+int sum=0;
+int i=1;
+while (i<=10) {
+	sum +=i;
+	i++;
+	System.out.printf("i가 %s일떄 sum은 %s이다\n",i,sum);
+	}
+}
+
+
+2. do -while문: while문과 비슷하지만 먼저 한번 실행문을 실행하고 비교함
+형식:
+do {
+	실행문:
+}while(조건)
+
+# 예제1
+a = 6;
+do {
+	System.out.println('안녕');
+	a--;
+}while(a>5)
+
+# 실습문제1. 수를 입력받아 수까지의 합을 구하는 프로그램
+Scanner sc = new Scanner(System.in);
+	System.out.println("수를 입력하세요:");
+	int su = sc.nextInt();
+	int i =1;
+	int sum =0;
+	
+	while (i<=su) {
+		sum += i;
+		i++;
+	}
+	System.out.printf("1~%d까지의 합: %d\n",su,sum);
+
+# 실습문제 2. 국어점수를 입력받아 값이 0~100사이의 값이 아니라면 계속 입력받는 프로그램
+Scanner sc = new Scanner(System.in);
+		int kor;	//지역변수
+		do{
+			System.out.println("국어점수입력: ");
+			kor =sc.nextInt();
+		}while(kor<0 || kor>100);
+	System.out.println("입력하신 국어점수:"+ kor);
+	}
+# 실습문제3. 임의의 수를 입력받아 그합과 평균을 구하는 프로그램
+Scanner sc=new Scanner(System.in);
+int sum =0;
+int cnt = 0;
+float avg=0;
+while (true) {
+	System.out.println("임의의 수:");
+	int su = sc.nextInt();
+	if (su<=0) break;
+	sum += su;
+	cnt++;
+	avg=(float)sum/cnt;
+	}
+	System.out.printf("입력하신횟수: %d \n총합: %d \n평균:%.2f",cnt,sum,avg);}
+
+3. for 문 : 수치에 의한 반복
