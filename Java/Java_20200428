@@ -71,19 +71,26 @@ else System.out.println("입력한 수는 홀수 입니다.");
 
 
 2. 세개의 수를 입력받아 큰수대로 나열하기
-
-Scanner sc= new Scanner(System.in); System.out.println("임의의 수 3개를 입력하세요");
-int a= sc.nextInt(); int b= sc.nextInt(); int c= sc.nextInt(); 
-if (a>b && a >c) {
-	    if (b>c) { System.out.printf("%s>%s>%s"+a,b,c);} 
-    	else { System.out.printf("%s>%s>%s"+a,c,b); } }
-else if (b>a && b>c) { 
-	if (a>c) {System.out.printf("%s>%s>%s"+b,a,c);} 
-	else { System.out.printf("%s>%s>%s"+b,c,a); }
-	 }
- else { if (a>b) { System.out.printf("%s>%s>%s"+c,a,b);} 
-	else { * System.out.printf("%s>%s>%s"+c,b,a); } 
-		 * }
+Scanner sc=new Scanner(System.in);
+		System.out.println("첫번째 수를 입력하세요");
+		int a=sc.nextInt();
+		System.out.println("두번째 수를 입력하세요");
+		int b=sc.nextInt();
+		System.out.println("세번 수를 입력하세요");
+		int c=sc.nextInt();
+		
+		if (a>b && a>c) {
+			if (b>c) System.out.printf("%s>%s>%s",a,b,c);
+			else System.out.printf("%s>%s>%s",a,c,b);
+		}
+		else if (b>a && b>c) {
+			if (a>c) System.out.printf("%s>%s>%s",b,a,c);
+			else System.out.printf("%s>%s>%s",b,c,a);
+		}
+		else {
+			if (a>b) System.out.printf("%s>%s>%s",c,a,b);
+			else System.out.printf("%s>%s>%s",c,b,a);
+		}
 
 ==> 선생님 풀이
 Scanner sc= new Scanner(System.in);
