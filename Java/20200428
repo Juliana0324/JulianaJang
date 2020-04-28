@@ -1,0 +1,179 @@
+if문 
+# if else문 
+if (조건) {
+     조건에 만족할 경우 실행되는 문장
+}
+else {
+     조건에 만족하지 않는 경우 실행 되는 문장
+}
+
+
+# if ~else~if 문
+둘이 아닌 셋 이상의 문장... 
+
+if (조건1){
+	조건 1에 만족할때 처리할 문장
+}
+else if (조건2){
+	조선 1에 만족 x 조건 2에 만족할때 처리하는 문장
+}
+
+else if (조건n){
+	조건 1~ 조건 n-1에 만족 x 
+	조건 n에 만족
+}
+else {
+	위에 언급한 무엇에도 포함x 
+	처리 문장
+
+}
+
+# Switch case 문
+switch(변수){
+	case 값1:
+	   실행문1;
+	   break;
+	case 값2:
+	   실행문2;
+	   break;
+	case 값3:
+	   실행문3;
+	   break;
+	default:
+	   실행문4;
+	   break;
+}
+
+# 예시
+switch(money){
+	case 500:
+	   System.out.println("버스를 타시오");
+	   break;
+	case 5000:
+	   System.out.println("일반택시를 타시오");
+	   break;
+	case 50000:
+	   System.out.println("모범택시를 타시오");
+	   break;
+	default:
+	   System.out.println("걸어가시오");
+}
+
+#예제
+1. 한개의 수를 입력받아 짝수인지 홀수인지 구하는값 
+== > 정우 풀이
+System.out.println("임의의 수 입력"); 
+int a =sc.nextInt(); 
+if (a % 2==0) System.out.println("입력한 수는 짝수 입니다."); 
+else System.out.println("입력한 수는 홀수 입니다.");
+
+==> 선생님 풀이
+
+
+2. 세개의 수를 입력받아 큰수대로 나열하기
+
+Scanner sc= new Scanner(System.in); System.out.println("임의의 수 3개를 입력하세요");
+int a= sc.nextInt(); int b= sc.nextInt(); int c= sc.nextInt(); 
+if (a>b && a >c) {
+	    if (b>c) { System.out.printf("%s>%s>%s"+a,b,c);} 
+    	else { System.out.printf("%s>%s>%s"+a,c,b); } }
+else if (b>a && b>c) { 
+	if (a>c) {System.out.printf("%s>%s>%s"+b,a,c);} 
+	else { System.out.printf("%s>%s>%s"+b,c,a); }
+	 }
+ else { if (a>b) { System.out.printf("%s>%s>%s"+c,a,b);} 
+	else { * System.out.printf("%s>%s>%s"+c,b,a); } 
+		 * }
+
+==> 선생님 풀이
+Scanner sc= new Scanner(System.in);
+System.out.println("첫번쨰 수를 입력하세요");
+int a = sc.nextInt();
+System.out.println("두번쨰 수를 입력하세요");
+int b = sc.nextInt();
+System.out.println("세번쨰 수를 입력하세요");
+int c = sc.nextInt();
+		
+		//큰수 찾아 a에 넣기
+if (b>a && b>c) {
+	int imsi =a;
+	a = b;
+	b = imsi;
+}
+else if (c>a && c>b) {
+	int imsi=a;
+	a=c;
+	c=imsi;
+}
+		//중간수
+if (b<c) {
+	int imsi =b;
+	b=c;
+	c=imsi;
+}
+System.out.printf("%d >= %d >= %d\n",a,b,c);
+}
+
+
+/*3. 국어 점수를 입력받아 60점이상이면 합격 아니면 불합격
+Scanner sc=new Scanner(System.in);
+System.out.println("국어 점수");
+int a =sc.nextInt();
+if (a >=60) {
+	System.out.println("합격");}
+else {
+	System.out.println("불합격");}
+
+
+# 4. 한개의 수를 입력받아 3의 배수인지 5의 배수인지 확인 하시오
+ Scanner sc= new Scanner(System.in); System.out.println("정수:"); int
+ a=sc.nextInt();
+if (a%3==0) {
+	if (a%5==0) {
+	System.out.printf("%s는 3의 배수이며, 5의 배수입니다",a); }
+	else {
+	System.out.printf("%s는 3의 배수입니다",a); } }
+else if (a%5==0) {
+	 System.out.printf("%s는 5의 배수입니다.",a); }
+else {
+	 System.out.println("3의 배수도 아니며 5의 배수도 아닙니다."); }
+
+# 5. 국어점수를 입력받아 90점 이상이면 A, 80-89점 이면 B, 70-79점 이면 C, 60-69점 D,60점 미만 F 
+
+ Scanner sc=new Scanner(System.in); 
+System.out.println("국어점수:");
+ int score=sc.nextInt(); 
+if (score>=90) System.out.println("A"); 
+else if(score<90&& score>=80) System.out.println("B"); 
+else if(score<80 && score>=70) System.out.println("C"); 
+else if(score<70 && score>=60) System.out.println("D"); 
+else if(score<60) System.out.println("F"); 
+else System.out.println("잘못 입력하셨습니다.");
+
+==> switch 사용법
+Scanner sc=new Scanner(System.in);
+System.out.println("국어점수");
+int kor=sc.nextInt();
+switch(kor/10) {
+case 10: //100점에서 10을 나눠주면 
+System.out.println("A");
+break;
+case 9: //90점에서 99점 사이일떄
+System.out.println("A");
+break;
+case 8: //80점에서 89점 사이일떄
+System.out.println("B");
+break;
+case 7: //70점에서 79점 사이일떄
+System.out.println("C");
+break;
+case 6: //60점에서 69점 사이일떄
+System.out.println("D");
+break;
+default: //60좀 이하일떄
+System.out.println("F");
+break;
+		}
+	}
+
+
