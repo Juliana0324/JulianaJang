@@ -1,0 +1,64 @@
+# 배열
+int []a=new int[5];
+int a[]=new int[5];
+int a[];a=new int[5];
+
+자바 순서
+배열의 선언=> 배열의 메모리 할당(배열의 생성)=>배열요소의 이용
+
+#레퍼런스 변수
+기초 데이터를 값으로 갖는 것이 아니고, 메모리상이 다른 객체나 배열을 가리키고 있는변수
+
+		Scanner sc=new Scanner(System.in);
+		//10개의 수 입력
+		int arr[]=new int[10];
+		for (int i=0;i<arr.length;i++) {
+			System.out.println(i+1+"번째수를 입력하세요");
+			arr[i]=sc.nextInt();
+		}
+			//select sort비겨할때 비교대상은 마지막 자리는 안한다
+		for (int i=0; i<arr.length;i++) {
+		for(int j=i+1; j<arr.length;j++) {
+				if(arr[i]>arr[j]) {
+					int imsi =arr[i];
+					arr[i] = arr[j];
+					arr[j]=imsi;
+				}
+				
+			}
+		
+		}
+	for(int i=0;i<arr.length-1;i++) {
+		System.out.print(arr[i]+",");
+	}	
+	System.out.println(arr[9]);
+	}
+
+}
+
+
+
+# 동적 할당
+
+변수값으로 할당받을수 있음
+
+#예제
+인원수를 입력받고 인원수만큼 이름과 전화번호를 입력받아 출력
+Scanner sc=new Scanner(System.in);
+		System.out.println("인원수 입력:");
+		int inwon = sc.nextInt();
+		
+		//인원수만큼 배열
+		String name[] =new String[inwon];
+		String tell[] = new String[inwon];
+		
+		for (int i=0; i<inwon; ++i) {
+			System.out.println("이름을 입력: ");
+			name[i]=sc.next();
+			System.out.println("전화번호 :");
+			tell[i]=sc.next();					
+		}
+		for(int i=0; i<inwon;++i) {
+			System.out.println(name[i]+"님의 전화번호는"+tell[i]);
+		}
+
