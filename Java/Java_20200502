@@ -51,3 +51,29 @@ public class Main_2 {
 	}
 	
 	}
+	
+	
+	
+import java.util.Scanner;
+
+public class Random {
+
+	public static void main(String[] args) {
+		//스무고개 게임
+		int comsu=(int)(Math.random()*100)+1;
+		int count=0;
+		Scanner sc=new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("1~100사이의 수를 선택:");
+			int selectSu=sc.nextInt();
+			count++;
+			if(comsu==selectSu)break;
+			else if (comsu>selectSu)System.out.println("up");
+			else if (comsu<selectSu)System.out.println("down");
+		} 
+		System.out.println(count+"번만에 맞추셨습니다");
+	}
+
+}
+
