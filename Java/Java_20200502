@@ -1,0 +1,53 @@
+
+//인원을 설정하고 이름,국어, 영어, 수학점수와 총점, 순위 출력 점수
+import java.util.Scanner;
+
+public class Main_2 {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		
+		System.out.println("인원수 입력:");
+		int inwon=sc.nextInt();
+		
+		String name[]=new String[inwon];
+		
+		int kor[]=new int[inwon];
+		int eng[]=new int[inwon];
+		int mat[]=new int[inwon];
+		int tot[]=new int[inwon];
+		int rank[]=new int[inwon];
+
+		for(int i=0;i<inwon;++i) {
+			System.out.println(i+1+"번째 학생이름:");
+			name[i]=sc.next();
+			
+			System.out.println(i+1+"번째 학생 국어점수:");
+			kor[i]=sc.nextInt();
+			
+			System.out.println(i+1+"번째 학생 영어점수:");
+			eng[i]=sc.nextInt();
+			
+			System.out.println(i+1+"번째 학생 수학점수:");
+			mat[i]=sc.nextInt();
+			
+			tot[i]=kor[i]+eng[i]+mat[i];
+			rank[i]=1; //제일 성적이 좋으먄 1등		
+		}
+		//전체를 1등으로 만들고 내 성적이 다른사람보다 성적보다 떨어지면순위를 1등으로 올림
+		for(int i=0;i<inwon;++i) {
+			for(int j=0; j<inwon; ++j) {
+				if (tot[i]<tot[j]) rank[i]++;
+			}
+		}
+	System.out.print("이름/t국어/t영어/t수학/t총점/t순위/n");
+	for (int i=0; i<inwon; ++i)	{
+		System.out.println(name[i]+"\t");
+		System.out.println(kor[i]+"\t");
+		System.out.println(mat[i]+"\t");
+		System.out.println(tot[i]+"\t");
+		System.out.println(rank[i]+"\n");
+	}	
+	}
+	
+	}
