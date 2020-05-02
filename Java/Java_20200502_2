@@ -1,0 +1,100 @@
+import java.util.Scanner;
+import java.io.*;
+public class Method {
+
+	public static void main(String[] args) throws IOException{
+		// 두개의 수와 한개의 산술연산자를 입력받아 그연산자 대로 하는 프르그램
+		// 단, 연산자가 음수일때 큰수에서 작은수를 빼서 결과 호출
+		// 나눗셈 일때는 2번째 수가 0이면 1로 고쳐서 결과 알려주세요
+		Scanner sc=new Scanner(System.in);
+		int su1=input();
+		int su2=input();
+		System.out.println("산술연산자를 입력:");
+		char op = (char)System.in.read();
+		int result = 0;
+		switch(op) {
+		case'+':
+			result = plus(su1,su2);
+			break;
+		case'-':
+			result = min(su1,su2);
+			break;
+		case'*':
+			result = mul(su1,su2);
+			break;
+		case'/':
+			result = div(su1,su2);
+			break;
+		default:
+			System.out.println("연산자 입력을 잘못하셨습니다.");
+		
+		}
+		System.out.println("결과:"+ result);
+	}
+	public static int plus(int a, int b) {
+		return a+b;
+		
+	}
+	public static int min(int a, int b) {
+		if (a>b) return a-b;
+		else return b-a;
+		
+	}
+	public static int mul(int a, int b) {
+		return a*b;
+		
+	}
+	public static int div(int a, int b) {
+		if (b==0) b=a;
+		return a/b;
+		
+	}
+	public static int input(){
+		Scanner sc= new Scanner(System.in);
+		System.out.println("임의의 수를 입력:");
+		int su=sc.nextInt();
+		return su;
+	}
+
+}
+
+
+import java.util.Scanner;
+
+public class Method_2 {
+
+	public static void main(String[] args) {
+		// 팩토리얼 구하기
+		Scanner sc= new Scanner(System.in);
+		System.out.println("팩토리얼의 수를 입력:");
+		int facSu=sc.nextInt();
+		
+		System.out.printf("%d의 팩토리얼 결과값은 %d입니다",facSu,factorial(facSu));
+
+	}
+	public static int factorial(int n) {
+		if (n==1) return 1;
+		return n * factorial(n-1);
+	}
+
+}
+
+
+import java.util.Scanner;
+
+public class Method_3 {
+
+	public static void main(String[] args) {
+		//피보나치 수열
+		//1.1.2.3.5.6,13,21,34,55,...
+		for(int i=1;i<10;++i) {
+			System.out.println(Pivo(i)+" , ");
+		}
+		System.out.println(Pivo(10));
+	}
+	//??
+public static int Pivo(int n){
+	if (n<=2) return 1;
+	return Pivo(n-2) + Pivo(n-1);
+}
+}
