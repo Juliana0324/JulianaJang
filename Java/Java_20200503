@@ -32,7 +32,8 @@ class Person{
   age =20;
   }
   Person(String name){
-    name = name;      ====>> ** Error!!!!!
+    name = name;      ====>> ** Error!!!!! 멤버필드와 변수명이 동일하기때문에
+                    구별을 해야함으로 멤버필드에 this붙임
     age = 20;
   }
 }
