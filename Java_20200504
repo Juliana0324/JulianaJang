@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+class SungJuk{
+	String name;
+	int kor,eng,mat;
+	int tot, rank;
+	
+	public void sumTot() {
+		tot = kor + eng+ mat;
+	}
+	public void disp() {
+		System.out.println(name+"\t");
+		System.out.println(kor+"\t");
+		System.out.println(eng+"\t");
+		System.out.println(mat+"\t");
+		System.out.println(tot+"\t");
+		System.out.println(rank+"\t");
+	}
+}
+public class Main_2 {
+	public static void main(String[] args) {
+		// 성적 관리프로그램
+		System.out.println("인원수를 입력:");
+		Scanner sc= new Scanner(System.in);
+		int inwon = sc.nextInt();
+		
+		SungJuk sj[] =new SungJuk[inwon];
+		for(int i=0; i<inwon;++i) {
+			sj[i]=new SungJuk();
+			System.out.println("이름을 입력하세요:");
+			sj[i].name=sc.next();
+			
+			System.out.println("국어점수 입력");
+			sj[i].kor=sc.nextInt();
+			System.out.println("영어점수 입력");
+			sj[i].eng=sc.nextInt();
+			System.out.println("수학점수 입력");
+			sj[i].mat=sc.nextInt();
+			sj[i].sumTot();
+			sj[i].rank = 1;
+		}
+		for(int i=0; i<inwon;++i) {
+			for(int j=0;j<inwon;++j) {
+				if(sj[i].tot < sj[j].tot)sj[i].rank++;
+			}
+		}
+		System.out.println("이름 \t국어 \t영어 \t수학 \t총점 \t순위 \n");
+	for(int i=0; i<inwon;++i) {
+		sj[i].disp();
+	}
+	}
+
+}
