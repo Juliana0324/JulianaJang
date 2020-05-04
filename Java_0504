@@ -1,0 +1,127 @@
+import java.util.Scanner;
+
+//은닉화 시키기
+	class SungJuk{
+	private String name;
+	private int kor,eng,mat;
+	private int tot, rank;
+	public void setName(String name) {
+		this.name=name;
+	}
+	public boolean setKor(int kor) {
+		if (kor<0 || kor>100) return false;
+		this.kor=kor;
+		return true;
+	}
+	public boolean setEng(int eng) {
+		if (eng<0 || eng>100) return false;
+		this.eng=eng;
+		return true;
+	}
+	public boolean setMat(int mat) {
+		if (mat<0 || mat>100) return false;
+		this.mat=mat;
+		return true;
+	}
+	
+	public void sumTot() {
+		tot = kor + eng+ mat;
+	}
+	public int getTot(){
+		return tot;
+	}
+	public void clearRank() {
+		rank=1;
+	}
+	public void plusRank() {
+		rank++;
+	}
+	
+	public void disp() {
+		System.out.println(name+"\t");
+		System.out.println(kor+"\t");
+		System.out.println(eng+"\t");
+		System.out.println(mat+"\t");
+		System.out.println(tot+"\t");
+		System.out.println(rank+"\t");
+	}
+	
+public class Main {
+	public static void main(String[] args) {
+		// 성적 관리프로그램
+		System.out.println("인원수를 입력:");
+		Scanner sc= new Scanner(System.in);
+		int inwon = sc.nextInt();
+		
+		SungJuk sj[] =new SungJuk[inwon];
+		for(int i=0; i<inwon;++i) {
+			sj[i]=new SungJuk();
+			System.out.println("이름을 입력하세요:");
+			sj[i].setName(sc.next());
+			
+			do {
+				System.out.println("국어점수 입력");
+			}while(!sj[i].setKor(sc.nextInt()));			
+			
+			do {
+				System.out.println("영어점수 입력");
+			}while(!sj[i].setEng(sc.nextInt()));
+			do {
+				System.out.println("수학점수 입력");
+			}while(!sj[i].mat(sc.nextInt()));
+			sj[i].sumTot();
+			sj[i].clearRank();
+		}
+		for(int i=0; i<inwon;++i) {
+			for(int j=0;j<inwon;++j) {
+				if(sj[i].getTot() < sj[j].getTot())sj[i].plusRank();
+			}
+		}
+		System.out.println("이름 \t국어 \t영어 \t수학 \t총점 \t순위 \n");
+	for(int i=0; i<inwon;++i) {
+		sj[i].disp();
+	}
+
+	}}}
+  
+  
+  
+  
+  Static 지정예약어
+  //은행예제
+  class Bank{
+	private String name;
+	private double money;
+	private float iyul;
+	
+	public Bank(String name, double money,float iyul) {
+		this.name=name;
+		this.money=money;
+		this.iyul=iyul;
+	}
+	public void setIyul(float iyul) {
+		this.iyul=iyul;
+	}
+	public void disp() {
+		System.out.println(name+"님의 잔액은"+money+"원이고"+"현재적용되는 이율은 "+ iyul*100+"%입니다");
+	}
+}
+
+public class Main_2 {
+
+	public static void main(String[] args) {
+		Bank aaa=new Bank("aaa",1000,0.02f);
+		System.out.println("====================");
+		aaa.disp();
+		Bank bbb= new Bank("bbb",1000,0.01f);
+		System.out.println("=====================");
+		aaa.setIyul(0.01f);
+		aaa.disp();
+		bbb.disp();
+		}
+	}
+
+
+
+
+
