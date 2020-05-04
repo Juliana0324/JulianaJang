@@ -37,3 +37,100 @@ class Person{
     age = 20;
   }
 }
+
+import java.io.IOException;
+import java.util.Scanner;
+
+class Room{
+	boolean room[];
+	Scanner sc;
+	int roomsu;
+	Room(int roomsu){
+		room = new boolean[roomsu];
+		//배열을 맨처음 선언 해주면 boolean 초기값은 false로 만들어진다.
+		
+		sc=new Scanner(System.in);
+		this.roomsu=roomsu;
+	}
+
+public void input(){
+	int roomNum;
+	do {
+	System.out.println("입실할 방의 번호:");
+	roomNum=sc.nextInt();
+	}
+	while(roomNum<1||roomNum>roomsu);
+	
+	//if (roomNum<1 || roomNum>roomsu)input();
+	if (room[roomNum-1]) {
+		System.out.println(roomNum+"호실은 사용중입니다");
+	}
+	else {
+		System.out.println(roomNum+"호실에 입실하였습니다.");
+		room[roomNum-1]=true;			//true로 변경
+	}
+}
+public void output(){ //input과 반대
+	int roomNum;
+	do {
+	System.out.println("퇴실할 방의 번호:");
+	roomNum=sc.nextInt();
+	}
+	while(roomNum<1||roomNum>roomsu);
+	
+	//if (roomNum<1 || roomNum>roomsu)input();
+	if (room[roomNum-1]) {
+		System.out.println(roomNum+"호실은 빈방입니다");
+	}
+	else {
+		System.out.println(roomNum+"호실에서 퇴실하였습니다.");
+		room[roomNum-1]=false;			
+	}
+	
+}
+public void view(){
+	for (int i=0; i<roomsu; ++i) {
+		if(room[i]) {
+			System.out.println(i+1+"호실은 사용중입니다.");
+		}
+		else {
+			System.out.println("빈방입니다");
+		}
+	}
+}
+public void exit(){
+	System.out.println("프로그램을 종료합니다");
+	System.exit(0);	// 프로그램을 영구히 종료합니다.
+}
+}
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("방의 개수를 입력하세요");
+		int roomsu=sc.nextInt();
+		Room room=new Room(roomsu);
+		
+		
+		while(true) {
+			System.out.println("1.입실\n2.퇴실3.방보기\n4.종료:");
+			int select =System.in.read()-48;	//1, \r \n
+			sc.nextLine(); //엔터키가 들어올때까지 입력을 받겠다
+			switch(select) {
+			case 1:
+				room.input();break;
+			case 2:
+				room.output();break;
+			case 3:
+				room.view();break;
+			case 4:
+				room.exit();break;
+			default :
+				System.out.println("잘못입력하셨습니다.");
+			}
+		}
+
+	}
+
+}
+
