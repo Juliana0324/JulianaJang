@@ -71,3 +71,58 @@ Q??? = 여기서 고치려면?
 	
 
 
+//메소드 연습
+import java.io.*;
+import java.util.Scanner;
+public class Main_2 {
+
+	public static void main(String[] args) throws IOException{
+		Scanner sc=new Scanner(System.in);
+		int su1=input();
+		int su2=input();
+		System.out.println("부호 입력: ");
+		char op = (char)System.in.read();
+		int result =0 ;
+		switch(op){
+		case'+':
+			result = plus(su1,su2);
+			break;
+		case'-':
+			result = min(su1,su2);
+			break;
+		case'*':
+			result=mul(su1,su2);
+			break;
+		case'/':
+			result=div(su1,su2);
+			break;
+		default :
+			System.out.println("연산자를 잘못 입력하셨습니다");
+		}
+		System.out.println("결과: "+result);
+
+	}
+	public static int plus(int su1, int su2) {
+		return su1+su2;
+	}
+	public static int min(int su1,int su2) {
+		if (su1>su2) return su1-su2;
+		else return su2-su1;
+	}
+	public static int mul(int su1,int su2) {
+		return su1*su2;
+	}
+	public static int div(int su1,int su2) {
+		if (su2==0) su1=su2;
+		return su1/su2;
+	}
+	public static int input(){
+		Scanner sc= new Scanner(System.in);
+		System.out.println("임의의 수를 입력하세요:");
+		int su=sc.nextInt();
+		return su;
+		
+	}
+	
+}
+
