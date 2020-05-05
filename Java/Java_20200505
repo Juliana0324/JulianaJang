@@ -1,0 +1,159 @@
+// 클래스
+class Outer1{
+	private int a;
+	private static int b;
+	static {
+		b=20;
+	}
+	Outer1(){
+		a=10;
+	}
+	public void disp(){
+		System.out.println("a=" +a);
+		System.out.println("b=" +b);
+		// System.out.println("c= "+ Inner1.class;);//말이 안됨
+	}
+	class Inner1{
+		private int c;
+		Inner1(){
+			c=30;
+		}
+		public void disp2() {
+			System.out.println("a= "+a);
+			System.out.println("b= "+b);
+			System.out.println("c= "+c);
+		}
+		class Inner1_Inner1{
+			
+		}
+	}
+	
+}
+public class Main {
+
+	public static void main(String[] args) {
+		// 중첩클래스
+		Outer1 ot=new Outer1();
+		Outer1.Inner1 oi =ot.new Inner1();	
+		oi.disp2();
+	}
+
+}
+
+//위치 : workspace2=0505=> bin안에 들어가면 class 저장 형식 볼수 있음
+
+
+
+
+
+
+//중첩 클래스
+class Outer2{
+	private int a;
+	private static int b;
+	static {
+		b=20;
+	}
+	Outer2(){
+		a=10;
+	}
+	public void disp(){
+		System.out.println("a=" +a);
+		System.out.println("b=" +b);
+		// System.out.println("c= "+ Inner1.class;);//말이 안됨
+	}
+	static class Inner2{
+		private int c;
+		Inner2(){
+			c=30;
+		}
+		public void disp2() {
+//			System.out.println("a= "+a);		==> static은 인식x
+			System.out.println("b= "+b);
+			System.out.println("c= "+c);
+		}
+			
+		}
+	}
+	
+
+public class Main_2 {
+
+	public static void main(String[] args) {
+		Outer2 ot=new Outer2();
+		Outer2.Inner2 oi=new Outer2.Inner2();//class만 부를 수 있음
+		oi.disp2();
+	}
+
+}
+
+
+
+
+
+
+//지역중첩 클래스
+class Outer3{
+	private int a;
+	private static int b;
+	static {
+		b=20;
+	}
+	Outer3(){
+		a=10;
+	}
+	public void disp(){
+		class Inner3{
+			private int c;
+			Inner3(){
+				c=30;
+		
+			}
+			public void disp_in() {
+				System.out.println("a="+a);
+				System.out.println("b="+b);
+				System.out.println("c="+c);
+			}
+		}
+		
+		Inner3 in = new Inner3();
+		in.disp_in();
+	}
+	
+	}
+
+public class Main_2 {
+	public static void main(String[] args) {
+	Outer3 ot =new Outer3();
+	ot.disp(); 		//
+	
+	}
+}
+
+
+
+
+
+//인터페이스 사용방식 ==> 익명 중첩클래스
+class Outer4{
+	public void aaa() {
+		System.out.println("aaa메소드");
+	}
+	public void bbb() {
+		System.out.println("bbb메소드");
+	}
+	
+}
+public class Main_2 {
+	public static void main(String[] args) {
+	Outer4 ot = new Outer4();{
+		public void bbb(){
+			System.out.println("안녕하세요 bbb메소드 입니다");
+		}
+	};
+	
+	ot.bbb(); 	//이때 bbb내용을 변경시키고자할때
+	}
+}
+
+
