@@ -1,0 +1,142 @@
+//상속
+// 성적관리 프로그램
+import java.util.Scanner;
+
+//성적관리 프로그램
+
+	class SungJuk{
+	private String name;
+	private int kor,eng,mat;
+	private int tot, rank;
+	public void setName(String name) {
+		this.name=name;
+	}
+	public boolean setKor(int kor) {
+		if (kor<0 || kor>100) return false;
+		this.kor=kor;
+		return true;
+	}
+	public boolean setEng(int eng) {
+		if (eng<0 || eng>100) return false;
+		this.eng=eng;
+		return true;
+	}
+	public boolean setMat(int mat) {
+		if (mat<0 || mat>100) return false;
+		this.mat=mat;
+		return true;
+	}
+	
+	public void sumTot() {
+		tot = kor + eng+ mat;
+	}
+	public int getTot(){
+		return tot;
+	}
+	public void clearRank() {
+		rank=1;
+	}
+	public void plusRank() {
+		rank++;
+	}
+	public String getName() {
+		return name;
+	}
+	public int getKor(){
+		return kor;
+	}
+	public int getMat(){
+		return mat;
+	}
+	public int getEng(){
+		return eng;
+	}
+	public int getRank(){
+		return rank;
+	}
+	public void disp() {
+		System.out.println(name+"\t");
+		System.out.println(kor+"\t");
+		System.out.println(eng+"\t");
+		System.out.println(mat+"\t");
+		System.out.println(tot+"\t");
+		System.out.println(rank+"\t");
+	}
+	
+	class SungJuk2 extends SungJuk{
+		private int com;
+		private int total;		//부모값을 변경 못하기때뮨에 새로 설정 or 부모값에 private가아니라 public으로 변경
+		public boolean setCom(int com) {
+			if (com<0 || com>100) return false;
+			this.com=com;
+			return true;
+		}
+	public void sumTotal() {
+		sumTot();	//불러오기
+		total = getTot()+com;	//기존의 sum에 추가해주기
+	}
+	public int getTotal() {
+		return total;
+	}
+	
+	public int getCom() {
+	return com;
+	}
+	public void disp() {
+			System.out.println(getName()+"\t");
+			System.out.println(getKor()+"\t");
+			System.out.println(getEng()+"\t");
+			System.out.println(getMat()+"\t");
+			System.out.println(getCom()+"\t");
+			System.out.println(getTot()+"\t");
+			System.out.println(getRank()+"\t");
+	}
+	}
+	
+public class Main {
+	public void main(String[] args) {
+		// 성적 관리프로그램
+		System.out.println("인원수를 입력:");
+		Scanner sc= new Scanner(System.in);
+		int inwon = sc.nextInt();
+		
+		SungJuk2 sj[] =new SungJuk2[inwon];
+		for(int i=0; i<inwon;++i) {
+			sj[i]=new SungJuk2();
+			System.out.println("이름을 입력하세요:");
+			sj[i].setName(sc.next());
+			
+			do {
+				System.out.println("국어점수 입력");
+			}while(!sj[i].setKor(sc.nextInt()));			
+			
+			do {
+				System.out.println("영어점수 입력");
+			}while(!sj[i].setEng(sc.nextInt()));
+			
+			do {
+				System.out.println("수학점수 입력");
+			}while(!sj[i].setMat(sc.nextInt()));
+			
+			do {
+				System.out.println("컴퓨터 점수 입력");
+			}while(!sj[i].setCom(sc.nextInt()));
+			sj[i].sumTot();
+			sj[i].clearRank();
+		}
+		for(int i=0; i<inwon;++i) {
+			for(int j=0;j<inwon;++j) {
+				if(sj[i].getTotal() < sj[j].getTotal())sj[i].plusRank();
+			}
+		}
+		System.out.println("이름 \t국어 \t영어 \t수학 \tCOM \t총점 \t순위 \n");
+	for(int i=0; i<inwon;++i) {
+		sj[i].disp();
+	}
+
+	}}
+
+
+	}
+
+
