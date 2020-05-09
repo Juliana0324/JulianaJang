@@ -1,0 +1,30 @@
+public class Main_0509 {
+
+	class Test{
+		int max,min,sum;
+		void sum() {
+			sum=max+min;
+		}
+	
+	public static void main(String[] args) {
+		/*// 팩토리얼 구하는 법
+		Scanner sc=new Scanner(System.in);
+		System.out.println("팩토리얼의 수:");
+		int facSu=sc.nextInt();
+		System.out.printf("%d의 팩토리얼 결과값은 %d입니다.",facSu,factorial(facSu));
+
+	}
+	public static int factorial(int n){
+		if (n==1) return 1;
+		return n*factorial(n-1);
+	}
+*/
+		Test mytest=new Test();
+		mytest.max=10;
+		mytest.min=20;
+		mytest.sum();
+		System.out.println("두수의 합은="+mytest.sum);
+	}
+}
+}
+
