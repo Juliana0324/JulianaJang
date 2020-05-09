@@ -1,0 +1,242 @@
+
+//hashSet 예제
+import java.util.*;
+public class Main {
+
+	public static void main(String[] args) {
+		HashSet hs=new HashSet();
+		
+		String a =new String("유재석");
+		String b ="강호동";
+		
+		hs.add(a);
+		hs.add(b);
+		hs.add("정형돈");
+		hs.add("김재동");
+		
+		/*
+		 * System.out.println("현재인원은 :"+ hs.size()); hs.remove("김재동");
+		 * System.out.println("김재동 삭제후 인원은 :"+hs.size());
+		 * System.out.println("강호동이 멤버에 있습니까?"+hs.contains("강호동"));
+		 * 
+		 * hs.clear(); System.out.println("전체 다 지우셨습니까?" + hs.isEmpty());
+		 */
+	Iterator it=hs.iterator(); // 전체 꺼내보기
+	while(it.hasNext()) {
+		Object obj=it.next(); 	//upcasting
+		String name=(String)obj;
+		System.out.println(name);	//출력 순서는 정의 x
+	}
+	}
+
+}
+
+
+//hashSet 예제 2
+
+import java.util.*;
+import java.io.*;
+
+/*public class Main2 {*/
+class SungJuk {
+	private String name;
+	private int kor, eng, mat;
+	private int tot, rank;
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public boolean setKor(int kor) {
+		if (kor < 0 || kor > 100)
+			return false;
+		this.kor = kor;
+		return true;
+	}
+
+	public boolean setEng(int eng) {
+		if (eng < 0 || eng > 100)
+			return false;
+		this.eng = eng;
+		return true;
+	}
+
+	public boolean setMat(int mat) {
+		if (mat < 0 || mat > 100)
+			return false;
+		this.mat = mat;
+		return true;
+	}
+
+	public void sumTot() {
+		tot = kor + eng + mat;
+	}
+
+	public int getTot() {
+		return tot;
+	}
+
+	public void clearRank() {
+		rank = 1;
+	}
+
+	public void plusRank() {
+		rank++;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getKor() {
+		return kor;
+	}
+
+	public int getMat() {
+		return mat;
+	}
+
+	public int getEng() {
+		return eng;
+	}
+
+	public int getRank() {
+		return rank;
+	}
+
+	public void disp() {
+		System.out.println(name + "\t");
+		System.out.println(kor + "\t");
+		System.out.println(eng + "\t");
+		System.out.println(mat + "\t");
+		System.out.println(tot + "\t");
+		System.out.println(rank + "\t");
+	}
+
+	class SungPro {
+		private HashSet hs;
+		private Scanner in;
+
+		public SungPro() {
+			hs = new HashSet();
+			in = new Scanner(System.in);
+		}
+
+		public void insert() {
+			System.out.println("이름: ");
+			String name = in.next();
+			int kor = inputSub("국어");
+			int eng = inputSub("영어");
+			int mat = inputSub("수학");
+			SungJuk insert =new SungJuk(name,kor,eng,mat);
+			insert.setName(name);
+			insert.setKor(kor);
+			insert.setEng(eng);
+			insert.setMat(mat);
+			insert.sumTot();
+			hs.add(insert);
+			}
+		public int inputSub(String sub) {
+			int score=0;
+			do {
+				System.out.println(sub+"과목의 점수:");
+				score = in.nextInt();
+			}while(score<0||score>100);
+			return score;
+		}
+
+		public void view() {
+			rank();
+			System.out.println("이름 \t국어 \t영어 \t수학 \t총점 \t순위 \n");
+			 for(Iterator it=hs.iterator(); it.hasNext();) {
+				 Object obj=it.next();
+				 SungJuk view = (SungJuk)obj;
+				 view.disp();
+			 }
+		}
+		public void rank() {
+			//배열로 바꿔주는법
+			SungJuk rank[]=new SungJuk[hs.size()];
+			hs.toArray(rank);
+			for(int i=0;i<rank.length;++i) {
+				rank[i].clearRank();
+				for(int j=0; j<rank.length;++j) {
+					if(rank[i].getTot() < rank[j].getTot()) rank[i].plusRank();
+				}
+			}
+		}
+		public void delete() {
+			//이름입력받아 삭제하기
+			System.out.println("삭제해줄 이름을 입력:");
+			String delName= in.next();
+			for (Iterator it=hs.iterator();it.hasNext();) {
+				Object obj =it.next();
+				SungJuk delete=(SungJuk)obj;
+				if (delete.getName().equals(delName)) {
+					hs.remove(delete);
+					return;
+				}
+			}
+			System.out.println(delName+"님은 없는 학생입니다.");
+		}
+
+		public void edit() {
+			System.out.println("이름:");
+			String editName=in.next();
+			for (Iterator it=hs.iterator();it.hasNext();) {
+				Object obj =it.next();
+				SungJuk edit=(SungJuk)obj;
+				if (edit.getName().equals(editName)) {
+					System.out.println("현재국어점수:"+edit.getKor()+"입니다");
+					edit.setKor(inputSub("수정할 국어점수"));
+					
+					System.out.println("현재 영어점수:"+edit.getEng()+"입니다");
+					edit.setKor(inputSub("수정할 영어점수"));
+
+					System.out.println("현재 수학점수:"+edit.getMat()+"입니다");
+					edit.setKor(inputSub("수정할 수학점수"));
+
+					edit.sumTot();
+					return;
+				}
+			}
+			System.out.println(editName+"님은 없는 학생입니다.");
+
+		}
+
+		public void exit() {
+			System.out.println("프로그램 종료");
+			System.exit(0);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		SungPro pro = new SungPro();
+		while (true) {
+			System.out.println("1.입력  2.출력 3.삭제 4.수정  5.종료");
+			int select = System.in.read() - 48;
+			while (System.in.read() != '\n') {
+			}
+			switch (select) {
+			case 1:
+				pro.insert();
+				break;
+			case 2:
+				pro.view();
+				break;
+			case 3:
+				pro.delete();
+				break;
+			case 4:
+				pro.edit();
+				break;
+			case 5:
+				pro.exit();
+				break;
+			default:
+				System.out.println("잘못입력하셧습니다.");
+
+			}
+		}
+	}
+}
