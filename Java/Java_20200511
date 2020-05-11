@@ -1,0 +1,134 @@
+# HashMap 예제1
+import java.util.*;
+public class Main {
+	public static void main(String[] args) {
+		HashMap map= new HashMap();
+
+		map.put("야구선수","류현진");
+		map.put("야구선수","추성훈"); //key값이 동일하면 수정
+		
+		map.put("축구선수","기성용");
+		map.put("남자개그맨","유재석");
+		map.put("여자연예인","이나영");
+		
+//		System.out.println("현재개수 :"+ map.size());
+//		
+//		Object name=map.get("여자연예인");
+//		System.out.println("name: "+name);
+	
+		Set key=map.keySet();
+		for(Iterator it= key.iterator();it.hasNext();) {
+			Object obj=it.next();
+			String name=(String)obj;
+			System.out.println(name + "의이름은 : "+ map.get(name));
+		
+		}
+	
+	}
+
+}
+
+
+
+# 예제2 
+
+import java.io.*;
+import java.util.*;
+
+class Company{
+	private HashMap map;
+	private Scanner in;
+	private HashSet hs[];
+	private String aa[];
+	public Company(){
+		map =new HashMap();
+		in = new Scanner(System.in);
+		hs =new HashSet[4];
+		for(int i=0; i<5 ; ++i) {
+			hs[i]=new HashSet();
+		}
+	aa= new String[]{
+			"개발부","영업부","총무부","관리부"
+	};
+	}
+		
+	public void insert() throws IOException{
+		System.out.print("1.개발부  2.영업부  3.총무부  4. 관리부: ");
+		int select = System.in.read()-48;
+		System.out.print("이름을 입력:");
+		String name =in.next();
+		hs[select-1].add(name);
+		map.put(aa[select-1], hs[select-1]);
+		}
+	public void edit() throws IOException{
+		System.out.print("현재 부서 : 1.개발부  2.영업부  3.총무부  4. 관리부: ");
+		int select = System.in.read()-48;
+		System.out.println("이름 입력 : ");
+		String editName=in.next();
+		
+		System.out.print("바꾸실 부서: 1.개발부  2.영업부  3.총무부  4. 관리부: ");
+		int select2 = System.in.read()-48;
+		
+		HashSet edit= (HashSet)map.get(aa[select-1]);	
+		for(Iterator it= edit.iterator(); it.hasNext();) {
+			String name2=(String)it.next();
+			if (editName.equals(name2)) {
+				edit.remove(name2);
+				HashSet edit2=(HashSet)map.get(aa[select2-1]);
+				edit2.add(editName);
+				return;
+			}
+	}
+	}
+	public void view() throws IOException{
+		System.out.print("1.개발부  2.영업부  3.총무부  4. 관리부: ");
+		int select = System.in.read()-48;
+		HashSet view = (HashSet)map.get(aa[select-1]);
+		for(Iterator it= view.iterator(); it.hasNext();) {
+			String name2=(String)it.next();
+			System.out.println(name2);
+		}
+}
+	public void delete() throws IOException{
+		System.out.print("1.개발부  2.영업부  3.총무부  4. 관리부: ");
+		int select = System.in.read()-48;
+		System.out.println("이름 입력 : ");
+		String delName=in.next();
+		HashSet delete= (HashSet)map.get(aa[select-1]);	
+		for(Iterator it= delete.iterator(); it.hasNext();) {
+			String name2=(String)it.next();
+			if (delName.equals(name2)) {
+				delete.remove(name2);
+				return;
+			}
+		}
+}
+	public void exit() {
+	System.out.println("종료");
+	System.exit(0);
+}
+	
+}
+public class Main_2 {
+	public static void main(String[] args)throws IOException {
+		// 회사 부서: 개발부,영업부, 총무부, 관리부
+		// 개발부 - 홍길동, 홍길순, 강순호	==> 이름들은 HashSet
+		// 인원이 많아서 키값은 부서면 데이타는 HashSet
+		Company com = new Company();
+		while(true) {
+			System.out.println("1.입력   2.수정   3.삭제   4.보기  5.종료:");
+			int select = System.in.read()-48;
+			while(System.in.read()!='\n') {}
+			switch(select){
+			case 1: com.insert(); break;
+			case 2: com.edit(); break;
+			case 3: com.delete(); break;
+			case 4: com.view(); break;
+			case 5: com.exit(); break;
+			default: System.out.println("잘못입력하셨습니다");		
+			}		
+		}
+		
+	}
+
+}
