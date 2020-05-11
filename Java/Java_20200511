@@ -132,3 +132,48 @@ public class Main_2 {
 	}
 
 }
+
+
+
+
+
+# ArrayList예제
+import java.util.*;
+public class Main_3 {
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		ArrayList list =new ArrayList();
+		list.add("유재석");
+		list.add("정형돈");
+		list.add("하하");
+		list.add("정준하");
+		list.add("광희");
+		
+		list.add(1,"박명수");
+		
+		//배열
+//		for (int i=0;i<list.size(); ++i) {
+//			Object obj = list.get(i);
+//			String name=(String)obj;
+//			System.out.println(i+1+"번째 이름은:"+name);
+//		
+		
+//		String name[]=new String[list.size()];
+//		list.toArray(name);
+//		for(int i=0;i<name.length;++i) {
+//			System.out.println(i+1+"번째이름은 : "+name[i]);
+		int i =1;
+		for (Iterator it=list.iterator(); it.hasNext(); ++i) {
+			Object obj = it.next();
+			String name=(String)obj;
+			System.out.println(i+1+"번째이름은 : "+name);
+	
+	}
+		}
+	}
+	
+	
+	
+	
+	
+	//그냥 해쉬샛과 어레이 리스트와 같아서 해쉬셋 자리에 어레이 리스트를 작성하면 에러 안남
