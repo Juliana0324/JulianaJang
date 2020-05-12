@@ -1,0 +1,81 @@
+class MyThread extends Thread{
+	public void run() {
+		
+		System.out.println("현재 실행되고 있는 스레드 갯수 :"+ Thread.activeCount());
+		System.out.println("현재 실행되는 스레드 형태: "+Thread.currentThread());
+	}
+	
+}
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("메인이 속한 스레드 시작!!");
+		MyThread mt=new MyThread();
+		mt.setName("스레드-01");
+		mt.setPriority(10);	//10이 제일 높고/빠르고  1이젤 늦음
+		mt.start();
+		System.out.println("메인이 속한 스레드 끝!!");
+	}
+
+}
+
+
+
+#스레드 인터페이스 예시2
+class MyThread2 implements Runnable{	public void run() {
+
+	System.out.println("현재 실행되고 있는 스레드 갯수 :"+ Thread.activeCount());
+	System.out.println("현재 실행되는 스레드 형태: "+Thread.currentThread());
+}	
+}
+public class Main_Interface {
+
+	public static void main(String[] args) {
+		MyThread2 mt =new MyThread2();
+		//mt.start(); 인터페이스를 상속받으면 start 메소드 없음
+		Thread th = new Thread(mt);
+		th.start();
+
+	}
+
+}
+
+
+
+//시간 예시
+import java.util.*;
+import java.text.*;
+class TimeThread extends Thread{
+	public void run() {
+		while(true) {
+		Date date=new Date();
+		//시스템의 날짜, 시간가져와 객체로 만들엊
+		SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");	//시간
+		//출력의 양식을 지정
+		System.out.println("현재시간 :"+sdf.format(date));
+		try {
+			Thread.sleep(1000);
+		}catch(InterruptedException e) {
+			
+		}
+		
+		}
+	}
+}
+public class Main_2{
+	public static void main(String[] arg) {
+	TimeThread tt =new TimeThread();
+	tt.setDaemon(true);//데몬과녜를 맺는다, 메인이 끝나면 같이 끝내겠다
+	tt.start();
+	try {
+		tt.join(5000);	//tt에게 제어권 넘겨주기
+		Thread.sleep(5000);	//5초동안 정지시켜주시
+	}catch(InterruptedException e) {
+		
+	}
+	
+}
+}
+
+
