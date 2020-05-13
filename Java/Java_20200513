@@ -1,0 +1,21 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		String str = new String("Hello Java!!");
+		
+		System.out.println("길이:"+str.length());
+		char ch = str.charAt(3);
+		System.out.println("4번째 문자: "+ch);
+		
+		
+		System.out.println(str.substring(6,10));
+		System.out.println(str.substring(6));
+		
+		byte[] by=str.getBytes();
+		for(int i=0;i<by.length;++i) {
+			System.out.println((char)(by[i]));
+		}
+	}
+
+}
