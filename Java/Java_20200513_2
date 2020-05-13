@@ -1,0 +1,64 @@
+#날짜 기입 하는법
+
+import java.util.*;
+public class Main_2 {
+
+	public static void main(String[] args) {
+		Date date =new Date();
+		Calendar c = Calendar.getInstance();
+	
+		
+		int year =c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH)+1;	//달은 하나적게 나오기 때문에 1더해줌
+		int day = c.get(Calendar.DAY_OF_MONTH);
+		
+		System.out.println("오늘의 날짜: "+year+"년"+month+"월"+day+"일");
+		
+		
+		//		System.out.println("date="+date);
+//		System.out.println("c="+c);
+	}
+
+}
+
+
+//년도와 월 작성하는법
+import java.util.Calendar;
+import java.util.Scanner;
+
+public class Main_3 {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("년도입력: ");
+		int year = in.nextInt();
+		
+		System.out.println("월 입력:");
+		int month = in.nextInt();
+		
+		Calendar ca= Calendar.getInstance();
+		ca.set(year,month-1,1);
+		
+		int week = ca.get(Calendar.DAY_OF_WEEK);
+		int lastDay=ca.getActualMaximum(Calendar.DAY_OF_MONTH);	//이번달의 마지막날짜
+		
+		
+		System.out.println("\t\t"+year+"년"+month+"월");
+		System.out.println("일\t월\t화\t수\t목\t금\t토");
+		for(int i=1;i<week;++i) {
+			System.out.print("\t");
+		}
+		for(int i=1;i<=lastDay;++i) {
+			System.out.print(i+"\t");
+			week++;
+			if(week>7) {
+				week=1;
+				System.out.println();
+			}
+		}
+		
+	//	System.out.println("week= "+week+", lastDay="+lastDay);
+		
+	}
+
+}
