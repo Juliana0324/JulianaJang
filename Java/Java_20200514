@@ -1,0 +1,158 @@
+// 라벨 예제
+
+import java.awt.*;
+class MyFrame extends Frame{
+	private Button bt1 =new Button("Yes");
+	private Button bt2 =new Button("No");
+	
+	private Label lb= new Label("이것은 라벨입니다.",Label.CENTER);
+	
+	private BorderLayout bl= new BorderLayout();
+	private Panel p =new Panel();
+	private GridLayout gl = new GridLayout(1,2,3,3);
+	MyFrame(){
+		super.setSize(300,200);
+		this.setLayout(bl);
+		this.add("North",lb);
+		this.add("South",p);
+		p.setLayout(gl);
+		p.add(bt1);
+		p.add(bt2);
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+
+}
+
+
+
+// 초이스 예제
+
+import java.awt.*;
+class MyFrame extends Frame{
+	private Label lb = new Label("당신의 혈액형은 무엇입니까?");
+	private Choice ch =new Choice();
+	
+	private GridLayout gl=new GridLayout(2,1);
+	
+	/*
+	 * private Button bt1 =new Button("Yes"); private Button bt2 =new Button("No");
+	 * 
+	 * private Label lb= new Label("이것은 라벨입니다.",Label.CENTER);
+	 * 
+	 * private BorderLayout bl= new BorderLayout(); private Panel p =new Panel();
+	 * private GridLayout gl = new GridLayout(1,2,3,3);
+	 */
+	MyFrame(){
+		super.setSize(300,200);
+		this.setLayout(gl);
+		this.add(lb);
+		ch.add("A형");
+		ch.add("AB형");
+		ch.add("O형");
+		ch.add("B형");
+		this.add(ch);
+
+		/*
+		 * this.setLayout(bl); this.add("North",lb); this.add("South",p);
+		 * p.setLayout(gl); p.add(bt1); p.add(bt2);
+		 */
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+
+}
+
+
+//List 예제
+
+import java.awt.*;
+class MyFrame extends Frame{
+	private Label lb = new Label("아무거나 선택하세요!!");
+	private List list=new List(5,true);
+	private BorderLayout bl = new BorderLayout();
+	
+	MyFrame(){
+		super.setSize(300,200);
+		this.setLayout(bl);
+		this.add("North",lb);
+		for(char i='A';i<='Z';++i) {
+			list.add(""+i+i+i);
+		}
+		this.add("Center",list);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+
+}
+
+//checkbox 예제
+
+import java.awt.*;
+class MyFrame extends Frame{
+	private Label lb =new Label("좋아하는 연예인은?");
+	private CheckboxGroup cg=new CheckboxGroup();
+	private Checkbox cb1= new Checkbox("콜드",cg,true);
+	private Checkbox cb2= new Checkbox("DPR ian",cg,false);
+	private Checkbox cb3= new Checkbox("지창욱",cg,false);
+	private Checkbox cb4= new Checkbox("김석진",cg,false);
+	
+	private GridLayout gl=new GridLayout(2,1);
+	private Panel p=new Panel();
+	private GridLayout p_gl=new GridLayout(1,4);
+	MyFrame(){
+		super.setSize(300,200);
+		this.setLayout(gl);
+		this.add(lb);
+		this.add(p);
+		p.setLayout(p_gl);
+		p.add(cb1);
+		p.add(cb2);
+		p.add(cb3);
+		p.add(cb4);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+
+}
+//==>여기서 checkboxgroup 안해주면 checkbox
+//--> 해주면 라디오
+
