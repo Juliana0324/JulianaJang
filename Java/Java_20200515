@@ -1,0 +1,158 @@
+//TextArea, TextLabel
+import java.awt.*;
+class MyFrame extends Frame{
+		private Label lb =new Label("제목 :",Label.RIGHT);
+		private TextField tf = new TextField();
+		private TextArea ta = new TextArea();
+		private Button bt =new Button("확인");
+		
+		private BorderLayout bl = new BorderLayout();
+		private Panel pl =new Panel();
+		private BorderLayout p1_bl=new BorderLayout();
+		private Panel p2 =new Panel();
+		private FlowLayout p2_fl=new FlowLayout(FlowLayout.RIGHT);
+		
+	
+		MyFrame(){
+		super.setSize(300,200);
+		this.setLayout(bl);
+		this.add("North",pl);
+		pl.setLayout(p1_bl);
+		pl.add("West",lb);
+		pl.add("Center",tf);
+		this.add("Center",ta);
+		this.add("South",p2);
+		p2.setLayout(p2_fl);
+		p2.add(bt);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+	}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+}
+
+
+
+//Dialog 
+import java.awt.*;
+class MyFrame extends Frame{
+		private Dialog dig=new Dialog(this,"새창",true);
+			
+		MyFrame(){
+		super.setSize(300,200);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+		
+		dig.setBounds(xpos,ypos,100,100);//사이즈 지정
+		dig.setVisible(true);
+		
+		}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+}
+
+//FileDialog
+import java.awt.*;
+class MyFrame extends Frame{
+		private FileDialog fdlg = new FileDialog(this,"파일열기",FileDialog.LOAD);
+		
+			
+		MyFrame(){
+		super.setSize(300,200);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+		fdlg.setVisible(true);
+		}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+}
+
+//메뉴바 만들기
+import java.awt.*;
+class MyFrame extends Frame{
+		private MenuBar mb = new MenuBar();
+		private Menu file =new Menu("파일");
+		private Menu edit=new Menu("편집");
+		private MenuItem fnew = new MenuItem("새파일");
+		private MenuItem fexit = new MenuItem("종료");
+		private Menu color = new Menu("색상");
+		private CheckboxMenuItem red = new CheckboxMenuItem("빨갈");
+		MyFrame(){
+		super.setSize(300,200);
+		this.setMenuBar(mb);
+		mb.add(file);		
+		file.add(fnew);
+		file.addSeparator();//구별자
+		file.add(fexit);
+		mb.add(edit);		
+		edit.add(color);	//색상넣기
+		color.add(red);
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+		}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+}
+
+//AWT 클래스
+
+import java.awt.*;
+class MyFrame extends Frame{
+	private Label lb = new Label("AWT 연습 많이 하셔야 합니다.");
+	private Font font =new Font("",Font.BOLD,30);
+	private BorderLayout bl =new BorderLayout();	
+	private Cursor cur = new Cursor(Cursor.CROSSHAIR_CURSOR);
+	public MyFrame(){
+		super.setSize(600,200);
+		this.setBackground(Color.RED);
+		this.setForeground(Color.blue);	//글씨색
+		this.setCursor(cur);
+		this.setLayout(bl);
+		lb.setFont(font);
+		this.add("North",lb);
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+		}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf= new MyFrame();
+	}
+}
+
+
