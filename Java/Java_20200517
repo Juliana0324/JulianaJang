@@ -1,0 +1,40 @@
+import java.awt.*;
+import java.awt.event.*;
+class MyFrame extends Frame{
+	private Button bt=new Button("종료");
+	private BorderLayout bl = new BorderLayout();
+	
+	public MyFrame(){
+		super.setSize(400,300);
+		this.setLayout(bl);
+		this.add("Southe",bt);
+		A01 ap=new A01();
+		bt.addActionListener(ap);
+		
+		Dimension screen =Toolkit.getDefaultToolkit().getScreenSize(); //중간으로 맞추기
+		int xpos=(int)(screen.getWidth()/2-this.getWidth()/2);		
+		int ypos =(int)(screen.getHeight()/2-this.getHeight()/2);
+		super.setLocation(xpos,ypos);
+		super.setResizable(false);
+		super.setVisible(true);
+		}
+}
+public class Main {
+	public static void main(String[] args) {
+		MyFrame mf = new MyFrame();
+	}
+}
+
+class A01 implements ActionListener{
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		System.exit(0);
+	}
+	
+}
+
+
+
+// ==> chanki.net
+클래스 ==>
