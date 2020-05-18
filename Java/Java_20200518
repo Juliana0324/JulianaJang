@@ -19,8 +19,13 @@ scope 제어
 
 //출력하기
 public class Main {
+
 	public static void main(String[] args) {
-		System.out.println("Hello,World!!");
+//		print stream
+//		1. print();
+//		2. printf();
+//		3. println();	==>주석
+	System.out.println("Hello,World!!");
 	}
 
 }
