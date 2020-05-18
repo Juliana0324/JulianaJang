@@ -1,0 +1,50 @@
+ ftp://118.130.22.132
+java105
+java105
+
+
+class = 객체
+java Main.class
+==> Main이라는 class는 java에서 JVM을 이해할수 있는 파일
+객체에대한 속성, 
+속성의 상태를 변경,기능 ...명령어를 가진 객체==>
+class안에 속함 
+객체안에 객체 포함가능
+
+scope 제어
+=> public = 제한을 걸지 x다는 의미	항상 => Main
+ 
+모든 어플리케이션은 Main 에서 부터
+
+
+//출력하기
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("Hello,World!!");
+	}
+
+}
+
+의미 : 
+//class 객체 안에 System
+class System{
+  //class System 안에 out
+  class out{
+      println();==>멤버
+  }
+  
+  짧게 줄여서  (.)으로 연산자 구분가능
+  System.out.println("Hello,World!!");
+  
+  
+JVM이 컴퓨터 용어로 Compile
+위치 ==> Java_bin
+
+println() ==>프린트 스트림중 한개
+
+*print Stream
+print();
+println();
+printf();
+...
+
