@@ -1,0 +1,111 @@
+2^8 = 256 ==> 0-255
+2^10 = 1024 ==> 0-1023
+2^16 = 65536 ==> 0-65535
+2^32 = 43,000,000,000 
+
+BCD = 6byte
+EBCD = 8byte
+ASCII = 7byte
+Unicode = 32byte ; 세상의 모든 문자 표현가능
+utf-8 ==> 유효값만 인코딩
+
+2진수 ==> binary
+0b 
+8진수 ==> O 표현x
+
+10진수 => heXa
+0x 
+
+DATA: 
+
+숫자 DATA
+byte = 0-7 , 0-255까지 표현가능
+short = 0-15, 0-65535까지 표현가능
+int = 0-31, 0-43,000,000,000까지 표현가능
+long = 0-63
+
+문자 DATA
+char = 0-15, 0-65535까지 표현가능
+String= 0~, 끝이없음 ==> 두문자 이상의 DATA
+
+boolean => 2개 Data ==> true,false
+
+참조형: 
+ex) String
+==> 필요에 의해서 만든 객체
+변수 지정후 heap위치에 주소 저장
+
+변수 : 주소값
+
+
+콤마 나열
+ex) 성적
+int eng,math,kor..
+
+실수 ==> 
+float (4byte)
+double (8byte)
+
+기본적으로 실수는 double형 이므로 
+float로 작성할때 마지막 f 붙혀줘야함.
+
+
+큰 data 에서 작은 data로 입력시
+==> * 형변환
+
+문자데이터
+한글의 시작 
+(hex)ac00
+
+
+ 
+ //예제
+ 
+public class Main {
+	public static void main(String[] args) {
+		/*
+		 * int num = 5; // 초기화 System.out.println("num=" + num);
+		 * 
+		 * num = 10; // 초기화 System.out.println("num=" + num);
+		 * 
+		 * num = num+ 10; System.out.println("num="+ num);
+		 */		
+	
+//		boolean logic= 10>5;
+//		System.out.println("logic = "+ logic);
+//		
+//		logic = false;
+//		System.out.println("logic = "+ logic);
+		
+		//실수
+//		double d = 123.456;
+//		float f =123.456f;
+//		System.out.println("d= " +d);
+//		System.out.println("f= " +f);
+//		
+//		int b = 5;
+//		int c = 3;
+//		System.out.println(b*c/2);
+//		System.out.println(b*c/2.0);
+		
+		//문자
+//		char ch = 'A'; 
+//		char code ='\u0041';	// u => 유니코드
+//		
+//		System.out.println("ch = "+ ch);
+//		System.out.println("ch의 코드값= "+ code);
+//		
+//		ch= '가';
+//		System.out.println(ch + "의 유니코드값은 " +(int)ch );
+//		
+//		ch= '1' + '1';	
+//		System.out.println("ch="+ch);
+		
+		//참조데이터
+		String name = "김강사";
+		System.out.println(name);
+	
+	}
+}
+
+ 
