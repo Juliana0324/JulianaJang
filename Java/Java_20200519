@@ -98,8 +98,17 @@ public class Main {
 //		ch= '가';
 //		System.out.println(ch + "의 유니코드값은 " +(int)ch );
 //		
+
+//		ch ='1';
+//		System.out.println("ch="+ch);
+//		System.out.println(ch+"의 유니코드 값은"+(int)ch);
+		
 //		ch= '1' + '1';	
 //		System.out.println("ch="+ch);
+		
+		
+		
+		
 		
 		//참조데이터
 		String name = "김강사";
