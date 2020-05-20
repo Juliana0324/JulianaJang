@@ -74,3 +74,104 @@ alt + up/down==> 자리 바꿈
 		System.out.print("탭 예제 : Hello \tWorld");
 		
 	
+# 서식제어 문자
+- %d : 정수
+- %f: float형 실수입력
+- %c: 문자입력
+- %s : 문자열입력
+
+int i = 10;
+float f = 10.1f;
+char c ='A';
+String str= "Hello World";	//String은 객체 주소값을 str에 저장
+	//서식 제어문자 예제
+	System.out.printf("i=%11d\n",i);	//앞에 붙는 숫자 = 자리값
+	System.out.printf("f=%.2f\n",f);	//소수점 2번째 자리까지 표현
+	System.out.printf("c=%013c\n",c);	//13자리 중 빈칸을 0으로 채워줌
+	System.out.printf("str=%s",str);
+	
+
+
+# 입력객체
+system.in ;
+
+#키보드로부터 입력값을 byte로 저장
+System.in.read();
+==> int형으로 받아줌
+# 예외처리필요! 
+import java.io.*;
+throws IOException
+
+#read 예제
+int i = 10;
+//		System.out.println("입력 : ");
+//		
+//		i = System.in.read();
+//		System.out.println("출력 1: "+(char)i);	//int로 받아서 a입력시 97로 출력 그러므로 char로 형변환
+
+
+==> 객체 (class로 정의 가능)
+-next(); 단어 단위로 읽기 (문자열)
+-nextLine(); 한라인 전체 읽기 (Enter기준)
+-nextByte();
+-nextInt();
+-nextLong();
+-nextFloat(); 실수 데이터 타입으로 읽어옴
+-nextDouble(); 
+
+//Scanner() ==> 
+Scanner sc= new ~~ 
+sc===> 참조변수
+
+
+
+//Scanner 예제
+
+Scanner sc = new Scanner(System.in);
+		System.out.print("메세지 입력: ");
+		String str = sc.nextLine();
+		
+		System.out.println("입력하신 메세지 :"+ str);
+		
+		
+		System.out.print("메세지 입력: ");
+		String str = sc.next();
+		
+		System.out.println("입력하신 메세지 :"+ str);	//출력결과 한 단어만 출력
+		
+		
+// scanner 이름 나이 예제
+System.out.print("이름입력:");
+		String name = sc.nextLine();
+			
+		System.out.print("나이입력:");
+		int age = sc.nextInt();
+		
+		System.out.println("이름:"+name);
+		System.out.println("나이:"+age);
+		
+		
+		
+//학생의 자바, c언어 , 미술 점수를 입력받아 합계와 평균을 구하시오
+		System.out.print("이름입력: ");
+		String name = sc.nextLine();
+		
+		System.out.println("자바 점수: ");
+		int java_Score = sc.nextInt();
+		
+		System.out.println("C언어 점수: ");
+		int c_Score=sc.nextInt();
+		
+		System.out.println("미술 점수: ");
+		int art_Score=sc.nextInt();
+
+		int sum = java_Score+c_Score+art_Score;
+		float avg= (float)sum/3;
+		
+		System.out.println("==========");
+		System.out.printf("[%s님의 성적]\n",name);
+		System.out.printf("자바: %d점\n",java_Score);
+		System.out.printf("c언어: %d점\n",c_Score);
+		System.out.printf("미술: %d점\n",art_Score);
+		System.out.printf("합계: %d점\n",sum);
+		System.out.printf("평균: %.2f점\n",avg);
