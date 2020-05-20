@@ -1,0 +1,23 @@
+2020-05-20
+a의 변수
+01100001==>메모리 특정위치/수정가능
+a의 상수
+01100001==>메모리 특정위치/ 변경x
+
+stack	==> 이름을 가지고 접근(참조변수)
+Heap	==> 주소로만 접근가능(참조데이터)
+Data/Method==> 수정이 안되는 영역(상수가 있는 영역)
+
+final ==> 상수 (쓰기를 금지함)
+  * 맨처음에 선언시에 사용
+상수선언;
+final 데이터형 변수명 = 초기값;
+ex> final doublePI =3.141592;
+
+
+//1. 상수 예제 
+final double pi =3.141592;	//변경 x
+		int radian = 5;
+		
+		int area = (int)(radian * radian *pi);
+		System.out.println(radian +" * "+radian+" * "+pi +" = " +area);
