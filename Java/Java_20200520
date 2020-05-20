@@ -21,3 +21,56 @@ final double pi =3.141592;	//변경 x
 		
 		int area = (int)(radian * radian *pi);
 		System.out.println(radian +" * "+radian+" * "+pi +" = " +area);
+
+
+
+buffer: 
+입출력 되는 데이터가 저장되는 임시 저장소
+# 스트림:키보드, 모니터, 프린트, 파일등을 스트림이라는 논리적 동등한 장치로 표현
+
+stdin=> 키보드로 입력받아
+stdout=> 모니터로 출력
+stderr=> 모니터에서 에러출력
+
+# 표준입출력 함수(class)
+System.out
+-표준 출력 class
+
+println
+-한줄씩 출력후 줄바꿈
+
+print
+-내용만 출력
+
+printf
+-서식문자 사용가능
+ 
+ex)printf("printf() 함수는 서식 지정자를 통해 출력할 데이터의 서식을 지정할 수 있어요!\n");
+   printf("변수에 저장된 숫자는 %d입니다.", 10);
+
+ 
+"" 문자열 끝에는 자동으로 null문자
+
+# ESCAPE 문자
+'\n' New line(줄바꿈)
+'\r' Carriage return(줄바꿈 후 줄의 처음으로)
+'\t' Tab : 다음 탭위치로 이동
+'\\' : 특수기능 삭제, 일반문자로 변환
+
+ctrl + i ==> intend 자동 들여쓰기
+alt + up/down==> 자리 바꿈
+
+		int i = 10;
+		float f = 10.1f;
+		char c ='A';
+		String str= "Hello World";	//String은 객체 주소값을 str에 저장
+	
+		System.out.println(i);
+		System.out.println(f);
+		System.out.println(c);
+		System.out.print(str);
+		System.out.println("Hello World");		
+		System.out.println("줄바꿈 예제 : \nHello \nWorld");		
+		System.out.print("탭 예제 : Hello \tWorld");
+		
+	
