@@ -47,6 +47,7 @@ byte a= 10;
     
     
   // Math.round클라스 ==> 자리올림
+  
   float pi=3.141592f;
 		float shortPi;
 		shortPi = (int)(pi* 100)/100f;
@@ -69,7 +70,210 @@ byte a= 10;
 		System.out.println(-10%-8);	//-2
     
     
+// 비교연산자
+비교연산자는 true/false 만 도출
+
+== 수학적의미의 같다		# = 대입연산자
+!= 같지않다
+>,< 크다,작다
+<= 
+>=
     
     
+String str = new String ("Hello World");
+String str = "Hello World";
+
+str == str1 ==> false
+str.equals(str1); ==> true;
+
+equals 함수: 내용안에만 가지고 도출
+
+//비교연산자 예시
+String str = "Hello World";
+String str1 = new String("Hello World");
+String str2 = "Hello World";
 		
+System.out.println("str == str1 :" + (str==str1));	 //false
+System.out.println("str == str2 :" + (str==str1));	 //false
+System.out.println("str.equals() :" + str.equals(str1)); //true
+
 	
+
+# 논리연산자
+- &&(and, *라는 의미)
+==> 모두 참일 경우
+#예시
+True && True = True
+ 1   *   1	1
+True && False = False
+ 0   *   1	0
+False && True = False
+  0   *   1	0
+False && False = False
+  0    *   0	  0
+  
+ - || (or, + 의미)
+==> 모두 false, 그렇지 않을 경우 true
+#예시
+True || True = True
+  1   +   1	1
+True || False = True
+  1   +   0	1
+False || True = True
+  0   +   1	1
+False || False = False
+  0   +   0	0
+
+- ! (not, )
+==> 현재 상태 부정
+
+1 0 	! ==> 0 1 	False True
+0 1 	! ==> 1 0 	True  False
+
+
+char ch ='f';
+System.out.println("ch가 a보다크고, z보다 작거나 같다: "+ ((ch>='a')&& (ch<='z')))
+==>결과 : true
+		
+char ch1 ='z'+1;
+System.out.println("ch가 a보다크고, z보다 작거나 같다: "+ ((ch1>='a') || (ch1<='z')));
+==> 결과 : true
+
+
+
+- ++a ==> 연산전 a 값 1 증가
+	#예제 1
+	int a =10 b=20 c;
+	int b=++a; ==> a =a+1
+	... a= 11, b=21
+	
+	#예제2
+	int a =10 b=20 c;
+	c = ++a + b;
+	    11  + 20
+ 
+- a++ ==> 연산후 a 값 1 증가
+	#예제1
+	int a = 10;
+	int b= a++  
+	==> b에 a대입 b=10
+	==> a = b+1 ... a=11
+
+	int a =10 b=20 c;
+	c = a++ + b;
+	    10  + 20
+	    11 
+	==> c= 30/ a = 11
+
+
+- --a ==> 연산전 a 값 1 감소
+	# 예제 
+	int a=10;
+	int b = --a
+	순서
+	1. b= a에 10 대입 b= a - 1 ==> 9
+	2. a= 9(b)-1 	 
+	
+	int a;
+	int b;
+	a=10;
+	b = --a;
+		
+	System.out.println("--a의 값은 =" + --a);
+	System.out.println("b의 값은 =" + b);
+
+- a-- ==> 연산후 a 값 1 감소
+	#예제
+	int a;
+	int b;
+	a= 10;
+	b=a--;
+
+	System.out.println("--a의 값은 =" + a--);
+	System.out.println("b의 값은 =" + b);
+	
+	순서
+	b에 먼저 a 대입
+	a에서 -1
+
+
+후위 증가 => 우선순위 맨뒤
+
+
+//예시
+		int i ;
+		float f;
+		i = 5;
+		++i;
+		System.out.println("++i="+i);
+		
+		i = 5;
+		i++;
+		System.out.println("i++="+i);
+		
+		f =12.3f;
+		System.out.println("++f ="+ ++f);	//13.3
+		
+		f =12.3f;
+		System.out.println("f++ ="+ f++);	//12.3
+
+삼항 연산자(조건연산자)
+?: ex) a>b ? A:B
+==> True이면 A실행/False 이면 B실행
+ex)
+a=10;
+b=8;
+a1 = a>b ? "크다":"작다"	# True
+a1 = 크다
+
+# 절댓값 예시
+int x=10;
+int y = -10;
+	
+int absX = (x>=10)? x:-x;
+int absY = (y>=10)? y:-y;
+
+System.out.println("absX:" + absX);	//true ==> 전자 x에 대입 10
+System.out.println("absY:" + absY);	//false ==>후자 y 대입 10
+
+
+# 절댓값 입력 예시
+
+	int x=10;
+	int y = -10;
+		
+	int absX = (x>=10)? x:-x;
+	int absY = (y>=10)? y:-y;
+	Scanner sc = new Scanner(System.in);
+		
+	System.out.print("x값 입력: ");
+	x =sc.nextInt();
+				
+	System.out.print("y값 입력: ");
+	y =sc.nextInt();
+		
+	System.out.println("absX:" + absX);	//true ==> 전자 x에 대입 10
+	System.out.println("absY:" + absY); //false ==>후자 y 대입 10
+
+
+
+비트 연산자	==> 잘 사용안함
+- & and 연산자
+==> 좌우 모두 값이 참일때 참
+ 
+- | or 연산자
+==> 한개라도 참인 경우 참
+
+- ^ xor연산자
+==> 둘다 다른경우 참
+
+
+// 예시
+int a = 123
+a = a^a ==> 0 (why? a-a와 같은의미)
+
+Shift 연산자
+<< left 
+>> right
+	 단 7번째 비트일때, 마지막 비트의 부호는 가져간다
+>>>부호없는 right 
