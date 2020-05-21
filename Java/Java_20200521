@@ -1,0 +1,75 @@
+byte + byte =int형으로 변환되기 때문에 형변환 시켜주어야함
+
+byte a= 10;
+	byte b= 20;
+	byte c= (byte)(a+b);	//byte+byte= int형으로 변환됨
+		
+	System.out.println(a+"+"+b+"="+c);
+
+
+**이때 (byte) a*b = -56으로 나오는 이유는
+이론상 200 ==> 
+	1 0 0 1 0 0 0
+보수	0 1 1 0 1 1 1
+		    1
+======================
+	0 1 1 1 0 0 0	==56
+1100100으로 봤을때 맨앞자리가 sign 비트 이기때문에 1은 음수로 인식
+
+
+#연산 예제
+//		int a= 1000000;
+//		int b= 2000000;
+//		long c = a*b;	
+//		System.out.println(a+"*"+b+"="+c);
+//		
+//		a=1000000*1000000/1000000;	//곱했을시에 이미 연산 망가졌기때문에 불가
+//		b = 1000000/1000000*1000000;
+//		System.out.println(a+"/"+b);
+		
+  char c1 ='a';
+		char c2 = c1;
+		char c3 =' ';
+		
+		int i = c1+1;	//c1인 a는 ASCII code 로 97
+		c3 = (char)(c1 +1);
+		c2++;	// c2 =c2+1
+		
+		System.out.println("i="+i);
+		System.out.println("c2="+c2);
+		System.out.println("c3="+c3);
+    
+    
+    char lower ='a';
+		char upper = (char)(lower-32);
+		System.out.println("lower="+lower);
+		System.out.println("upper="+upper);
+    
+    
+  // Math.round클라스 ==> 자리올림
+  float pi=3.141592f;
+		float shortPi;
+		shortPi = (int)(pi* 100)/100f;
+		System.out.println("shortPi= "+ shortPi);
+		
+		shortPi = Math.round(pi*1000)/1000f;
+		System.out.println("shortPi ="+shortPi);
+    
+    
+ // % 연산자
+    int share = 10 /8 ;
+		int remain = 10 % 8;
+		System.out.println("10/8의 몫: "+ share);
+		System.out.println("10%8의 나머지: "+ remain);
+
+		
+		//절댓값으로 인식 후 왼쪽에 있는 부호 따라감
+		System.out.println(-10%8);	//-2
+		System.out.println(10%-8);	//2
+		System.out.println(-10%-8);	//-2
+    
+    
+    
+    
+		
+	
