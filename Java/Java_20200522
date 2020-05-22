@@ -139,6 +139,35 @@ year: 50
 		}
 
 
+//SimpleDateFormat(); 예시2
+long mSec = System.currentTimeMillis();
+SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd");
+String time = df.format(mSec);
+System.out.println("현재 시간 : "+time);
+==>출력결과 ==>2020-05-22
+
+// 시간예시3
+Date today =new Date(mSec);
+System.out.println("현재 시간:"+today);
+
+==>출력결과 ==> 현재 시간:Fri May 22 15:12:13 KST 2020
+
+
+
+//Math.random();
+//0.000 ~ 1보다 작은 임의의 난수를 생성
+double rd= Math.random();
+int rNum = (int)(rd*10);	//0-9
+int rNum1 = (int)(rd*10)+1;	//1-10
+System.out.println(rNum);
+System.out.println(rNum1);
+
+
+//숙제
+//주사위2개를 던져서 합계가 짝수일때 : 짝 ! 출력
+//주사위2개를 던져서 합계가 홀수일때 : 홀 ! 출력
+//두 주사위의 값이 동일할 경우 : 더블 출력
+
 
 반복문 : while
 	      for
