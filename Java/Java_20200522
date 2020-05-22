@@ -1,0 +1,147 @@
+int a = 10; b= 30; c;
+c = a + b + 30 ;  
+call : 되돌아 온다
+jump : x
+
+조건문 : if 
+ 명령어(조건){
+
+} 
+
+//if 예시 1
+int visitCount;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("방문횟수 입력 :");
+		visitCount = sc.nextInt();
+		
+		if (visitCount<=1) {
+			System.out.println("처음오셨군요. 방문해주셔서 감사합니다.");
+		}
+		
+		if (visitCount>1) {
+			System.out.println("다시 방문해 주셔서 감사합니다.");
+			}
+		visitCount++;
+	}
+
+//if 예시 2
+Scanner sc= new Scanner(System.in);
+System.out.println("과목 선택 (자바[1] / jsp[2]):");
+int select = sc.nextInt();
+		
+if (select==1) {
+System.out.println("Java과목이 신청되었습니다");
+}
+if(select==2){
+System.out.println("Jsp과목이 신청되었습니다");
+}
+
+//if (!((select==1) || (select ==2)))
+if ((select!=1)&&(select!=2)) {
+System.out.println("잘못 선택하셨습니다.");
+}
+    
+//if-string 예시
+	//성별 [남자/여자] 입력받은 후 
+	//남성복 코너는 12층입니다
+	//여성복 코너는 13층입니다
+		Scanner sc= new Scanner(System.in);
+		System.out.println("성별을 입력하세요: 남자 / 여자");
+		String gender = sc.next();
+		
+		if(gender.equals("남자")) {
+			System.out.println("남성복 코너는 12층입니다");
+		}
+		if(gender.equals("여자")) {
+			System.out.println("여성복 코너는 13층입니다");
+		}
+		if (!(gender.equals("남자"))||(gender.equals("여자"))) {
+			System.out.println("잘못입력하셨습니다.");
+
+
+**equals꼭 기억하기
+
+
+if ~ else 분기문
+int visitCount;
+		Scanner sc = new Scanner(System.in);
+		System.out.print("방문횟수 입력 :");
+		visitCount = sc.nextInt();
+		
+		if (visitCount<=1) {
+			System.out.println("처음오셨군요. 방문해주셔서 감사합니다.");
+		}
+		else {
+			System.out.println("다시 방문해 주셔서 감사합니다.");
+		}
+
+visitCount++;
+
+//시간 출발 함수
+System.currentTimeMillis();
+==> 기준시간 : 1970년 01월 01일 0시0분
+==> 기준시간부터 현재까지의 시간을 milli sec단위로 반환
+==> milli = 1000ms / 1sec
+==> long형으로 반환
+
+// 사용방법: long 변수 = System.currentTimeMillis();
+
+//시간 출발함수 예시
+		long time=System.currentTimeMillis();
+		System.out.println("time="+time); 
+    
+// 시간 출발 함수 예시 2
+		long time=System.currentTimeMillis();
+		long sec = time/1000;
+		long min = sec/60;
+		long hour = min/60;   //그리니치 천문대 시간대로 정해졌기 때문에 +9 해줘야함
+		long day = hour/24;
+		long year =day/365;
+		System.out.println("time: "+time);
+		System.out.println("sec: "+sec);
+		System.out.println("min: "+min);
+		System.out.println("hour: "+hour);
+		System.out.println("day: "+day);
+		System.out.println("year: "+year);
+    
+출력 결과==>    
+time: 1590126270553
+sec: 1590126270
+min: 26502104
+hour: 441701
+day: 18404
+year: 50
+
+
+//나이예시1
+//성인 / 미성년자 구분
+		//사용자로 부터 출생년도 4자리 입력받아 20살 이상이면 ==> 성인 이하==> 미자
+		//"____년생이면 __살로 성인입니다."
+		Scanner sc= new Scanner(System.in);
+		System.out.print("태어난 연도 4자리를 입력하세요:");
+		int age = sc.nextInt();
+		long time=System.currentTimeMillis();
+		long sec = time/1000;
+		long min = sec/60;
+		long hour = min/60;
+		long day = hour/24;
+		long year =day/365;
+		
+//선생님 풀이:	int pYear=(int)((System.currentTimeMillis()/1000/60/60+9)/24/365)+1970;
+		
+		int thisYear= (int)(year+1970);
+		int myAge = thisYear-age+1;
+		if (myAge>=20) {
+			System.out.printf("%d년생이면  %d살로 성인입니다",age,myAge);
+			}
+		else {
+			System.out.printf("%d년생이면 %d살로 미성년자입니다",age,myAge);
+		}
+
+
+
+반복문 : while
+	      for
+분기 명령 : continue;
+	          break; 
+분기문 : switch;
