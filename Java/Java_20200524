@@ -1,0 +1,17 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		int a1= 10, b1=20, c1;
+		c1=++a1 + b1;
+		System.out.println("++a의 a1값: "+a1+"c1값 :"+c1);
+		
+		
+		
+		int a=10, b=20, c;
+		c= a++ + b;
+		System.out.println("a++의 a값:"+a+"c값: "+c);
+		
+	}
+
+}
