@@ -15,3 +15,127 @@ public class Main {
 	}
 
 }
+
+import java.util.*;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.awt.*;
+public class Main {
+	public static void main(String[] args) {
+//		Scanner sc = new Scanner(System.in);
+//		System.out.println("과목 선택 : [1]자바 [2]jsp");
+//		int select=sc.nextInt();
+//		
+//		if (select==1) {
+//			System.out.println("JAVA 과목이 신청되었습니다.");
+//		}
+//		if (select==2) {
+//			System.out.println("jsp과목이 신청되었습니다.");
+//		}
+//		if ((select!=1)&&(select!=2)){
+//			System.out.println("잘못선택하셨습니다.");
+//		}
+		
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("성별을 입력하세요: ");
+//		String gender = sc.next();
+//		
+//		if(gender.equals("남자")) {
+//			System.out.println("남성복 코너는 12층입니다.");
+//		}
+//		
+//		if(gender.equals("여자")) {
+//			System.out.println("여성복 코너는 13층입니다.");
+//		}
+//		if (!(gender.equals("남자")||gender.equals("여자"))) {
+//			System.out.println("잘못 입력하셨습니다.");
+//		}
+		
+//		System.out.println("-10%3="+(-10%3));
+//		System.out.println("10%-3="+(10%-3));
+//		System.out.println("-10%-3="+(-10%-3));
+//		System.out.println("10%3="+(10%3));
+
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("임의의 수 입력:");
+//		int a= sc.nextInt();
+//		if (a<=5) {
+//			System.out.println("입력하신 값은 5보다 작거나 같습니다");
+//		}
+//		else{
+//			System.out.println("입력하신 값은 5보다 큽니다.");
+//		}
+		
+		//두수중에 큰수 찾기
+//		Scanner sc= new Scanner(System.in);
+//		System.out.print("첫번째 수를 입력하세요: ");
+//		int a = sc.nextInt();
+//		System.out.print("두번쨰 수를 입력하세요:");
+//		int b = sc.nextInt();
+//		
+//		if (a>b) {
+//			System.out.printf("%d가 %d보다 큽니다",a,b);
+//		}
+//		else if (a<b) {
+//			System.out.printf("%d가 %d보다 작습니다",a,b);
+//		}
+//		else {
+//			System.out.println("두수가 같습니다.");
+//		}
+		
+		//성인과 미성년자 구분
+		//사용자로부터 출생년도 4자리 입력받기
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("출생 년도 4자리를 입력하시오: ");
+//		int age=sc.nextInt();		
+//		long time = System.currentTimeMillis();
+//		int todayYear= (int)(time/1000/60/60/24/365)+1970;
+//		int myage=todayYear-age+1;
+//		if (myage>19) {
+//			System.out.printf("%d년생이면 %d살로 성인입니다",age,myage);
+//		}
+//		else if (0<myage&&myage<=19) {
+//			System.out.printf("%d년생이면 %d살로 미성년자입니다",age,myage);
+//		}
+//		else{
+//			System.out.println("잘못 입력하셨습니다.");
+//		}
+//		long mSec = System.currentTimeMillis();
+//		SimpleDateFormat df= new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+//		String time = df.format(mSec);
+//		System.out.println("현재시간은 "+time);
+//		
+//		
+//		long mSec= System.currentTimeMillis();
+//		Date today = new Date(mSec);
+//		System.out.println("현재시간 : "+today);
+//		
+//		double rd = Math.random();
+//		int rNum = (int)(rd*10)+1;
+//		System.out.println("임의의 수:"+rNum);
+		
+		//주사위 2개를 던져 합계가 짝수일때 : 짝! 출력
+		//주사위 2개를 던져 합계가 홀수일때 : 홀! 출력
+		//두 주사위의 값이 동일할 경우 : 더블 출력
+		
+		double rd1 = Math.random();
+		int rDice1=(int)(rd1*6)+1;
+		double rd2 = Math.random();
+		int rDice2=(int)(rd2*6)+1;
+		int rSum = rDice1+rDice2;
+		if (rDice1==rDice2) {
+			System.out.println("첫번째 주사위: "+rDice1+"\n"+"두번째 주사위: "+rDice2);
+			System.out.println("더블");
+		}		
+		else if (rSum%2==0) {
+			System.out.println("첫번째 주사위: "+rDice1+"\n"+"두번째 주사위: "+rDice2);
+			System.out.println("짝!");
+		}
+		else if(rSum%2==1) {
+			System.out.println("첫번째 주사위: "+rDice1+"\n"+"두번째 주사위: "+rDice2);
+			System.out.println("홀!");			
+		}
+		
+	}
+
+}
