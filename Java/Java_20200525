@@ -58,3 +58,76 @@
 			System.out.println("5점 감점 \n내 점수:"+myScore);
 		}
 		
+		
+		//마지막에 내점수 작성
+		System.out.println("내 점수는:"+myScore);
+		
+		
+// if~ else if구문
+
+		Scanner sc= new Scanner(System.in);
+		System.out.println("점수입력: ");
+		int score = sc.nextInt();
+		
+		char grade=' ';
+		if (score>=90) 
+			grade='A';
+		else if (score>=80)
+			grade='B';
+		else if (score>=70)
+			grade='C';
+		else if (score>=60)
+			grade='D';
+		else 
+			grade='F';
+
+		System.out.println("점수 : "+score+"점");
+		System.out.println("등급 : "+ grade+"등급");
+
+
+//중국집 주문 프로그램
+		//짜장면, 짬뽕 주문을 입력받아서 결제 금액을 계산하여 출력
+		//- 짜장면 : 5000원, -짬뽕 : 6000원
+		//- 5그릇 이상 주문시  3000원 할인
+		//- 10그릇 이상 주문시 총금액 10% 할인
+		
+		//짜장면 주문 : 
+		//짬뽕 주문: 
+		// ***주문내용***
+		// [짜장면]
+		// 상품가격: 5000원
+		// 주문 : 5그릇
+		// [짬뽕]
+		// 상품가격 : 6000원
+		// 주문 : 5그릇
+		// 계산 : 49,500원
+		
+		Scanner sc= new Scanner(System.in);
+		System.out.println("짜장면 주문: ");
+		int blkN=sc.nextInt();
+		
+		System.out.println("짬뽕 주문: ");
+		int redN=sc.nextInt();
+				
+		int bPrice=5000,rPrice=6000;
+		int tPrice=(bPrice*blkN)+(rPrice*redN);
+		int nTotal = blkN+redN;
+		
+		System.out.println("***주문 내용***");
+		System.out.println("[짜장면]");
+		System.out.println("상품가격 : 5000원");
+		System.out.println("주문 : "+ blkN);
+		System.out.println("[짬뽕]");
+		System.out.println("상품가격 : 6000원");
+		System.out.println("주문 : "+ redN);	
+		
+		if (nTotal>=5) {
+			if (nTotal>=10) {
+				tPrice = (int)(tPrice*0.9);
+			}
+			tPrice -= 3000;
+		}
+	System.out.println("계산 : "+ tPrice+"원");
+	}
+	
+		
