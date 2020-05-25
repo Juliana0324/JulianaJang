@@ -131,3 +131,115 @@
 	}
 	
 		
+//선생님 풀이
+//변수 지정: final double DC = double 0.1f;
+//변수 지정: final int DCP = 3000;
+//if ~ else if 으로도 표현함
+if (tCount >= 10){
+	tCost = (int)((짜장면))
+	}
+	else if(tCount >= 5){
+	}
+	else if {
+	
+	}
+	
+숫자에 콤마찍는 방법 :함수 :
+DecimalFormat df = new DecimalFormat("##,###");
+System.out.println(df.format(tPrice)+"원");
+	
+
+	
+2020-05-25
+Switch / case :
+switch(변수){
+	case 상수1 : 
+		명령문;
+		break;
+
+	case 상수2 : 
+		명령문;
+		break;
+	
+	case 상수3 : 
+		명령문;
+		break;
+
+}
+
+# 라벨 사용하여 분기하기
+byte, short, char, int ,String 중 하나의 상수만 올수 있음
+
+명령어 switch사용(조건대신 label){
+case start :  명령1
+	      명령2
+	      break;
+
+case middle : 명령3
+	      명령4
+	      break;
+
+case end    : 명령5
+	      break;
+
+default: 
+	     명령문;
+
+}
+
+
+label :ex) start , middle, end..
+라벨 뒤에는 콜론(:)붙음 
+라벨의 앞에는 case사용
+break; 명령어에서 분기블록 밖으로 분기시켜줌
+==> start내의 명령어 실행하다가 break 만나면
+==> middle 명령어 실행
+...
+
+default명령문 : 값이 없을 경우
+
+
+//Switch 예시
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("점수입력: ");
+//		int score = sc.nextInt();
+//		int label = score/10;
+//		char grade = ' ';
+//		
+//		
+//		switch(label){	
+//			case 10:
+//			case 9: 
+//				grade = 'A';
+//				break;
+//			case 8: 
+//				grade = 'B';
+//				break;
+//			case 7:
+//				grade = 'C';
+//				break;
+//			case 6:
+//				grade = 'D';
+//				break;
+//			default:
+//				grade = 'F';
+//		}
+//		System.out.println("점수 : "+score+"점");
+//		System.out.println("등급 : "+grade+"등급");
+
+숙제: 
+		//수강신청 과목
+		//수강신청과목 : 
+		//자바, jsp,자료구조,리눅스,네트워크 기초
+		//자바 - 301호 자강사
+		//jsp - 302호 제강사
+		//자료구조 - 303호 자료강사
+		//리눅스 - 304호 리강사
+		//네트워크 - 305호 네강사
+		//출력결과: __과목은 ___강의실에서 __와 함께 진행될 예정입니다.
+		
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("수강 신청 과목을 선택하세요: (자바,jsp,자료구조,리눅스,네트워크기초)");
+//		String cls1 = sc.next();
+//		char g
+		
