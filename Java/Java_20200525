@@ -238,8 +238,41 @@ default명령문 : 값이 없을 경우
 		//네트워크 - 305호 네강사
 		//출력결과: __과목은 ___강의실에서 __와 함께 진행될 예정입니다.
 		
-//		Scanner sc= new Scanner(System.in);
-//		System.out.println("수강 신청 과목을 선택하세요: (자바,jsp,자료구조,리눅스,네트워크기초)");
-//		String cls1 = sc.next();
-//		char g
+		Scanner sc= new Scanner(System.in);
+		System.out.println("수강 신청 과목을 선택하세요: (자바,jsp,자료구조,리눅스,네트워크기초)");
+		String cls1 = sc.next();
+		String clss=" ";
+		String teacher=" ";
+		int cRoom=0;
+		
+		
+		switch(cls1) {
+			case "자바":
+				clss="자바";
+				cRoom=301;
+				teacher="자강사";
+				break;
+			case "jsp":
+				clss="jsp";
+				cRoom=302;
+				teacher="제강사";
+				break;
+			case "자료구조":
+				clss="자료구조";
+				cRoom=303;
+				teacher="자료강사";
+				break;
+			case "리눅스":
+				clss="리눅스";
+				cRoom=304;
+				teacher="리강사";
+				break;
+			case "네트워크 기초":
+				clss="네트워크 기초";
+				cRoom=305;
+				teacher="네강사";
+				break;
+				
+		}
+		System.out.println(clss+"과목은 "+cRoom+" 강의실에서 "+teacher+"와 함께 진행될 예정입니다.");
 		
