@@ -1,0 +1,60 @@
+		//주사위 2개를 던져 합계가 짝수일때 : 짝! 출력
+		//주사위 2개를 던져 합계가 홀수일때 : 홀! 출력
+		//두 주사위의 값이 동일할 경우 : 더블 출력
+		
+		int fSpot=(int)(Math.random()*6+1);
+		int sSpot=(int)(Math.random()*6+1);
+		int rSpot= fSpot +sSpot;
+		System.out.println("첫번째 주사위:"+fSpot);
+		System.out.println("두번째 주사위:"+sSpot);
+		
+		if (rSpot%2==0) {
+			if(fSpot==sSpot) {
+				System.out.println("더블!");
+			}
+			else {
+			System.out.println("짝!");
+			}
+		}
+		else {
+			System.out.println("홀!");
+		}
+		
+	
+	}
+}
+
+//구구단 예시
+//컴퓨터가 임의의 구구단 문제를 제시하면 
+		// 사용자가 문제를 맞추는 프로그램
+		// 임의의 구구단 범위 : 2단~15단
+		// 문제를 맞췄을시 : 10점 획득
+		// 틀렸을시 : 5점 감점
+		// 어려운 문제(11단 이상): 보너스 10점 추가획득
+		
+		int mul1=(int)(Math.random()*13+2);
+		int mul2=(int)(Math.random()*9+1);
+		int mulSum = mul1*mul2;
+		int myScore = 100;
+		int rScore=10,wScore=5,bScore=10;
+		
+		Scanner sc= new Scanner(System.in);
+		System.out.printf("%d * %d = ",mul1,mul2);
+		int dap = sc.nextInt();
+		
+		
+		if (mulSum == dap) {
+			if((mul1>10)){
+				myScore=myScore+rScore+bScore;
+				System.out.println("보너스 10점 추가 획득 \n내 점수:"+myScore);
+			}
+			else {
+			myScore=myScore+rScore;
+			System.out.println("10점 획득 \n내 점수:"+myScore);
+			}
+		}
+		else {
+			myScore-=wScore;
+			System.out.println("5점 감점 \n내 점수:"+myScore);
+		}
+		
