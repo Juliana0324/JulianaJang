@@ -275,4 +275,33 @@ default명령문 : 값이 없을 경우
 				
 		}
 		System.out.println(clss+"과목은 "+cRoom+" 강의실에서 "+teacher+"와 함께 진행될 예정입니다.");
+
+
+//경품추첨예시: 
+		//100: 자전거
+		//200 : 보드세트
+		//300 요트
 		
+		int score,label;
+		String coupon="";
+		score =(int)(Math.random()*10+1);
+		label =score*100;
+		
+		switch(label){
+		case 100: coupon ="자전거";
+		break;
+		case 200: coupon ="보트세트";
+		break;
+		case 300: coupon ="자전거";
+		break;
+		case 900: coupon ="평생 무료 시즌방";
+		break;
+		default: coupon ="볼펜";
+		break;
+		}
+		System.out.println("점수: "+score);
+		System.out.println("상품: "+coupon);
+		}
+	
+	}
+
