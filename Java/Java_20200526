@@ -1,0 +1,50 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+//		// 반복문 사용x 1-100까지의 합을 구하시오
+//		int a=0,sum=0;
+//		while(a<=100){
+//			a++;
+//			sum+=a;
+//		}
+//		System.out.println("합"+sum);		
+		//1에서 100까지 홀수의 합
+//		int sum=0,num=0;
+//		while(num<=100) {
+//			num++;
+//			if(num%2==1) {
+//				System.out.println(sum+"+"+num+"="+(sum+num));
+//				sum=sum+num;
+//			}
+//		}
+		//1에서 100사이에 임의의 정수를 생산한 후
+		//생산된 정수까지 3의 배수를 카운팅
+//		
+//		int count=0, num=0;
+//		int rNum=(int)(Math.random()*100+1);
+//		num++;
+//		if(num<=rNum) {
+//			if(num%3==0) {
+//				count++;
+//				}
+//		}
+//		//while문 사용시
+//		while(num<rNum) {
+//		num++;
+//			if(num%3==0) {
+//				count++;
+//				System.out.printf("%3d",num);
+//				if(count%5==0) {
+//					System.out.println();
+//				}
+//				}
+//		}
+//		System.out.println("\n1부터 "+rNum+"까지 3의 배수 갯수 : "+count);
+//		
+//		
+		//2부터 20까지 임의의 정수를 생산한 후 
+		//구구단 출력
+		
+	}}
+
