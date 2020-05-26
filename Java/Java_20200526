@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class Main {
 
@@ -45,6 +46,65 @@ public class Main {
 //		
 		//2부터 20까지 임의의 정수를 생산한 후 
 		//구구단 출력
+//		int mul=1, num=0;
+//		int rNum=(int)(Math.random()*19+2);
+//		while (mul<10) {
+//			num=rNum*mul;
+//			mul++;
+//			System.out.println(rNum+"*"+mul+"="+num);
+//		}
+//		
+//		//선생님 풀이
+//		int fNum=1,sNum=0,result=0;
+//		fNum=(int)(Math.random()*19+2);
+//		while(sNum<10) {
+//				sNum++;
+//				result=fNum*sNum;
+//				System.out.println(fNum+"*"+sNum+"="+result);
+//			
+//		}
 		
-	}}
+		//2단부터 9단까지 출력
+//		int i=2,j=2,sum=0;
+//		while(i<10) {
+//			i++;
+//			while(j<10) {
+//				j++;
+//				sum=i*j;
+//				System.out.print(i+"*"+j+"="+sum+"\n");
+//			}
+//			
+//		}
+		//선생님 풀이
+//		int fNum=1,sNum=0,result=0;
+//		while(fNum<9) {
+//		fNum++;
+//			sNum=0;
+//			while(sNum<9) {
+//				sNum++;
+//				result = fNum*sNum;
+//				System.out.println(fNum+"*"+sNum+"="+result);
+//}
+//			System.out.println();
+//		}
+//		
+
+//숙제
+		//사용자가 틀릴때 까지 구구단문제를 출제
+		//2x1부터 19x9까지
+		//사용자가 3문제를 틀리면 "게임 오버"출력후 프로그램 종료하세요
+		//종료시 정답의 갯수와 점수 출력
+		//정답일떄 10점, 오답일때 -5점, 보너스11단부터 추가 5점
+		int myScore=100;
+		int rAnswer=10,wAnswer=5,bonus=5;
+		int i=(int)(Math.random()*18+2);
+		int j=(int)(Math.random()*9+1);
+		int result= i*j;
+		
+		Scanner sc= new Scanner(System.in);
+		int answer= sc.nextInt();
+		
+		}
+			}
+	
 
