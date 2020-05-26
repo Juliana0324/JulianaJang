@@ -1,0 +1,116 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// 경품추첨 예시 : 
+		// 100: 자전거
+		//200: 보드세트
+		//300: 요트
+		//900: 평생무료 시즌방
+		//장려상: 볼펜
+		
+//		int score,label;
+//		String coupon="";
+//		score=(int)(Math.random()*10+1);
+//		label=score*100;
+//		
+//		switch(label) {
+//		case 100: 
+//			coupon="자전거";
+//			break;
+//		case 200:
+//			coupon="보트세트";
+//			break;
+//		case 300:
+//			coupon="요트";
+//			break;
+//		case 900:
+//			coupon="평생 무료 시즌방";
+//			break;
+//		default:
+//			coupon="장려상 : 볼펜";
+//			break;
+//		}
+//		System.out.println("점수: "+label);
+//		System.out.println("경품: "+coupon);
+
+		//반복문을 사용x, 1-100까지의 합을 구하시오
+//		int a=0,sum=0;
+//		while(a<100) {
+//			++a;
+//			sum+=a;
+//			System.out.println("a의 값: "+a+"\n합: "+sum);
+//		}
+		
+		//1에서 100까지 홀수의 합
+//		int sum=0, num=0;
+//		while(num<100) {
+//			++num;
+//			if(num%2==1) {
+//				sum+=num;
+//				System.out.println("홀수: "+num+"\n합: "+sum);
+//			}
+//			
+//		}
+		
+		//1에서 100까지의 임의의 정수를 생산한 후
+		//생산된 정수까지의 3의 배수를 count
+//		int count=0,num=0;
+//		int rNum=(int)(Math.random()*100+1);
+//		while(num<rNum) {
+//			num++;
+//			if(num%3==0) {
+//				count++;
+//				System.out.printf("%3d",num);
+//				if(count%5==0) {
+//					System.out.println();
+//				}
+//		}
+//	}
+//		System.out.println("\n임의의 수: "+rNum);
+//		System.out.println("3의 배수의 개수: "+count);	
+	
+		//2부터 20까지 임의의 정수를 생산후 구구단 출력
+//		int imsi=(int)(Math.random()*19+2);
+//		int i=1,result=0;
+//		while(i<9) {
+//			i++;
+//			result=imsi*i;
+//			System.out.println(imsi+"*"+i+"="+result);
+//		}
+//		System.out.println("임의의수: "+imsi);
+		
+		//사용자가 틀릴때 까지 구구단문제를 출제
+		//2x1부터 19x9까지
+		//사용자가 3문제를 틀리면 "게임 오버"출력후 프로그램 종료하세요
+		//종료시 정답의 갯수와 점수 출력
+		//정답일떄 10점, 오답일때 -5점, 보너스11단부터 추가 5점
+		
+		int myScore=100;
+		int rAnswer=10,wAnswer=5,bonus=5,a=0;
+		int i=(int)(Math.random()*18+2);
+		int j=(int)(Math.random()*9+1);
+		int result= i*j;
+		
+		Scanner sc= new Scanner(System.in);
+		int answer= sc.nextInt();
+			
+		while(myScore<=0) {
+			if (result==answer){
+			myScore+=rAnswer;
+				if(i>11) {
+					myScore+=rAnswer+bonus;
+			}
+		}
+			else {
+				myScore-=wAnswer;
+			}
+			System.out.println("점수: "+myScore);
+			System.out.println("게임오버: ");
+		}
+//		System.exit(3);
+		}
+		
+		
+	}
