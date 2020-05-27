@@ -1,0 +1,97 @@
+
+//구구단 게임
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// 2*1 19*9까지 
+//		사용자가 3문제를 틀리면
+//		게임오버출력후 프로그램 종료
+		Scanner sc= new Scanner(System.in);
+		
+		int rAnswer=10,wAnswer=5,bonus=10;
+		int myScore=100,rCount=0,wCount=0;
+		
+		while(true){              //true 대신 flag사용 가능
+			int fNum = (int)(Math.random()*18+2);
+			int sNum= (int)(Math.random()*9+2);
+			int result=fNum*sNum;
+		
+			System.out.println(fNum+" * "+sNum+" = ");
+			int answer=sc.nextInt();
+			
+			if(result==answer) {
+				System.out.println("정답입니다."+rAnswer+"획득하셨습니다.");
+				myScore+=rAnswer;
+				if(fNum>10) {
+					System.out.println("보너스 점수 "+bonus+" 획득하셨습니다.");
+					myScore+=bonus;
+				}
+				rCount++;
+				System.out.println("현재 점수 : "+myScore+"점");
+			}
+			else {
+				System.out.println("오답입니다."+wAnswer+"감점입니다.");
+				myScore-=wAnswer;
+				wCount++;
+				if(wCount>=3) {
+					System.out.println(wCount+"번 틀려서 게임오버");
+					break;
+				}
+				else {
+				System.out.println("현재 점수 : "+myScore+"점");
+				}
+			}
+		}
+		System.out.println("정답횟수 : "+rCount+"번");
+		System.out.println("총점: "+myScore+"점");
+		System.exit(0);
+	}
+
+}
+
+		//컴퓨터가 임의의 1-100까지의 수를 생성하면
+		//사용자가 맞추는 게임
+		//조건: 사용자가 높은값을 예측하면 "[다운]" 메세지 출력해서 낮은 값을 입력하도록 유도
+		//사용자가 낮은값을 예측하면 "업" 출력
+		//종료시:
+		//사용자가 정답을 입력할때 종료
+		//종료시 몇번만에 맞췄는지 출력
+		//정답
+		//[업:  번]
+		//[다운: 번]
+		
+		Scanner sc= new Scanner(System.in);
+		int upCount=0,dCount=0,tCount=0;
+		int imsi=(int)(Math.random()*100+1);
+		boolean flag=true;
+
+		while(flag) {
+			System.out.print("0~100사이 임의의 수를 입력하세요: ");
+			int myAnswer=sc.nextInt();
+//			System.out.printf("r=%d / an=%d\n", imsi, myAnswer);
+			if(myAnswer>100 || myAnswer<=0) {
+				flag=false;
+				continue;
+			}
+			if (myAnswer>imsi) {
+				System.out.println("down!");
+				dCount++;
+			}
+			else if(myAnswer<imsi){
+				System.out.println("up!");
+				upCount++;
+			}
+			else {
+				System.out.println("[정  답]");
+				flag=false;
+			}
+		}
+		tCount=upCount+dCount;
+		System.out.printf("[업	%d번]\n",upCount);
+		System.out.printf("[다운	%d번]\n",dCount);
+		System.out.printf("[총	%d번]\n",tCount);
+    
+    
