@@ -1,0 +1,173 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+//
+//		int myScore=100;
+//		int rAnswer=10,wAnswer=5,bonus=5,a=0;
+//		int rCount=0,wCount=0;
+//		
+//		Scanner sc= new Scanner(System.in);
+//			
+//		while(true) {
+//			int i=(int)(Math.random()*18+2);
+//			int j=(int)(Math.random()*9+1);
+//			int result= i*j;
+//			
+//			System.out.println(i+"*"+j+"=");
+//			int answer= sc.nextInt();
+//			if (result==answer){
+//					myScore+=rAnswer;
+//					System.out.println("정답입니다. 10점추가");
+//					if(i>10) {
+//					myScore+=bonus;
+//					System.out.println("보너스 점수 5점추가");
+//			}
+//					rCount++;
+//			}
+//			else {
+//				System.out.println("오답입니다. 5점 감점");
+//				wCount++;
+//				myScore-=wAnswer;
+//				if(wCount>=3) {
+//					System.out.println("3번 오답 이여서 게임을 종료합니다.");
+//					break;
+//				}
+//			}
+//		}
+//		System.out.println("점수: "+myScore);
+//		System.out.println("맞은 갯수: "+rCount);
+//		System.out.println("게임오버 ");
+
+//	//1. 1부터 100까지 정수 출력
+//		int a;
+//		for(a=1;a<=100;a++) {
+//			System.out.print(a+" ");
+//			if (a%10==0) {
+//				System.out.println();
+//			}
+//		}
+//		System.out.println();
+//
+//		//2. 53부터 25까지
+//		
+//		int b;
+//		for(b=53;b>=25;b--) {
+//			System.out.print(b+" ");
+//			if(b%10==0) {
+//				System.out.println();
+//			}
+//		}
+//		System.out.println("\n");
+//	
+//		//3. 30부터 60까지
+//		int c;
+//		for(c=30;c<=60;c++) {
+//			System.out.print(c+" ");
+//			if (c%10==0) {
+//				System.out.println();
+//			}
+//		}
+//		System.out.println("\n");
+//
+//		//4. 100부터 0까지 5의 배수 정수 출력
+//		int d;
+//		for(d=100;d>0;d--) {
+//			if(d%5==0) {
+//				System.out.print(d+" ");
+//			}
+//		}
+//		System.out.println("\n");
+//		
+//		//5. A부터 Z까지 알파벳 출력
+//		char f;
+//		for (f=65;f<=90;f++) {
+//			System.out.print(f+" ");
+//		}
+//		System.out.println("\n");
+//		
+//		
+//		//6. 1.0부터 3,0까지 0.5씩 출력
+//		double g;
+//		for(g=1;g<=3;g+=0.5) {
+//			System.out.print(g+" ");
+//		}
+//		System.out.println("\n");
+//		
+//		//7. 1부터 100까지 각 수의 제곱값 출력
+//		int h,su;
+//		for(h=1;h<=100;h++) {
+//			su=h*h;
+//			System.out.print(h+"의 제곱값은: "+ su+" ");
+//			if(h%10==0) {
+//				System.out.println();
+//			}
+//		}
+//		System.out.println("\n");
+//	
+//	
+//		//8. 숫자를 한개 입력받아 1부터 해당수까지 출력
+//		Scanner sc= new Scanner(System.in);
+//		System.out.println("숫자 한개를 입력하세요 :");
+//		int num=sc.nextInt();
+//		int i;
+//		for (i=1;i<=num;i++) {
+//			System.out.print(i+" ");
+//		}
+	
+	// 단수 입력하여 구구단 되게하시오
+		Scanner sc= new Scanner(System.in);
+//		System.out.println("단수 입력하세요: ");
+//		int dan=sc.nextInt();
+//		int i;
+//		
+//		for(i=2;i<=9;i++) {
+//			System.out.println(dan+"*"+i+"="+dan*i);
+//		}
+	//구구단 연속 출력
+//		int dan1,su1;
+//		for(dan1=2;dan1<10;dan1++) {
+//			for(su1=1;su1<10;su1++) {
+//				System.out.print(dan1+"*"+su1+"="+su1*dan1+" ");
+//			}
+//			System.out.println();
+//		}
+//		System.out.println("\n");
+//		
+	// 구구단 세로 출력
+//		int dan2,su2;
+//		for (dan2=1;dan2<10;dan2++) {
+//			for(su2=2;su2<10;su2++) {
+//				System.out.print(su2+"*"+dan2+"="+su2*dan2+" ");
+//			}
+//			System.out.println();
+//		}
+
+//		*
+//		**
+//		***
+//		****
+//		*****
+//		int i,j;
+//		for(i=0;i<6;i++) {
+//			for(j=0;j<=i;j++) {
+//			System.out.print("*");
+//		}
+//			System.out.println();
+//		}
+		
+//		*****
+//		****
+//		***
+//		**
+//		*
+		int su2,num2;
+		for (su2=5;su2>0;su2--) {
+			for(num)
+			System.out.print("*");
+		}
+		
+		
+	}
+}
