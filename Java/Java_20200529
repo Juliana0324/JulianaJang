@@ -1,0 +1,210 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+		// 주사위를 1000번 던져서
+		//각각의 눈금이 나온 횟수 출력
+//		int [] dice = new int[6];
+//		for(int i=0;i<1000;i++) {
+//			int num=(int)(Math.random()*6);
+//			dice[num]++;
+//		}
+//		for(int i=0;i<dice.length;i++) {
+//			System.out.println((i+1)+" 나온 횟수: "+dice[i]);
+//		}
+		
+		//사용자가 좋아하는 메뉴를 입력받아 추천해 주는 프로그램
+		//개수 : 5
+		//항목 : 라면,
+		//항목 : 김밥
+		//항목 : 떡볶이
+		//항목 : 순대
+		//항목 : 쫄면
+		//추첨된 항목은 떡볶이 입니다.
+		
+//		 Scanner sc= new Scanner(System.in);
+//		 System.out.println("항목수  입력: ");
+//		 int addMenu=sc.nextInt();
+//		 sc.nextLine();
+//		 
+//		 String [] menu= new String[addMenu];
+//		 System.out.println("[ 메뉴 입력  ]");
+//		 for (int i=0;i<menu.length;i++) {
+//			 System.out.print((i+1) + "항목 : ");
+//			 menu[i]=sc.nextLine();
+//		 }
+//		 System.out.println("추첨중 입니다.");
+//		 for(int i=0;i<4; i++) {
+//			 System.out.print(".");
+//			 Thread.sleep(1000);
+//		 }
+//		 int mSelect = (int)(Math.random()*addMenu);
+//		 System.out.println("\n추첨된 항목은 : "+menu[mSelect]);
+
+	//초기화
+//		int [] arr= new int[8];
+//		int [] brr = {1,2,3,4,5,6,7,8};
+//		int [] crr = new int[] {1,2,3,4,5,6,7,8};
+//		int [] drr;
+//		drr=new int[] {1,2,3,4,5};
+//		int i;
+//		//arr 예제
+//		for(i=0;i<arr.length;i++) {
+//			System.out.println("arr["+i+"]= "+arr[i]);
+//		}
+//		System.out.println();
+//
+//		//brr예제
+//		for(i=0;i<brr.length;i++) {
+//			System.out.println("brr["+i+"]= "+brr[i]);
+//		}
+//		System.out.println();
+//		
+//		//crr예제
+//		for(i=0;i<crr.length;i++) {
+//			System.out.println("crr["+i+"]= "+crr[i]);
+//		}
+//		System.out.println();
+//		
+//		//drr예제
+//		for(i=0;i<drr.length;i++) {
+//			System.out.println("drr["+i+"]= "+drr[i]);
+//		}
+//		System.out.println();
+
+		//학생 점수 예제
+//		int [] score = {100,88,100,100,90};
+//		int sum=0;	//합계 
+//		float avg;	//평균
+//		
+//		for(int i=0; i<score.length;i++) {
+//			sum+=score[i];
+//		}
+//		avg=(float)sum/score.length;
+//		System.out.println("총점 : "+ sum);
+//		System.out.println("평규 : "+ avg);
+		
+//		String [] name= new String[3];
+//		name[0]=new String("Kim");
+//		name[1]=new String("Lee");
+//		name[2]=new String("Park");
+//		
+//		String [] familyA= {"kim","Lee","Park"};
+//		String [] familyB= {new String("Kim"),new String("Lee"),new String("Park")};
+//	
+//		for(int i=0;i<name.length;i++) {
+//			System.out.println(name[i]);
+//		}	
+//		System.out.println();
+//
+//		
+//		for(int i=0;i<familyA.length;i++) {
+//			System.out.println(familyA[i]);
+//		}	
+//		System.out.println();
+//
+//		
+//		for(int i=0;i<familyB.length;i++) {
+//			System.out.println(familyB[i]);
+//		}	
+//		System.out.println();
+//	
+
+//	int [] numA= {1,2,3,4,5};
+//	int [] numB;
+//	numB=numA;	//참조변수는 복사사용 가
+//
+//	int [] num= {1,2,3,4,5};
+//	int [] nnum=new int[10];
+//		
+//	for(int i=0;i<num.length;i++) {
+//		nnum[i]=num[i];
+//	}
+//	for (int i=0;i<nnum.length;i++) {
+//		System.out.println(nnum[i]+" ");
+//	}
+	
+
+//		char [] str = {'A','B','C'};
+//		char [] num= {'0','1','2','3','4','5','6','7','8','9'};
+//
+//		System.out.println("str: "+Arrays.toString(str));
+//		System.out.println("num: "+Arrays.toString(num));
+//	
+//		char [] result = new char[str.length+num.length];
+//		System.arraycopy(str, 0, result, 0, str.length);
+//		System.arraycopy(num, 0, result, str.length, num.length);
+//		System.out.println("result: " + Arrays.toString(result));
+//	
+		
+//		int [][] darr = new int[3][];
+//		int data=1;
+//		darr[0]=new int[4];
+//		darr[1]=new int[2];
+//		darr[2]=new int[8];	//각자 길이 모두 다름
+//		
+//		for(int i=0;i<darr.length;i++) {
+//			for(int j=0;j<darr[i].length;j++) {
+//				darr[i][j]=data++;
+//			}
+//			for(int j=0;j<darr[i].length;j++) {
+//				System.out.print(darr[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+//		
+		//배열의 크기를 입력받아 2차원 배열 구성
+		Scanner sc= new Scanner(System.in);
+//		int data1=0;
+//
+//		//1차 배열의 크기:
+//		System.out.println("1차 배열의 크기: ");
+//		int fLayer=sc.nextInt();
+//		
+//		//2차 배열의 크기:
+//		System.out.println("2차 배열의 크기: ");
+//		int sLayer=sc.nextInt();
+//		
+//		// [배열[][]의 값 ]
+//		System.out.println("\n[배열["+fLayer+"]["+sLayer+"]의 값 ]");
+//		int [][] arr= new int[fLayer][sLayer];
+//		for(int i1=0;i1<arr.length;i1++) {
+//			for(int j1=0;j1<arr[i1].length;j1++) {
+//				arr[i1][j1]=++data1;
+//				System.out.print(arr[i1][j1]+"\t");
+//			}
+//			System.out.println();
+//		
+//		}
+		//가로, 세로의 값을 입력받아 빙고판을 만들고 
+		//모든 자리의 숫자가 랜덤으로 배치될수 있도록 만드시오
+		int ddr=0;
+		System.out.println("가로: ");
+		int bow=sc.nextInt();
+		
+		System.out.println("세로: ");
+		int arrow=sc.nextInt();
+		
+		System.out.println("가로"+bow+" * "+ arrow+"의 빙고판");
+		
+		int [][] bArro=new int [bow][arrow];
+		for(int x=0;x<bArro.length;x++) {
+			for(int y=0;y<bArro[x].length;y++) {
+				bArro[x][y]=++ddr;
+				int a=(int)(Math.random()*x);
+				int b=(int)(Math.random()*y);
+				System.out.print(a+" ");
+
+			}
+			System.out.println();
+		}
+	
+	
+	
+	
+	}
+		
+	}
+
