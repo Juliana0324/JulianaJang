@@ -1,3 +1,83 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		//10개의 임의의 수를 입력하고 출력하세요
+//		Scanner sc= new Scanner(System.in);
+//		int arr[]=new int[10];
+//		for(int i=0;i<arr.length;i++) {
+//			System.out.println(i+1+"번째 수를 입력하세요 :");
+//			arr[i]=sc.nextInt();
+//		}
+//		for(int j=0;j<arr.length;j++) {
+//			System.out.print(arr[j]+" ");
+//
+//		}
+//		}
+	//10개의 수를 입력받아 입력한 수와의 합 구하시오
+//	Scanner sc= new Scanner(System.in);
+//	int rNum[]=new int[10];
+//	int sum=0;
+//	for(int i=0;i<rNum.length;i++) {
+//		System.out.println(i+1+"번째 수를 입력: ");
+//		rNum[i]=sc.nextInt();
+//		sum+=rNum[i];
+//		System.out.println("합은 : "+sum);
+//	}
+		
+		//인원수를 입력받고 인원수만큼 이름고 전화번호를 입력받아 출력
+//		Scanner sc=new Scanner(System.in);
+//		System.out.println("인원수를 입력하세요 : ");
+//		int inwon=sc.nextInt();
+//		
+//		String name[]=new String[inwon];
+//		String tele[]=new String[inwon];
+//
+//		for (int i=0;i<inwon;i++) {
+//			System.out.println("이름: ");
+//			name[i]=sc.next();
+//			System.out.println("전화번호 : ");
+//			tele[i]=sc.next();
+//			System.out.println(name[i]+"님의 전화번호는 "+tele[i]+"\n");
+//		}
+		Scanner sc= new Scanner(System.in);
+		System.out.println("인원을 입력하세요 : ");
+		int inwon=sc.nextInt();
+		
+		String name[]=new String[inwon];
+		int kor[]=new int[inwon];
+		int eng[]=new int[inwon];
+		int math[]=new int[inwon];
+		int tot[]=new int[inwon];
+		int avg[]=new int[inwon];
+		
+		for (int i=0;i<inwon;i++) {
+			System.out.println("이름: ");
+			name[i]=sc.next();
+			System.out.println("국어 점수: ");
+			kor[i]=sc.nextInt();
+			System.out.println("영어 점수: ");
+			eng[i]=sc.nextInt();
+			System.out.println("수학 점수: ");
+			math[i]=sc.nextInt();
+			
+			tot[i]=kor[i]+eng[i]+math[i];
+			avg[i]=tot[i]/3;
+		}
+		for (int i=0;i<inwon;i++) {
+		System.out.println("이름:"+ name[i]);
+		System.out.println("국어\t영어\t수학\t총점\t평균\n"+kor[i]+"\t"+eng[i]+"\t"+math[i]+"\t"+tot[i]+"\t"+avg[i]);	
+		System.out.println();
+		}
+	}
+	}
+
+
+
+
+
+
 import java.util.Arrays;
 import java.util.Scanner;
 
