@@ -208,3 +208,25 @@ public class Main {
 		
 	}
 
+배열 초기화
+메모리 할당
+new
+malloc 빠른 처리
+calloc 안전한 처리
+
+일시정지: 
+Thread.sleep(초)
+ex) Thread.sleep(1000) 
+	System.out.print(".")
+
+
+배열은 크기 변경이 x
+복사하여 사용x==>참조변수는 가능
+Arrays.toString() ==> String에서 변수내의 내용을 읽어들어옴
+
+- arraycopy();
+System.arraycopy(src, srcPos, dest, destPos, length);
+
+
+2차원 배열 생성
+int [][]ban = new int[행의길이][열의 길이]
