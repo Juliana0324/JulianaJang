@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -83,25 +84,136 @@ public class Main {
 //		
 		//과목 이름을 입력받아 해당과목 점수를 출력해주는 프로그램 작성
 		//그만을 입력하면 프로그램 종료
-		String []arSubject= {"Java","Python","Android","Jsp","Html"};
-		int [] arScore= {100,98,76,62,55};
-	while(true) {
-		System.out.println("과목명을 입력: ");
-		String name=sc.next();
+//		String []arSubject= {"Java","Python","Android","Jsp","Html"};
+//		int [] arScore= {100,98,76,62,55};
+//	while(true) {
+//		System.out.println("과목명을 입력: ");
+//		String name=sc.next();
+//		
+//		for(int i=0;i<arSubject.length;i++) {
+//			if(arSubject[i].equals(name)) {
+//				System.out.println(arSubject[i]+"의점수 : "+arScore[i]);
+//			}
+//		}
+//		if(name.equals("그만")) {
+//			System.out.println("프로그램을 종료합니다");
+//			System.exit(0);
+//		}
+//	}
+	
+//		char [] str= {'A','B','C'};
+//		char [] num= {'0','1','2','3','4','5','6','7','8','9'};
+//		
+//		System.out.println("str: "+Arrays.toString(str));
+//		System.out.println("num: "+Arrays.toString(num));
+//		
+//		char[] result=new char[str.length+num.length];
+//		System.arraycopy(str, 0, result, 0, str.length);
+//		System.arraycopy(num, 0, result, str.length, num.length);
+//		System.out.println("result"+Arrays.toString(result));
+// 질문: 위의 System.arraycopy이해x
+
 		
-		for(int i=0;i<arSubject.length;i++) {
-			if(arSubject[i].equals(name)) {
-				System.out.println(arSubject[i]+"의점수 : "+arScore[i]);
+		
+//		int [][]arr=new int[2][3];
+//		System.out.println(arr);
+//		System.out.println(arr[0]);
+//		System.out.println(arr[1]);
+//		arr[0][0] =1;
+//		arr[0][1] =2;
+//		arr[0][2] =3;
+//		arr[1][0] =4;
+//		arr[1][1] =5;
+//		arr[1][2] =6;
+//		System.out.println("arr.length: "+arr.length);
+//		System.out.println("arr[0].length: "+arr[0].length);
+//		System.out.println("arr[1].length: "+arr[1].length);
+//
+//		for(int i=0;i<arr.length;i++) {
+//			for(int j=0;j<arr[i].length;j++) {
+//				System.out.println("["+i+"]["+j+"]:"+arr[i][j]);
+//			}
+//		}
+//출력 결과
+//		[0][0]:1
+//		[0][1]:2
+//		[0][2]:3
+//		[1][0]:4
+//		[1][1]:5
+//		[1][2]:6
+
+		
+		
+		//순서대로 출력
+//		1 2 3 4 5 
+//		6 7 8 9 10 
+//		11 12 13 14 15 
+//		16 17 18 19 20 
+//		21 22 23 24 25 
+
+//		int [][]arr=new int[5][5];
+//		int num=1;
+//		for(int i=0;i<arr.length;i++) {
+//			for(int j=0;j<arr[i].length;j++) {
+//				arr[i][j]=num++;
+//				System.out.print(arr[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+		System.out.println("세로: ");
+		int arrow=sc.nextInt();
+		System.out.println("가로 : ");
+		int bow=sc.nextInt();
+		int data=1;
+		
+		int [][] bingo=new int[arrow][bow];
+		System.out.println(arrow+" * "+bow+" 빙고판");
+		for(int i=0;i<bingo.length;i++) {
+			for(int j=0;j<bingo[i].length;j++) {
+				bingo[i][j]=data++;
+				int rNum=(int)(Math.random()*bingo[i][j]);
+				bingo[i][j]=rNum;
+				System.out.printf("%7d",bingo[i][j]);
 			}
+			System.out.println();
 		}
-		if(name.equals("그만")) {
-			break;
-		}
+		
+		
+		
+		
+//		1 2 3 4 5 
+//		10 9 8 7 6 
+//		11 12 13 14 15 
+//		20 19 18 17 16 
+//		21 22 23 24 25 
+//
+//		int [][]arr=new int[5][5];
+//		int num=1;
+//		for(int i=0;i<arr.length;i++) {
+//			if(i%2==0) {
+//				for(int j=0;j<arr.length;j++) {
+//					arr[i][j]=num++;
+//				}
+//			}
+//			else {
+//				for(int j=4;j>=0;j--) {
+//					arr[i][j]=num++;
+//				}
+//			}
+//			}
+//		for(int i=0;i<arr.length;i++) {
+//			for(int j=0;j<arr[i].length;j++) {
+//				System.out.print(arr[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+
+	
+	
+	
+	
+	
 	}
 	
 	}
 
-}
-
-
-https://ubange.tistory.com/204
