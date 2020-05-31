@@ -1,0 +1,104 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+		// 10개의 수를 입력하고 출력하세요
+		Scanner sc= new Scanner(System.in);
+//		int rNum[]= new int[10];
+//		for(int i=0;i<rNum.length;i++) {
+//			System.out.print(i+1+"번 수를 입력하세요: ");
+//			rNum[i]=sc.nextInt();
+//		}
+//		for(int i=0;i<rNum.length;i++) {
+//			System.out.print(rNum[i]+" ");
+//		}
+		//10개의 수를 입력하여 기존의 값에서 더해가시오
+//		int rNum[]=new int[10];
+//		int sum=0;
+//		for(int i=0;i<rNum.length;i++) {
+//			System.out.print(i+1+"번의 숫자를 입력하세요: ");
+//			rNum[i]=sc.nextInt();
+//			sum+=rNum[i];
+//		}
+//		System.out.println("총합은 : "+ sum);		
+
+	//인원수를 입력받아 이름, 국어,수학,영어,총합,평균을 구하시오
+//		System.out.println("입력하실 인원수: ");
+//		int inwon=sc.nextInt();
+//		String name[]=new String[inwon];
+//		int kor[]=new int[inwon];
+//		int mat[]=new int[inwon];
+//		int eng[]=new int[inwon];
+//		int tot[]=new int[inwon];
+//		double avg[]=new double[inwon];
+//		for (int i=0;i<inwon;i++) {
+//			System.out.println("이름 :" );
+//			name[i]=sc.next();
+//			System.out.println("국어점수 : ");
+//			kor[i]=sc.nextInt();
+//			System.out.println("수학점수 : ");
+//			mat[i]=sc.nextInt();
+//			System.out.println("영어점수 : ");
+//			eng[i]=sc.nextInt();
+//			tot[i]=kor[i]+mat[i]+eng[i];
+//			avg[i]=(double)(tot[i]/3);
+//		}
+//		System.out.println("[결\t과]");
+//		for(int i=0;i<inwon;i++) {
+//			System.out.println("이름 : "+name[i]);
+//			System.out.println("국어 : "+kor[i]);
+//			System.out.println("수학 : "+mat[i]);
+//			System.out.println("영어 : "+eng[i]);
+//			System.out.println("총점 : "+tot[i]);
+//			System.out.println("평균 : "+avg[i]);
+//		}
+//		System.out.println();
+		
+		//주사위를 1000돌려 눈금이 나온횟수
+//		int [] dice=new int[6];
+//		for(int i=0;i<1000;i++) {
+//			int num=(int)(Math.random()*6);
+//			dice[num]++;
+//		}
+//		for(int j=0;j<dice.length;j++) {
+//			System.out.println(j+1+"가 나온횟수: "+dice[j]);
+//		}
+		//사용자가 좋아하는 메뉴를 추천
+//		System.out.println("드실 메뉴의 갯수를 입력하세요: ");
+//		int menu=sc.nextInt();
+//		
+//		String [] addMenu= new String[menu];
+//		for(int i=0;i<menu;i++) {
+//			System.out.print("항목: ");
+//			addMenu[i]=sc.next();
+//		}
+//		System.out.println("추첨중");
+//		for(int j=0;j<4;j++) {
+//			System.out.print(".");
+//			Thread.sleep(1000);
+//		}
+//		int rMenu=(int)(Math.random()*menu);
+//		System.out.println("추첨된 메뉴는 : "+addMenu[rMenu]);
+//		
+		//과목 이름을 입력받아 해당과목 점수를 출력해주는 프로그램 작성
+		//그만을 입력하면 프로그램 종료
+		String []arSubject= {"Java","Python","Android","Jsp","Html"};
+		int [] arScore= {100,98,76,62,55};
+	while(true) {
+		System.out.println("과목명을 입력: ");
+		String name=sc.next();
+		
+		for(int i=0;i<arSubject.length;i++) {
+			if(arSubject[i].equals(name)) {
+				System.out.println(arSubject[i]+"의점수 : "+arScore[i]);
+			}
+		}
+		if(name.equals("그만")) {
+			break;
+		}
+	}
+	
+	}
+
+}
