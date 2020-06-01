@@ -37,3 +37,158 @@
 			System.out.println();
 		}
 	
+
+int char,,, ==> 객체x
+모든 데이터는 객체 안에서만 존재
+데이터 만들때 고려사항: 1. 접근범위
+		2. 유효시간
+		3. 접근주체
+class기본구성
+-접근지정자+멤버변수+멤버 메소드
+
+패키지: 
+-관계가 있는 클ㄹ래스들의 묶음 
+-사용자 정의 클래스
+-라이브러리 클래스
+모든 클래스는 반드시 하나의 패키지에 속해야한다
+
+최상위 패키지의 이름은 java로 시작할수 없다.
+
+대분류와 소분류 패키지를 구분할때는 '.'로 구분: Java.lang.String
+
+import 키워드를 사용==> 해당클래스의 전체경로 지정
+import문 선언법: 
+import 패키지명.클래스명;
+import 패키지명.*;
+
+instance= 클래스로 부터 만들어지는 각 객체를 그 클래스의 인스턴스라고 한다
+-참조변수를 통해서만 다룰수 있음
+-주소로 접근가능 : heap영역에 있기 때문에
+- 참조변수의 타입은 인스턴스의 타입과 일치
+
+package lam.sam.example;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws InterruptedException {
+//		String name="김강사";
+//		int age=28;
+//		System.out.println("이름: "+ name);
+//		System.out.println("나이: "+ age);
+//		Info info=new Info();
+//		info.name="이강사";
+//		info.age=30;
+//		System.out.println("이름 : "+info.name);
+//		System.out.println("나이 : "+info.age);
+//	Info dataInfo=new Info();
+//	dataInfo.setData("김&강 사", 18);
+//	dataInfo.display();
+		
+		TV offonTv=new TV();
+		TV t1=new TV();
+		offonTv.powerOn();
+		offonTv.setchannel(5);
+		System.out.println("\n t1 객체 정보: ");
+		t1.disp();
+		
+//		for(int i=0;i<10;i++) {
+//			offonTv.channeldown();
+//			Thread.sleep(500);
+//		}
+//		offonTv.powerOn();
+////		offonTv.setchannel(50);
+//		offonTv.setcolor("보라");
+//		offonTv.disp();
+	}
+}
+//class Info{
+//	String name;
+//	int age;
+//	
+//	//수정 기능
+//	void setData(String name1,int age1) {
+//		name=name1;
+//		age=age1;
+//		
+//	}
+//	//내용출력
+//	void display() {
+//		System.out.println("이름: "+name);
+//		System.out.println("나이: "+age);
+//	}
+//}
+//TV객체 생성해보세요
+//속성 : color,power, channel
+//기능 : 전원 on/off
+//		channel변경
+
+class TV{
+	String color="빨강";
+	int channel;
+	boolean power;
+
+	void setcolor(String color1) {
+		color=color1;
+	}
+	void powerOn(){
+		power= !power;
+		if(power) {
+			System.out.println("전원이 켜졌습니다.");
+			System.out.println("현재 채널: "+channel);
+		}
+		else {
+			System.out.println("전원이 꺼졌습니다.");
+		}
+	
+	}
+	void setchannel(int channel1) {
+		if(power) {
+			if(channel1<0|| channel>120) {
+				channel1=channel;
+			}
+			channel=channel1;
+			System.out.println("현재 채널: "+channel1);
+		}
+		else {
+			System.out.println("전원이 꺼져있습니다.");
+		}
+	}
+	void channelup() {
+		if(power) {
+			channel++;
+			if(channel>120) {
+				channel=0;
+			}
+			System.out.println("현재 채널: "+channel);
+		}
+		else {
+			System.out.println("전원이 꺼져 있습니다.");
+		}
+	}
+	void channeldown() {
+		if(power) {
+			channel--;
+			if(channel<0) {
+				channel=120;
+			}
+			System.out.println("현재 채널: "+channel);
+		}
+		else {
+			System.out.println("전원이 꺼져 있습니다.");
+		}
+	}
+	void disp() {
+		System.out.println("색상: "+color);
+		System.out.println("현재 채널: "+channel);
+		if(power){
+			System.out.println("전원이 켜져있습니다.");
+			}
+		else {
+			System.out.println("전원이 꺼져있습니다.");
+		}
+		}
+	}
+
+
