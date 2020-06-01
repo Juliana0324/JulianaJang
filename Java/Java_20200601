@@ -1,0 +1,39 @@
+		//가로, 세로의 값을 입력받아 빙고판을 만들고 
+		//모든 자리의 숫자가 랜덤으로 배치될수 있도록 만드시오
+		int i,j,rNum;
+		System.out.println("가로열 갯수: ");
+		int row=sc.nextInt();
+		System.out.println("세로열 갯수: ");
+		int col=sc.nextInt();
+		int bgNum=row*col;
+		int [][]aBingo=new int[row][col];
+		int []aBgNum=new int[bgNum];
+		
+		for(i=0;i<aBgNum.length;i++) {
+			rNum=(int)(Math.random()*bgNum+1);
+			
+			boolean flag=true;
+
+			while(flag) {
+				for(j=0;j<i;j++) {
+					if(aBgNum[j]==rNum) {
+						rNum=(int)(Math.random()*bgNum+1);
+						break;					
+					}
+				}
+				if(i==j) {
+					aBgNum[i]=rNum;
+					flag=false;
+				}
+			}
+		}
+		
+		int k=0;
+		for(i=0;i<aBingo.length;i++) {
+			for(j=0;j<aBingo[i].length;j++) {
+				aBingo[i][j]=aBgNum[k++];
+				System.out.print(aBingo[i][j]+"\t");
+			}
+			System.out.println();
+		}
+	
