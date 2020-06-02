@@ -138,7 +138,7 @@ void method()
 		System.out.println(ame.str);
 	
 	
-위험성이 있기때문에
+위험성이 있기때문에 은닉화사용
 public class AccessModifierEx {
 	private String str="AccessModifierEx";
 	public String getstr=str;
