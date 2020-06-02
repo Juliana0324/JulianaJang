@@ -6,6 +6,10 @@ Student.flag{
 }
 
 static 지정해주면 메소드 안에 포함x
+캡슐화,정보은닉,
+
+
+
 package lab.sam.example;
 
 import java.util.Arrays;
@@ -109,4 +113,38 @@ class Calc{
 		return a/b;
 	}
 	}
+	
+private사용하게 되면 메인에서 사용이 안됨 
+package lab.sam.example.access;
+
+public class AccessModifierEx {
+	public String str="AccessModifierEx";
+
+	void func() {
+		System.out.println("AccessModifierEx.func()");
+	}
+}
+
+public 은 전역에서 사용가능
+
+메인{
+		Calc cll=new Calc();
+		cll.method();
+}
+
+void method()
+	{
+		AccessModifierEx ame =new AccessModifierEx();
+		System.out.println(ame.str);
+	
+	
+위험성이 있기때문에
+public class AccessModifierEx {
+	private String str="AccessModifierEx";
+	public String getstr=str;
+
+	void func() {
+		System.out.println("AccessModifierEx.func()");
+	}
+}
 
