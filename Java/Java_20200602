@@ -1,0 +1,112 @@
+클래스로 매소드 구분 가능
+Static boolean flag= true;
+
+Student.flag{
+
+}
+
+static 지정해주면 메소드 안에 포함x
+package lab.sam.example;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		MethodEx mex=new MethodEx();
+//		mex.sam_method(4,3);
+//		int[] arr = {1,2,3,4,5};
+//		System.out.println("before addArray: "+Arrays.toString(arr));
+//		mex.addArray(arr);
+//		System.out.println("after addArray: "+Arrays.toString(arr));
+	Scanner sc=new Scanner(System.in);
+	Calc cl= new Calc();
+	double result;
+	int resInt;
+	
+	System.out.println("1. 숫자 입력 : ");
+	double fNum=sc.nextDouble();
+	System.out.println("2. 숫자 입력: ");
+	double sNum=sc.nextDouble();
+	
+	System.out.println("연산자 입력: ");
+	String sign=sc.next();
+	
+	result = cl.operator(fNum, sNum, sign);
+	resInt = (int)result;
+	if (resInt==result) {
+		System.out.println((int)fNum+sign+(int)sNum+"="+resInt);
+	}
+	else{
+		System.out.println(fNum+sign+sNum+"="+result);
+	}
+	}
+
+}
+//class MethodEx{
+//	static void sam_method(int a, int b) {
+//		int sum=0;
+//		String sign="";
+//		if(a<b) {
+//		sum=add(a,b);
+//		sign="+";
+//		}
+//		else {
+//			sum=sub(a,b);
+//			sign="-";
+//		}
+//		System.out.printf("%d %s %d= %d\n",a,sign,b,sum);
+//	}
+//	static int add(int a,int b) {
+//		return a+b;
+//	}
+//	static void addArray(int [] arr) {
+//		for(int i=0;i<arr.length;i++) {
+//			arr[i]=arr[i]+10;
+//		}
+//	}
+//	
+//	static int sub(int a,int b) {
+//		return a-b;
+//		
+//	}
+	
+
+class Calc{
+	
+	double operator(double a,double b,String sign) {
+		double result=0;
+		switch(sign) {
+		case "+" :
+			result=add(a, b);
+			break;
+		case "-" :
+			result=sub(a, b);
+			break;
+		case "*":
+			result=mul(a,b);
+			break;
+		case "/":
+			result=div(a,b);
+			break;
+		default :
+			result=0;
+		}
+		return result;
+	}
+	double add(double a,double b){
+		return a+b;
+	}
+	double sub(double a,double b){
+		return a-b;
+		
+	}
+	double mul(double a,double b){
+		return a*b;
+	}
+	double div(double a,double b){
+		return a/b;
+	}
+	}
+
