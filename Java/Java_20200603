@@ -1,0 +1,237 @@
+package lab.sam.example;
+
+import java.util.Arrays;
+//import java.text.SimpleDateFormat;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) throws InterruptedException {
+//		SamsInfo si=new SamsInfo();
+//		si.setName("young sam");
+//		si.setAge(38);
+//		System.out.println(si.getName());
+//		System.out.println(si.getAge());
+//		
+//		si.disp();
+		
+//		Timer t= new Timer();
+//		Scanner sc=new Scanner(System.in);
+//		System.out.println("시간 입력: ");
+//		int hour=sc.nextInt();
+//		System.out.println("분 입력: ");
+//		int min=sc.nextInt();
+//		min=hour*60+min;
+//		System.out.println("초 입력: ");
+//		int sec=sc.nextInt();
+//		sec=min*60+sec;
+//		
+//		for(int i=hour;i>=0;i--) {
+//			t.setHour(i);
+//			for(int j=min%60;j>=0;j--) {
+//				t.setMin(j);
+//			}
+//			for(int k=sec%60;k>=0;k--) {
+//				t.setSec(k);
+//				t.disp();
+//				Thread.sleep(1000);
+//				sec--;
+//			}
+//			min--;
+//		}
+//		System.out.println("사랑해요 여러분:>");
+//	}
+//		Data d=new Data();
+//		d.x=10;
+//		System.out.println("main().x = "+d.x);
+//		//change(d.x);
+//		changeObj(d);//주소를 보냄
+//		System.out.println("main2().x = "+d.x);
+//		int [] arr= {1,2,3,4,5};	
+//		System.out.println(Arrays.toString(arr));
+//		changeArray(arr);
+//		System.out.println(Arrays.toString(arr));
+		MethodEx mex=new MethodEx();
+		int [] arr= {1,2,3,4,5};
+		System.out.println("add(int, int): "+mex.add(3,4));
+		System.out.println("add(long, int): "+mex.add(5L,6));
+		System.out.println("add(int, long): "+mex.add(10, 20L));
+		System.out.println("add(long, long): "+mex.add(30L,50L));
+		System.out.println("add(double, double): "+mex.add(1.2,3.4));
+		System.out.println("add(int []): "+mex.add(arr));
+		
+		
+	}
+	static void changeArray(int [] arr)/*배열*/ {
+		arr[0]=1000;//주소에 직접 데이터 할당
+		System.out.println("change3().x = "+arr[0]);
+		
+	}
+	static void changeObj(Data d)/*주소값*/ {
+		d.x=1000;//주소에 직접 데이터 할당
+		System.out.println("change2().x = "+d.x);
+		
+	}
+	static void change(int x) {
+		x=1000;
+		System.out.println("change().x = "+x);
+		
+	}
+	
+	
+}
+class MethodEx{
+	int add(int a, int b) {
+		return a+b;
+	}
+	long add(int a, long b) {
+		return a+b;
+	}
+	long add(long a,int b) {
+		return a+b;
+	}
+	long add(long a,long b) {
+		return a+b;
+	}
+	double add(double a,double b) {
+		return a+b;
+	}
+	int add(int [] a) {
+		int sum=0;
+		for(int i=0;i<a.length;i++) {
+			sum += a[i];
+		}
+		return sum;
+	}
+}
+
+//}
+//class SamsInfo{
+//	private String name;
+//	private int age;
+//	 
+//	public void setName(String name1) {
+//		name=name1;
+//	}
+//	public String getName() {
+//		return name;
+//		}
+//	public void setAge(int age1) {
+//		if(age1<=0 || age1>30) {
+//			age1=28;
+//		}
+//		age=age1;
+//	}
+//	public int getAge() {
+//		return age;
+//	}
+//	public void disp() {
+//		System.out.println("이름: "+getName());
+//		System.out.println("나이: "+getAge()+"살");
+//	}
+	
+//시계 객체 생성
+	//속성 : hour, minute,second
+	
+	//시간 정보를 입력 받아서 
+	//입력받은 시간이 지나면 
+	//사랑해요 여러분 코로나 조심! 을 출력
+	
+//class Clock{
+//	long mSec=System.currentTimeMillis();
+//	SimpleDateFormat hour=new SimpleDateFormat("hh");
+//	String rhour=hour.format(mSec);
+//	SimpleDateFormat min=new SimpleDateFormat("mm");
+//	String rmin=min.format(mSec);
+//	SimpleDateFormat sec=new SimpleDateFormat("ss");
+//	String rsec=sec.format(mSec);
+//		
+//	public void setHour(String hour1) {
+//		rhour=hour1;
+//	}
+//	public String getHour() {
+//		return rhour;
+//	}
+//	public void setMin(String minute1) {
+//		rmin=minute1;
+//	}
+//	public String getMin() {
+//		return rmin;
+//	}
+//	public void setSec(String second1) {
+//		rsec=second1;
+//	}
+//	public String getSec() {
+//		return rsec;
+//	}
+//	public void disp() {
+//		System.out.println("현재시각은 "+rhour+"-"+rmin+"-"+rsec);
+//		System.out.println("사랑해요, 여러분!!코로나를 이겨냅시다.");
+//	}
+//	
+//	
+//}}
+
+//
+//class Timer{
+//	private int hour;
+//	private int min;
+//	private int sec;
+//	
+//	public void setHour(int hour1) {
+//		if(hour1<0) {
+//			hour1=23;
+//		}
+//		else if(hour1>23) {
+//			hour=0;
+//		}
+//		else {
+//			hour=hour1;
+//		}
+//	}
+//	public void setMin(int min1) {
+//		if(min1<0) {
+//			min=59;
+//		}
+//		else if(min1>59) {
+//			min=0;
+//		}
+//		else {
+//			min=min1;
+//	}
+//	}
+//	public void setSec(int sec1) {
+//		if(sec1<0) {
+//			sec=59;
+//		}
+//		else if(sec1>59) {
+//			sec=0;
+//		}
+//		else {
+//			sec=sec1;
+//		}
+//	}
+//	
+//	public int getHour() {
+//		return hour;
+//	}
+//	public int getMin() {
+//		return min;
+//	}
+//	public int getSec() {
+//		return sec;
+//	}
+//	
+//	public void disp() {
+//		System.out.print(getHour()+"시간");
+//		System.out.print(getMin()+"분");
+//		System.out.print(getSec()+"초");
+//		System.out.println();
+//	}
+//	
+//	
+//	
+//	}
+
+class Data{
+	int x;
+}
