@@ -1,7 +1,7 @@
-생성자
-package lab.sam.example;
+생성자package lam.sam.example;
 
-public class Main2 {
+public class Main {
+
 	public static void main(String[] args) {
 //		ConstEx ce=new ConstEx();
 //		System.out.println("ConstEx의 value: "+ce.value);
@@ -9,8 +9,16 @@ public class Main2 {
 //		System.out.println("ConstFx의 value: "+cf.getValue());
 
 		System.out.println("[Car1 정보]");
-		Car car1=new Car("빨강","manual", 2);
-		System.out.println("색상: "+car1.color);
+		Car car1=new Car("red","manual", 2);
+		System.out.println("color: "+car1.color);
+		System.out.println("gearType: "+car1.gearType);
+		System.out.println("door: "+car1.door+"개");
+		
+		System.out.println("[Car2 정보]");
+		Car car2=new Car("blue","auto",4);
+		System.out.println("color: "+car2.color);
+		System.out.println("gearType: "+car2.gearType);
+		System.out.println("door: "+car2.door+"개");
 		
 		
 	}
@@ -60,4 +68,4 @@ class Car{
 		gearType=gearType1;
 		door=door1;
 	}
-}
+}	
