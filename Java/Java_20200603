@@ -235,3 +235,24 @@ class MethodEx{
 class Data{
 	int x;
 }
+
+
+
+오버로딩: 
+메소드 이름(매개 변수)
+구분점: 
+매게 변수의 갯수와 add(int a,int b)/ add(int a)
+매개 변수의 타입 add(char)
+
+한클래스 내에 갗은 이름의 메서드를 정의
+메소드 명과 매개 변수의 정보를 사용
+
+리턴 타입이 다르다고 오버로딩 되지 않음
+==>ex) long add(int a,int b){
+
+	}
+	int add(int a,int b){
+	
+	}
+	 ==> 오버로딩x
+
