@@ -1,0 +1,63 @@
+생성자
+package lab.sam.example;
+
+public class Main2 {
+	public static void main(String[] args) {
+//		ConstEx ce=new ConstEx();
+//		System.out.println("ConstEx의 value: "+ce.value);
+//		ConstFx cf=new ConstFx(100);	//생성자 안에 숫자 넣어줄수 있음
+//		System.out.println("ConstFx의 value: "+cf.getValue());
+
+		System.out.println("[Car1 정보]");
+		Car car1=new Car("빨강","manual", 2);
+		System.out.println("색상: "+car1.color);
+		
+		
+	}
+
+}
+//
+//class ConstEx{
+//	int value;	//0으로 초기화 시킴
+//
+////사용자가 생성자 지정안해주면 자동적으로 생성자 만듦
+////	ConstEx(){
+////		
+////	}	=생략되어있는것
+//}
+//class ConstFx{
+//	private int value;
+//	
+//	ConstFx(int val){		//생성자(기본적으로 void가 생성되어있어여함 void ConstFx)
+//		value=val;
+////		int num;
+////		value =num; ==> num=없는 데이터
+//	}
+//	public int getValue() {
+//		return value;
+//	}
+//	
+//
+//}
+
+//자동차 :color,gearType,door
+//[car1의 정보]
+//color: 빨강
+//gearType: manual
+//door: 2개
+
+//[car2의 정보]
+//color: 파랑
+//gearType: auto
+//door: 4개
+class Car{
+	String color;
+	String gearType;
+	int door;
+	
+	Car(String color1,String gearType1,int door1){
+		color=color1;
+		gearType=gearType1;
+		door=door1;
+	}
+}
