@@ -1,7 +1,6 @@
-생성자package lam.sam.example;
+생성자package lab.sam.example;
 
-public class Main {
-
+public class Main2 {
 	public static void main(String[] args) {
 //		ConstEx ce=new ConstEx();
 //		System.out.println("ConstEx의 value: "+ce.value);
@@ -10,17 +9,12 @@ public class Main {
 
 		System.out.println("[Car1 정보]");
 		Car car1=new Car("red","manual", 2);
-		System.out.println("color: "+car1.color);
-		System.out.println("gearType: "+car1.gearType);
-		System.out.println("door: "+car1.door+"개");
+		car1.disp();
+		System.out.println();
 		
 		System.out.println("[Car2 정보]");
 		Car car2=new Car("blue","auto",4);
-		System.out.println("color: "+car2.color);
-		System.out.println("gearType: "+car2.gearType);
-		System.out.println("door: "+car2.door+"개");
-		
-		
+		car2.disp();
 	}
 
 }
@@ -59,13 +53,36 @@ public class Main {
 //gearType: auto
 //door: 4개
 class Car{
-	String color;
-	String gearType;
-	int door;
+	private String color;
+	private String gearType;
+	private int door;
 	
 	Car(String color1,String gearType1,int door1){
 		color=color1;
 		gearType=gearType1;
 		door=door1;
 	}
-}	
+	public void setColor(String color1) {
+		color=color1;
+	}
+	public void setGearType(String gearType1) {
+		gearType=gearType1;
+	}
+	public void setDoor(int door1) {
+		door=door1;
+	}
+	public String getColor() {
+		return color;
+	}
+	public String getGearType() {
+		return gearType;
+	}
+	public int getDoor() {
+		return door;
+	}
+	public void disp() {
+		System.out.println("color : "+getColor());
+		System.out.println("GearType: "+getGearType());
+		System.out.println("door: "+getDoor());
+	}
+}
