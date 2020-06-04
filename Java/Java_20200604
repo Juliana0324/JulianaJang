@@ -1,0 +1,221 @@
+package lab.sam.example;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+//	KimKangSa kks=new KimKangSa("김강사",28);
+//	KimKangSa kksJunior=new KimKangSa("김강사 쥬니어",18);
+//	kks.setName("Kim Kang Sa");
+//	kks.setAge(28);
+//	
+//	kksJunior.setName("Kim Kang Sa Junior");
+//	kks.disp();
+//	kksJunior.disp();
+//		Scanner sc=new Scanner(System.in);
+//		while(true) {
+//		System.out.println("ID를 입력하세요: (그만을 입력하면 멈춥니다.)");
+//		String id=sc.next();
+//		Game gm=new Game();
+//		if(id.equals("그만")) {
+//			break;
+//		}
+//		gm.disp();
+//		}
+		
+		Game [] users=new Game[3];
+		Scanner sc=new Scanner(System.in);
+		
+		for(int i=0;i<users.length;i++) {
+			System.out.println("Id 입력: ");
+			String id=sc.nextLine();
+			users[i]=new Game(id);
+		}
+		users[1].levelUp(5);
+		System.out.println("번호\t아이디\t체력\t공격력\t체력");
+		for(int i=0;i<users.length;i++) {
+			users[i].disp(i+1);
+		}
+	}
+}
+//게임 객체 생성 : ID(아이디),level(레벨),attack(공격력), power(체력)
+//조건 : 캐릭터 생성시  레벨은 1,공격력 5,체력 20;
+//레벨이 증가할 경우, 공격력 3,체력 10씩 증가
+//출력:
+//번호	아이디	체력		공격력	체력
+//[1]	공유		6		20		70		
+//[2]	동원		1		5		20		
+//[3]	KKS		1		5		20		
+
+//추가조건 : 상대방을 공격하면 상대방의 체력이 나의 공격력만큼 감소
+//속성에 target메소드 추가: 공격하면 체력 ""
+// 스캐너 이름 : w
+// if(w.equals(target)) {
+//	 power[w]=power-attack;
+// }
+
+class Game{
+	private String id;
+	private int level;
+	private int attack;
+	private int power;
+	
+	Game(){
+		id="Guest";
+		level=1;
+		attack=5;
+		power=20;
+	}
+	
+	Game(String id) {
+		this.id=id;
+		this.level=1;
+		this.attack=5;
+		this.power=20;
+	}
+	
+	public void setUser(String id,int level,int attack,int power) {
+		this.id=id;
+		this.level=level;
+		this.attack=attack;
+		this.power=power;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getAttack() {
+		return attack;
+	}
+
+	public void setAttack(int attack) {
+		this.attack = attack;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+	public void levelUp(int level) {
+		this.level +=level;
+		this.attack +=level*3;
+		this.power+=level*10;
+	}
+	public void target()
+
+	//	public void setUser(int user) {
+//		this.user=user++;
+//	}
+//	public void setLevel(int level) {
+//		level=1;
+//		for(int i=0;i<level;i++) {
+//			this.level += level;
+//		}
+//	}
+//	public void setAttack(int attack) {
+//		attack=5;
+//		for(int i=0;i<level;i++) {
+//			attack+=3;
+//			this.attack=attack;
+//		}
+//	}
+//	public void setPower(int power) {
+//		power=20;
+//		for(int i=0;i<level;i++) {
+//			power+=10;
+//		this.power=power;
+//		}
+//	}
+//	public int getUser() {
+//		return user;
+//	}
+//	public String getId() {
+//		return id;
+//	}
+//	public int getLevel() {
+//		return level;
+//	}
+//	public int getAttack(){
+//		return attack;
+//	}
+//	public int getPower(){
+//		return power;
+//	}
+//	
+	public void disp() {
+		System.out.println("Id: "+getId());
+		System.out.println("Level: "+getLevel());
+		System.out.println("Attack: "+getAttack());
+		System.out.println("Power: "+getPower());
+	
+	}
+	public void disp(int num) {
+		System.out.print("["+num+"]");
+		System.out.print("\t"+getId());
+		System.out.print("\t"+getLevel());
+		System.out.print("\t"+getAttack());
+		System.out.print("\t"+getPower());
+		System.out.println();
+	}
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//class KimKangSa{
+//	private String name;
+//	private int age;
+//	
+//	KimKangSa(String name,int age){
+//		this.name=name;
+//		this.age=age;
+//	}
+//
+//	public void setName(String name) {
+//		this.name=name;
+//	}
+//	public void setAge(int age) {
+//		this.age=age;
+//	}
+//	
+//	public String getName(){
+//		return name;	//this.name과 동일
+//	}
+//	public int getAge() {
+//		return age;
+//	}
+//	public void disp() {
+//		System.out.println("이름 : "+getName()+"님");
+//		System.out.println("나이 : "+getAge()+"살");
+//	}
+//	
+//}
