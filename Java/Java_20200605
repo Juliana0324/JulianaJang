@@ -1,0 +1,287 @@
+package lab.sam.example;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		KimKangSa kks=new KimKangSa();
+//		KimKangSa kksJ=new KimKangSa("김강오");
+//		KimKangSa kksJJ=new KimKangSa("김강육",28);
+//		
+//		System.out.println("kks: ");
+//		kks.disp();	//기본설정값
+//		
+//		System.out.println("kksJ: ");
+//		kksJ.disp();//이름변경+기본설정 나이
+//		
+//		System.out.println("kksJJ: ");
+//		kksJJ.disp();//이름나이 모두 변경
+
+//			Phone ph1=new Phone("G8","LGT",70);
+//			Phone ph2=new Phone("IPhone8","KTG",85);
+//			Phone ph3=new Phone("Note10","SKT",95);
+////			ph1.disp();ph2.disp();ph3.disp();
+//			Phone [] arr=new Phone[] {ph1,ph2,ph3};
+//			System.out.println("\tname\ttelecom\tprice");
+//			for(int i=0;i<arr.length;i++) {
+//				arr[i].disp(i+1);
+//			}
+		
+//		ExPhone ph1=new ExPhone("갤럭시 20","SKT",650000);
+//		ExPhone ph2=new ExPhone("갤럭시7","알뜰폰",910000);
+//		ExPhone ph3=new ExPhone("G8","LGT",1200000);
+//		ExPhone ph4=new ExPhone("화웨이","LGT",2800000);
+//		
+//		ExPhone.comp(ph4, ph1);
+//		ph4.comp(ph2);
+//		ph1.comp(ph2);
+//		ExPhone [] ph=new ExPhone[] {ph1,ph2,ph3,ph4};
+//		for(int i=0;i<ph.length;i++) {
+//			ph[i].disp(i+1);
+//		}
+		
+		InitEx iex=new InitEx();
+		System.out.println();
+		
+		
+		//static ==> 이전의 인스턴스에서 이어서 작성
+		InitEx iexx=new InitEx();
+			
+	}
+}
+//변수 초기화
+//한번 생성되면 재생성안됨;
+class InitEx{
+	int instanceVal=1;
+	static int staticVal=1;
+	
+	static{
+		staticVal=100000;
+		System.out.println("static{}.staticVal="+staticVal);
+	}
+	//초기화 메소드
+	{
+		instanceVal +=10;
+		staticVal++;
+		System.out.println("instance{}.instaceVal="+instanceVal);
+		System.out.println("instance{}.staticVal="+staticVal);
+	}
+	InitEx(){
+		instanceVal +=100;
+		staticVal++;
+		System.out.println("InitEx().instaceVal="+instanceVal);
+		System.out.println("InitEx().staticVal="+staticVal);
+		
+	}
+}
+
+
+
+
+//숙ㅈㅔ:
+//생산된 제품의 제품번호와 총생산량을 출력
+//[product 1]의 제품번호: 1010200
+//[product 2]의 제품번호: 1010201
+//[product 3]의 제품번호: 1010202
+
+//총 제품 수: 3개
+
+
+
+
+
+
+
+//스마트폰 가격을 비교하여 비싼스마트폰의 이름을 출력
+// 생성자 : 이름, 통신사, 가격;
+//출력 : 갤럭시 20이 아이폰 8보다 비쌉니다.
+//   아이폰 8과 G8의 가격은 같스비낟.
+//조건: 이름 변경 불가능
+//최저 가격은 90만원
+
+//class ExPhone{
+//	private String name;
+//	private String telecom;
+//	private int price;
+//	
+//	ExPhone(String name){
+//		this.name=name;
+//	}
+//	
+//	ExPhone(String name,String telecom,int price){
+//		this.name=name;
+//		this.telecom=telecom;
+//		setPrice(price);
+//	}
+//
+//	private String getName() {
+//		return name;
+//	}
+//
+//	public String getTelecom() {
+//		return telecom;
+//	}
+//
+//	public void setTelecom(String telecom) {
+//		this.telecom = telecom;
+//	}
+//
+//	public int getPrice() {
+//		return price;
+//	}
+//
+//	public void setPrice(int price) {
+//		if(price<900000){
+//			price =900000;
+//		}
+//		this.price = price;
+//	}
+//	public void comp(ExPhone phone) {
+//		if(this.getPrice()<phone.getPrice()) {
+//			System.out.println(phone.getName()+"이(가)  비쌉니다.");
+//		}
+//		else if(this.getPrice()>phone.getPrice()) {
+//			System.out.println(this.getName()+"이(가)  비쌉니다.");
+//		}
+//		else {
+//			System.out.print(this.getName()+"과");
+//			System.out.println(phone.getName()+"의 가격이 같습니다.");
+//		}
+//	}
+//	public static void comp(ExPhone phone1,ExPhone phone2) {
+//		if(phone1.getPrice()<phone2.getPrice()) {
+//			System.out.println(phone2.getName()+"이(가)  비쌉니다.");
+//		}
+//		else if(phone1.getPrice()>phone2.getPrice()) {
+//			System.out.println(phone1.getName()+"이(가)  비쌉니다.");
+//		}
+//		else {
+//			System.out.print(phone1.getName()+"과");
+//			System.out.println(phone2.getName()+"의 가격이 같습니다.");
+//		}
+//	}
+//	public void disp() {
+//		System.out.println("이름: "+getName());
+//		System.out.println("통신사: "+getTelecom());
+//		System.out.println("가격: "+getPrice()+"원");
+//	}
+//	public void disp(int num) {
+//		System.out.println("["+num+"]\t"+getName()+"\t");
+//		System.out.println(getTelecom()+"\t"+getPrice()+"원");
+//	}
+//
+//}
+	
+
+	
+	
+	
+
+
+
+
+//스마트폰 클래스 생성
+//객체를 생성한 후 
+//각 객체의 정보를 출력
+//		name	telecom		price	
+//[1]	G8		LGT			70만원
+//[2]	Iphone8	KTG			85만원
+//[3]	Note10	SKT			95만원
+
+//class Phone{
+//	private String tName;
+//	private String tele;
+//	private int price;
+//	
+//	
+//	Phone(String tName,String tele,int price){
+//		this.tName=tName;
+//		this.tele=tele;
+//		this.price=price;
+//	}
+//
+//	public String gettName() {
+//		return tName;
+//	}
+//
+//	public void settName(String tName) {
+//		this.tName = tName;
+//	}
+//
+//	public String getTele() {
+//		return tele;
+//	}
+//
+//	public void setTele(String tele) {
+//		this.tele = tele;
+//	}
+//
+//	public int getPrice() {
+//		return price;
+//	}
+//
+//	public void setPrice(int price) {
+//		this.price = price;
+//	}
+//	public void setData(String tName,String tele,int price) {
+//		this.tName=tName;
+//		this.tele=tele;
+//		this.price=price;
+//	}
+//	
+//	public void disp() {
+//		System.out.println("Name: "+gettName());
+//		System.out.println("Telecom: "+getTele());
+//		System.out.println("Price: "+getPrice()+"만원");
+//	}
+//	public void disp(int num) {
+//		System.out.print("["+num+"]");
+//		System.out.print("\t"+gettName());
+//		System.out.print("\t"+getTele());
+//		System.out.print("\t"+getPrice()+"만원");
+//		System.out.println();
+//	}
+//}
+
+
+
+
+//class KimKangSa{
+//	private String name;
+//	private int age;
+//	
+//	//기본설정값
+//	KimKangSa(){
+//		name="강사";
+//		age=20;
+//	}
+//	//이름만 제공후 만들것인가
+//	KimKangSa(String name){
+//		this.name=name;
+//		age=20;
+//	}
+//	//이름과 나이를 제공후 만들것인가
+//	KimKangSa(String name,int age){
+//		this.name=name;
+//		this.age=age;		
+//	}
+//	
+//	public String getName() {
+//		return name;
+//	}
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//	public int getAge() {
+//		return age;
+//	}
+//	public void setAge(int age) {
+//		this.age = age;
+//	}
+//	public void disp(){
+//		System.out.println("이름: "+getName());
+//		System.out.println("나이: "+getAge());
+//	}
+//	
+//}
