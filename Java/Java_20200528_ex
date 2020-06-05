@@ -1,0 +1,223 @@
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+//		int cData=0;
+//		
+//		System.out.print("문장을 입력 하세요 : ");
+//		do{
+//			cData = System.in.read();
+//			System.out.print((char)cData);
+//		}while(cData != 'q');
+//		System.out.println("프로그램 종료");
+
+//		int cData=0;
+//		
+//		System.out.print("문장을 입력 하세요 : ");
+//		do{
+//			cData = System.in.read();
+//			if(cData == 'x') {
+//				break;
+//			}
+//			
+//			if( !(cData>='a' && cData<='z') ) {
+//				continue;
+//			}
+//			System.out.print((char)cData);
+//		}while(true);
+//		System.out.println("프로그램 종료");
+		
+		//1에서 100사이의 있는 3의 배수만 출력해 보세요
+		
+//		int num=0;
+//		
+//		while(true){
+//			num++;
+//			if(num>100) {
+//				break;
+//			}
+//			if(num%3 != 0) {
+//				continue;
+//			}
+//			System.out.println(num+" ");
+//		}
+		
+//		int sum=0, num=0;
+//		
+//		for(num=1; num<=5; num++){
+//			System.out.printf("%d + %d = %d\n", sum, num, sum+num);
+//			sum = sum + num;
+//		}
+//		int i, line_count=0;
+//		
+//		//1. 1부터 100까지 정수 출력
+//		for(i=1; i<100; i++) {
+//			System.out.printf("%3d", i);
+//			
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//2. 53부터 25까지 정수 출력
+//		line_count=0;
+//		System.out.println("\n");
+//		for(i=53; i>=25; i--) {
+//			System.out.printf("%3d", i);
+//
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//3. 30부터 60까지 홀수 출력
+//		line_count=0;
+//		System.out.println("\n");
+//		for(i=30; i<=60; i++) {
+//			if(i%2 == 0) {
+//				continue;
+//			}
+//			System.out.printf("%3d", i);
+//			
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//4. 100부터 0까지 5의 배수 출력
+//		line_count=0;
+//		System.out.println("\n");
+//		for(i=100; i>=0; i--) {
+//			if(i%5 == 0) {
+//				System.out.printf("%3d", i);
+//
+//				line_count++;
+//				if(line_count%10 == 0) {
+//					System.out.println();
+//				}
+//			}
+//		}
+//		//5. A부터 Z까지 알파벳 출력
+//		line_count=0;
+//		System.out.println("\n");
+//		for(i='A'; i<='Z'; i++ ) {
+//			System.out.printf("%3c", (char)i);
+//
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//6. 1.0부터 3.0까지 0.5씩 출력
+//		double ii;
+//		System.out.println("\n");
+//		for(ii=1.0; ii<=3.0; ii+=0.5) {
+//			System.out.printf("%4.1f", ii);
+//		}
+//		//7. 1부터 100까지 각 수의 제곱 값 출력
+//		line_count=0;
+//		System.out.println("\n\n");
+//		for(i=1; i<=100; i++) {
+//			System.out.printf("%6d", i*i);
+//
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//8. 숫자를 한 개 입력 받아 1부터 해당 수까지 출력
+//		line_count=0;
+//
+//		Scanner sc = new Scanner(System.in);
+//		System.out.print("\n정수 입력 :");
+//		int input = sc.nextInt();
+//		for(i=1; i<=input; i++) {
+//			System.out.printf("%5d", i);
+//
+//			line_count++;
+//			if(line_count%10 == 0) {
+//				System.out.println();
+//			}
+//		}
+//		//9. 숫자를 한 개 입력 받아 1부터 해당 수 까지 홀수 출력
+//		line_count=0;
+//		System.out.println("\n\n");
+//		input =(int)(Math.random()*100 + 1);
+//		for(i=1; i<=input; i++) {
+//			if(i%2 != 0) {
+//				System.out.printf("%3d", i);
+//
+//				line_count++;
+//				if(line_count%10 == 0) {
+//					System.out.println();
+//				}
+//			}
+//		}
+//		
+		//for문을 사용하여 구구단 출력 해 보세요
+		//2단 - 9단
+//		for(int i=2; i<=9; i++) {
+//			for(int j=1; j<=9; j++) {
+//				System.out.printf("%d * %d = %d\n", i, j, i*j);
+//			}
+//			System.out.println();
+//		}
+		
+		//Timer 프로그램
+		//사용자로 부터 분 정보를 입력 받아서
+		//입력 받은 시간이 지난 후에 
+		//"사랑합니다. 여러분!!! 코로나를 이겨냅시다!!!"
+		
+		int min, mSec, sec, secVal=60;
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("분 입력 : ");
+		min = sc.nextInt();
+		mSec = min * secVal;
+		
+		System.out.println("Ready...");
+		for(int i=mSec; i>=0; i--) {
+			double start = System.currentTimeMillis();
+			double end;
+			int interbal;
+			
+			min = i/secVal;
+			sec = i%secVal;
+			System.out.println(min+"분 : "+sec+"초");
+			Thread.sleep(500);
+//			while(true) {
+//				end = System.currentTimeMillis();
+//				interbal = (int)(end-start)/1000;
+//				if( interbal >1 ) {
+//					break;
+//				}
+//			}
+//			end = 400000000;
+//			while(true) {
+//				end--;
+//				if(end<0) {
+//					break;
+//				}
+//			}
+		}
+		System.out.println("사랑합니다. 여러분!!! 코로나를 이겨냅시다!!!");
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+update
