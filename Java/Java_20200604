@@ -32,7 +32,15 @@ public class Main {
 			String id=sc.nextLine();
 			users[i]=new Game(id);
 		}
-		users[1].levelUp(5);
+
+		
+		//		users[1].levelUp(5);
+		users[0].setTarget(users[1]);
+		users[0].attack();
+		users[1].setTarget(users[2]);
+		users[1].disp(users[2]);
+		users[1].attack();
+		
 		System.out.println("번호\t아이디\t체력\t공격력\t체력");
 		for(int i=0;i<users.length;i++) {
 			users[i].disp(i+1);
@@ -60,6 +68,7 @@ class Game{
 	private int level;
 	private int attack;
 	private int power;
+	private Game target;
 	
 	Game(){
 		id="Guest";
@@ -81,7 +90,12 @@ class Game{
 		this.attack=attack;
 		this.power=power;
 	}
-	
+	public Game getTarget() {
+		return target;
+	}
+	public void setTarget(Game target) {
+		this.target=target;
+	}
 	public String getId() {
 		return id;
 	}
@@ -118,7 +132,15 @@ class Game{
 		this.attack +=level*3;
 		this.power+=level*10;
 	}
-	public void target()
+	public void attack() {
+		if (target != null) {
+			System.out.println(target.getId()+"를 공격합니다.");
+			target.power -= this.attack;
+			System.out.println(target.getId()+" : "+target.getPower());
+		}else {
+			System.out.println("공격 대상을 설정해 주세요");
+		}
+	}
 
 	//	public void setUser(int user) {
 //		this.user=user++;
@@ -173,6 +195,10 @@ class Game{
 		System.out.print("\t"+getAttack());
 		System.out.print("\t"+getPower());
 		System.out.println();
+	}
+	public void disp(Game target) {
+		System.out.print(target.getId()+"\t"+target.getAttack()+"\t");
+		System.out.println(target.getPower());
 	}
 	
 	
