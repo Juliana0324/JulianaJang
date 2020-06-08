@@ -1,0 +1,85 @@
+package lab.sam.example;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		for(int i=0;i<5;i++) {
+			System.out.println("이름: ");
+			String name=sc.next();
+			System.out.println("알고리즘 점수: ");
+			int algo=sc.nextInt();
+			
+			System.out.println("인공지능 점수: ");
+			int artint=sc.nextInt();
+			
+			System.out.println("수학 점수: ");
+			int math=sc.nextInt();
+			SungJuk sk=new SungJuk(name,algo,artint,math);
+			sk.disp();
+		}
+		
+		
+	}
+
+}
+class SungJuk{
+	static String name;
+	private int algo;
+	private int artint;
+	private int math;
+	private int sum;
+	private double avg;
+	
+	SungJuk(String name){
+		this.name=name;
+	}
+	
+	SungJuk(String name,int algo,int artint,int math){
+		this.name=name;
+		this.algo=algo;
+		this.artint=artint;
+		this.math=math;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAlgo() {
+		return algo;
+	}
+	public void setAlgo(int algo) {
+		this.algo = algo;
+	}
+	public int getArtint() {
+		return artint;
+	}
+	public void setArtint(int artint) {
+		this.artint = artint;
+	}
+	public int getMath() {
+		return math;
+	}
+	public void setMath(int math) {
+		this.math = math;
+	}
+	
+	public int setSum() {
+		sum=getAlgo()+getArtint()+getMath();
+		return sum;
+	}
+	public double setAvg() {
+		return avg=sum/3;
+	}
+	public void disp(){
+	System.out.print(getName()+"\t"+getAlgo());	
+	System.out.print("\t"+getArtint()+"\t"+getMath());
+	System.out.println("\t"+setSum()+"\t"+setAvg());
+	}
+	
+	
+}
+
