@@ -1,0 +1,200 @@
+package lab.sam.example;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		FChild fc=new FChild();
+//		SChild sc=new SChild();
+//		sc.age=25;
+//		sc.method();                                                                                                                                                                                                                                                                                                                                                                                                                              
+//		fc.age=28;
+//		fc.method();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("학생의 이름 : ");
+		String lName=sc.nextLine();
+		System.out.println("나이 : ");
+		int lAge=sc.nextInt();
+		System.out.println("학번 : ");
+		int lNum=sc.nextInt();
+		System.out.println("학점 : ");
+		double lScore=sc.nextDouble();
+		
+		Student st=new Student(lName,lAge,lNum,lScore);
+		st.disp();
+//		st.setlNum(2020);
+//		st.setlScore(3.6);
+		
+		System.out.println("회사원의 이름 : ");
+		String sName=sc.next();
+		System.out.println("나이 : ");
+		int sAge=sc.nextInt();
+		System.out.println("직책 : ");
+		String sNum=sc.next();
+		System.out.println("연봉: ");
+		int sScore=sc.nextInt();
+		Salary sa=new Salary(sName,sAge,sNum,sScore);
+		sa.setsLevel("주임");
+		sa.setsSalary(3500);
+		sa.disp();
+		
+		
+		
+		
+		
+	}
+
+}
+//학생객체와 회사원 객체를 생성
+//학생 객체 속성: 이름 나이 학번 학점
+//회사원 : 이름 나이 직책 연봉
+
+class StSa{
+	String Name;
+	int Age;
+	
+	StSa(){
+		
+	}
+	StSa(String Name, int Age){
+		this.Name=Name;
+		this.Age=Age;
+	}
+	
+	public String getName() {
+		return Name;
+	}
+	public void setName(String Name) {
+		this.Name = Name;
+	}
+	public int getAge() {
+		return Age;
+	}
+	public void setAge(int Age) {
+		this.Age = Age;
+	}
+	public void disp() {
+		System.out.println("이름: "+getName());
+		System.out.println("나이 : "+getAge());
+		
+	}	
+}
+
+
+class Student extends StSa{
+	private int lNum;
+	private double lScore;
+	
+	Student(){
+		
+	}
+	Student(String Name,int Age){
+		super.Name=Name;
+		super.Age=Age;
+	}
+	Student(String Name,int Age,int lNum,double lScore){
+		super.setName(Name);
+		super.setAge(Age);
+		this.lNum=lNum;
+		this.lScore=lScore;		
+	}
+
+	public int getlNum() {
+		return lNum;
+	}
+	public void setlNum(int lNum) {
+		this.lNum = lNum;
+	}
+	public double getlScore() {
+		return lScore;
+	}
+	public void setlScore(double lScore) {
+		this.lScore = lScore;
+	}
+	public void disp() {
+		super.disp();
+		System.out.println("학번: "+getlNum());
+		System.out.println("학점: "+getlScore());
+		System.out.println();
+	}
+}
+
+
+class Salary extends StSa{
+	private String sLevel;
+	private int sSalary;
+	
+	Salary(){
+		
+	}
+	Salary(String Name,int Age){
+		super.Name=Name;
+		super.Age=Age;
+	}
+	
+	Salary(String Name,int Age,String sLevel,int sSalary){
+		super.Name=Name;
+		super.Age=Age;
+		this.sLevel=sLevel;
+		this.sSalary=sSalary;
+	}
+
+	public String getsLevel() {
+		return sLevel;
+	}
+
+	public void setsLevel(String sLevel) {
+		this.sLevel = sLevel;
+	}
+
+	public int getsSalary() {
+		return sSalary;
+	}
+
+	public void setsSalary(int sSalary) {
+		this.sSalary = sSalary;
+	}
+	public void disp() {
+		super.disp();
+		System.out.println("직책: "+getsLevel());
+		System.out.println("연봉: "+getsSalary());
+		System.out.println();
+	}
+	
+}
+
+
+//class Parent{
+//	int age=28;//super.age
+//	
+//	Parent(){
+//		
+//	}
+//	Parent(int age){
+//		this.age=age;
+//	}
+//	void method(){
+//		System.out.println("Parent : "+age);
+//	}
+//}
+//class FChild extends Parent{
+//	int age=18;	//this.age
+//	
+//	FChild(){
+//		super(38);
+//	}
+//	
+//	void method(){
+//		int age=8;	//age
+//		super.method();
+//		System.out.println("age : "+age);	//8: Stack 8
+//		System.out.println("this.age : "+this.age);	//18: heap 
+//		System.out.println("super.age : "+super.age);//28: heap 중 부모영역
+//	}
+//}
+//class SChild extends Parent{
+//	void method(){
+//		System.out.println("SChild : "+age);
+//	}
+//}
