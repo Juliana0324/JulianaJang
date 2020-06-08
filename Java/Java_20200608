@@ -12,39 +12,80 @@ public class Main {
 //		fc.age=28;
 //		fc.method();
 		Scanner sc=new Scanner(System.in);
-		System.out.println("학생의 이름 : ");
-		String lName=sc.nextLine();
-		System.out.println("나이 : ");
-		int lAge=sc.nextInt();
-		System.out.println("학번 : ");
-		int lNum=sc.nextInt();
-		System.out.println("학점 : ");
-		double lScore=sc.nextDouble();
-		
-		Student st=new Student(lName,lAge,lNum,lScore);
-		st.disp();
+//		System.out.println("학생의 이름 : ");
+//		String lName=sc.nextLine();
+//		System.out.println("나이 : ");
+//		int lAge=sc.nextInt();
+//		System.out.println("학번 : ");
+//		int lNum=sc.nextInt();
+//		System.out.println("학점 : ");
+//		double lScore=sc.nextDouble();
+//		
+//		Student st=new Student(lName,lAge,lNum,lScore);
+//		st.disp();
 //		st.setlNum(2020);
 //		st.setlScore(3.6);
 		
-		System.out.println("회사원의 이름 : ");
-		String sName=sc.next();
-		System.out.println("나이 : ");
-		int sAge=sc.nextInt();
-		System.out.println("직책 : ");
-		String sNum=sc.next();
-		System.out.println("연봉: ");
-		int sScore=sc.nextInt();
-		Salary sa=new Salary(sName,sAge,sNum,sScore);
-		sa.setsLevel("주임");
-		sa.setsSalary(3500);
-		sa.disp();
+//		System.out.println("회사원의 이름 : ");
+//		String sName=sc.nextLine();
+//		System.out.println("나이 : ");
+//		int sAge=sc.nextInt();
+//		sc.nextLine();
+//		System.out.println("직책 : ");
+//		String sNum=sc.next();
+//		System.out.println("연봉: ");
+//		int sScore=sc.nextInt();
+//		Salary sa=new Salary(sName,sAge,sNum,sScore);
+////		sa.setsLevel("주임");
+////		sa.setsSalary(3500);
+//		sa.disp();
 		
-		
-		
-		
+//		StaticEx st=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
+//		StaticEx st1=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
+//		StaticEx st2=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
 		
 	}
 
+}
+//이름 알고리즘 인공지능 	수학 	총점 	평균
+//장동건 100	100	 	100 300	100.0
+//원빈    100	100	 	100 300	100.0
+//김래원 100	100	 	100 300	100.0
+//한석규 100	100	 	100 300	100.0
+//김강사 100	100	 	100 300	100.0
+
+//총 계   500	500		500	1500 500.0
+
+
+class SungJuk{
+	private String name;
+	private int algo;
+	private int inji;
+	private int math;
+	static int sum;
+	static double avg;
+}
+
+
+
+//static ==> 초기화 블록은 한번만 실행됨 
+class StaticEx{
+	static int width=200;
+	static int height=120;
+	static int area;
+	
+//	int num1,num2;
+	static{
+		area=width*height;
+		width *= 2;
+		height *=2;
+		
+//		num1=10;
+//		num2=20;
+	}
 }
 //학생객체와 회사원 객체를 생성
 //학생 객체 속성: 이름 나이 학번 학점
