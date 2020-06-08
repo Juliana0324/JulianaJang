@@ -285,3 +285,52 @@ class InitEx{
 //	}
 //	
 //}
+
+
+//숙ㅈㅔ:
+//생산된 제품의 제품번호와 총생산량을 출력
+//[product 1]의 제품번호: 1010200
+//[product 2]의 제품번호: 1010201
+//[product 3]의 제품번호: 1010202
+//총 제품 수: 3개
+
+
+		Product p1=new Product();
+		Product p2=new Product();
+		Product p3=new Product();
+		Product [] arr= {p1,p2,p3};
+		Product.disp(arr);
+	}
+}
+class Product{
+	private int serialNum=0; //명시적 초기화
+	private static int count;
+
+	{
+		count++;
+		serialNum = count+100000;
+	}
+	Product(){
+		
+	}
+	public int getSerialNum() {
+		return serialNum;
+	}
+	public void setSerialNum(int serialNum) {
+		this.serialNum = serialNum;
+	}
+	public static int getCount() {
+		return count;
+	}
+	public static void setCount(int count) {
+		Product.count = count;
+	}
+	public static void disp(Product [] arr) {
+		for(int i=0;i<arr.length;i++) {
+			System.out.print("[Product "+(i+1)+"]의 제품번호 ");
+			System.out.println(arr[i].getSerialNum());
+		}
+		System.out.println("총 제품 수: "+Product.getCount());
+	}
+	
+}
