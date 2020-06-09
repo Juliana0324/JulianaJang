@@ -1,3 +1,4 @@
+//
 package lab.sam.example;
 
 public class Main {
@@ -90,4 +91,106 @@ class CAreaEx extends AreaEx{
 	}
 }
 
+
+//인터페이스
+package lab.sam.example;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+//		InterfaceEx iex=new InterfaceEx(); 접근 불가
+//		CInterfaceEx cife =new CInterfaceEx();
+//		cife.setArea(10, 20);
+//		System.out.println("면적: "+cife.getArea());
+//		
+		OuterEx oc=new OuterEx();
+		OuterEx.InstanceClass oic=oc.new InstanceClass();
+		
+		System.out.println("oic.iciv: "+oic.iciv);
+		System.out.println("OuterEx.StaticClass.scsv: "+OuterEx.StaticClass.scsv);
+		
+		OuterEx.StaticClass osc=new OuterEx.StaticClass();
+		System.out.println("osc.sciv: "+osc.sciv);
+		
+	}
+}
+class OuterEx{
+	int nativeVal;
+	static int staticNativeVal;
+	
+	class InstanceClass{
+		int iciv =100;
+	//	static int icsv =100;	//인스턴스 사용시 static 변수 사용x
+		final static int ICONST=100;
+	}
+	InstanceClass ic=new InstanceClass();
+	
+	static class StaticClass{	//static 클래스 안에 static 변수는 사용가능
+		int sciv =200;
+		static int scsv=200;
+	}
+	StaticClass sc=new StaticClass();
+	
+	void method() {
+		int num;
+		class LocalClass{
+			int lciv =300;
+			//static int lcsv=300;
+			InstanceClass lcic=new InstanceClass();
+			StaticClass lcsc=new StaticClass();	//메소드 내부에서 데이터 사용가능 
+			final static int LCONST =300;
+		}
+		LocalClass lc =new LocalClass();
+		InstanceClass lic=new InstanceClass();
+		StaticClass lsc =new StaticClass();
+		}
+	void method1() {
+		InstanceClass lic=new InstanceClass();
+		StaticClass lsc=new StaticClass();
+		//LocalClass llc=new LocalClass();	//지역변수  LocalClass는 method1이아닌 method영역에서만 사용가능
+		
+		
+	}
+}
+
+
+interface InterfaceEx{
+	public static final int width=10;
+	int height=10;
+	
+	abstract void setArea(int width, int height);
+	abstract int getArea();
+	
+}
+class CInterfaceEx implements InterfaceEx{
+	int area;
+	public CInterfaceEx() {
+		area = width *height;
+	}
+	public void setArea(int width,int height){
+		area=width*height;
+	}
+	public int getArea() { //추상 메소드
+		return area;
+	}
+}
+인터페이스
+인터페이스 상속시 변수 사용x
+변수: 속성값==> 상수로 받음
+추상메소드 + 상수로만 구성되어있음
+멤버 메서드 또는 멤버변수를 구성원으로 가질수 없는 추상클래스
+
+사용법
+Interface 이름 {
+public static final int 상수이름 = 값;
+public abstract 추상메서드();
+}
+
+인터페이스는 인터페이스로만 상속받을 수 있다
+==> 다중상속 가능
+
+class 로 사용해야 할때
+class 클래스 implements Interface{
+	//인터페이그에 정의된 추상메서드 
+}
 
