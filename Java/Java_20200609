@@ -1,0 +1,93 @@
+package lab.sam.example;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// final
+//		CAreaEx cae=new CAreaEx(20,20);
+//		cae.setArea();
+//		cae.disp();
+		//추상 메서드 abstract
+//		AbsEx aex =new AbsEx();
+		CAbsEx cae =new CAbsEx();
+		cae.setArea();
+		System.out.println("Area: "+ cae.getArea());
+	}
+}
+//클래스 앞에 final 붙이면 자식을 받지 못함
+//상수/변수에 final이 붙으면 오버라이딩 안됨
+abstract class AbsEx{	//추상 메소드 있음을 알리는법
+	int width;
+	int height;
+	int area;
+	abstract void setArea();
+	int getArea() {
+		return area;
+	}	
+}
+class CAbsEx extends AbsEx{
+	void setArea() {
+		width=10;
+		height=20;
+		area =width *height;
+	}
+	
+}
+class AreaEx{
+	final protected int WIDTH;
+	protected int height;
+	protected int area;
+	
+	
+	AreaEx(){
+		WIDTH=10;
+	}
+	AreaEx(int width,int height){
+		this.WIDTH =width;
+		this.height=height;
+	}
+	public int getWidth() {
+		return WIDTH;
+	}
+	public void setWidth(int width) {
+//		this.width = width;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public int getArea() {
+		return area;
+	}
+	final public void setArea(int width, int height) {
+		this.area = width*height;
+	}
+	public void setArea() {
+		this.area = getWidth()*this.height;
+	}
+	public void disp() {
+		System.out.println("넓이 : "+getWidth());
+		System.out.println("높이 : "+getHeight());
+		System.out.println("면적 : "+getArea());
+	}
+}
+class CAreaEx extends AreaEx{
+	CAreaEx(){
+	}
+	CAreaEx(int width, int height){
+		super(width,height);
+	}
+//	public void setArea(int width, int height) {
+//		this.area = getWidth()*this.height;
+//	}
+
+	public void disp() {
+		System.out.println("넓이 : "+getWidth());
+		System.out.println("높이 : "+getHeight());
+		System.out.println("면적 : "+getArea());
+	}
+}
+
+
