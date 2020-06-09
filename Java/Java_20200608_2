@@ -3,44 +3,116 @@ package lab.sam.example;
 import java.util.Scanner;
 
 public class Main {
+
 	public static void main(String[] args) {
+//		FChild fc=new FChild();
+//		SChild sc=new SChild();
+//		sc.age=25;
+//		sc.method();                                                                                                                                                                                                                                                                                                                                                                                                                              
+//		fc.age=28;
+//		fc.method();
 		Scanner sc=new Scanner(System.in);
-		for(int i=0;i<5;i++) {
+//		System.out.println("학생의 이름 : ");
+//		String lName=sc.nextLine();
+//		System.out.println("나이 : ");
+//		int lAge=sc.nextInt();
+//		System.out.println("학번 : ");
+//		int lNum=sc.nextInt();
+//		System.out.println("학점 : ");
+//		double lScore=sc.nextDouble();
+//		
+//		Student st=new Student(lName,lAge,lNum,lScore);
+//		st.disp();
+//		st.setlNum(2020);
+//		st.setlScore(3.6);
+		
+//		System.out.println("회사원의 이름 : ");
+//		String sName=sc.nextLine();
+//		System.out.println("나이 : ");
+//		int sAge=sc.nextInt();
+//		sc.nextLine();
+//		System.out.println("직책 : ");
+//		String sNum=sc.next();
+//		System.out.println("연봉: ");
+//		int sScore=sc.nextInt();
+//		Salary sa=new Salary(sName,sAge,sNum,sScore);
+////		sa.setsLevel("주임");
+////		sa.setsSalary(3500);
+//		sa.disp();
+		
+//		StaticEx st=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
+//		StaticEx st1=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
+//		StaticEx st2=new StaticEx();
+//		System.out.println(StaticEx.width+"*"+StaticEx.height+"="+StaticEx.area);
+		System.out.println("학생수 입력: ");
+		int stuNum=sc.nextInt();
+		SungJuk [] st =new SungJuk[stuNum];
+		for(int i=0;i<st.length;i++) {
 			System.out.println("이름: ");
 			String name=sc.next();
+//			sc.nextInt();
+			
 			System.out.println("알고리즘 점수: ");
 			int algo=sc.nextInt();
 			
 			System.out.println("인공지능 점수: ");
 			int artint=sc.nextInt();
-			
+				
 			System.out.println("수학 점수: ");
 			int math=sc.nextInt();
-			SungJuk sk=new SungJuk(name,algo,artint,math);
-			sk.disp();
+			
+			st[i]=new SungJuk(name,algo,artint,math);
+			
 		}
-		
+			SungJuk.showTitle();
+			for(int i=0; i<st.length;i++) {
+				st[i].showData();
+			}
+			System.out.println();
+			SungJuk.showTotal();
 		
 	}
 
 }
+//이름 알고리즘 인공지능 	수학 	총점 	평균
+//장동건 100	100	 	100 300	100.0
+//원빈    100	100	 	100 300	100.0
+//김래원 100	100	 	100 300	100.0
+//한석규 100	100	 	100 300	100.0
+//김강사 100	100	 	100 300	100.0
+
+//총 계   500	500		500	1500 500.0
+
+
 class SungJuk{
-	static String name;
-	private int algo;
-	private int artint;
-	private int math;
-	private int sum;
-	private double avg;
+	String name;
+	int algo, artint, math;
+	int sum=0;
+	double avg;
 	
-	SungJuk(String name){
-		this.name=name;
-	}
+	static int gAlg,gAi,gMath,gTotal=0,cnt;
+	static double gAvg;
 	
+	{cnt += 3;}
+
+//	SungJuk(String name){
+//		this.name=name;
+//	}
+//	
 	SungJuk(String name,int algo,int artint,int math){
 		this.name=name;
 		this.algo=algo;
 		this.artint=artint;
 		this.math=math;
+		
+		this.setSum();
+		this.setAvg(getSum());
+		
+		SungJuk.setgAlg(getAlgo());
+		SungJuk.setgAi(getArtint());
+		SungJuk.setgMath(getMath());
 	}
 	public String getName() {
 		return name;
@@ -67,19 +139,253 @@ class SungJuk{
 		this.math = math;
 	}
 	
-	public int setSum() {
-		sum=getAlgo()+getArtint()+getMath();
+	public void setSum() {
+		this.sum=getAlgo() + getArtint()+getMath();
+	}
+	public int getSum() {
 		return sum;
 	}
-	public double setAvg() {
-		return avg=sum/3;
+	public void setAvg(int sum) {
+		this.avg=sum/3.0;
 	}
-	public void disp(){
-	System.out.print(getName()+"\t"+getAlgo());	
-	System.out.print("\t"+getArtint()+"\t"+getMath());
-	System.out.println("\t"+setSum()+"\t"+setAvg());
+	public static int getgAlg() {
+		return gAlg;
+	}
+
+	public static void setgAlg(int gAlg) {
+		SungJuk.gAlg += gAlg;
+	}
+
+	public static int getgAi() {
+		return gAi;
+	}
+
+	public static void setgAi(int gAi) {
+		SungJuk.gAi += gAi;
+	}
+
+	public static int getgMath() {
+		return gMath;
+	}
+
+	public static void setgMath(int gMath) {
+		SungJuk.gMath += gMath;
+	}
+
+	public static int getgTotal() {
+		return gTotal;
+	}
+
+	public static void setgTotal() {
+		SungJuk.gTotal = SungJuk.getgAlg()+SungJuk.getgAi()+SungJuk.getgMath();
+	}
+
+	public static int getCnt() {
+		return cnt;
+	}
+
+	public static void setCnt(int cnt) {
+		SungJuk.cnt = cnt;
+	}
+
+	public static double getgAvg() {
+		return gAvg;
+	}
+
+	public static void setgAvg(double gTotal) {
+		SungJuk.gAvg = gTotal/SungJuk.getCnt();
+	}
+
+	public double getAvg() {
+		return avg;
 	}
 	
+	public static void showTitle() {
+		System.out.println("이름\t알고리즘\t인공지능\t수학\t총점\t평균");
+	}
+	public void showData(){
+	System.out.print(getName()+"\t"+getAlgo());	
+	System.out.print("\t"+getArtint()+"\t"+getMath());
+	System.out.printf("\t%d\t%.2f",getSum(),getAvg());
+	System.out.println();
+	}
+	public static void showTotal() {
+		SungJuk.setgTotal();
+		SungJuk.setgAvg(getgTotal());
+		System.out.print("총점: \t"+getgAlg()+"\t"+getgAi()+"\t");
+		System.out.printf("%d\t%d\t%.2f",getgMath(),getgTotal(),getgAvg());
+		System.out.println();
+	}
 	
 }
 
+
+
+////static ==> 초기화 블록은 한번만 실행됨 
+//class StaticEx{
+//	static int width=200;
+//	static int height=120;
+//	static int area;
+//	
+////	int num1,num2;
+//	static{
+//		area=width*height;
+//		width *= 2;
+//		height *=2;
+//		
+////		num1=10;
+////		num2=20;
+//	}
+//}
+////학생객체와 회사원 객체를 생성
+////학생 객체 속성: 이름 나이 학번 학점
+////회사원 : 이름 나이 직책 연봉
+//
+//class StSa{
+//	String Name;
+//	int Age;
+//	
+//	StSa(){
+//		
+//	}
+//	StSa(String Name, int Age){
+//		this.Name=Name;
+//		this.Age=Age;
+//	}
+//	
+//	public String getName() {
+//		return Name;
+//	}
+//	public void setName(String Name) {
+//		this.Name = Name;
+//	}
+//	public int getAge() {
+//		return Age;
+//	}
+//	public void setAge(int Age) {
+//		this.Age = Age;
+//	}
+//	public void disp() {
+//		System.out.println("이름: "+getName());
+//		System.out.println("나이 : "+getAge());
+//		
+//	}	
+//}
+//
+//
+//class Student extends StSa{
+//	private int lNum;
+//	private double lScore;
+//	
+//	Student(){
+//		
+//	}
+//	Student(String Name,int Age){
+//		super.Name=Name;
+//		super.Age=Age;
+//	}
+//	Student(String Name,int Age,int lNum,double lScore){
+//		super.setName(Name);
+//		super.setAge(Age);
+//		this.lNum=lNum;
+//		this.lScore=lScore;		
+//	}
+//
+//	public int getlNum() {
+//		return lNum;
+//	}
+//	public void setlNum(int lNum) {
+//		this.lNum = lNum;
+//	}
+//	public double getlScore() {
+//		return lScore;
+//	}
+//	public void setlScore(double lScore) {
+//		this.lScore = lScore;
+//	}
+//	public void disp() {
+//		super.disp();
+//		System.out.println("학번: "+getlNum());
+//		System.out.println("학점: "+getlScore());
+//		System.out.println();
+//	}
+//}
+//
+//
+//class Salary extends StSa{
+//	private String sLevel;
+//	private int sSalary;
+//	
+//	Salary(){
+//		
+//	}
+//	Salary(String Name,int Age){
+//		super.Name=Name;
+//		super.Age=Age;
+//	}
+//	
+//	Salary(String Name,int Age,String sLevel,int sSalary){
+//		super.Name=Name;
+//		super.Age=Age;
+//		this.sLevel=sLevel;
+//		this.sSalary=sSalary;
+//	}
+//
+//	public String getsLevel() {
+//		return sLevel;
+//	}
+//
+//	public void setsLevel(String sLevel) {
+//		this.sLevel = sLevel;
+//	}
+//
+//	public int getsSalary() {
+//		return sSalary;
+//	}
+//
+//	public void setsSalary(int sSalary) {
+//		this.sSalary = sSalary;
+//	}
+//	public void disp() {
+//		super.disp();
+//		System.out.println("직책: "+getsLevel());
+//		System.out.println("연봉: "+getsSalary());
+//		System.out.println();
+//	}
+//	
+//}
+
+
+//class Parent{
+//	int age=28;//super.age
+//	
+//	Parent(){
+//		
+//	}
+//	Parent(int age){
+//		this.age=age;
+//	}
+//	void method(){
+//		System.out.println("Parent : "+age);
+//	}
+//}
+//class FChild extends Parent{
+//	int age=18;	//this.age
+//	
+//	FChild(){
+//		super(38);
+//	}
+//	
+//	void method(){
+//		int age=8;	//age
+//		super.method();
+//		System.out.println("age : "+age);	//8: Stack 8
+//		System.out.println("this.age : "+this.age);	//18: heap 
+//		System.out.println("super.age : "+super.age);//28: heap 중 부모영역
+//	}
+//}
+//class SChild extends Parent{
+//	void method(){
+//		System.out.println("SChild : "+age);
+//	}
+//}
