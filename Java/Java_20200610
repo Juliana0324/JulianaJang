@@ -1,0 +1,224 @@
+package lab.sam.example;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		FireCar fc=new FireCar();
+//		Ambulance ac=new Ambulance();
+//		
+//		//ac=(Ambulance)fc; //Sibling끼리는  형변환 x
+//		
+//		Car car=null;
+//		car=fc;		//fc가 부모의 값을 가지고 있음
+//		System.out.println("car.color: "+car.color);
+//		System.out.println("Firecar.color: "+ fc.color);
+//		System.out.println("Hospital.color: "+ ac.color);
+//		
+//		System.out.print("car.drive(): ");
+//		car.drive();
+//		System.out.print("fc.drive(): ");
+//		fc.drive();
+//		
+//		
+//		//fc.water();
+//		//car.water();	//car가 인식할 수 있는 범위 x
+////		car.drive(fc);
+////		car.drive(ac);
+//		
+//		
+//		FireCar fc2=null;
+//		fc2=(FireCar)car;	//down casting 시에  형변환시켜주어야함
+		Child1 c1=new Child1();
+		Child2 c2=new Child2();
+		
+		FamilyInfo fi=new FamilyInfo();
+		fi.disp(c1);
+		System.out.println();
+		fi.disp(c2);
+		
+	}
+
+}
+class FamilyInfo{
+	void disp(Parent p) {
+		if (p instanceof Child1) {
+			Child1 c1=(Child1)p;
+			c1.method();
+		}
+		else{
+			Child2 c2=(Child2)p;
+			c2.method();
+		}
+	}
+
+}
+class Parent{
+	String lastName="김씨네";
+	void method() {
+		System.out.println("가족: "+lastName);
+	}
+}
+class Child1 extends Parent{
+	String lank="첫 째";
+	String job="컴퓨터 엔지니어";
+	
+	void method() {
+		super.method();
+		System.out.println("위치: "+lank);
+		System.out.println("직업: "+job);
+	}
+}
+class Child2 extends Parent{
+	String lank="둘 째";
+	String job="그래픽 디자이너";
+	
+	void method() {
+		super.method();
+		System.out.println("위치: "+lank);
+		System.out.println("직업: "+job);
+	
+}
+
+
+
+
+class Car{
+	String color ="Black";
+	int door;
+	
+	void drive() {
+		System.out.println("출발");		
+	}
+//	void drive(Car c) {
+//		if(c instanceof FireCar) {
+//			FireCar fc=(FireCar)c;		//FireCar로 형변환 
+//			fc.water();		
+//		}
+//		else if(c instanceof Ambulance) {
+//			Ambulance ac=(Ambulance)c;		//Ambulance로 형변환 
+//			ac.hospital();
+//		}
+//		else {
+//			System.out.println("꼬마자동차 붕붕");
+//		}
+//		System.out.println("출발");
+//	}
+//	void drive(Ambulance ac) {
+//		System.out.println("엠뷸런스 출발");		
+//	}
+	
+	void park() {
+		System.out.println("정지");
+	}
+}
+class FireCar extends Car{
+	String color="Red";
+	void water() {
+		System.out.print("[ 소방차  ]\t");
+	}
+	void drive() {
+		water();
+		System.out.println("출발");
+	}
+}
+
+
+class Ambulance extends Car{
+	String color="White";
+	void hospital() {
+		System.out.println("[ 엠뷸런스  ]");
+	}
+	void drive() {
+		hospital();
+		System.out.println("출발");
+	}
+}
+}
+
+
+package lab.sam.example;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+		Tv tv= new Tv();
+		Computer pc=new Computer();
+		Radio rd=new Radio();
+		
+		Market m=new Market();
+		System.out.println("TV를 구매하셨을때 ");
+		m.customer(tv);
+		
+		System.out.println("Computer를 구매하셨을때 ");
+		m.customer(pc);
+		System.out.println("Radio를 구매하셨을때 ");
+		m.customer(rd);
+
+	}
+}
+//제품: Tv, Computer, Radio
+//속성 : 가격, 보너스포인트(가격의 10%)
+//고객 : 현금=1000, 보너스 포인트(각 제품의 보너스 포인트가 누적 된다)
+
+
+class Market{
+	int price=1000;
+	int bonus=0;
+	void customer(Market m){
+		if (m instanceof Tv) {
+			Tv tv=(Tv)m;
+			price-=tv.price;
+			bonus+=tv.bonus;
+			System.out.println("가격은: "+tv.price);
+			System.out.println("남은 돈: "+price );
+			System.out.println("보너스 : "+bonus);
+			
+		}
+		else if(m instanceof Computer) {
+			Computer pc=(Computer)m;
+			price-=pc.price;
+			bonus+=pc.price;
+			System.out.println("가격은: "+pc.price);
+			System.out.println("남은 돈: "+price );
+			System.out.println("보너스 : "+bonus);
+		}
+		else {
+			Radio rd=(Radio)m;
+			price-=rd.price;
+			bonus+=rd.price;
+			System.out.println("가격은: "+rd.price);
+			System.out.println("남은 돈: "+price );
+			System.out.println("보너스 : "+bonus);
+		}
+	}
+}
+
+class Tv extends Market{
+	int price=300;
+	int bonus=(int)(price*0.1);
+
+	void method() {
+//		super.bonus+=price*0.1;
+//		System.out.println("보너스 포인트: "+bonus);
+	}
+}
+class Computer extends Market{
+	int price=200;
+	int bonus=(int)(price*0.1);
+//	void method() {
+//		super.price-=price; 
+//		System.out.println("Computer의 가격: "+price);
+//		System.out.println("보너스 포인트: "+bonus);
+
+}
+class Radio extends Market{
+	int price=300;
+	int bonus=(int)(price*0.1);
+//	void method() {
+//		super.price-=price; 
+//		System.out.println("Radio의 가격: "+price);
+//		super.bonus+=price*0.1;
+//		System.out.println("보너스 포인트: "+bonus);
+}
+
+
