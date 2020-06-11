@@ -1,0 +1,152 @@
+package lab.sam.example;
+
+public class Main2 {
+
+	public static void main(String[] args) {
+		Tv tv= new Tv();
+		Computer pc=new Computer();
+		Audio rd=new Audio();
+		Buyer b=new Buyer();
+//		
+//		Market m=new Market();
+//		System.out.println("TV를 구매하셨을때 ");
+//		m.customer(tv);
+//		
+//		System.out.println("Computer를 구매하셨을때 ");
+//		m.customer(pc);
+//		System.out.println("Radio를 구매하셨을때 ");
+//		m.customer(rd);
+		
+//		b.buy(tv);
+//		b.disp();
+//		System.out.println();
+//		b.buy(pc);
+//		b.buy(pc);
+//		b.buy(pc);
+//		b.buy(pc);
+//		b.disp();
+//		System.out.println();
+//		b.buy(rd);
+//		b.disp();
+
+		Product [] p=new Product[3];
+		p[0]=new Tv();
+		p[1]=new Computer();
+		p[2]=new Audio();
+		
+		b.buy(p[0]);
+		b.buy(p[1]);
+		b.buy(p[2]);
+		b.disp();
+		
+
+	}
+}
+//제품: Tv, Computer, Radio
+//속성 : 가격, 보너스포인트(가격의 10%)
+//고객 : 현금=1000, 보너스 포인트(각 제품의 보너스 포인트가 누적 된다)
+
+class Product{
+	private int price;
+	private int bonus;
+	
+	Product(int price){
+		this.price =price;
+		bonus=(int)(price/10.0);
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getBonus() {
+		return bonus;
+	}
+
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}	
+}
+class Tv extends Product{
+	Tv(){
+		super(100);
+	}
+	public String toString() {
+		return "Tv";
+	}
+}
+class Computer extends Product{
+	Computer(){
+		super(200);
+	}
+	public String toString() {
+		return "Computer";
+	}
+}
+class Audio extends Product{
+	Audio(){
+		super(300);
+	}
+	public String toString() {
+		return "Audio";
+	}
+}
+
+class Buyer{
+	private int money=1000;
+	private int bonus=0;
+	Product [] item =new Product[10];
+	int index=0;
+	
+	
+	Buyer(){
+		money=1000;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	public int getBonus() {
+		return bonus;
+	}
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
+	}
+	public void buy(Product p) {
+
+		if(p.getPrice() > money) {
+			System.out.println("잔액이 부족합니다.");
+			return;
+		}
+
+			money-=p.getPrice();
+			bonus+=p.getBonus();
+			System.out.println(p+"를(을) 구매하셨습니다.");
+			item[index++]=p;
+
+	}
+	public void disp() {
+		int sum=0;
+		String itemList="";
+		for(int i=0; i<item.length;i++) {
+			if(item[i]==null) {
+				break;
+			}
+			itemList += item[i] + "/";
+			sum +=item[i].getPrice();
+		}
+		System.out.println("구매 제품: "+itemList);
+		System.out.println("총 구매 금액: "+sum);
+		System.out.println("현재 잔액: "+getMoney());
+		System.out.println("현재 보너스 포인트: "+getBonus());
+	}
+
+}
+
+
