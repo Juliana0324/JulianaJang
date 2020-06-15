@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>페이지 이동</title>
+</head>
+<body>
+    <p>a테그로 페이지 이동</p>
+    <a href="https://www.naver.com/">네이버로 이동 </a><br>
+    <a href="naver.com/">네이버로 이동 </a><br>
+    <!-- http가 빠지면 상대경로가 됨 -->
+
+    <!-- 우리가 작성한 다른 페이지로 이동가능 -->
+    <!-- /: 절대경로. 현재드라이브의 ROOT를 찾는다  -->
+    <a href="/01_index.html">01: 기본</a><br>
+    <!-- ../: 상위폴더로 이동(상대경로) -->
+    <a href="02_textindent.html">02: 줄바꾸기</a><br>
+
+
+    <a style="color:#03c75a; 
+    text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', '맑은 고딕', 'helvetica','Apple SD Gothic Neo';
+    padding: 10px 5px;"
+    href="https://comic.naver.com/index.nhn">웹툰</a>
+
+    <p>javascript로 페이지 이동</p>
+    <div style="cursor: pointer;" 
+       onclick="location.href='https://www.naver.com/'">onclick은 global attribute기 떄문에 아무테그 가능</div>
+    <div onclick="hello()">안녕하세용</div>
+    <p>a테그로 페이지 이동 x</p>
+
+</body>
+<script>
+// 자바스크립트 영역
+function hello(){
+    alert("hello");
+
+    // javaScript로 location.href값을 변경하면 페이지 이동
+    location.href='03_html속성.html';
+}
+
+
+</script>
+</html>
