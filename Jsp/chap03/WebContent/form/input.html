@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>input</title>
+</head>
+<body>
+	<h3>Input 테그</h3>
+	<ul>
+		<li>form 테그 내부에서 데이터를 담는 역할</li>
+		<li>name: 전송한 데이터의 key값</li>
+		<li>type: 어떤 방식으로 입력받을지 설정한다</li>
+		<li>value: 원한다면 값을 지정할수 있다(미리 입력해놓는 용도)</li>
+		<li>placeholder: 무엇을 입력할지 미리 알려주는 용도</li>
+		<li>required: </li>
+		<li>checked: </li>
+		<li>disabled: </li>
+		<li>readonly: </li>
+
+	</ul>
+<h3>type =text</h3>
+제목
+<p>일반적인 입력필드를 생성한다. type을 지정해주지 않으면 text타입으로 설정</p>
+<input type ="text" name="title" value="기본값" placeholder="아무거나 입력하세요"><br>
+text type: 기본타입.<br>
+<input placeholder="아무거나 입력하세욧"><br>
+
+<h3>type =password</h3>
+비밀번호
+<p>사용자의 입력을 가려주는 비밀번호 필드
+required를 입력하면 무조건 입력이 되어야 전송이 된다.
+</p>
+<input type ="password" name="pwd" placeholder="비밀번호"><br>
+<form action="./joinProcess.jsp" >
+누르면 전송되는 내용<input name="abc" required>
+<h3>type = submit</h3>
+<p>누르면 서버로 데이터를 전송하는 버튼을 생성<br>
+현재 속한 form데이터 전부를 들고 서버 페이지로 요청을 보낸다<br>
+</p>
+<input type="submit" value="전송버튼! ">
+<button type="submit">전송버튼! </button>
+</form>
+
+<h3>type = reset</h3>
+<p>현재 속한 form데이터를 초기화<br>
+</p>
+<form>
+버튼을 누르면 초기화 되는 내용<input><br>
+<input type="reset" value="리셋버튼! ">
+<button type="reset">초기화버튼! </button>
+</form>
+
+<h3>type = radio</h3>
+<p>사용자가 한가지만 선택할 수 있게  만듬<br>
+같은 name으로 설정하면 한가지만 선택할 수 있게 된다.<br>
+</p>
+<!-- name이 키값이다 -->
+
+<form action="./joinProcess.jsp">
+	<input id="radio-male" type="radio" name="gender" value="male">
+	<label for="radio-male">male</label><br>
+	
+	<input id="radio-female" type="radio" name="gender" value="female">
+	<label for="radio-female">female</label><br>
+	
+	<input id="radio-other" type="radio" name="gender" value="other">
+	<label for="radio-other">other</label><br>
+	
+	<input type="submit" value="전송">
+</form>
+
+
+<h3>type = checkbox</h3>
+<p>사용자가 여러가지를 선택할 수 있다
+name속성을 같은 값으로 설정하면 선택한 모든 값을 **배열로 보낸다
+checked 속성을 설정하면 미리 체크됨.
+<br>
+</p>
+<form action="./joinProcess.jsp">
+	<input id="checkbox-bike" type="checkbox" name="hobbies" value="bike" checked>
+	<label for="checkbox-bike" >bike<br>
+	<input id="checkbox-movie" type="checkbox" name="hobbies" value="movie">
+	<label for="checkbox-movie" >movie<br>
+	<input id="checkbox-game" type="checkbox" name="hobbies" value="game">
+	<label for="checkbox-game">game<br>
+	
+	<input type="submit" value="전송">
+</form>
+
+<h3>type = email</h3>
+<form>
+	<input type="email">
+	<button type="submit">전송! </button>
+</form>
+
+<h3>type = file</h3>
+<form>
+	첨부파일<input type="file"><br>
+	<button type="submit">전송! </button>
+</form>
+
+
+
+</body>
+</html>

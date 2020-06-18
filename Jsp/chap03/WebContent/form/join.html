@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Join.html</title>
+</head>
+<body>
+	<h3>회원가입 페이지</h3>
+
+	<h3>Form 테그</h3>
+	<ul type="circle">	
+	<!-- list tag의 type attribute로 앞의 모양을 선택가능
+		==> circle, disc(default), square,none
+	-->
+		<li>클라이언트의 입력을 수집하기 위해 사용하는 테그</li>
+		<li>사용자의 입력을 서버로 전송할 수 있다</li>
+		<h4>Form tag속성: </h4>	
+		<li>action 속성: 사용자의 입력이 전송될 URL을 성정(설정이 없으면 현재 페이지) :: 보낼 페이지</li>
+		<li>method 속성: action에 설정된 URL로 데이터를 보낼때의  HTTP method를 설정한다:: 보낼방식</li>
+		<li>GET 방식- URL에 데이터를 실어보내는 방식(default)<br>
+			 ex) ?name1=value1&name2=value2&...<br>
+			 GET방식은 길이 제한이 있어서 너무 긴 데이터를 보내면 데이터 손실 가능성 있음<br>
+			 사용자가 해당페이지를 즐겨찾기 하기를 원한다면 GET방식을 사용하는 것이 좋다<br>
+			 ==> GET방식은 주소창에 내용보임<br>
+			
+			 </li>
+		<li>POST 방식- request의 body라는 부분에 data를 실어보내는 방식<br>
+					==> 주소창에는 안보임<br>
+					POST방식은 길이 제한이없어서 글내용가튼 긴데이터를 보내는 데에 적합<br>
+		</li>
+	</ul>
+	<form action="./joinProcess.jsp" method="post">
+		<p>JSP 페이지로 전송</p>
+		이름: <input name="m_name"><br>
+		나이: <input name="m_age"><br>
+		이메일: <input name="m_email"><br>
+		<button type="submit">회원가입 버튼! </button><br>
+		<button type="reset">초기화 버튼! </button><br>
+	</form>
+	
+	<form action="/chap01/join2" method="post">
+		<p>Servlet 페이지로 전송</p>
+		
+		이름: <input name="m_name"><br>
+		나이: <input name="m_age"><br>
+		이메일: <input name="m_email"><br>
+		<button type="submit">회원가입 버튼! </button><br>
+		<button type="reset">초기화 버튼! </button><br>
+	</form>
+	
+</body>
+</html>
