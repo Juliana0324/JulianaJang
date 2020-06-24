@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
-  <display-name>chap01</display-name>
+  <display-name>chap02</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,4 +9,72 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
+  <!-- 서블릿을 선언함
+  		servlet-name: 사용할 서블릿의 이름(변수명)
+  		jsp-file: 원하는 위치의 jsp file을 설정한다
+  		(or servlet-class): 원하는 위치의 servlet class를 설정
+   -->
+  <servlet>
+  	<servlet-name>inf-home</servlet-name>  
+  	<jsp-file>/WEB-INF/home.jsp</jsp-file>
+  	<!-- web.xml/에서는  WEB-INF밑에 있는 페이지들에 접근할수 있다 -->
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>inf-home</servlet-name>
+  	<url-pattern>/babo</url-pattern>
+  	<!--  여기의 /는 ContextRoot가 된다 (현재는 /chap02/) -->	
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>context-home</servlet-name>  
+  	<jsp-file>/home.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>context-home</servlet-name>
+  	<url-pattern>/babo2</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- url=http://localhost:8080/chap02/babo3 -->
+  <servlet>
+  	<servlet-name>servlet-home</servlet-name>  
+  	<servlet-class>chap02.servlet.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>servlet-home</servlet-name>
+  	<url-pattern>/babo3</url-pattern>
+  </servlet-mapping>
+  
+  <!-- JSP Controller -->
+  <servlet>
+  	<servlet-name>con01</servlet-name>
+  	<jsp-file>/WEB-INF/controller/testController.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>con01</servlet-name>
+  	<url-pattern>/test/jsp</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Servlet Controller -->
+  <servlet>
+  	<servlet-name>con02</servlet-name>
+  	<servlet-class>chap02.servlet.TestControllerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>con02</servlet-name>
+  	<url-pattern>/test/servlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- MVC Controller: 컨트롤러를 서블릿으로 작성하는 이유 -->
+  <servlet>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<servlet-class>chap02.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<url-pattern>/mvc/*</url-pattern>
+  </servlet-mapping>
 </web-app>

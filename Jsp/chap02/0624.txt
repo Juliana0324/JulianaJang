@@ -1,0 +1,48 @@
+2020-06-24
+web.xml편집
+
+- Home.jsp를 만들었을때에 WEB-INF밑에 있는 jsp는 실행안됨
+
+
+MVC controller : 새로운 URL이 생길때마다 web.xml에 등록하기 싫어서 만든 서블릿
+	
+
+ =init() ==>servlet이 처음 생성될때 가장먼저 호출되는 함수
+
+ =service()
+ -요청의 종류와 상관없이 무조건 호출되는 메서드
+
+init() 호출됨
+service() 호출됨
+doGet()호출됨
+service() 호출됨
+doGet()호출됨
+
+
+System.out.println("웹 서버의 Context경로: "+req.getContextPath());
+System.out.println("사용자가 요청한 경로: "+req.getRequestURI());
+System.out.println("사용자가 요청한 방식"+req.getMethod());
+System.out.println("사용자가 요청한 Query"+req.getQueryString());
+System.out.println("사용자의 IP주소:"+req.getRemoteAddr());
+System.out.println("요청의 header"+req.getHeaderNames());
+System.out.println("요청의 파라미터들"+req.getParameterNames());
+System.out.println("요청에 실린 어트리뷰트들"+req.getAttributeNames());
+		
+
+웹 서버의 Context경로: /chap02
+사용자가 요청한 경로: /chap02/mvc/me
+사용자가 요청한 방식: GET
+사용자가 요청한 Query: null
+사용자의 IP주소:0:0:0:0:0:0:0:1
+요청의 header: org.apache.tomcat.util.http.NamesEnumerator@388298b8
+요청의 파라미터들: java.util.Collections$3@364571d8
+요청에 실린 어트리뷰트들: java.util.Collections$3@327af3c8
+doGet()호출됨
+
+
+String cmd=req.getRequestURI().replace("/chap02/mvc/","/");
+System.out.println("사용자가 원한 페이지는 "+cmd);
+
+==>출력 결과 : 사용자가 원한 페이지는: /me
+		
+		
