@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>chap02</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
+
+<servlet>
+	<servlet-name>inf-home</servlet-name>
+	<jsp-file>/WEB-INF/home.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+	<servlet-name>inf-home</servlet-name>
+	<url-pattern>/map</url-pattern>
+</servlet-mapping>
+
+<servlet>
+	<servlet-name>context-home</servlet-name>
+	<jsp-file>/home.jsp</jsp-file>
+</servlet>
+<servlet-mapping>
+	<servlet-name>context-home</servlet-name>
+	<url-pattern>/babo2</url-pattern>
+</servlet-mapping>
+<servlet>
+  	<servlet-name>servlet-home</servlet-name>  
+  	<servlet-class>chap02.servlet.Home</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>servlet-home</servlet-name>
+  	<url-pattern>/babo3</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>con01</servlet-name>
+  	<jsp-file>/WEB-INF/controller/testController.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>con01</servlet-name>
+  	<url-pattern>/test/jsp</url-pattern>
+  </servlet-mapping>
