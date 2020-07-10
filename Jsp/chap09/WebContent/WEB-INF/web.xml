@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <!-- web.xml에서 해당서블릿의 load-on-startup을 1로 설정하면
+	  서버를 시작할때 해당서블릿을 로드 -->
+  <servlet>
+  	<servlet-name>DBCP</servlet-name>
+  	<servlet-class>chap09.jdbc.DBCPInit</servlet-class>
+  	<load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>view</servlet-name>
+  	<servlet-class>chap09.controller.indexController</servlet-class>	
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<servlet-class>chap09.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Dispatcher</servlet-name>
+  	<url-pattern>/*</url-pattern>
+  </servlet-mapping>
+   	
+</web-app>
