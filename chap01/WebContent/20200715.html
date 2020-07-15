@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>게시판글쓰기 - 입력화면</title>
+</head>
+<body>
+<h1>입력값 테스트</h1>
+<form action="/BBS2" method="POST">
+	이름: <input type=text name=name><br>
+	아이디:<input type=text name=id><br>
+	비밀번호: <input type="password" name=pw><br>
+	연락처: <input type=tel name="tel" pattern="^[0][1][0](-| )\d{4}(-| )\d{4}$"><br>
+	
+	성별:<br>
+	남자: <input type="radio" name="gender" value="m">
+	여자: <input type="radio" name="gender" value="w"><br>
+
+	메일 수신 체크여부:<br>
+	<input type="checkbox" name="email" value="mail">공지메일
+	<input type="checkbox" name="email" value="adv" checked>광고메일
+	<input type="checkbox" name="email" value="check">배송확인메일 
+	<br>
+	날짜: <br>
+	<input type= date name="birth"><br>
+	직업: <br>
+	<select name="job" size="2">
+	<option value="회사원">회사원<br>
+	<option value="학생">학생<br>
+	<option value="주부">주부<br>
+	</select>	
+	<br>
+	<input type="submit" value="저장"><br>
+	<input type="reset" value="취소"><br>
+</form>
+</form>
+</body>
+</html>
