@@ -14,6 +14,8 @@ tr:nth-child(even){
 <title>Data List</title>
 </head>
 <body>
+<%if (session.getAttribute("id")!=null){ %>
+	안녕하세요, <%=session.getAttribute("id") %>님 환영합니다.
 	<% ArrayList<DataVO> list=(ArrayList<DataVO>)request.getAttribute("list"); %>
 	<table border="2">
 		<tr>
@@ -27,6 +29,8 @@ tr:nth-child(even){
 		</tr>
 		<%} %>
 	</table>
+	<a href="../Login.do"><input type=button value="로그아웃"></a>
+	<%} %>
 	<form>
 		<br>
 		<a href="/DataSuccess.jsp">추가하기</a>

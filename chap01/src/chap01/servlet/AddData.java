@@ -18,10 +18,6 @@ public class AddData extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String num=request.getParameter("num");
-		AddData data=new AddData();
-		data.setNum(num);
-		list.add(data);
 		
 		
 	}

@@ -25,6 +25,7 @@ public class DataServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
 		request.setCharacterEncoding("UTF-8");
 		String name= request.getParameter("name");
 		String tel= request.getParameter("tel");
@@ -35,6 +36,7 @@ public class DataServlet extends HttpServlet {
 		data.setAdd(add); 
 		list.add(data);
 		response.sendRedirect("/DataSuccess.jsp");
+	
 		
 		
 	}
