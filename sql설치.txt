@@ -1,0 +1,14 @@
+cmd창에
+1. sqlplus/nolog
+
+2. conn sys / as sysdba
+--> enter
+
+3. alter session set container=xepdb1;
+--> 세션 변경
+
+4. alter user hr account unlock identified by hr;
+--> hr이라는 계정에 hr로 로그인 가능
+
+5. conn hr/hr@localhost:1521/xepdb1;
+--> 연결시키기
