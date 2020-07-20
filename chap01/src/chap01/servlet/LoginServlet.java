@@ -4,6 +4,7 @@ package chap01.servlet;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,10 @@ public class LoginServlet extends HttpServlet {
 		String pw= request.getParameter("pw");
 		if("abc".equals(id)&&"0000".equals(pw)) {
 			HttpSession session = request.getSession();
+			Cookie c1=new Cookie("id",id);
+			Cookie c2=new Cookie("pw",pw);
+			response.addCookie(c1);
+			response.addCookie(c2);
 			session.setAttribute("id", id);
 			//5ÃÊ À¯Áö
 			session.setMaxInactiveInterval(5);
