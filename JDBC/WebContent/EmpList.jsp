@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <style>
-td:nth-child(even){
+tr:nth-child(even){
 	background-color:sky-blue;
 }
 </style>
@@ -14,8 +14,7 @@ td:nth-child(even){
 </head>
 <body>
 	<h1>Employees list</h1>
-	<table>
-		<th>
+	<table border="1">
 		<td>사원번호</td>
 		<td>이름</td>
 		<td>성</td>
@@ -27,11 +26,11 @@ td:nth-child(even){
 		<td>보너스율</td>
 		<td>매니저</td>
 		<td>부서</td>
-		</th>
+		
 <% List<EmpVO> list=(List<EmpVO>)request.getAttribute("list"); %>
 <%for(EmpVO emp:list) {%>
 <tr>
-<td><%=emp.getEmployeeId() %></td>
+<td><a href="/JDBC/Emp.do?action=view&empId=<%=emp.getEmployeeId() %>"><%=emp.getEmployeeId() %></a></td>
 <td><%=emp.getFirstName() %></td>
 <td><%=emp.getLastName() %></td>
 <td><%=emp.getEmail() %></td>

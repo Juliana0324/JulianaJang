@@ -29,7 +29,17 @@ public class EmpServlet extends HttpServlet {
 			int empId= Integer.parseInt(request.getParameter("empId"));
 			request.setAttribute("emp", dao.selectEmployee(empId));
 			url="/EmpView.jsp";
+		}else if("byName".equals(action)) {
+			String byName= request.getParameter("byName");
+			request.setAttribute("list", dao.selectByName(byName));
+			url="/EmpList.jsp";
 		}
+		else if("byDept".equals(action)) {
+			int deptId= Integer.parseInt(request.getParameter("deptId"));
+			request.setAttribute("list", dao.selectEmployeeByDeptId(deptId));
+			url="/EmpList.jsp";
+		}
+		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
