@@ -14,6 +14,8 @@ tr:nth-child(even){
 </head>
 <body>
 	<h1>Employees list</h1>
+	<a href="/JDBC/Emp.do?action=list&num=1"><input type=button value="급여순 정렬"></a>
+	<a href="/JDBC/Emp.do?action=list&num=2"><input type=button value="부서별 정렬"></a>
 	<table border="1">
 		<td>사원번호</td>
 		<td>이름</td>

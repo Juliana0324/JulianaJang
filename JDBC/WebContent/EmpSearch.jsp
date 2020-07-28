@@ -25,7 +25,7 @@
 <input type=hidden name=action value=byDept>
 부서: <input type=text name=deptId>
 &nbsp;&nbsp;<input type=submit value="검색">
-</form>
 
+</form>
 </body>
 </html>

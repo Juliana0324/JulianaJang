@@ -1,6 +1,9 @@
 package lab.web.model;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 public class EmpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     EmpDAO dao;
+    boolean s;
+    boolean d;
 	public EmpServlet() {
         super();
     }
@@ -19,11 +24,18 @@ public class EmpServlet extends HttpServlet {
 		dao=new EmpDAO();
 	}
 
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		String url= "";
 		if("list".equals(action)) {
-			request.setAttribute("list", dao.selectEmployeeList());	
+			int num=0;
+			if(request.getParameter("num")!=null) {
+				num=Integer.parseInt(request.getParameter("num"));
+				s= num==1 ? !s :s;
+				d= num==2 ? !d :d;
+			}
+			request.setAttribute("list", dao.selectEmployeeList(num,num==1 ? s : d));	
 			url="/EmpList.jsp";
 		}else if("view".equals(action)) {
 			int empId= Integer.parseInt(request.getParameter("empId"));
@@ -39,11 +51,51 @@ public class EmpServlet extends HttpServlet {
 			request.setAttribute("list", dao.selectEmployeeByDeptId(deptId));
 			url="/EmpList.jsp";
 		}
+		else if("insert".equals(action)) {
+			request.setAttribute("jobList", dao.selectAllJobs());
+			request.setAttribute("manList", dao.selectAllManager());
+			request.setAttribute("deptList", dao.selectAllDepartment());
+			url="/EmpInsert.jsp";
+		}
 		
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int employeeId= Integer.parseInt(request.getParameter("empId"));
+		String firstName=request.getParameter("firstName");
+		String lastName=request.getParameter("lastName");
+		String email = request.getParameter("email");
+		String phoneNumber=request.getParameter("phoneNumber");
+		String sdate=request.getParameter("hireDate");
+		SimpleDateFormat tool =new SimpleDateFormat("yyyy-MM-dd");
+		java.sql.Date hireDate= null;
+		try {
+			hireDate=new java.sql.Date(tool.parse(sdate).getTime());
+		}catch(ParseException e) {
+			e.printStackTrace();
+		}
+		String jobId= request.getParameter("jobId");
+		double salary= Double.parseDouble(request.getParameter("salary"));
+		double commissionPct= Double.parseDouble(request.getParameter("commissionPct"));
+		int managerId= Integer.parseInt(request.getParameter("managerId"));
+		int departmentId= Integer.parseInt(request.getParameter("departmentId"));
+
+		
+		EmpVO emp= new EmpVO();
+		emp.setEmployeeId(employeeId);
+		emp.setFirstName(firstName);
+		emp.setLastName(lastName);
+		emp.setEmail(email);
+		emp.setPhoneNumber(phoneNumber);
+		emp.setHireDate(hireDate);
+		emp.setJobId(jobId);
+		emp.setSalary(salary);
+		emp.setCommissionPct(commissionPct);
+		emp.setManagerId(managerId);
+		emp.setDepartmentId(departmentId);
+		dao.insertEmployee(emp);
+		response.sendRedirect("/JDBC/Emp.do?action=list");
 	}
 
 }

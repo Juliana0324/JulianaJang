@@ -9,5 +9,6 @@
 <body>
 <h3>1. <a href="/JDBC/Emp.do?action=list">목록조회</a></h3>
 <h3>2. <a href="/JDBC/EmpSearch.jsp">사원/부서검색</a></h3>
+<h3>3. <a href="/JDBC/Emp.do?action=insert">사원입력</a></h3>
 </body>
 </html>

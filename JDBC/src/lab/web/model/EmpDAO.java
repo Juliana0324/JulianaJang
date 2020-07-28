@@ -38,12 +38,24 @@ public class EmpDAO {
 			}
 		}
 	}
-	public List<EmpVO> selectEmployeeList(){
+	public List<EmpVO> selectEmployeeList(int num, boolean a){
 		Connection con = null;
 		List<EmpVO> list =new ArrayList<>();
 		try {
 			con=getConnection();
-			String sql ="select * from employees";
+			String sql="";
+			if(num==0) {
+				sql="select * from employees";
+			}
+			else if(num==1) {
+				sql="select * from employees order by salary";
+				sql = a ? sql+" desc": sql;
+			}
+			else if(num==2) {
+				sql="select * from employees order by department_id";
+				sql = a ? sql+" desc": sql;
+			}
+
 			PreparedStatement stmt = con.prepareStatement(sql);
 			ResultSet rs=stmt.executeQuery();
 			while(rs.next()) {
@@ -186,8 +198,111 @@ public class EmpDAO {
 		}
 		return list;
 	}
-
-	
+	public List<JobVO> selectAllJobs(){
+		Connection con = null;
+		List<JobVO> list= new ArrayList<>();
+		try {
+			con=getConnection();
+			String sql= "select job_id, job_title from jobs";
+			PreparedStatement stmt=con.prepareStatement(sql);
+			ResultSet rs= stmt.executeQuery();
+			while(rs.next()) {
+				JobVO job=new JobVO();
+				job.setJobId(rs.getString("job_id"));
+				job.setJobTitle(rs.getString("job_title"));
+				list.add(job);
+			}
+		}catch(SQLException e)
+			{
+			e.printStackTrace();
+			throw new RuntimeException("EmpDAO - selectAllJobs");
+		}finally {
+			closeConnection(con);
+		}
+		return list;
+		}
+	public List<EmpVO> selectAllManager(){
+		Connection con=null;
+		List<EmpVO> list = new ArrayList<>();
+		try {
+			con=getConnection();
+			String sql= "select employee_id, "
+					+"first_name||' '||last_name as manager_name "
+					+ "from employees "
+					+ "where employee_id in "
+					+ "(select distinct manager_id from employees)";
+			PreparedStatement stmt =con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				EmpVO emp = new EmpVO();
+				emp.setEmployeeId(rs.getInt("employee_id"));
+				emp.setFirstName(rs.getString("manager_name"));
+				list.add(emp);
+			}
+		}catch(SQLException e)
+		{
+		e.printStackTrace();
+		throw new RuntimeException("EmpDAO - selectAllManager");
+	}finally {
+		closeConnection(con);
 	}
+	return list;
+	}
+	
+	
+	public List<DepartmentVO> selectAllDepartment(){
+		Connection con = null;
+		List<DepartmentVO> list= new ArrayList<>();
+		try {
+			con=getConnection();
+			String sql="select department_id,department_name from departments";
+			PreparedStatement stmt= con.prepareStatement(sql);
+			ResultSet rs= stmt.executeQuery();
+			while(rs.next()) {
+				DepartmentVO dept =new DepartmentVO();
+				dept.setDepartmentId(rs.getInt("department_id"));
+				dept.setDepartmentName(rs.getString("department_name"));
+				list.add(dept);
+			}
+		}catch(SQLException e)
+		{
+		e.printStackTrace();
+		throw new RuntimeException("EmpDAO - selectAllDepartment");
+	}finally {
+		closeConnection(con);
+	}
+	return list;
+	}
+	public void insertEmployee(EmpVO emp) {
+		Connection con = null;
+		try {
+			con=getConnection();
+			String sql="insert into employees values(?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement stmt= con.prepareStatement(sql);
+			stmt.setInt(1, emp.getEmployeeId());
+			stmt.setString(2, emp.getFirstName());
+			stmt.setString(3, emp.getLastName());
+			stmt.setString(4, emp.getEmail());
+			stmt.setString(5, emp.getPhoneNumber());
+			stmt.setDate(6, emp.getHireDate());
+			stmt.setString(7, emp.getJobId());
+			stmt.setDouble(8, emp.getSalary());
+			stmt.setDouble(9, emp.getCommissionPct());
+			stmt.setInt(10, emp.getManagerId());
+			stmt.setInt(11, emp.getDepartmentId());
+			stmt.executeUpdate();
+		}catch(SQLException e)
+		{
+		e.printStackTrace();
+		throw new RuntimeException("EmpDAO - insertEmployee");
+	}finally {
+		closeConnection(con);
+	}
+
+	}
+	}
+	
+	
+	
 	
 
