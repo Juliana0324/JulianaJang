@@ -273,6 +273,7 @@ public class EmpDAO {
 	}
 	return list;
 	}
+	
 	public void insertEmployee(EmpVO emp) {
 		Connection con = null;
 		try {
@@ -298,7 +299,38 @@ public class EmpDAO {
 	}finally {
 		closeConnection(con);
 	}
+		}
 
+	
+	public void UpdateEmployee(EmpVO emp) {
+		Connection con = null;
+		try {
+			con=getConnection();
+			String sql="update employees set first_name=?, last_name=?, email=?, phone_number=?, "
+					+"hire_date=?, job_id=?, salary=?, commission_PCT=?, manager_id=?, department_id=? "
+					+"where employee_id=?";
+			PreparedStatement stmt= con.prepareStatement(sql);
+			stmt.setString(1, emp.getFirstName());
+			stmt.setString(2, emp.getLastName());
+			stmt.setString(3, emp.getEmail());
+			stmt.setString(4, emp.getPhoneNumber());
+			stmt.setDate(5, emp.getHireDate());
+			stmt.setString(6, emp.getJobId());
+			stmt.setDouble(7, emp.getSalary());
+			stmt.setDouble(8, emp.getCommissionPct());
+			stmt.setInt(9, emp.getManagerId());
+			stmt.setInt(10, emp.getDepartmentId());
+			stmt.setInt(11, emp.getEmployeeId());
+			if(stmt.executeUpdate()==0) {
+				throw new RuntimeException("수정이 되지 않았습니다.");
+			};
+		}catch(SQLException e)
+		{
+		e.printStackTrace();
+		throw new RuntimeException("EmpDAO - updateEmployee");
+	}finally {
+		closeConnection(con);
+	}
 	}
 	}
 	

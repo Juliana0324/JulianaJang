@@ -22,7 +22,9 @@
 <tr><td>보너스</td><td><%=emp.getCommissionPct() %></td></tr>
 <tr><td>매니저</td><td><%= emp.getManagerName()%> (<%=emp.getManagerId() %>)</td></tr>
 <tr><td>부서</td><td><%= emp.getDepartmentName()%> (<%=emp.getDepartmentId() %>)</td></tr>
-
 </table>
+<a href="/JDBC/Emp.do?action=update&empId=<%=emp.getEmployeeId()%>">정보수정</a>&nbsp;&nbsp;
+<a href="">정보삭제</a>&nbsp;&nbsp;
+
 </body>
 </html>

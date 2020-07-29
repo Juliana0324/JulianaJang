@@ -52,6 +52,17 @@ public class EmpServlet extends HttpServlet {
 			url="/EmpList.jsp";
 		}
 		else if("insert".equals(action)) {
+			request.setAttribute("action", action);
+			request.setAttribute("message", "입력");
+			request.setAttribute("jobList", dao.selectAllJobs());
+			request.setAttribute("manList", dao.selectAllManager());
+			request.setAttribute("deptList", dao.selectAllDepartment());
+			url="/EmpInsert.jsp";
+		}else if("update".equals(action)) {
+			request.setAttribute("action", action);
+			request.setAttribute("message", "수정");
+			int empId= Integer.parseInt(request.getParameter("empId"));
+			request.setAttribute("emp", dao.selectEmployee(empId));
 			request.setAttribute("jobList", dao.selectAllJobs());
 			request.setAttribute("manList", dao.selectAllManager());
 			request.setAttribute("deptList", dao.selectAllDepartment());
@@ -62,40 +73,81 @@ public class EmpServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int employeeId= Integer.parseInt(request.getParameter("empId"));
-		String firstName=request.getParameter("firstName");
-		String lastName=request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String phoneNumber=request.getParameter("phoneNumber");
-		String sdate=request.getParameter("hireDate");
-		SimpleDateFormat tool =new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date hireDate= null;
-		try {
-			hireDate=new java.sql.Date(tool.parse(sdate).getTime());
-		}catch(ParseException e) {
-			e.printStackTrace();
+		request.setCharacterEncoding("UTF-8");
+		String action =request.getParameter("action");
+		if("insert".equals(action)) {
+			int employeeId= Integer.parseInt(request.getParameter("empId"));
+			String firstName=request.getParameter("firstName");
+			String lastName=request.getParameter("lastName");
+			String email = request.getParameter("email");
+			String phoneNumber=request.getParameter("phoneNumber");
+			String sdate=request.getParameter("hireDate");
+			SimpleDateFormat tool =new SimpleDateFormat("yyyy-MM-dd");
+			java.sql.Date hireDate= null;
+			try {
+				hireDate=new java.sql.Date(tool.parse(sdate).getTime());
+			}catch(ParseException e) {
+				e.printStackTrace();
+			}
+			String jobId= request.getParameter("jobId");
+			double salary= Double.parseDouble(request.getParameter("salary"));
+			double commissionPct= Double.parseDouble(request.getParameter("commissionPct"));
+			int managerId= Integer.parseInt(request.getParameter("man"));
+			int departmentId= Integer.parseInt(request.getParameter("dept"));
+
+			
+			EmpVO emp= new EmpVO();
+			emp.setEmployeeId(employeeId);
+			emp.setFirstName(firstName);
+			emp.setLastName(lastName);
+			emp.setEmail(email);
+			emp.setPhoneNumber(phoneNumber);
+			emp.setHireDate(hireDate);
+			emp.setJobId(jobId);
+			emp.setSalary(salary);
+			emp.setCommissionPct(commissionPct);
+			emp.setManagerId(managerId);
+			emp.setDepartmentId(departmentId);
+			dao.insertEmployee(emp);
+			response.sendRedirect("/JDBC/Emp.do?action=list");
+			
+		}else if("update".equals(action)) {
+			String firstName=request.getParameter("firstName");
+			String lastName=request.getParameter("lastName");
+			String email = request.getParameter("email");
+			String phoneNumber=request.getParameter("phoneNumber");
+			String sdate=request.getParameter("hireDate");
+			SimpleDateFormat tool =new SimpleDateFormat("yyyy-MM-dd");
+			java.sql.Date hireDate= null;
+			try {
+				hireDate=new java.sql.Date(tool.parse(sdate).getTime());
+			}catch(ParseException e) {
+				e.printStackTrace();
+			}
+			String jobId= request.getParameter("jobId");
+			double salary= Double.parseDouble(request.getParameter("salary"));
+			double commissionPct= Double.parseDouble(request.getParameter("commissionPct"));
+			int managerId= Integer.parseInt(request.getParameter("man"));
+			int departmentId= Integer.parseInt(request.getParameter("dept"));
+			int employeeId= Integer.parseInt(request.getParameter("empId"));
+
+			
+			EmpVO emp= new EmpVO();
+			emp.setEmployeeId(employeeId);
+			emp.setFirstName(firstName);
+			emp.setLastName(lastName);
+			emp.setEmail(email);
+			emp.setPhoneNumber(phoneNumber);
+			emp.setHireDate(hireDate);
+			emp.setJobId(jobId);
+			emp.setSalary(salary);
+			emp.setCommissionPct(commissionPct);
+			emp.setManagerId(managerId);
+			emp.setDepartmentId(departmentId);
+			dao.UpdateEmployee(emp);
+			response.sendRedirect("/JDBC/Emp.do?action=view&empId="+employeeId);
 		}
-		String jobId= request.getParameter("jobId");
-		double salary= Double.parseDouble(request.getParameter("salary"));
-		double commissionPct= Double.parseDouble(request.getParameter("commissionPct"));
-		int managerId= Integer.parseInt(request.getParameter("managerId"));
-		int departmentId= Integer.parseInt(request.getParameter("departmentId"));
-
+		}
 		
-		EmpVO emp= new EmpVO();
-		emp.setEmployeeId(employeeId);
-		emp.setFirstName(firstName);
-		emp.setLastName(lastName);
-		emp.setEmail(email);
-		emp.setPhoneNumber(phoneNumber);
-		emp.setHireDate(hireDate);
-		emp.setJobId(jobId);
-		emp.setSalary(salary);
-		emp.setCommissionPct(commissionPct);
-		emp.setManagerId(managerId);
-		emp.setDepartmentId(departmentId);
-		dao.insertEmployee(emp);
-		response.sendRedirect("/JDBC/Emp.do?action=list");
-	}
 
-}
+	}
