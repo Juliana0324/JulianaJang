@@ -6,8 +6,7 @@ import java.util.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import lab.web.member.*;
+import java.util.*;
 
 public class MemDAO {
 	static{
@@ -45,7 +44,7 @@ public class MemDAO {
 		Connection con = null;
 		try {
 			con=getConnection();
-			String sql="insert into employees values(?,?,?,?,?)";
+			String sql="insert into member values(?,?,?,?,?)";
 			PreparedStatement stmt= con.prepareStatement(sql);
 			stmt.setString (1,mem.getUserId());
 			stmt.setString(2, mem.getName());
@@ -64,6 +63,32 @@ public class MemDAO {
 		closeConnection(con);
 	}
 		}
+	public String getPassword(String userId) {
+		Connection con= null;
+		String pw=null;
+		try {
+			con=getConnection();
+			String sql="select password from member where userid=?";
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setString(1, userId);
+			ResultSet rs=stmt.executeQuery();
+			if(rs.next()) {
+				pw =rs.getString(1);
+			}
+		}catch(SQLException e)
+			{
+				e.printStackTrace();
+				throw new RuntimeException("MemDAO - getPassword");
+			}finally {
+				closeConnection(con);
+			}
+		return pw;
+		
+		}
+		
+	
+	
+	
 	public List<MemberVO> selectMember(String userId){
 		Connection con=null;
 		List<MemberVO> list=new ArrayList<>();

@@ -36,20 +36,20 @@ public class EmpServlet extends HttpServlet {
 				d= num==2 ? !d :d;
 			}
 			request.setAttribute("list", dao.selectEmployeeList(num,num==1 ? s : d));	
-			url="/EmpList.jsp";
+			url="/hr/EmpList.jsp";
 		}else if("view".equals(action)) {
 			int empId= Integer.parseInt(request.getParameter("empId"));
 			request.setAttribute("emp", dao.selectEmployee(empId));
-			url="/EmpView.jsp";
+			url="/hr/EmpView.jsp";
 		}else if("byName".equals(action)) {
 			String byName= request.getParameter("byName");
 			request.setAttribute("list", dao.selectByName(byName));
-			url="/EmpList.jsp";
+			url="/hr/EmpList.jsp";
 		}
 		else if("byDept".equals(action)) {
 			int deptId= Integer.parseInt(request.getParameter("deptId"));
 			request.setAttribute("list", dao.selectEmployeeByDeptId(deptId));
-			url="/EmpList.jsp";
+			url="/hr/EmpList.jsp";
 		}
 		else if("insert".equals(action)) {
 			request.setAttribute("action", action);
@@ -57,7 +57,7 @@ public class EmpServlet extends HttpServlet {
 			request.setAttribute("jobList", dao.selectAllJobs());
 			request.setAttribute("manList", dao.selectAllManager());
 			request.setAttribute("deptList", dao.selectAllDepartment());
-			url="/EmpInsert.jsp";
+			url="/hr/EmpInsert.jsp";
 		}else if("update".equals(action)) {
 			request.setAttribute("action", action);
 			request.setAttribute("message", "¼öÁ¤");
@@ -66,7 +66,7 @@ public class EmpServlet extends HttpServlet {
 			request.setAttribute("jobList", dao.selectAllJobs());
 			request.setAttribute("manList", dao.selectAllManager());
 			request.setAttribute("deptList", dao.selectAllDepartment());
-			url="/EmpInsert.jsp";
+			url="/hr/EmpInsert.jsp";
 		}
 		
 		request.getRequestDispatcher(url).forward(request, response);

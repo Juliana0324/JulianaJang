@@ -40,8 +40,9 @@ public class MemServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	request.setCharacterEncoding("UTF-8");
-	String action = request.getParameter("action");
+	/*String action = request.getParameter("action");
 	if("insert".equals(action)) {
+	*/
 		String userId=request.getParameter("userId");
 		String name=request.getParameter("name");
 		String password=request.getParameter("password");
@@ -55,9 +56,11 @@ public class MemServlet extends HttpServlet {
 		mem.setEmail(email);
 		mem.setAddress(address);
 		dao.insertMember(mem);
-		response.sendRedirect("/JDBC/Member.do?action=list");
-	}
+		request.setAttribute("message", "회원가입완료");
+		request.getRequestDispatcher("/Login.jsp").forward(request, response);
 
 	}
 
-}
+	}
+
+

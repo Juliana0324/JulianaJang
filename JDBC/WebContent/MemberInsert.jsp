@@ -15,23 +15,23 @@
 <table border=1>
 <tr>
 	<td>회원 아이디</td>
-	<td><input type="text" name=userId value=<%=mem.getUserId() %>></td>
+	<td><input type=text name=userId ></td>
 </tr>
 <tr>
 	<td>이름</td>
-	<td><input type="text" name=name value=<%=mem.getName() %>></td>
+	<td><input type=text name=name ></td>
 </tr>
 <tr>
 	<td>비밀번호</td>
-	<td><input type="password" name=password value=<%=mem.getPassword() %>></td>
+	<td><input type=password name=password ></td>
 </tr>
 <tr>
 	<td>이메일</td>
-	<td><input type="text" name=email value=<%=mem.getEmail() %>></td>
+	<td><input type=text name=email ></td>
 </tr>
 <tr>
 	<td>주소</td>
-	<td><input type="text" name=address value=<%=mem.getAddress() %>></td>
+	<td><input type=text name=address></td>
 </tr>
 </table>
 <input type=submit value=저장 value=<%=request.getAttribute("message") %>>
