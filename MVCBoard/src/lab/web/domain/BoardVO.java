@@ -10,10 +10,6 @@ public class BoardVO {
 	private String subject;
 	private String content;
 	private Date writeDate;
-	private int readCount;
-	private int masterId;
-	private int replyNumber;
-	private int replyStep;
 	public int getBbsno() {
 		return bbsno;
 	}
@@ -80,4 +76,8 @@ public class BoardVO {
 	public void setReplyStep(int replyStep) {
 		this.replyStep = replyStep;
 	}
+	private int readCount;
+	private int masterId;
+	private int replyNumber;
+	private int replyStep;
 }
