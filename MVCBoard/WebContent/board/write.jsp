@@ -24,7 +24,7 @@
 		<td><input type="password" name="password" value="${board.password }"></td>
 		</tr>	
 		<tr><td>내용</td>
-		<td><textarea cols="30" rows="5" name="content">${board.contect }</textarea></td>
+		<td><textarea cols="30" rows="5" name="content">${board.content }</textarea></td>
 		</tr>	
 		<tr>
 		<td colspan="2">
