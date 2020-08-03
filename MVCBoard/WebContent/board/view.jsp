@@ -18,21 +18,21 @@
 	<table>
 	<tr>
 		<th>작성자 이름</th>
-		<td>${board.name }</td>
+		<td>${board.name}</td>
 	</tr>
 	<tr>
 		<th>제목</th>
-		<td>${board.subject }</td>
+		<td>${board.subject}</td>
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td>${board.content }</td>
+		<td>${board.content}</td>
 	</tr>
 	<tr>
 	<td colspan=2><h3 align=center>
 	<a href='<c:url value="/Board.do?action=list"/>'>목록</a>
 	<a href='<c:url value="/Board.do?action=reply&bbsno=${board.bbsno}"/>'>댓글</a>
-	<a href='<c:url value="/Board.do?action=update&bbsno=${board.bbsno}&userid=${board.userId}"/>'>댓글</a>
+	<a href='<c:url value="/Board.do?action=update&bbsno=${board.bbsno}&userid=${board.userId}"/>'>수정</a>
 	<a href='<c:url value="/Board.do?action=delete&bbsno=${board.bbsno}&replynumber=${board.replyNumber}&userid=${board.userId}"/>'>삭제</a>
 	</h3>
 	</td>

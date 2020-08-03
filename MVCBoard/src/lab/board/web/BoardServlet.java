@@ -45,7 +45,7 @@ public class BoardServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		String url="";
 		if("write".equals(action)) {
-			request.setAttribute("message", "»õ ±Û ÀÔ·Â");
+			request.setAttribute("message", "ìƒˆ ê¸€ ì…ë ¥");
 			url=url+"/board/write.jsp";
 			request.setAttribute("action", "write_do");
 		}else if("list".equals(action)) {
@@ -77,7 +77,7 @@ public class BoardServlet extends HttpServlet {
 				board.setContent(board.getContent().replaceAll("\n", "<br>"));
 			}
 			request.setAttribute("board", board);
-			request.setAttribute("message", "±Û »ó¼¼º¸±â");
+			request.setAttribute("message", "ê¸€ ìƒì„¸ë³´ê¸°");
 			url= url + "/board/view.jsp";
 		}else if("reply".equals(action)) {
 			String bbsno = request.getParameter("bbsno");
@@ -85,7 +85,7 @@ public class BoardServlet extends HttpServlet {
 			board.setSubject("[re]"+board.getSubject());
 			board.setContent(board.getContent()+"\n---------\n");
 			request.setAttribute("board", board);
-			request.setAttribute("message", "´ñ±Û ÀÔ·Â");
+			request.setAttribute("message", "ëŒ“ê¸€ ì…ë ¥");
 			request.setAttribute("action", "reply_do");
 			url= url+"/board/write.jsp";
 		}else if("update".equals(action)) {
@@ -93,7 +93,7 @@ public class BoardServlet extends HttpServlet {
 			int bbsno = Integer.parseInt(bbsnoStr);
 			BoardVO board = dao.selectArticle(bbsno);
 			request.setAttribute("board", board);
-			request.setAttribute("message", "±Û ¼öÁ¤È­¸é");
+			request.setAttribute("message", "ê¸€ ìˆ˜ì •í™”ë©´");
 			request.setAttribute("action", "update_do");
 			url= url+"/board/write.jsp";
 		}
@@ -157,7 +157,7 @@ public class BoardServlet extends HttpServlet {
 				response.sendRedirect(url);
 				return;
 			}else {
-				request.setAttribute("message", "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù. ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				request.setAttribute("message", "ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤. ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 				url= url+"/error/error.jsp";
 			}
 		}

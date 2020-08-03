@@ -35,14 +35,14 @@ public class MemberServlet extends HttpServlet {
     	String url="";
     	if(action.equals("insert")) {
     		request.setAttribute("action", action);
-    		request.setAttribute("message", "È¸¿ø°¡ÀÔ");
+    		request.setAttribute("message", "íšŒì›ê°€ì…");
     		 url="memberform.jsp";
     	}else if(action.equals("update")) {
     		try {
     			member= dao.selectMember(userid);
     			request.setAttribute("member", member);
     			request.setAttribute("action", action);
-    			request.setAttribute("message", "È¸¿øÁ¤º¸ ¼öÁ¤");
+    			request.setAttribute("message", "íšŒì›ì •ë³´ ìˆ˜ì •");
     		}catch(RuntimeException e) {
     			request.setAttribute("message", e.getMessage());
     		}
@@ -76,7 +76,7 @@ public class MemberServlet extends HttpServlet {
 		member.setAddress(address);
 		if(action.equals("insert")) {
 			dao.insert(member);
-			request.setAttribute("message", "È¸¿ø°¡ÀÔ ¼º°ø");
+			request.setAttribute("message", "íšŒì›ê°€ì… ì„±ê³µ");
 			url="/login.jsp";
 		}else if(action.equals("update")) {
 			dao.updateMember(member);
@@ -84,7 +84,7 @@ public class MemberServlet extends HttpServlet {
 			return;
 		}else if(action.equals("delete")) {
 			dao.deleteMember(userid, password);
-			request.setAttribute("message", "È¸¿øÁ¤º¸ »èÁ¦¿Ï·á");
+			request.setAttribute("message", "íšŒì›ì •ë³´ ì‚­ì œì™„ë£Œ");
 			HttpSession session = request.getSession();
 			session.invalidate();
 			url="/login.jsp";

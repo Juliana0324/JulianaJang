@@ -18,7 +18,7 @@ public class BoardDAO {
 	static {
 		try {
 			DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-			System.out.println("µå¶óÀÌ¹ö ·Îµå ¼º°ø");
+			System.out.println("ë“œë¼ì´ë²„ ë¡œë“œ ì„±ê³µ");
 		}catch(SQLException e) {
 			System.out.println(e.getMessage());
 		}
@@ -68,7 +68,7 @@ public void insertArticle(BoardVO board) {
 		pstmt.executeUpdate();
 	}catch(SQLException e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.insertArticle() ¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.insertArticle() ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -102,7 +102,7 @@ public Collection<BoardVO> selectArticleList(int page){
 		}
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.selectArticleList()¿¹¿Ü¹ß»ı - ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.selectArticleList()ì˜ˆì™¸ë°œìƒ - ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -135,7 +135,7 @@ public BoardVO selectArticle(int bbsno) {
 		}
 	}catch(SQLException e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.selectArticleList()¿¹¿Ü¹ß»ı - ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.selectArticleList()ì˜ˆì™¸ë°œìƒ - ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 
@@ -153,7 +153,7 @@ public void updateReadCount(int bbsno) {
 		pstmt.executeUpdate();
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.updateReadCount()¿¹¿Ü¹ß»ı - ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.updateReadCount()ì˜ˆì™¸ë°œìƒ - ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -173,7 +173,7 @@ public String getPassword(int bbsno) {
 		}	
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.getPassword()¿¹¿Ü¹ß»ı- ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.getPassword()ì˜ˆì™¸ë°œìƒ- ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -206,7 +206,7 @@ public void replyArticle(BoardVO board) {
 	pstmt.setString(4, board.getSubject());
 	pstmt.setString(5, board.getContent());
 	pstmt.setInt(6, board.getMasterId());
-	pstmt.setInt(7,board.getReplyNumber()+1);
+	pstmt.setInt(7, board.getReplyNumber()+1);
 	pstmt.setInt(8, board.getReplyStep()+1);
 	pstmt.executeUpdate();
 	con.commit();
@@ -215,7 +215,7 @@ public void replyArticle(BoardVO board) {
 			con.rollback();
 		}catch(SQLException e1) {
 			e1.printStackTrace();
-			throw new RuntimeException("BoardDAO.replyArticle()¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+			throw new RuntimeException("BoardDAO.replyArticle()ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 		}finally {
 			closeConnection(con);
 		}
@@ -236,7 +236,7 @@ public void deleteArticle(int bbsno, int replynumber) {
 		pstmt.executeUpdate();
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.deleteArtice() ¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.deleteArtice() ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -254,7 +254,7 @@ public int selectTotalBbsCount() {
 		return bbsCount;
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.selectTotalBbsCount()¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.selectTotalBbsCount()ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -267,14 +267,13 @@ public void updateArticle(BoardVO board) {
 	try {
 		con=getConnection();
 		PreparedStatement pstmt=con.prepareStatement(sql);
-		ResultSet rs = pstmt.executeQuery();
 		pstmt.setString(1, board.getSubject());
 		pstmt.setString(2, board.getContent());
 		pstmt.setInt(3, board.getBbsno());
 		pstmt.executeUpdate();
 }catch(Exception e) {
 	e.printStackTrace();
-	throw new RuntimeException("BoardDAO.updateArticle()¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+	throw new RuntimeException("BoardDAO.updateArticle()ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 }finally {
 	closeConnection(con);
 }
@@ -291,7 +290,7 @@ public int selectCount(String userid) {
 		return count;
 	}catch(Exception e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.selectCount()¿¹¿Ü¹ß»ı-ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.selectCount()ì˜ˆì™¸ë°œìƒ-ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 	}
@@ -325,7 +324,7 @@ public Collection<BoardVO> memberList(String userid, int page){
 		}
 	}catch(SQLException e) {
 		e.printStackTrace();
-		throw new RuntimeException("BoardDAO.memberList()¿¹¿Ü¹ß»ı - ÄÜ¼ÖÈ®ÀÎ");
+		throw new RuntimeException("BoardDAO.memberList()ì˜ˆì™¸ë°œìƒ - ì½˜ì†”í™•ì¸");
 	}finally {
 		closeConnection(con);
 

@@ -18,19 +18,19 @@
 	<form action='<c:url value="/Board.do"/>' method="post">
 		<table>
 		<tr><td>제목</td>
-		<td><input type="text" name="subject" size="20" value="${board.subject }"></td>
+		<td><input type="text" name="subject" size="20" value="${board.subject}"></td>
 		</tr>	
 		<tr><td>비밀번호</td>
-		<td><input type="password" name="password" value="${board.password }"></td>
+		<td><input type="password" name="password" value="${board.password}"></td>
 		</tr>	
 		<tr><td>내용</td>
-		<td><textarea cols="30" rows="5" name="content">${board.content }</textarea></td>
+		<td><textarea cols="30" rows="5" name="content">${board.content}</textarea></td>
 		</tr>	
 		<tr>
 		<td colspan="2">
-		<input type="hidden" name="action" value="${action}">
-		<input type="hidden" name="bbsno" value="${board.bbsno}">
-		<input type="hidden" name="masterid" value="${board.masterId}">
+		<input type="hidden" name="action" value="${action }">
+		<input type="hidden" name="bbsno" value="${board.bbsno }">
+		<input type="hidden" name="masterid" value="${board.masterId }">
 		<input type="hidden" name="replynumber" value="${board.replyNumber}">
 		<input type="hidden" name="replystep" value="${board.replyStep}">
 		<input type="submit" value="저 장"> <input type="reset" value="취 소"></td>
