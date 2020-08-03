@@ -14,21 +14,20 @@
 <jsp:include page="/incl/header.jsp"/>
 </td></tr>
 <tr height="500" valign="top"><td>
-<td>
 	<h3>게시판 목록입니다.</h3>
 	<table>
-	<c:forEach var="board" items="${lists }">
+	<c:forEach var="board" items="${lists}">
 	<tr>
-	<td>${board.name }</td>
-	<td><a href='<c:url value="/Board.do?action=view&bbsno=${board.bbsno }"/>'>${board.subject }</a></td>
-	<td>${board.writeDate }</td>
-	<td>${board.readCOunt }</td>
+	<td>${board.name}</td>
+	<td><a href='<c:url value="/Board.do?action=view&bbsno=${board.bbsno}"/>'>${board.subject}</a></td>
+	<td>${board.writeDate}</td>
+	<td>${board.readCount}</td>
 	</tr>
 	</c:forEach>
 	<tr>
 	<td colspan=4>
 	<h6 align="center">
-		<c:set var="totalPageBlock" value="${ElCeil:ElCeil(totalPageCount/10.0 }"/>
+		<c:set var="totalPageBlock" value="${ElCeil:ElCeil(totalPageCount/10.0 )}"/>
 		<c:set var="nowPageBlock" value="${ElCeil:ElCeil(page/10.0) }"/>
 		<c:set var="startPage" value="${(nowPageBlock-1)*10+1}"/>
 	<c:choose>
@@ -40,19 +39,22 @@
 	</c:otherwise>
 	</c:choose>
 	<c:if test="${nowPageBlock gt 1 }">
-		<a href='<c:url value="/Board.do?page=${startPage-1 }&action=list"/>'>◀</a>
+		<a href='<c:url value="/Board.do?action=list&page=${startPage-1 }"/>'>◀</a>
 	</c:if>
-	<c:forEach begin="${startPage }" end="${endPage }" step="1" varStatus="status">
-		[<a href = '<c:url value="Board.do?page=${endPage+1 }&action=list"/>'>${status.count }</a>]
+	<c:forEach begin="${startPage }" end="${endPage }" var="i">
+		[<a href = '<c:url value="Board.do?action=list&page=${i }"/>'>${i}</a>]
 	</c:forEach>
 	<c:if test="${nowPageBlock lt totalPageBlock }">
-		<a href='<c:url value="/Board.do?page=${endPage+1 }&action=list"/>'>▶</a>
+		<a href='<c:url value="/Board.do?action=list&page=${endPage+1 }"/>'>▶</a>
 	</c:if>
 	</h6>
 	</td>
 	</tr>
 	</table>
+	</td></tr>
 <tr height="50">
-<td><jsp:inclue page="/incl/footer.jsp"/></td>
+<td><jsp:include page="/incl/footer.jsp"/></td>
+</tr>
+</table>
 </body>
 </html>

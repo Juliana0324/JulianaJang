@@ -25,7 +25,7 @@ public class UserFilter implements Filter {
 			if(hreq.getParameter("userid").equals(userid)) {
 				chain.doFilter(request, response);		
 			}else {
-				request.setAttribute("message", "ë³¸ì¸ ê¸€ì´ ì•„ë‹ˆë©´ ìˆ˜ì • ë˜ëŠ” ì‚­ì œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
+				request.setAttribute("message", "º»ÀÎ ±ÛÀÌ ¾Æ´Ï¸é ¼öÁ¤ ¶Ç´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.");
 				hreq.getRequestDispatcher("/error/error.jsp").forward(request, response);
 			}
 		}else {

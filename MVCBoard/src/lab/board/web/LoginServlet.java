@@ -52,9 +52,9 @@ public class LoginServlet extends HttpServlet {
 				session.invalidate();
 				url="/login.jsp";
 				if(dbpw.equals("")) {
-					request.setAttribute("message", "ì•„ì´ë””ê°€ ì—†ìŠµë‹ˆë‹¤.");
+					request.setAttribute("message", "¾ÆÀÌµğ°¡ ¾ø½À´Ï´Ù.");
 				}else {
-					request.setAttribute("message", "ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");					
+					request.setAttribute("message", "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.");					
 					}
 				}
 			}catch(RuntimeException e) {
@@ -66,5 +66,4 @@ public class LoginServlet extends HttpServlet {
 			disp.forward(request, response);
 		}
 	}
-
 

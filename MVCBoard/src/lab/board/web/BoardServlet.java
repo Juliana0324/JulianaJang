@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import lab.web.domain.BoardDAO;
 import lab.web.domain.BoardVO;
+import lab.web.domain.MemberDAO;
 import lab.web.domain.MemberVO;
 
 @WebServlet("/Board.do")
@@ -43,7 +45,7 @@ public class BoardServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		String url="";
 		if("write".equals(action)) {
-			request.setAttribute("message", "ìƒˆ ê¸€ ìž…ë ¥");
+			request.setAttribute("message", "»õ ±Û ÀÔ·Â");
 			url=url+"/board/write.jsp";
 			request.setAttribute("action", "write_do");
 		}else if("list".equals(action)) {
@@ -66,12 +68,99 @@ public class BoardServlet extends HttpServlet {
 			request.setAttribute("totalPageCount", (int)totalPage);
 			request.setAttribute("page", page);
 		}
+		else if("view".equals(action)) {
+			String bbsnoStr = request.getParameter("bbsno");
+			int bbsno=Integer.parseInt(bbsnoStr);
+			BoardVO board = dao.selectArticle(bbsno);
+			dao.updateReadCount(bbsno);
+			if(board.getContent() !=null) {
+				board.setContent(board.getContent().replaceAll("\n", "<br>"));
+			}
+			request.setAttribute("board", board);
+			request.setAttribute("message", "±Û »ó¼¼º¸±â");
+			url= url + "/board/view.jsp";
+		}else if("reply".equals(action)) {
+			String bbsno = request.getParameter("bbsno");
+			BoardVO board = dao.selectArticle(Integer.parseInt(bbsno));
+			board.setSubject("[re]"+board.getSubject());
+			board.setContent(board.getContent()+"\n---------\n");
+			request.setAttribute("board", board);
+			request.setAttribute("message", "´ñ±Û ÀÔ·Â");
+			request.setAttribute("action", "reply_do");
+			url= url+"/board/write.jsp";
+		}else if("update".equals(action)) {
+			String bbsnoStr = request.getParameter("bbsno");
+			int bbsno = Integer.parseInt(bbsnoStr);
+			BoardVO board = dao.selectArticle(bbsno);
+			request.setAttribute("board", board);
+			request.setAttribute("message", "±Û ¼öÁ¤È­¸é");
+			request.setAttribute("action", "update_do");
+			url= url+"/board/write.jsp";
+		}
 		RequestDispatcher disp = request.getRequestDispatcher(url);
 		disp.forward(request,response);
 		}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String action = request.getParameter("action");
+		String url="";
+		HttpSession session=request.getSession();
+		if("write_do".equals(action)) {
+			String userId=(String)session.getAttribute("userid");
+			String password=request.getParameter("password");
+			String subject=request.getParameter("subject");
+			String content=request.getParameter("content");
+			
+			BoardVO board= new BoardVO();
+			board.setUserId(userId);
+			board.setPassword(password);
+			board.setContent(content);
+			board.setSubject(subject);
+			dao.insertArticle(board);
+			url="/MVC/Board.do?action=list";
+			response.sendRedirect(url);
+			return;
+		}else if("reply_do".equals(action)) {
+			String userid=(String)session.getAttribute("userid");
+			String subject=request.getParameter("subject");
+			String content= request.getParameter("content");
+			String password=request.getParameter("password");
+			int bbsno =Integer.parseInt(request.getParameter("bbsno"));
+			int masterid=Integer.parseInt(request.getParameter("masterid"));
+			int replynumber=Integer.parseInt(request.getParameter("replynumber"));
+			int replystep=Integer.parseInt(request.getParameter("replystep"));
+			BoardVO board = new BoardVO();
+			board.setBbsno(bbsno);
+			board.setUserId(userid);
+			board.setSubject(subject);
+			board.setContent(content);
+			board.setPassword(password);
+			board.setMasterId(masterid);
+			board.setReplyNumber(replynumber);
+			board.setReplyStep(replystep);
+			dao.replyArticle(board);
+			response.sendRedirect("/MVC/Board.do?action=list");
+			return;
+		}
+		else if("update_do".equals(action)) {
+			String password = request.getParameter("password");
+			String bbsnoStr=request.getParameter("bbsno");
+			int bbsno = Integer.parseInt(bbsnoStr);
+			String dbpw=dao.getPassword(bbsno);
+			if(dbpw.equals(password)) {
+				BoardVO board =new BoardVO();
+				board.setBbsno(bbsno);
+				board.setSubject(request.getParameter("subject"));
+				board.setContent(request.getParameter("content"));
+				dao.updateArticle(board);
+				url="/MVC/Board.do?action=view&bbsno="+bbsno;
+				response.sendRedirect(url);
+				return;
+			}else {
+				request.setAttribute("message", "ºñ¹Ð¹øÈ£°¡ ´Ù¸¨´Ï´Ù. ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				url= url+"/error/error.jsp";
+			}
+		}
 	}
 
 }

@@ -10,7 +10,7 @@
 <body>
 <table class="layout">
 <tr height="50"><td>
-	<jsp:inclue page="/incl/header.jsp"/>
+	<jsp:include page="/incl/header.jsp"/>
 </td></tr>
 <tr height="500" valign="top"><td>
 	<h6>게시판에 오신걸 환영합니다.</h6>
