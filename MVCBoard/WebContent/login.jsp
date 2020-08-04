@@ -19,7 +19,7 @@
 		<h2></h2>
 		<h3>아이디와 비밀번호를 입력하세요.</h3>
 		<form action='<c:url value="/Login.do"/>' method="post">
-			<input type="text" name="userid">
+			<input type="text" name="userid"><br>
 			<input type="password" name="password">
 		<input type="submit" value="로그인">
 		</form>

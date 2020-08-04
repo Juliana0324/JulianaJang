@@ -26,7 +26,7 @@
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td>${board.content}</td>
+		<td>${board.content }</td>
 	</tr>
 	<tr>
 	<td colspan=2><h3 align=center>

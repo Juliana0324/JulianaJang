@@ -28,11 +28,12 @@
 		</tr>	
 		<tr>
 		<td colspan="2">
-		<input type="hidden" name="action" value="${action }">
-		<input type="hidden" name="bbsno" value="${board.bbsno }">
-		<input type="hidden" name="masterid" value="${board.masterId }">
+		<input type="hidden" name="action" value="${action}">
+		<input type="hidden" name="bbsno" value="${board.bbsno}">
+		<input type="hidden" name="masterid" value="${board.masterId}">
 		<input type="hidden" name="replynumber" value="${board.replyNumber}">
 		<input type="hidden" name="replystep" value="${board.replyStep}">
+		<input type="hidden" name="userid" value="${board.userId}">
 		<input type="submit" value="저 장"> <input type="reset" value="취 소"></td>
 		</tr>
 		</table>

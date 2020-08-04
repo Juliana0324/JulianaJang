@@ -45,7 +45,7 @@ public class BoardServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		String url="";
 		if("write".equals(action)) {
-			request.setAttribute("message", "ìƒˆ ê¸€ ì…ë ¥");
+			request.setAttribute("message", "»õ ±Û ÀÔ·Â");
 			url=url+"/board/write.jsp";
 			request.setAttribute("action", "write_do");
 		}else if("list".equals(action)) {
@@ -77,7 +77,7 @@ public class BoardServlet extends HttpServlet {
 				board.setContent(board.getContent().replaceAll("\n", "<br>"));
 			}
 			request.setAttribute("board", board);
-			request.setAttribute("message", "ê¸€ ìƒì„¸ë³´ê¸°");
+			request.setAttribute("message", "±Û »ó¼¼º¸±â");
 			url= url + "/board/view.jsp";
 		}else if("reply".equals(action)) {
 			String bbsno = request.getParameter("bbsno");
@@ -85,7 +85,7 @@ public class BoardServlet extends HttpServlet {
 			board.setSubject("[re]"+board.getSubject());
 			board.setContent(board.getContent()+"\n---------\n");
 			request.setAttribute("board", board);
-			request.setAttribute("message", "ëŒ“ê¸€ ì…ë ¥");
+			request.setAttribute("message", "´ñ±Û ÀÔ·Â");
 			request.setAttribute("action", "reply_do");
 			url= url+"/board/write.jsp";
 		}else if("update".equals(action)) {
@@ -93,10 +93,49 @@ public class BoardServlet extends HttpServlet {
 			int bbsno = Integer.parseInt(bbsnoStr);
 			BoardVO board = dao.selectArticle(bbsno);
 			request.setAttribute("board", board);
-			request.setAttribute("message", "ê¸€ ìˆ˜ì •í™”ë©´");
+			request.setAttribute("message", "±Û ¼öÁ¤È­¸é");
 			request.setAttribute("action", "update_do");
 			url= url+"/board/write.jsp";
 		}
+		else if("delete".equals(action)) {
+			String bbsnoStr=request.getParameter("bbsno");
+			String replynoStr=request.getParameter("replynumber");
+			request.setAttribute("bbsno", bbsnoStr);
+			request.setAttribute("replynumber", replynoStr);
+			request.setAttribute("action", "delete_do");
+			url=url+"/board/delete.jsp";
+		}else if("member".equals(action)) {
+			int count=dao.selectCount((String)session.getAttribute("userid"));
+			member = mdao.selectMember((String)session.getAttribute("userid"));
+			request.setAttribute("member", member);
+			request.setAttribute("count", count);
+			url=url+"/board/member.jsp";
+		}
+		else if("memberList".equals(action)) {
+			String pageStr=request.getParameter("page");
+			int page=1;
+			if(pageStr != null) {
+				page=Integer.parseInt(pageStr);
+			}
+			String userid=(String)session.getAttribute("userid");
+			Collection<BoardVO> memberList = dao.memberList(userid, page);
+			request.setAttribute("lists", memberList);
+			int bbsCount=dao.selectCount(userid);
+			double totalPage=0;
+			if(bbsCount>0) {
+				totalPage= bbsCount/20.0;
+			}if((totalPage%1) !=0) {
+				totalPage=totalPage+1;
+			}
+			request.setAttribute("totalPageCount", (int)totalPage);
+			request.setAttribute("page", page);
+			url=url+"/board/memberlist.jsp";
+		}
+		else {
+			request.setAttribute("message", "Àß¸øµÈ ¸í·É: doGet- "+action);
+			url=url+"error/error.jsp";
+		}
+		
 		RequestDispatcher disp = request.getRequestDispatcher(url);
 		disp.forward(request,response);
 		}
@@ -116,6 +155,7 @@ public class BoardServlet extends HttpServlet {
 			board.setPassword(password);
 			board.setContent(content);
 			board.setSubject(subject);
+			
 			dao.insertArticle(board);
 			url="/MVC/Board.do?action=list";
 			response.sendRedirect(url);
@@ -138,6 +178,7 @@ public class BoardServlet extends HttpServlet {
 			board.setMasterId(masterid);
 			board.setReplyNumber(replynumber);
 			board.setReplyStep(replystep);
+			System.out.println("¼­ºí¸´ ½ÇÇà");
 			dao.replyArticle(board);
 			response.sendRedirect("/MVC/Board.do?action=list");
 			return;
@@ -157,7 +198,22 @@ public class BoardServlet extends HttpServlet {
 				response.sendRedirect(url);
 				return;
 			}else {
-				request.setAttribute("message", "ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤. ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
+				request.setAttribute("message", "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù. ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+				url= url+"/error/error.jsp";
+			}
+		}
+		else if("delete_do".equals(action)) {
+			String password = request.getParameter("password");
+			int bbsno=(Integer.parseInt(request.getParameter("bbsno")));
+			int replynumber =(Integer.parseInt(request.getParameter("replynumber")));
+			String dbpw=dao.getPassword(bbsno);
+			if(dbpw.equals(password)) {
+				dao.deleteArticle(bbsno, replynumber);
+				url="/MVC/Board.do?action=list";
+				response.sendRedirect(url);
+				return;
+			}else {
+				request.setAttribute("message", "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù. »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.");
 				url= url+"/error/error.jsp";
 			}
 		}
