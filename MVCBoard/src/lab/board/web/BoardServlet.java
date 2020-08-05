@@ -1,6 +1,7 @@
 package lab.board.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
@@ -16,6 +17,7 @@ import lab.web.domain.BoardDAO;
 import lab.web.domain.BoardVO;
 import lab.web.domain.MemberDAO;
 import lab.web.domain.MemberVO;
+import lab.web.mail.SMTPAuth;
 
 @WebServlet("/Board.do")
 public class BoardServlet extends HttpServlet {
@@ -216,7 +218,23 @@ public class BoardServlet extends HttpServlet {
 				request.setAttribute("message", "비밀번호가 다릅니다. 삭제할 수 없습니다.");
 				url= url+"/error/error.jsp";
 			}
+		} else if("contact_do".equals(action)) {
+			String from=request.getParameter("from");
+			String name= request.getParameter("name");
+			String subject = request.getParameter("subject");
+			String content = request.getParameter("content");
+			if(SMTPAuth.sendEmail(from, name, subject, content)) {
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out =response.getWriter();
+				out.println("<script>alert(\"메일이 전송되었습니다!\"); location.href='/MVC/index.jsp';</script>");
+				return;
+			}
+		}else {
+			request.setAttribute("message", "잘못된 명료이doPost-" +action);
+			url=url+"/error/error.jsp";
 		}
+		RequestDispatcher disp=request.getRequestDispatcher(url);
+		disp.forward(request, response);
 	}
 
 }
