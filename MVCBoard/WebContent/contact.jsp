@@ -5,15 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <title>문의 페이지</title>
 </head>
-<body>
-<table>
-	<tr height="50"><td>
-	<jsp:include page="incl/header.jsp"/>
-	</td></tr>
-	<tr height="500" valign="top"><td>
+<body class="page">
+<jsp:include page="/incl/header.jsp"/>
+<div id="page-banner" style="background-image: url(img/best-quote.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
+    </div></div></div>
+
+  <div id="page-body">
+	  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 	<form action='<c:url value="/Board.do"/>' method="post">
 	<fieldset>
 	<legend>문의메일</legend>
@@ -46,10 +51,8 @@
 	</fieldset>
 	<input type=hidden name=action value="contact_do">
 	</form>
-	<tr height="50"><td>
-	<jsp:include page="/incl/footer.jsp"/>
-	</td>
-	</tr>
-</table>
+	</div></div></div></div>
+	<div class="clearfix"></div>
+<jsp:include page="/incl/footer.jsp"/>
 </body>
 </html>

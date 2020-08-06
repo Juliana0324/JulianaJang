@@ -4,21 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <title>회원 정보 입력</title>
 </head>
-<body>
-<table class="layout">
-<tr height="50"><td>
-	<jsp:include page="/incl/header.jsp"/>
-</td></tr>
-<tr height="500" valign="top"><td>
+<body class="page">
+<jsp:include page="/incl/header.jsp"/>
+<div id="page-banner" style="background-image: url(img/best-quote.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
 <h1>${message }</h1>
+</div></div></div>
+  <div id="page-body">
+	  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 <h3 align=center>회원정보 입력</h3>
 <form action="/MVC/Member.do" method="post">
 <fieldset>
 <legend>회원 정보</legend>
-<table>
+<table class="table table-striped table-bordered">
 <tr>
 	<td>아이디</td>
 	<td><input type="text" name="userid" value="${member.userId }" ${empty member.userId ? "" :"readonly" }></td>
@@ -45,10 +49,8 @@
 	<input type="reset" value="취소">
 </fieldset>
 </form>
-</td></tr>
-<tr height="50"><td>
-	<jsp:include page="/incl/footer.jsp"/>
-</td></tr>
-</table>
+	</div></div></div></div>
+	<div class="clearfix"></div>
+<jsp:include page="/incl/footer.jsp"/>
 </body>
 </html>
