@@ -5,18 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <title>마이페이지</title>
 </head>
-<body>
-<table class="layout">
-<tr height="50"><td>
-	<jsp:include page="/incl/header.jsp"/>
-</td></tr>
-<tr height="500" valign="top"><td>
+<body class="page">
+<jsp:include page="/incl/header.jsp"/>
+<div id="page-banner" style="background-image: url(img/photo-typo.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
+      <h1>Contact</h1>
+    </div>
+  </div>
+  </div>
+  <div id="page-body">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 <h1>회원정보</h1>
 <h3 align=center>회원정보</h3>
-	<table>
+	<table class="table table-striped table-bordered">
 	<tr>
 		<th>아이디</th>
 		<td>${member.userId}</td>
@@ -53,10 +60,8 @@
 		</h3>
 		</td>
 	</table>
-	</td></tr>
-	<tr height="50"><td>
+	</div></div></div></div><div class="clearfix"></div>
 		<jsp:include page="/incl/footer.jsp"/>
-	</td></tr>
-	</table>
+
 </body>
 </html>

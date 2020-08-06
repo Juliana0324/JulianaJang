@@ -4,19 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <title>${message }</title>
 </head>
-<body>
-<table class="layout">
-<tr height="50"><td>
+<body class="page">
 <jsp:include page="/incl/header.jsp"/>
-</td></tr>
-<tr height="500" valign="top"><td>
+<div id="page-banner" style="background-image: url(img/01-screenshot.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
 	<h1>${message }</h1>
+  </div>
+  </div>
+  </div>
+    <div id="page-body">
+	  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 	<h3 align=center>글 내용을 작성해 주세요</h3>
 	<form action='<c:url value="/Board.do"/>' method="post">
-		<table>
+		<table class="table table-striped table-bordered">
 		<tr><td>제목</td>
 		<td><input type="text" name="subject" size="20" value="${board.subject}"></td>
 		</tr>	
@@ -38,12 +44,8 @@
 		</tr>
 		</table>
 	</form>
-	</td>
-</tr>
-<tr height="50"><td>
+	</div></div></div></div>
+	<div class="clearfix"></div>
 <jsp:include page="/incl/footer.jsp"/>
-</td>
-</tr>
-</table>
 </body>
 </html>

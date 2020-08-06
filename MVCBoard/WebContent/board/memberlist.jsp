@@ -6,19 +6,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
 </head>
 <body>
-<table class="layout">
-	<tr height="50"><td>
-		<jsp:include page="/incl/header.jsp"/>
-	</td></tr>
-	<tr height="500" valign="top"><td>
+<body class="page">
+<jsp:include page="/incl/header.jsp"/>
+<div id="page-banner" style="background-image: url(img/03-screenshot.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
+      <h1>게시판</h1>
+    </div>
+  </div>
+  </div>
+  <div id="page-body">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 	<h1>내가 쓴 글 목록</h1>
 	<h3>내가 작성한 글 (답글)입니다. </h3>
-	<table>
+	<table class="table table-striped table-bordered">
 	<c:forEach var="board" items="${lists}">
 	<tr>
 	<td>${board.name}</td>
@@ -54,10 +62,7 @@
 	</td>
 	</tr>
 	</table>
-	</td></tr>
-<tr height="50">
-<td><jsp:include page="/incl/footer.jsp"/></td>
-</tr>
-</table>
+	</div></div></div></div><div>	
+	<jsp:include page="/incl/footer.jsp"/></div>
 </body>
 </html>

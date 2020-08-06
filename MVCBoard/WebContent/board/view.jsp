@@ -4,18 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="./css/default.css" media="screen">
+<jsp:include page="/incl/staticHeader.jsp"/>
 <meta charset="UTF-8">
 <title>글상세 내용화면</title>
 </head>
-<body>
-<table class="layout">
-<tr height="50"><td>
-	<jsp:include page="/incl/header.jsp"/>
-</td></tr>
-<tr height="500" valign="top"><td>
+<body class="page">
+<jsp:include page="/incl/header.jsp"/>
+<div id="page-banner" style="background-image: url(img/02-screenshot.jpg);">
+  <div class="content  wow fdeInUp">
+    <div class="container ">
+      <h1>Contact</h1>
+    </div>
+  </div>
+  </div>
+  <div id="page-body">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-offset-3 col-md-6 page-block">
 	<h1>상세내용</h1>
-	<table>
+	<table class="table table-striped table-bordered">
 	<tr>
 		<th>작성자 이름</th>
 		<td>${board.name}</td>
@@ -38,11 +45,7 @@
 	</td>
 	</tr>
 	</table>
-</td></tr>
-<tr height="50"><td>
-	<jsp:include page="/incl/footer.jsp"/>
-</td></tr>
-
-</table>
+	</div></div></div></div><div class="clearfix"></div>
+		<jsp:include page="/incl/footer.jsp"/>
 </body>
 </html>
