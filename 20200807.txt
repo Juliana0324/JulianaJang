@@ -1,0 +1,23 @@
+관리자 기능 - 
+아이디로 회원정보 검색 가능 - 마이페이지 띄우시면 됩니다.
+관리자인 경우 index.jsp에서 회원검색 기능이 추가되면 됨.
+일반 아이디인 경우 x
+혹시나 일반 아이디가 url 로 직접 접속하려는 경우
+필터를 이용해 일반으로 돌려 보면된다.
+DB에서 권한 주어주기
+
+
+
+페이지 경로에 file 파일 만들기
+
+D:\7월_JSP_장정우\jee-2020-03\eclipse\workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\MVCBoardDesign\file
+
+spring : 인터페이스 사용-> 중앙저장소 사용
+
+@Autowired : 자동으로 묶다
+JDBCTemplate.queryForObject(sql,Intefer.class)
+미리 저장되어있음
+자동으로 넣어줌
+
+**의존성 : DA프레임워크
+
