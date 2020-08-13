@@ -1,0 +1,268 @@
+\\118.130.22.223
+
+<OS(운영체제): Operating System>
+ -컴퓨터에  들어있는 자원을 사용자가 쉽게 접근하고 
+  사용할 수 있도록 인터페이스 환경을 제공하는역할
+ 
+ - 윈도우,리눅스, 안드로이드,,,
+ 
+ <Linux>
+ 
+ - 유닉스 기반으로 만들어진 os
+ - 서버를 구성하고 관리하는데 특화된 os
+ - 명령어로 모든 작업이 가능
+ - client 보다 server로 많이 이용하는데 이유는 
+   linux를 사용하는데에는 전문적 지식이 필요+
+   호환성 문제로 일반컴퓨터 사용하지 x
+ 
+ -  오픈소스 유용
+
+=================================================
+r FTP
+128.134.143.25
+사용자 ID august
+비번 2008
+
+=================================================
+리눅스 설치방법
+
+select Guest Operating System
+Linux
+버젼: CentOS 7 64-bit
+
+Vms 폴더에 저장
+
+마지막-customize hardware
+usb controller + sound card + printer 삭제
+
+ctrl + alt = 마우스 커서 
+
+
+=================================================
+사용안될시 
+vmci0.present = "TRUE"에서 false로 바꾸기
+
+20200812
+
+설치대상
+partition 추가 -
+	1. swap= 2048 
+	2. / = 용량 x
+
+소프트웨어 선택:
+	최소 설치x
+	그래픽 형식으로 바꾸기(GUI사용)/ 개발용 툴 
+
+설치 시작
+
+ROOT암호 = P@ssw0rd
+사용자 = samadal
+
+프로그램 - 설정
+자동으로 연결 
+아이피 맞추는 방법 
+ipv4 방법: 수동으로 바꾸기
+
+주소 192.168.10.128
+네트마스트 : 255.255.255.0
+게이트 웨이: 192.168.10.2
+네임서버 : 8.8.8.8
+
+
+Edit - virtual network editor
+변경 누르기
+NAT = IP: 192.168.10.0 으로 변경
+
+
+인터넷 연결안될시
+
+cmd -  ping 192.168.10.128 (IP주소)
+
+연결안될시(ping 연결x)
+
+ncpa.cpl 
+
+Visual 8번 없거나 연결안되어있을시에
+리눅스 Edit에 virtual network editor
+Restore Defaults
+
+==========================================
+터미널 열기 (명령어 사용)
+
+ifconfig: ip연결 정보 확인시 필요
+clear : 터미널창 초기화
+reboot: 재부팅명령어
+재부팅후 ifconfig 실행시 ip 사라짐 == 유선연결 끊김
+poweroff + init 0 : 리눅스 종료
+
+=================================
+putty 실행
+
+불러옴 몇번 누르기
+
+창-모양
+	커서 깜빡임 체크
+
+- 특성
+	alt+enter누르면 전체화면으로 전환 체크
+
+- 변환
+	수신한 데이터를 이 문자셋으로 가정: UTF-8로 변경
+
+- ** ssh -키교환 
+	디피헬만 그룹 14 선택 후 up 
+
+세션 -
+ ip = 리눅스ip사용
+ 파일명에 내파일 설정
+
+/열기
+
+==========================================
+ISO 다운받는법
+the centos project
+centos Linux 7(2003)버전
+x86_64 클릭
+
+미러사이트 들어가기
+CentOS-7-x86_64-Everything-2003.iso	
+
+
+================================================
+2020-08-13
+
+리눅스의 prompt(프롬프트)
+
+	- 컴퓨터가 사용자가 입력하는 명령어를 사용할 준비 단계를 의미
+	- 리눅스의 터미널에서 사용
+	ex) [root@localhost ~]#
+
+	root : 계정의 이름
+	@: 구분문자
+	localhost: 서버이름
+	~: 자신의 현재 경로
+	#: 관리자 계정
+	$: 사용자 계정
+
+
+==================================================
+pwd 명령어 및 디렉터리 구조확인
+
+	* 명령어 입력후 띄어쓰기
+	
+ 	- pwd입력시 => /root출력
+	: 현재 자신의 경로를 표시하는 명령어
+	
+	
+	/ : 최상위 디렉터리(=폴더), 리눅스의 모든 디렉터리와 파일의 시작점
+		디렉터리 뒤에만 /붙임	
+		마지막에 나오는 디렉터리에는 /생략가능
+
+	ls / 디렉터리 안에 있는 요소들 볼때
+
+
+/bin: /usr/bin 
+	- 리눅스 기본명령어가 들어있는 디렉터리
+	-모든 계정이 전부 사용할 수 있습니다.
+/sbin ; /usr/sbin
+	-관리자 전용 명령어가 들어있는 디렉터리
+	-관리자만 사용 가능
+
+/boot: 
+	- 리눅스의 메모리 정보와 부팅관련 정보 파일들이 들어있는 디렉터리	
+
+/ home: 
+	- 일반사용자의 홈 디렉터리가 생성되는 디렉터리
+/ root: 
+	- 관리자 계정의 홈 디렉터리
+/ etc
+	-리눅스의 서버와 시스템 설정파일이 들어가 있는 디렉터리
+/var:
+	- 각족설정이나 로그파일이 들어있는 디렉터리
+/dev: 
+	- 리눅스의 장치파일이 들어있는 디렉터리 H/W를 관리하는데 사용
+	- usb, 하드디스크, cdrom...
+
+
+	cd: 위치이동 및 변경  ex) cd /home/samadal/
+
+=================================================================
+경로 실습 
+
+[root@localhost ~]# cd /home/samadal/
+[root@localhost samadal]# pwd
+/home/samadal
+[root@localhost samadal]# cd /home/samadal/
+[root@localhost samadal]# mkdir a
+[root@localhost samadal]# cd a
+[root@localhost a]# mkdir b
+[root@localhost a]# cd b.
+[root@localhost b]# pwd
+/home/samadal/a/b
+[root@localhost b]# cd /home/
+[root@localhost home]# mkdir test
+[root@localhost home]# cd test/
+[root@localhost test]# mkdir c
+[root@localhost test]# cd c
+[root@localhost c]# mkdir d
+[root@localhost c]# cd d
+[root@localhost d]# pwd
+/home/test/c/d
+[root@localhost d]#
+
+
+mkdir = 파일 생성 명령어
+=====================================================
+상대경로 상위폴더 이동시 ../
+하위폴더 이동시 ./파일이름
+
+passwd 명령어
+	- 사용자의 패스워드를 변경하는 명령어
+	- 패스워드 변경가능
+	- 관리자 계정은 암호에러 무시하고 변경가능
+
+passwd samadal (관리자 속성)
+	-다른계정의 패스워드 변경가능
+
+itbank
+
+
+ctrl + c : 취소후 나오기
+
+
+
+
+
+redirect: 지정된 url로 요청 재전송
+
+forward: 제어권 url로 지정되어있는 페이지로 넘김
+
+1) jsp 액션 태그 사용 : <jsp:forward page = " 페이지명 ">
+
+2) 내장 객체 사용 : <% pageContext.forward("페이지명"); %>
+
+3) 서블릿 RequestDispatcher 사용
+
+RequestDispatcher dispatcher = request.getRequestDispatcher("경로").forward(req,resp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
