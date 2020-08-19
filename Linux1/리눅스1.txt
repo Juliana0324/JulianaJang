@@ -27,7 +27,7 @@ r FTP
 리눅스 설치방법
 
 select Guest Operating System
-Linux
+Linux/b
 버젼: CentOS 7 64-bit
 
 Vms 폴더에 저장
@@ -208,9 +208,7 @@ pwd 명령어 및 디렉터리 구조확인
 [root@localhost c]# cd d
 [root@localhost d]# pwd
 /home/test/c/d
-[root@localhost d]#
-
-
+[root@localhost d]
 mkdir = 파일 생성 명령어
 =====================================================
 상대경로 상위폴더 이동시 ../
@@ -381,13 +379,103 @@ cp연습:
 	# cp /backup/login.defs /home/samadal/a/login
 
 
-	[삭제 명령어] rm
+
+	[디렉터리 복사]
+#cp /backup/ /home/samadal/
+-cp는 기본적으로 복사 불가능
+
+
+==> 옵션사용하면 디렉터리(디렉터리 안에 파일까지) 복사가능 : -r
+
+ ex)
+	# cp -r /backup/ /home/samadal/	
+	# ls -l /home/samadal/
+합계 16
+	drwxr-xr-x. 3 root root   94  8월 18 15:11 a
+	drwxr-xr-x. 2 root root   66  8월 19 12:47 backup
+	-rw-r--r--. 1 root root 4301  8월 18 14:15 grub.cfg
+	-rw-r--r--. 1 root root  511  8월 18 14:15 inittab
+	-rw-r--r--. 1 root root 2027  8월 18 14:16 login.defs
+	[root@localhost ~]# ls -l /home/samadal/backup/
+	합계 20
+	-rw-r--r--. 1 root root 4301  8월 19 12:47 grub.cfg
+	-rw-r--r--. 1 root root  511  8월 19 12:47 ini
+	-rw-r--r--. 1 root root  511  8월 19 12:47 inittab
+	-rw-r--r--. 1 root root 2027  8월 19 12:47 login.defs
+
+
+===============================================
+ -------------[이동]-------------
+mv 명령어
+ - 파일이나 디렉터리를 이동시키는 명령어
+ -윈도우의 잘라내기기능
+ - cp와 형식은 동일
+
+[사용형식]
+mv[이동시킬 파일 혹은 디렉터리] [붙여넣기 하고 싶은 경로]
+	#mv /backup/ini /home/samadal/
+	
+ - mv는 특별한 옵션 사용하지 않아도 디렉터리 이동이 가능
+ - cp와 동일하게 이동하는 과정에서 이름변경이 가능
+ex) mv /home/samadal/back /home/samadal/test
+	이름변경 back -> test
+
+================================================
+------------[디렉터리 생성명령어]-------------
+mkdir 명령어
+[사용방법]
+mkdir [옵션] [생성하고 싶은 디렉터리의 이름과 경로]
+ex) mkdir /home/test/test1
+
+
+2-1 ex) mkdir /home/test/test1/test2/test3
+ ==> error : test2가 없음
+
+2-2 ex) mkdir -p /home/test/test1/test2/test3
+===> -p명령어 : 상위의 디렉터리가 없다면 상위디렉터리 생성됨
+
+
+--------	[삭제 명령어] rm------------------------
 	# cp /backup/login.defs /home/samadal/a/loginex
 
 	# rm /home/samadal/a/loginex
 	rm: remove 일반 파일 `/home/samadal/a/loginex'? y
 
-===============================================
+rmdir 명령어
+ - 빈 디렉터리 삭제할때 사용하는 명령어
+ - 파일삭제 불가
+ex )  rmdir /home/test/test1/test2/test3/
+==> test3 삭제
+
+#rmdir -p /home/test/test1/test2
+
+rm [옵션] [삭제하고 싶은 파일이나 디렉터리의 경로]
+
+-r = 디렉터리까지 삭제하는옵션
+	# rm -r /home/samadal/backup/
+	rm: descend into directory `/home/samadal/backup/'? y
+	rm: remove 일반 파일 `/home/samadal/backup/inittab'? y
+	rm: remove 일반 파일 `/home/samadal/backup/login.defs'? y
+	rm: remove 일반 파일 `/home/samadal/backup/grub.cfg'? y
+	rm: remove 일반 파일 `/home/samadal/backup/ini'? y
+	rm: remove 디렉토리 `/home/samadal/backup/'? y
+
+
+-f = 질문하지 않고 바로 삭제하는 옵션
+  rm -rf /home/samadal/test/
+
+ # rm -rf /home/samadal/*
+
+===================================================
+
+touch 명령어
+ 
+ - 빈 파일을 생성하는 명령어
+
+[사용형식]
+touch [만들고 싶은 파일의 이름과 경로]
+ex) touch /home/samadal/testfile
+
 
 
 
