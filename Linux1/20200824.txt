@@ -1,0 +1,56 @@
+
+ 사용자 계정(user)
+ -사용자는 os를 사용하기 위해 반드시 핗요한 객체 입니다
+ - 우리는 사용자 계정을 통해 os에 접속해서 os를 관리 및 운용
+
+ 사용자와 관련된 파일 
+/etc/passwd
+/etc/shadow ==> 계정에 대한 password
+/etc/group ==> 사용자를 그룹화하여 쉽게 관리
+
+/etc/passwd 
+ -passwd파일은 리눅스에서 사용하는 모든 계정의 정보를 가지고 있는 파일입니다
+ 실제 계정을 사용할때 paswswd안에 들어있는 정보를 가지고 계정에 로그인합니다.
+ 그래서 passwd에 잘못된 정보가 있다면 그 계정을 사용할수 x
+
+
+# grep samadal /etc/passwd
+
+samadal:x:1000:1000:samadal:/home/samadal:/bin/bash
+
+samadal =사용자이름
+x: 패스워드
+1000:1000 = U(ser)ID : G(roup)ID
+samadal = 코멘트
+홈 디렉터리 = 사용자 정보파일 (skel파일)이 들어있는 디렉터리
+
+
+ls -la /home/samadal
+모든 계정은 home 디렉터리에서 시작
+
+/bin/bash
+==> 사용자가 사용하는 셸(명령어 처리기-언어번역기)
+각자 다른 셸 때문에 다름
+
+
+-종류
+/bin/sh(Bourne shell)
+ - 가장오랜기간 사용했던 유닉스 시스템의 표준 셸
+ - 강력한 명령 프로그래밍 기능을 가지고 있습니다
+ - 복구모드에서사용
+
+/bin/csh(c shell)
+- 프로그래밍 언어 c를 기반으로 만들어진 셸
+- 상호 대화병 방식의 셸
+- 크기가 커지고 처리속도는 느리지만 다양한 기능제공
+
+/bin/tcsh
+ - C shell 과 Korn shell의 기능을 합친 셸
+
+/bin/ksh(korn shell)
+- 유닉스에서 가장많이 사용하는 셸
+- 명령어 줄 편집기능
+
+/bin/bash
+- 리눅스에서 가장많이 사용하는 표준 셸
+- 리눅스에서 기본적으로 사용하는 셸
