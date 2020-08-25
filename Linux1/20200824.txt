@@ -54,3 +54,220 @@ ls -la /home/samadal
 /bin/bash
 - 리눅스에서 가장많이 사용하는 표준 셸
 - 리눅스에서 기본적으로 사용하는 셸
+
+
+==================================================
+사용자 생성명령어
+
+useradd [옵션1] [값1] [옵션2] [값2] ...사용자명
+ex) useradd user1
+사용자 생성시 useraddd 명령어 사용
+사용자를 옵션을 사용하지 않고 생성하면 기본값으로 사용자 생성
+
+
+계정을 만들었다면 반드시 tail이나 grep명령어를 
+사용해서 /etc/passwd에 등록된거 확인
+
+ex ) tail -3 /etc/passwd
+출력결과 ==> 
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+samadal:x:1000:1000:samadal:/home/samadal:/bin/bash
+user1:x:1001:1001::/home/user1:/bin/bash
+
+/home 안에 생성됨
+
+passwd user1 
+==> 비밀번호 설정
+
+skel파일들은 etc/skel 디렉터리 안에 자동으로 사용자홈 디렉터리에 복사됩니다.
+그래서 /etc/skel 디렉터리에서 파일을 복사하지 못하면 그 계정은 사용할 수 없습니다.
+
+
+
+-----------------[계정옵션]-----------------------
+useradd옵션
+
+-c = 계정 생성시 코멘트 추가
+ex) useradd -c [코멘트명] [생성하고자하는 계정이름]
+
+출력결과 
+	user2:x:1002:1002:user2:/home/user2:/bin/bash
+
+-s = 계정생성시 셸 변경(기본값: bash)
+ex) useradd -s /bin/sh user3
+
+출력결과 
+	user3:x:1003:1003::/home/user3:/bin/sh
+
+
+-d = 계정 생성시 홈 디렉터리의 생성위치 변경(기본값 : home)
+
+디렉터리 생성==>mkdir /itbank
+ ***
+이름 지정 주의 itbank/user4
+ex) useradd -d /itbank/user4 user4
+
+출력결과 user4:x:1004:1004::/itbank/user4:/bin/bash
+# ls -l /itbank/
+합계 4
+drwx------ 3 user4 user4 4096  8월 25 13:06 user4
+
+
+
+-u = 게정생성시 UID지정
+ex) useradd -u 1200 user5
+출력결과
+==> user5:x:1200:1200::/home/user5:/bin/bash
+  
+-g = 계정생성시 GID지정
+ex) useradd -g 1300 user6
+출력결과
+==> user6:x:1201:1200::/home/user5:/bin/bash
+uid 생성후 다음 user는 그전 uid 다음번호로 UID생성
+
+
+
+옵션 한번에 사용하는경우
+ex) # useradd -c user7 -d /itbank/user7 -s /bin/ksh user7
+출력결과
+user7:x:1202:1202:user7:/itbank/user7:/bin/ksh
+
+
+-m -k =사용자 지정 skel 디렉터리를 사용하는 경우
+
+사용자 지정skel만들기
+-계정을 생성하면 자동을 /etc/skel 안에 들어있는 파일과 디렉터리를 모두복사해서 사용자
+	홈디렉터리를 생성하지만 -m -k옵션을 사용하면 다른 디렉터리로 사용자 홈 디렉터리 생성가능
+
+[준비]
+mkdir /etc/samskel
+
+사용자 지정 skel을 사용하려면 옵션 -m -k를 사용합니다
+-m -k 이후 내가 사용하고 싶은 skel디렉터리의 경로를 적어줘야합니다
+ex)  useradd -m -k /etc/samskel/ user8
+# ls -l /home/
+
+출력결과
+# ls -la /home/user8
+합계 32
+drwx------  4 user8 user8 4096  8월 25 13:59 .
+drwxr-xr-x. 9 root  root  4096  8월 25 13:59 ..
+-rw-r--r--  1 user8 user8   18  8월 25 13:50 .bash_logout
+-rw-r--r--  1 user8 user8  193  8월 25 13:50 .bash_profile
+-rw-r--r--  1 user8 user8  231  8월 25 13:50 .bashrc
+-rw-r--r--  1 user8 user8  172  8월 25 13:50 .kshrc
+drwxr-xr-x  4 user8 user8 4096  8월 25 13:50 .mozilla
+drwxr-xr-x  2 user8 user8 4096  8월 25 13:55 test
+
+===============================================
+----------useradd의 기본값 변경하기---------------
+
+useradd의 기본값 확인명령어
+ex) useradd -D
+출력결과
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel
+CREATE_MAIL_SPOOL=yes
+
+
+[검색]
+# find / -name useradd -type f
+/etc/default/useradd	==> 기본값
+/usr/sbin/useradd	==> 
+/usr/share/bash-completion/completions/useradd
+
+
+[VI로 수정하기]
+vi /etc/default/useradd
+home ==> itbank 
+shell ==> ksh
+skel ==> etc/samskel
+
+useradd user9 생성하면
+user9:x:1204:1204::/itbank/user9:/bin/ksh
+
+----------------------------------------------
+
+명령어로 기본값 변경
+
+useradd -D -b 
+ - 홈 디렉터리의 기본값변경
+ex) useradd -D -b /home
+
+
+useradd -D -s 
+ - 셸 기본값 변경
+ex) useradd -D -s /bin/bash
+
+
+useradd -D -g 
+ - 생성 그룹의 GID변경
+ex) useradd -D -g samadal
+
+useradd -D -e 
+ - 패스워드 만료 기간
+ex) useradd -D -e 10
+
+useradd -D -f
+ - 패스워드 만료된 후 유효기간 
+ex) useradd -D -f 10
+
+
+--------------사용자 수정---------------
+ 사용자 수정명령어는 usermod 명령어
+ 사용형식은 useradd와 동일하기 때문에 useradd대신 usermod를 쓴다고 생각하면 
+  쉽게 사용할 수 있습니다.
+ 옵션도 useradd와 동일하게 사용합니다
+ usermod는 passwd안에 등록된 정보를 수정합니다.
+
+[사용형식]
+ *usermod는 옵션필수
+옵션은 useradd와동일
+usermod [옵션1*] [값1]... 사용자명
+
+
+[실습]
+기존:
+user9:x:1204:1204::/itbank/user9:/bin/ksh
+
+user9 계정의 홈디렉터리 바꾸기
+# usermod -d /home/user9 user9
+
+
+출력결과
+user9:x:1204:1204::/home/user9:/bin/ksh
+
+현재 파일은 /home에 없음으로 홈으로 이동
+mv /itbank/user9 /home/
+
+
+디렉터리 경로를 수정하는 경우 -m옵션을 추가적으로 사용하면
+실제 홈 디렉터리의 경로도 자동으로 수정됩니다
+ usermod -m -d /itbank/user9 user9
+# ls -l /itbank/
+합계 12
+drwx------ 3 user4 user4 4096  8월 25 13:06 user4
+drwx------ 3 user7 user7 4096  8월 25 13:35 user7
+drwx------ 4 user9 user9 4096  8월 25 15:00 user9
+
+셸변경
+usermod  -s /bin/bash user9
+
+코멘트수정
+usermod  -c user9 user9 user9
+
+gid 수정
+usermod  -g 1200 user9
+
+
+usermod또한 다수옵션을 한번에 사용가능
+
+
+
+=====================================================
+
+
