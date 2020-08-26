@@ -270,4 +270,161 @@ usermod또한 다수옵션을 한번에 사용가능
 
 =====================================================
 
+------[사용자 삭제]------------
+userdel 명령어 사용
+
+[사용형식]
+user [옵션] [사용자명]
+ex) userdel user1
+
+특별한 옵션을 사용하지않고 userdel로 삭제하면 /etc/passwd안에 잇는 설정만 삭제됨
+# useradd user1
+useradd: 경고: 홈디렉터리가 이미 있습니다.
+skel 디렉터리에서 파일을 복사하지 않습니다.
+메일함 파일을 만드는 중: 파일이 있습니다
+
+# ls -l /home/
+합계 32
+-rw-r--r--  1 root    root     857  8월 24 13:47 inittab
+drwx------. 3 samadal samadal 4096  8월 24 14:23 samadal
+drwx------  3    1001    1001 4096  8월 25 15:14 user1
+drwx------  3 user2   user2   4096  8월 25 12:57 user2
+drwx------  3 user3   user3   4096  8월 25 13:01 user3
+drwx------  3 user5   user5   4096  8월 25 13:18 user5
+drwx------  3 user6   user5   4096  8월 25 13:20 user6
+drwx------  4 user8   user8   4096  8월 25 13:59 user8
+
+
+메일파일보는법
+ ls -l /var/spool/mail/
+
+
+-새로만든 user1 생성된것 볼수있음
+기존에 계정이 상ㅇ하고 있던 홈 디레터리나 메일파일은 그대로 남아있습니다.
+# tail -2 /etc/passwd
+user9:x:1204:1204::/itbank/user9:/bin/bash
+user1:x:1205:1205::/home/user1:/bin/bash
+
+
+기존에 사용하던 user1의 홈 디렉터리와 mail파일이 남아있기 때문에 user1을 만들려고 하면 
+에러가 발생합니다. userdel 명령어만 사용해서 계정을 삭제하면 그 계정의 홈 디렉터리와 
+mail파일까지 수동으로 만들어집니다.
+
+그러므로 홈디렉터리에서 / mail 파일삭제
+# rm -rf /home/user1
+# rm -rf /var/spool/mail/user1
+
+[옵션]
+
+-r옵션
+
+그래서 특별한 경우가 아니라면 userdel 명령어에 옵션 -r을 같이 사용합니다
+userdel -r을 사용하면 passwd정보와 홈디렉터리 그리고 메일파일까지 자동삭제합니다.
+ex) userdel -r user1 
+
+
+=========================================================================
+/etc/shadow 
+ - 사용자계정과 시스템 계정관련 비밀번호 정보파일
+
+# cat /etc/shadow 
+
+# grep samadal /etc/shadow
+samadal:$6$zfV3bwWs$Ty3Fty.tqmh37ms15bz6qOPcfQkLWZiWBIW5jpB77DWXnkpys4AEsuiiLP0YhUmnKpGOfh.xPRhbyhu7QXkzI.
+(==>암호화된 사용자 password)
+:18396 (==> 1970년 1월 1일 기준으로 패스워드가 수정된 날짜)
+:0 (==> 최소 패스워드 사용기간)
+:99999 (==> 패스워드 만료기간)
+:7 (==>패스워드 만료되기전에 경고 날짜)
+:: (==> 암호가 만료된 후 지정한 날짜만큼 로그인가능)
+:: (==> 로그인금지하는 날짜 지정)
+
+======================================================================
+/etc/group 
+ - group 관련파일
+# grep samadal /etc/group
+samadal:x:1000:samadal
+
+samadal (===> 그룹명)
+:x (===> 패스워드)
+:1000 (===> GID)
+:samadal (==> 그룹의 구성원)
+
+
+그룹 생성
+groupadd 명령어 사용
+[사용형식]
+groupadd [옵션] [그룹이름]
+ex) groupadd s1
+# tail -2 /etc/group
+user5:x:1200:
+s1:x:1201:
+
+-g = gid를 직접 지정해서 그룹생성
+ 
+
+그룹삭제명령어
+groupdel [그룹이름]
+
+
+그룹수정
+groupmod [옵션] [값] [그룹이름]
+
+그룹 GID값 바꾸기 
+# groupmod -g 1200 s2
+
+그룹이름바꾸기 groupmod -n [바꾸고자하는 이름] [기존이름]
+# groupmod -n test s2
+
+============================================================================
+ --------------[권한(Permission)]-------------
+ -리눅스에서 권한은 허가권 그리고 소유권으로 확인
+ - 디렉터리나 파일에서는 반드시 허가권, 소유권이 존재
+ - 권한 설정에 따라서 디렉터리나 파일의 사용형식이 결정됨
+ - 허가권, 소유권은 ls -l 명령어를 사용해서 확인할 수 있음
+
+
+허가권 : chmod (change Modification)
+ -허가권은 읽기 ,쓰기 ,실행 및 접근권한을 표현하는 권한
+  ==> -rw-r--r--
+	r: read (4)
+	w: write (2)
+	e: execute (1)
+
+	--- 소유자 --- 그룹사용자 ---일반사용자
+
+소유권 : chown (CHange Ownership)
+ -소유권은 디렉터리나 파일을 소유하고 있는 계정과 그룹이 누구인지 나타내는권한
+ ==>  root root 
+
+
+-rw-r--r--. 1 root root 4303  5월  3 17:44 grub.cfg
+ 현재 grub.cfg 에 소유권은 root(UID) root(GID) 임으로 
+ 내가 사용하고 있는 계정 = 소유자권한
+ 계정 = GID ==> group권한 확인
+ 계정!(UID && GID) = other
+
+
+
+실습
+useradd user1
+passwd user1
+
+# ls -l /home/
+drwx------. 3 samadal samadal 4096  8월 24 14:23 samadal
+drwx------  3 user1   user1   4096  8월 26 15:04 user1
+
+other부분에 x (execute)가 없기 때문에
+user1로 로그인시 
+[user1@localhost ~]$ ls -l /home/samadal/
+ls: cannot open directory /home/samadal/: 허가 거부
+
+
+
+
+
+
+
+
+
 
