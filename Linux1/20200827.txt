@@ -1,0 +1,300 @@
+--------------[권한(Permission)]-------------
+ -리눅스에서 권한은 허가권 그리고 소유권으로 확인
+ - 디렉터리나 파일에서는 반드시 허가권, 소유권이 존재
+ - 권한 설정에 따라서 디렉터리나 파일의 사용형식이 결정됨
+ - 허가권, 소유권은 ls -l 명령어를 사용해서 확인할 수 있음
+
+
+허가권 : chmod (change Modification)
+ -허가권은 읽기 ,쓰기 ,실행 및 접근권한을 표현하는 권한
+  ==> -rw-r--r--
+	r: read (4)
+	w: write (2)
+	e: execute (1)
+
+	--- 소유자 --- 그룹사용자 ---일반사용자
+
+소유권 : chown (CHange Ownership)
+ -소유권은 디렉터리나 파일을 소유하고 있는 계정과 그룹이 누구인지 나타내는권한
+ ==>  root root 
+
+
+-rw-r--r--. 1 root root 4303  5월  3 17:44 grub.cfg
+ 현재 grub.cfg 에 소유권은 root(UID) root(GID) 임으로 
+ 내가 사용하고 있는 계정 = 소유자권한
+ 계정 = GID ==> group권한 확인
+ 계정!(UID && GID) = other
+
+
+
+실습
+useradd user1
+passwd user1
+
+# ls -l /home/
+drwx------. 3 samadal samadal 4096  8월 24 14:23 samadal
+drwx------  3 user1   user1   4096  8월 26 15:04 user1
+
+other부분에 x (execute)가 없기 때문에
+user1로 로그인시 
+[user1@localhost ~]$ ls -l /home/samadal/
+ls: cannot open directory /home/samadal/: 허가 거부
+
+
+-----------------------------------------------------------
+허가권 변경 
+chmod 
+
+1. 숫자로 허가권 변경
+[사용형식]
+chmod [바꾸고싶은 허가권] [파일 또는 딜렉터리]
+ex) 
+# chmod 777 /backup/grub.cfg
+==> 초록색으로 변경됨
+
+
+2. 문자사용한 허가권 변경
+ - 사용할 수 잇는 문자는 u,g,o입니다
+ - u는 owner
+ - g는 group
+ - o는 other
+ - 그래서 내가 지정하고 싶은 부분을 선택후 
+	+ 또는 - 사용해서 rwx를 사용
+
+[사용형식]
+ex) chmmod u-x,g-wx,o-wx /backup/grub.cfg
+ 	==> user에서 x빼기, group 에서 wx빼기...
+
+=======================================================
+
+디렉터리 허가권 변경
+/home/samadal 디렉터리를 사용해서 실습진행
+samadal 디렉터리의 초기 허가권은 700입니다
+
+디렉터리에서 x = 접근
+파일에서 x = 실행
+
+ex) 
+# chmod 701 /home/samadal
+user1 계정으로 samadal 홈 디렉터리 접근가능
+[user1@localhost ~]$ cd /home/samadal/
+[user1@localhost samadal]$ pwd
+/home/samadal
+[user1@localhost samadal]$
+
+
+접근권한만 있기 때문에 읽기 권한주기
+# chmod 705 /home/samadal/
+# ls -l /home/
+합계 8
+drwx---r-x. 3 samadal samadal 4096  8월 24 14:23 samadal
+drwx------  3 user1   user1   4096  8월 26 15:15 user1
+
+$ls -la /home/samadal
+==> user1의 읽기권한생성
+
+
+접근*읽기권한만 있기때문에 쓰기 권한주기
+$ touch testfile
+touch: cannot touch `testfile': 허가 거부
+
+root에서 w권한까지 주기
+# chmod 707 /home/samadal/
+# ls -l /home/
+합계 8
+drwx---rwx. 3 samadal samadal 4096  8월 24 14:23 samadal
+
+
+[user1@localhost samadal]$ touch testfile
+[user1@localhost samadal]$ ls -la
+
+[출력결과]
+ -rw-rw-r--  1 user1   user1      0  8월 27 13:09 testfile
+
+
+---------[706으로 x권한 제외한다면]---------------
+$pwd
+$ cd /home/samadal/
+-bash: cd: /home/samadal/: 허가 거부
+
+[user1@localhost samadal]$ ls -l /home/samadal/
+출력결과
+ls: cannot access /home/samadal/test1: 허가 거부
+ls: cannot access /home/samadal/testfile: 허가 거부
+합계 0
+-????????? ? ? ? ?             ? test1
+-????????? ? ? ? ?             ? testfile
+
+[user1@localhost samadal]$ touch /home/samadal/testfile2
+touch: cannot touch `/home/samadal/testfile2': 허가 거부
+
+----------------------------------------------------
+... x가 있어야 사용가능
+
+# chmod 600 /home/samadal/
+변경시
+drw-------.  3 samadal samadal 4096  8월 27 13:09 samadal
+
+오너 부분에 x 없을시
+==> Could not chdir to home directory /home/samadal: Permission denied
+-bash: /home/samadal/.bash_profile: 허가 거부
+
+소유권자여도 접근권한 없을시 접근 불가
+
+==============================================================
+
+파일 허가권 변경
+/backup/grub.cfg
+
+최초 grub.cfg의 허가권 644에 소유권은 root root
+그래서 root이외에 계정이 grub.cfg를 사용하면 other부분에 권하능ㄹ 보는데
+파일은 디렉터리와 ㄷ르게 x가 필요 없으며 반드시 r 이있어야 파일의 내용을 ㅎ확인 가능
+r이 없으면 파일의 내용을 확인할 수 없습니다. (cat,vi,tail 등 사용x)
+
+
+
+#chmod 640 /backup/grub.cfg
+변경시 other에 r이 없ㄱ기 때문에
+samadal접속시
+head /backup/grub.cfg
+head: cannot open `/backup/grub.cfg' for reading: 허가 거부
+
+
+644변경시 
+"/backup/grub.cfg" [읽기 전용]
+vi /backup/grub.cfg
+==> 저장이 안됨
+
+vi를 사용해서 grub.cfg 파일에 내용을 수정할 수 있는지 확인
+결과 other에 w 가 없기 때문에 파일 수정x
+
+==> chmod 646으로 변경
+
+/bin 디렉터리에 있는 ls 명령어 실행 파일로 진행
+실행파일을 필수적으로 x를 사용 그래서 만약 x 권한을 삭제하면 ㅏ른계정들이 
+그 파일을 사용하지 못하는 경우 발생
+
+# ls -l /bin/ls
+-rwxr-xr-x. 1 root root 117608  8월 20  2019 /bin/ls
+other부분에서 x실행 제외
+
+사마달 실행결과
+[samadal@localhost ~]$ pwd
+/home/samadal
+[samadal@localhost ~]$ ls
+-bash: /usr/bin/ls: 허가 거부
+
+=================================================================
+소유권 바꾸기
+- chown 명령어를 사용해서 소유권 변경합니다
+- 소유권변경은 다양한 방법이 있기 때문에 상황에 따라서 사용하는 명령어 형태가 다릅니다.
+
+1. 파일이나 디렉터리의 소유자(UID)만 변경하고 싶은경우
+chown [사용자이름] [변경하고 싶은 파일이나 디렉터리]
+
+
+uid를 samadal로 변경하겠다는 의미(기존 : root)
+ex) chown samadal /backup/grub/cfg
+결과 ==> -rw-r--rw-. 1 samadal root 4317  8월 27 14:03 grub.cfg
+
+2.  파일이나 디렉터리의 그룹(GID)만 변경하고 싶은경우
+ex) chown :[그룹명][변경하고 싶은 파일이나 디렉터리]
+chown :samadal /backup/grub.cfg
+결과 ==> -rw-r--rw-. 1 samadal samadal 4317  8월 27 14:03 grub.cfg
+
+3. 파일이나 디렉터리의 UID,GID를 변경
+ex) chown [사용자명]: [변경하고싶은 파일 or 디렉터리]
+chown root: /backup/grub.cfg
+결과 ==> -rw-r--rw-. 1 root root 4317  8월 27 14:03 grub.cfg
+
+
+4. **파일이나 디렉터리의 uid,gid를 각각 다른 사용자로 한번에 변경하고 싶은경우
+chown [사용자명]:[그룹명] [변경하고 싶은 파일이나 디렉터리]
+ex) chown samadal:samadal /backup/grub.cfg
+
+
+소유권은 :대신 . 사용해도 변경가능
+ex) chown root.root /backup/grub.cfg
+
+============================================================
+FTP (file transfer Protocol)
+-우리가 사용하는 pc에서 FTP서버에 접속해서 파일을 다운,업로드 하는 환경을 제공하는 서비스
+
+윈도우 cmd에서 리눅스 cmd로 접속 방법
+1.경로변경
+C:\Users\1202-16>d:
+D:\>
+
+2. D:\>ftp 192.168.10.128
+
+3.samadal 접속
+4. pwd, cp, ls명령어 사용가능
+ls 사용시 상대경로로 사용
+
+
+5. 윈도우에서 d 드라이브에 html 파일 생성후 index.html 파일을 리눅스에서 업로드
+
+[put 명령어 사용] 
+put index.html로
+리눅스에 연결
+
+
+6. # cat /home/samadal/index.html
+내용확인가능
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<title>index.html</title>
+<head>
+</head>
+        <body>
+        <h1>안녕하세요</h1>
+        </body>
+</html>#
+
+
+7.리눅스의 html을 윈도우로 다운받기
+[get명령어 사용]
+get index.html
+
+
+
+8. 리눅스에서 firefox 실행후
+# mv /home/samadal/index.html /var/www/html/
+firefox에서 ftp주소 입력해서 
+html 실행되는지 보기
+
+
+=============================================================================
+
+허가권,소유권 최종 실습
+
+소유권 : 1) root root	2)  samadal root	3) root samadal	    4) samadal samadal
+
+허가권 : 570,375,321,273,447
+
+대상  : /var/www/html 과 /home/samadal/ 두개의 소유권 허가권 동일하게
+
+실습설명
+- /var/www/html 과 /home/samadal 디렉터리를 위에 명시한 허가권 과 소유권을 사용해서 실습을 진행합니다
+- 윈도우에서 D 혹은 E 드라이브 안에 index.html 파일을 생성하고 내용까지 입력합니다
+- 그리고 ftp로 리눅스에 접근해서 index.html 파일을 업로드 합니다(samadal 계정 사용)
+- 리눅스에서는 업로드 받은 /home/samadal/index.html 을 /var/www/html 안으로 이동시켜서
+- 홈페이지가 정상적으로 출력이 되는지 확인 합니다(index.html안에 내용일 출력이 되면 정상)
+- 홈페이지는 인터넷 주소창에 리눅스의 ip를 입력하면 확인할 수 있습니다
+
+TEST
+- 1. FTP 접속이 가능합니까?
+- 2. FTP 안에서 /home/samadal 디렉터리에 내용물 확인 가능합니까? pwd / ls -la옵션사용
+- 3. FTP 안에서 index.html이 업로드 가능합니까?
+- 4. 사이트 출력 가능합니까?
+
+주의 사항
+- 허가권,소유권을 FTP 접속한 상태에서 바꿔도 바로 적용이 안됩니다 
+  FTP를 접속해 있는 상태라면 반드시 접속을 끊고 허가권과 소유권을 바꾸고 다시 접속해서 진행합니다(quit 명령어  로 ftp 종료 가능)
+- 업로드를 할 때 마다 사용하는 index.html은 한번 실습에 사용했으면 리눅스에서 지우고 다시 윈도우에서
+  업로드를 시켜야 정상적으로 실습결과를 확인 할 수있습니다
+  (업로드하는 파일이 이미 있으면 결과가 다르게 나오기 때문)
+
+=========================================================================================
+
