@@ -1,0 +1,89 @@
+사용자 계정복구
+
+user1 일반사용자생성
+
+1. 홈디렉터리는 남아있고 passwd에서만 삭제되는 경우
+samadal 계정 삭제 
+#userdel samadal
+
+삭제되면 아직 홈디렉터리에 남아있음
+# ls -l /home/
+합계 8
+drwx------. 15  1000  1000 4096  8월 28 13:37 samadal
+drwx------   3 user1 user1 4096  8월 26 15:15 user1
+
+다시 samadal 계정만들기
+# useradd samadal
+useradd: 경고: 홈디렉터리가 이미 있습니다.
+skel 디렉터리에서 파일을 복사하지 않습니다.
+메일함 파일을 만드는 중: 파일이 있습니다
+
+# tail -1 /etc/passwd
+samadal:x:1002:1002::/home/samadal:/bin/bash
+
+
+기존 samadal과 새로운 samadal의 접근권한 x때문에
+
+1002samadal소유권을 1000samadal로변경해주기
+# chown samadal: /home/samadal
+	-------		
+     1002번samadal
+
+# chown samadal: home/samadal/.b*
+# chown samadal: home/samadal/.mozilla
+# chown samadal: home/samadal/.viminfo
+소유권 변경
+
+
+
+
+2. passwd에는 정보가 있지만 홈디렉터리가 없는경우
+# tail -1 /etc/passwd
+samadal:x:1002:1002::/home/samadal:/bin/bash
+#
+
+사용자의 홈디렉터리 없으면 passwd에 정보가 있어도 정상적인 로그인 불가능
+(skel파일없어서)
+그래서 다시사용자를 사용하고 싶다면 홈디렉터리를 직접 생성해서 사용
+
+
+
+====================================================================
+특수 권한
+set UID -----> 4000   = --s(S) --- ---
+set GID -----> 2000   = --- --s(S) ---
+Sitck Bit ----> 1000  = --- --- --t(T)
+
+대문자 특수권한 == x권한 제외
+rwS r-- -wT = 5642
+
+소문자 특수권한 == x권한 포함 
+--s rws -rwx = 6177
+
+
+특수권한 제거: (owner)u-s ,(group) g-s, (other)o-s
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
