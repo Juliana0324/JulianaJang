@@ -1,0 +1,66 @@
+/*
+ -- 점수 테이블 생성.
+CREATE TABLE scores(
+    stu_id NUMBER PRIMARY KEY,
+    stu_name VARCHAR2(30) NOT NULL,
+    kor NUMBER DEFAULT 0,
+    eng NUMBER DEFAULT 0,
+    math NUMBER DEFAULT 0,
+    total NUMBER DEFAULT 0,
+    average NUMBER(5, 2)
+);
+ */
+
+/*
+    sequence : 자동으로 순차적 증가, 순번을 반환하는 DB객체
+    보통 PK값에 중복값을 방지하기 위해 사용
+    START WITH =시작값
+    INCREMENT = 증가값==> DEFAULT값:1, 양수면 증가 음수면 감소
+    MAXVALUE= 최대값 DEFUALT =1027
+    NOCYCLE=반복 X==> 최대값 도달했을시 반복할것인가
+    NOCACHE,CACHE==> 캐시메모리에 시퀀스값을 미리할당
+*/
+CREATE SEQUENCE id_seq
+    START WITH 1 
+    INCREMENT BY 1
+    MAXVALUE 1000
+    NOCYCLE
+    NOCACHE;
+
+
+히카리 빈에 등록하기
+spring파일에 root.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- jdbc, DB관련 파일 설정-->
+	<!-- 히카리 커넥션 풀 빈 등록 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XEPDB1"/>
+		<property name="username" value="spring"/>
+		<property name="password" value="spring"/>
+	</bean>
+</beans>
+
+
+return template.query(sql, rowMapper, args);
+rowMapper==> ResultSet으로 읽어서 TYPE로 반환
+ mapRow()메서드 오버라이딩
+	
+CREATE TABLE jdbc_board(
+    board_no NUMBER PRIMARY KEY,
+    writer VARCHAR2(30) NOT NULL,
+    title VARCHAR2(100) NOT NULL,
+    content VARCHAR2(300)
+);
+CREATE SEQUENCE bid_soq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 1000
+    NOCYCLE
+    NOCACHE

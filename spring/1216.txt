@@ -1,0 +1,82 @@
+-싱글빈-
+<bean id="person" class="com.spring.basic.ex03.Person">
+	<property name="name" value="홍길동"/>
+	<property name="age" value="20"/>
+</bean>
+
+
+홍의 주소는 : com.spring.basic.ex03.Person@6e1ec318
+kim의 주소는 : com.spring.basic.ex03.Person@6e1ec318
+hong == kim??true
+
+
+
+**
+prototype을 사용하면
+prototype-config.xml
+<bean id="person" class="com.spring.basic.ex03.Person" scope="prototype">
+	<property name="name" value="홍길동"/>
+	<property name="age" value="20"/>
+</bean>
+
+
+홍의 주소는 : com.spring.basic.ex03.Person@6236eb5f
+kim의 주소는 : com.spring.basic.ex03.Person@7c1e2a9e
+hong == kim??false
+================================
+
+
+auto-config.xml에
+<!-- 자동스캔명령추가 -->
+   <context:annotation-config/>
+   
+Printer class에
+@Autowired
+public void setPaper(Paper paper) {
+	this.paper = paper;
+} 
+
+
+Autowire는 생성자도 가능하다
+public class Printer {
+	private Paper paper;
+	
+	@Autowired
+	public Printer(Paper paper) {
+		this.paper = paper;
+	}
+	
+
+
+@Autowired
+객체를 자동주입할때 사용하는 아노테이션
+스킨명령을 통해 객체를 찾아 주입하는데, 타입이름으로 검색합니다
+타입을 찾아내지 못하면 이름(id속성값)을 통해 검색합니다.
+생성자, 메서드, 필드에 적용가능합니다.
+
+
+***필드 자동주입 설정시 기본생성자가 반드시 있어야합니다.
+@Autowired
+@Qualifier("paper1")
+private Paper paper;
+	
+public Printer() { }
+
+빈을 두개 생성하면   
+<bean id="paper1" class="com.spring.basic.ex04.Paper"/>
+<bean id="paper2" class="com.spring.basic.ex04.Paper"/>
+
+자동주입시 에러
+Exception in thread "main" org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'prt': Unsatisfied dependency expressed through field 'paper'; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type 'com.spring.basic.ex04.Paper' available: 
+expected single matching bean but found 2: paper1,paper2
+
+==> 두개가 발견됐대!!!
+
+
+해결방법
+@Autowired
+@Qualifier("paper1")
+	private Paper paper;
+
+Autowire 사용시 동일 타입의 빈이 여러개가 있을 경우 
+어떤빈을 주입해야하는지 선택해 주는 추가 아노테이션
