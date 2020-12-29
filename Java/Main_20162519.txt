@@ -1,0 +1,110 @@
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
+
+trait HasName{
+    val name : String; 
+    val age : Int;
+}
+object HelloScala {
+	def main(args: Array[String]): Unit = {
+    
+	  trait Greeter extends HasName{
+    def Greeter(name:String,age:Int);
+    val greeter:String;
+    }
+  
+    trait Member extends Greeter{
+     def name{
+       this.name;
+      }
+     def age{       
+    	 LocalDate.now.getYear - birthday.getYear();
+     }
+     
+     def birthday:LocalDate
+     def greet{
+        println("Name: "+ this.name +", Age: "+ this.age);
+     }
+     
+    }
+    
+
+  trait Teacher extends Member{
+      def name:String;
+      def birthday:LocalDate;
+      def lecture:String;
+      val teaches= this.lecture;     
+  }
+
+  trait Students extends Member{
+    def name:String;
+    def birthday:LocalDate;
+    def id_no:Int;
+    def ID_no{
+      this.id_no;
+    }
+    
+
+  }
+  trait Visiting extends Students{
+    def valid_thru:LocalDate;
+    def expired{
+      LocalDate.now.isAfter(this.valid_thru);
+    }
+    def greet{
+      println(greet + ", Valid thru " +
+               valid_thru.format(DateTimeFormatter.ofPattern("YYYY-MM-dd")));
+    }
+  }
+  trait AgeSorter extends HasName{
+    def compare(m1:age,m2:age) {
+       m1.age -m2.age;
+    }
+  }
+
+	}
+class ReverseNameSorter extends HasName{
+   def compare(m1:HasName,m2:HasName) {
+       m2.name.toLowerCase.compareTo(m1.name.toLowerCase);
+    }
+}
+        
+  object Unit extends Greeter;
+  trait Greeter : new LinkedList{
+    add.greeter = Teacher("Harry", LocalDate.of(1971, 12,  7), "Programming Languages");
+    add.greeter = Teacher("Natasha", LocalDate.of(1975,  9, 21), "Forbidden Archeology");
+    add.greeter = Students("YK", LocalDate.of(1999,  3, 16), 2051);
+    add.greeter = Students("SH", LocalDate.of(2000, 10,  5), 4968);
+  
+  
+  def Alice = new Visiting{
+    ("Alice", LocalDate.of(1995, 7, 14), 9595,
+    LocalDate.of(2019, 12, 25));}
+  
+  def Vanessa = new Visiting{
+    ("Vanessa", LocalDate.of(1998, 3, 27), 9598,
+  LocalDate.of(2019, 2, 28));
+    }
+  add.greeter(Alice);
+  add.greeter(Vanessa);
+
+  System.out.println("A few CAU greeters...");
+  for (greeter:Greeter)
+  println(greeter.greet());
+  println();
+
+  Collections.sort(greeters, new AgeSorter());
+  println("Members sorted on age...");
+  for (Greeter greeter: greeter)
+    println(greeter.greet());
+    println();
+
+  Collections.sort(greeters, new ReverseNameSorter());
+  println("Members reverse sorted on name...");
+  for (Greeter greeter: greeter)
+  println(greeter.greet());
+  
+  
+  }
+}
