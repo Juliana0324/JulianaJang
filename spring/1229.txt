@@ -1,0 +1,30 @@
+기본 포트 번호 80번
+사용시 포트번호까지 입력안해도 localhost까지만 입력해도 주입가능
+
+
+<!-- get방식으로 delete하는것은 위험하다!! -->
+        <form role="form" action="<c:url value='/board/delete'/>" method="post">
+         		
+         		<input type="hidden" name="boardNo" value="${article.boardNo}">
+	          <input type="button" value="목록" class="btn"
+			style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+
+	          <input type="button" value="수정" class="btn" 
+			style="background-color: orange; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+
+	          <input type="submit" value="삭제" class="btn" onclick="return confirm('정말로 삭제하시겠습니까?')"
+			style="background-color: red; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+	        </form>
+
+
+아노테이션: 
+@PathVariable 
+==> 경로에 붙어있는 변수라는 뜻
+스프링 3버전 부터 URL경로에 변수를 포함시켜주는 방식
+
+null이나 공백이 들어가는 파라미터 값이라면 적용하지 않을 것을 추천
+파라미터값에 . 이포함 되어있다면 .뒤값은 잘린다
+
+그러고 난 다음에 GetMapping아노테이션 뒤에 
+@GetMapping("/content/{boardNo}")
+이렇게 사용
