@@ -1,0 +1,216 @@
+<script>
+const message="${msg}";
+	if(message ==="modSuccess"){
+		alert("수정이 완료!");
+	}
+//제이쿼리의 시작
+$(function() {
+	//변수는 let, 상수는 const로 선언
+
+	//바닐라 자바스크립트= 썡 자바스크립트
+	//const formElement = document.getElementById("formObj");
+	// = 
+	const formElement = $("#formObj");
+		
+	//목록버튼 클릭 이벤트 처리
+	// id가 list-btn을 가진 애를 click이 된다면 실행될 function
+	$("#list-btn").click(function() {
+		console.log("목록버튼이 클릭됨!");
+		location.href="/board/list";
+		//form의 속성을 바꿀랭
+
+		}); 
+		
+// id를 지목할때 #
+// class를 지목할때 . 
+		
+		
+//수정버튼 클릭이벤트
+const modBtn = $("#modBtn");
+modBtn.click(function() {
+console.log("수정버튼 클릭!");
+formElement.attr("action", "/board/modify");
+formElement.attr("method", "get");
+formElement.submit();
+		})
+	});
+	
+	//제이쿼리의 끝
+
+form에서 id=이름 정해주기
+
+============================================================================
+
+페이징 하는방법
+
+--페이징 
+--board_no 기준으로 조회를 할때 
+--삭제된 게시물이 있다면 10개씩 조회할때 
+--중간중간 비는 경우 발생
+--오라클의 Rownum을 사용: 쿼리가 실행될떄 결과값에 가상의 번호를 부여해줌
+--이번호를 가지고 조회하면 중간에 비는 게시물 없이 한 화면당 
+원하는 게시물 개수만큼 게시물 보여줄수 있음
+
+/*
+SELECT ROWNUM, mvc_board.* FROM mvc_board
+WHERE ROWNUM <= 20 AND ROWNUM > 10
+ORDER BY board_no DESC;
+
+위의 SQL문이 실행되지 않는 이유
+row num 은 where절이 먼저 실행되고 
+그 조건에 맞는 리스트를 먼저 검색후 해당리스트에 번호 매김
+그래서 WHERE절 빼서 쓰기
+*/
+
+SELECT * FROM (
+    SELECT ROWNUM as rn, board_no, title, content,
+    writer, reg_date, view_cnt FROM(
+        SELECT * FROM mvc_board
+        ORDER BY board_no DESC
+    )
+)WHERE rn <=20 AND rn>10;
+
+
+서브 쿼리문 안쪽부터 해석
+
+SELECT * FROM (
+    SELECT ROWNUM as rn, tbl.* FROM(
+        SELECT * FROM mvc_board
+        ORDER BY board_no ASC
+    ) tbl(별명)
+)
+WHERE rn <=10 AND rn>0;
+
+
+
+
+
+
+
+package com.spring.mvc.board;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.spring.mvc.board.commons.PageVO;
+import com.spring.mvc.board.repository.IBoardMapper;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/mvc-config.xml"})
+public class PageAlgorithmTest {
+	
+/*
+* ***** 페이징 알고리즘 만들기 ****
+#1. 사용자가 보게될 페이지 화면부터
+- 한화면에 페이지버튼을 10개씩 끊어서 보여준다면 ?
+ex) 1 2 3 4 5 .... 9 10 [다음] 
+[이전] 11 12 13... [다음] 
+
+-만약 총 게시물의 개수가 67개라면?? 
+1 2 3 4 5 6 7 
+
+-총 게시물의 수가 142개이고 현재 12 페이지에 사용자가 머물러 있다면?
+[이전] 11 12 13 14 15 
+	  	
+#2. 우선 총 게시물의 수를 조회해야 합니다
+- 총게시물은 SQL문으로 작성
+	  	
+#3.사용자가 현재 위치한 페이지를 기준으로 끝 페이지 번호를 계산하는 호직
+-만약 현재 사용자가 보고 있는 페이지가 3페이지고, 
+한화면에 보여줄 페이지 버튼이 10개라면
+끝 페이지 번호는 10번
+
+공식 : Math.ceil 
+(현재위치한 페이지번호 / 한 화면당 보여질 페이지 수)*한 화면당 보여질 페이지 수
+	 
+	 
+	 
+#4. 시작 페이지 번호 계산하기
+- 현재 위치한 페이지가 15페이지고,
+한화면에 보여줄 페이지가 10페이지씩이라면? 
+시작페이지--> 11번
+공식: (끝 페이지 번호 - 한회면에 보여줄 페이지 수) + 1
+	 
+	 
+#5 끝 페이지 보정
+-총 게시물 수 가 324개이고 한 페이지당 10개의 게시무을 보여준다
+-그리고 이사람은 31 페이지를 현재 보고 있습니다
+그리고 한 화면에 버튼 10개 배치
+그렇 다면 위 공식에 의한 끝 페이지는 몇번으로 계산? ->40번
+하지만 실제 끝페이지는 몇번까지? 
+	 	
+#5-1번 이전 버튼 활성여부 설정
+- 언제 이전버튼을 활성화/ 비활성화 시킬것인가 여부 -> 시작페이지가 1인 부분에서 비활성
+시작 번호가 1로 구해진 시점에서 비활성화, 나머지는 활성
+		
+#5-2 다음 버튼 활성화 시킬래? 
+언제 다음버튼을 비활성화 시킬래
+공식: 보정 전 끝 페이지 번호 * 한 페이지에 들어갈 게시물 수 >= 총 게시물 수 -> 비활성
+	
+* #5-4 끝 페이지 보정
+* - 다음 버튼이 비활성화 되었을 때 총 게시물 수에 맞춰 끝 페이지 번호를 재보정 합니다
+* 공식: Math.ceil(총 게시물 수 / 한 페이지에 보여줄 게시물 수)
+	 * */
+
+@Autowired
+private IBoardMapper mapper;
+	
+@Test
+public void pagingAlgorithmTest() {
+	//총게시물 구하는 수 테스트
+	System.out.println("---------------------");
+	System.out.println("총 게시물 수는? " + mapper.countArticles());
+	System.out.println("---------------------");
+	
+	//끝 
+	PageVO paging = new PageVO();
+	paging.setPage(26);
+	int displayPage = 10; //페이지 버튼 개수
+	int endPage = (int) (Math.ceil(paging.getPage() / (double)displayPage)
+		* displayPage);
+		
+	System.out.println("끝페이지 번호: "+endPage + "번");
+		
+		
+	//시작 페이지 번호 계산
+	int beginPage = (endPage - displayPage)+1;
+	System.out.println("시작 페이지번호: "+beginPage +"번");
+		
+	
+	//이전버튼 활성, 비활성 여부
+	boolean isPrev = (beginPage == 1) ? false: true;
+	System.out.println("이전 버튼 활성화 야부: "+ isPrev);
+		
+	//다음 버튼 비*활성화 여부
+	boolean isNext = (mapper.countArticles() <= (endPage * paging.getCountPerPage()));
+	System.out.println("다음 버튼 활성화 여부: "+ isNext);
+		
+	//끝 페이지 보정
+	if(!isNext) {
+		endPage=(int) Math.ceil(mapper.countArticles() / (double)paging.getCountPerPage());
+	}
+	System.out.println("보정후 끝 페이지 번호: "+ endPage + "번");
+	
+	
+	
+	
+	
+	}
+	
+	
+}
+
+
+
+
+이후 
+setArticleTotalCount에 calcDataOfPage() 넣어주기 
+
+
+public void setArticleTotalCount(int articleTotalCount) {
+		this.articleTotalCount = articleTotalCount;
+		calcDataOfPage();
+		}
