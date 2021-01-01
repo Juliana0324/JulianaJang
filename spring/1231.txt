@@ -1,0 +1,110 @@
+페이지 색넣어주기
+pc의 paging안에 page가 pageNum과 같니?
+좌(true 값):우(false 값) 	
+class="page-link ${(pc.paging.page == pageNum) ? 'page-active' : ' '}" 
+
+
+페이지에서 1로 다시 안넘기고 기존 페이지에 남아있는법
+list.jsp에서
+href="<c:url value='/board/content/${article.boardNo}?page=${pc.paging.page}'/>">
+
+BoardController에서 p로 이름 정해준뒤
+public String content(@PathVariable int boardNo, Model model,
+	@ModelAttribute("p") PageVO paging) 
+
+content.jsp에서
+$("#list-btn").click(function() {
+	console.log("목록버튼이 클릭됨!");
+	location.href="/board/list?page=${p.page}";
+
+		}); 
+		
+
+
+//페이징 처리 이후 게시글 목록 불러오기 요청
+@GetMapping("list")
+public String list(PageVO paging, Model model) {
+	List<BoardVO> list= service.getArticleList(paging);
+	System.out.println("URL: /board/list GET -> result: "+ list.size());
+	System.out.println("페이지 번호: "+ paging.getPage());
+	PageCreator pc= new PageCreator();
+	pc.setPaging(paging);
+	pc.setArticleTotalCount(service.countArticles());
+		
+	model.addAttribute("articles", list);
+	model.addAttribute("pc", pc);
+	return "board/list";
+	}
+
+
+setPaging ==> 받아줘야지 가능
+
+
+검색기능
+
+list.jsp 
+버튼 누른순간 이벤트 추가해주기!
+
+	//검색 이벤트 처리
+	$("#searchBtn").click(function() {
+	console.log("검색버튼이 클릭됨");
+	const keyword =$("#keywordInput").val();
+	//console.log("검색어: "+keyword);
+			
+	const condition = $("#condition option:selected").val();
+	// condition이라는 id이름에서 option이 selected된거의 value를 가져와
+	// console.log("검색조건: "+ condition);
+	location.href="/board/list?keyword="+ keyword
+			+ "&condition= "+ condition;
+				
+				
+			})
+
+
+매개변수 두개이상일때
+class는 상관없지만 객체형태로 보내야함
+예)
+List<BoardVO> getArticleListByTitle(PageVO paging, String keyword);
+에서 String keyword못읽음
+
+param붙혀주던가
+List<BoardVO> getArticleListByTitle(PageVO paging, @Param("keyword") String keyword);
+
+or 객체형태로 VO붙혀서 붙혀주기	
+
+
+
+
+
+<!-- 중복 되는 동적 SQL문에대한 처리 -->
+	<sql id="search">
+	<!-- 동적 SQL구문 -->
+	<if test="condition == 'title'">
+		WHERE title LIKE '%'||#{keyword}||'%'
+	</if>
+		
+	<if test="condition == 'writer'">
+		WHERE writer LIKE '%'||#{keyword}||'%'
+	</if>
+
+	<if test="condition == 'content'">
+			WHERE content LIKE '%'||#{keyword}||'%'
+	</if>
+
+		<if test="condition == 'titleContent'">
+			WHERE title LIKE '%'||#{keyword}||'%'
+			OR content LIKE '%'||#{keyword}||'%'
+		</if>
+		
+	</sql>
+
+
+MY sql에서는 CONCAT사용가능 하지만
+오라클에서는 3개이상은안돼서 
+WHERE title LIKE '%'||#{keyword}||'%'
+OR content LIKE '%'||#{keyword}||'%'
+
+이렇게 사용
+
+================================================
+uri짧게 쓰는법:
