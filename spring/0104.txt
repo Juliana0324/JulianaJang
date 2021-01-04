@@ -1,0 +1,77 @@
+@Override
+public List<BoardVO> getArticleList(SearchVO search) {
+	List<BoardVO> list = mapper.getArticleList(search);
+	//1일이내 신규글을 new 마크로 처리
+	for(BoardVO article:list) {
+		long now = System.currentTimeMillis();//현재시간을 밀리초로 리턴하는 메서드
+		//각 게시물들의 작성시간을 밀리초로 읽어오기
+		long regTime = article.getRegDate().getTime();
+		if(now - regTime < 60 * 60 * 24*1000) {
+			article.setNewMark(true);
+		}
+}
+
+		return list;
+}
+
+
+----------------------------------------------------------------------
+비동기, restAPI
+@ResponseBody 아노테이션
+: 
+리턴데이터를 viewResolver 에게 전달하지 않고
+클라이언트에게 해당데이터를 바로 응답
+
+<!--데이터를 Json형태로 파싱해주는 라이즈러리-->
+<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.8</version>
+</dependency>
+		
+
+
+@RestController
+사용시
+ResponseBody사용 안해도 됨
+
+단, //스프링 4 이상부터 사용가능
+
+
+ajax==> 비동기 통신
+화면이동 없이 서버의 통신을 처리함
+json형식 사용
+//아이디 중복검사 비동기 처리
+else{
+	//ID 중복확인 통신을 위해 id값을 가져오기
+	const id = $(this).val();
+	console.log(id);
+			
+//클라이언트에서 서버와 통신하는 ajax함수(비동기 통신)
+	$.ajax({
+	type:"POST", 	//서버에 전송하는 http방식
+	url: "/user/checkId",	//서버에 요청하는 url
+	headers:{
+	"Content-Type": "application/json"
+				},
+//요청 헤더 정보
+	dataType:"text",		//서버로부터 응답받을 데이터의 형태
+	data: id,		//서버로 전송할 데이터
+success: function(result){
+
+//함수의 매게변수는 통신 성공시 데이터가 저장될 곳,
+	console.log("통신 성공!"+result);
+if(result == "OK"){
+	$("#user_id").css("background-color", "aqua");
+	$("#idChk").html('<b style="font-size:14px; color:green;">[아이디 사용이 가능합니다!]</b>');
+
+}else{
+		$("#user_id").css("background-color", "pink");
+		$("#idChk").html('<b style="font-size:14px; color:pink;">[아이디가 중복되었습니다!]</b>');
+}
+	},
+	error:function(){
+			console.log("통신 실패!");
+				}
+				
+			});//ajax
