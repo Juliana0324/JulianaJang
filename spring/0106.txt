@@ -1,0 +1,21 @@
+암호화 방법
+System.out.println("/user/loginCheck요청~: POST");
+System.out.println("param: "+ inputData);
+BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+UserVO dbData = service.selectOne(inputData.getAccount());
+if(dbData != null) {
+	if(encoder.matches(inputData.getPassword(), dbData.getPassword())) {
+			
+
+
+인터셉터
+**preHandle: 들어오기 전에 
+postHandle: 나가기전에
+afterCompletion: 나간후 
+
+인터셉터클래스로 만드려면 
+HandlerIntercpetorAdapter클래스 상속
+public class TestInterceptor extends HandlerInterceptorAdapter {
+
+}
