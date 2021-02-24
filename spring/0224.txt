@@ -1,0 +1,19 @@
+maven기능: 라이브러리들을 자동으로 가져온다
+GroupID지정시: 거꾸로 com.spring
+	(예: com.naver)
+
+설정파일은 모두 resources에 저장
+DI란 프로그래밍에서 객체를 만들어 외부에서 주입
+
+<!-- test-config.xml에 이렇게 저장 -->
+	<!-- Hotel 객체와 의존객체들의 빈 등록 및 의존성 주입 설정 -->
+	
+	<bean id="chef" class="com.spring.basic.ex01.Chef"/>
+	
+	<bean id="res" class="com.spring.basic.ex01.Restuarant">
+		<constructor-arg ref="chef"/>
+	</bean>
+	
+	<bean id="hotel" class="com.spring.basic.ex01.Hotel">
+		<constructor-arg ref="res"/>
+	</bean>
