@@ -1,0 +1,31 @@
+void = 리턴값이 없는 자료형, 동작만 수행하고 반환되는 값이 필요없을 때 
+
+bean불러오는 방식:
+GenericXmlApplication ct 
+	= new GenericXmlApplication("classpath:db-config.xml");
+DataBaseInfo db1 = ct.getBean("db1", DataBaseInfo.class);
+	bean을 가져옴(bean의 id, 어떤 형식으로?)
+
+property name= setter메세지 이름 [예) setChef(Chef chef)]
+	ref= 빈의 id
+
+
+property사용시 : setter가 있어야 가능!
+constructor-arg: setter가 없을 시 생성자를 주입해줘야함
+
+scope = 기본값은 singleton으로 만약 다중으로 불러낼시 주소가 같다
+prototype=> 지정해주면 예) setName
+	setter를 변경해주면 두개이상의 객체로 변경가능
+
+의존 객체주입: 
+아노테이션 사용시 xml에 필수 사용!
+<context:annotation-config />
+@Autowired
+-객체를 자동주입할때 사용하는 아노테이션
+ - 스캔명령을 통해 객체를 찾아서 주입하는데 타입이름으로 검색합니다(class이름, )
+ - 타입을 찾아내지못하면 이름,즉 id속성값을 통해 검색
+ - 생성자, 필드, 메서드에 적용가능
+	 
+#@Qualifier(bean 'id')
+- Autowired를 사용할때 동일 타입의 빈이 여러개 있을경우
+어떤 빈을 주입해야할지 선택해주는 추가 아노테이션
