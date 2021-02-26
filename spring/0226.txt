@@ -1,31 +1,121 @@
-void = 리턴값이 없는 자료형, 동작만 수행하고 반환되는 값이 필요없을 때 
+<!-- 서블릿을 최신버전으로 업데이트 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 
-bean불러오는 방식:
-GenericXmlApplication ct 
-	= new GenericXmlApplication("classpath:db-config.xml");
-DataBaseInfo db1 = ct.getBean("db1", DataBaseInfo.class);
-	bean을 가져옴(bean의 id, 어떤 형식으로?)
+ <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
 
-property name= setter메세지 이름 [예) setChef(Chef chef)]
-	ref= 빈의 id
 
 
-property사용시 : setter가 있어야 가능!
-constructor-arg: setter가 없을 시 생성자를 주입해줘야함
+#1. web.xml에서 의미
+	
+	<!-- mvc와 관련된 스프링 설정파일의 위치를 지정해주는 테그 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/mvc-config.xml</param-value>
+	</context-param>
 
-scope = 기본값은 singleton으로 만약 다중으로 불러낼시 주소가 같다
-prototype=> 지정해주면 예) setName
-	setter를 변경해주면 두개이상의 객체로 변경가능
 
-의존 객체주입: 
-아노테이션 사용시 xml에 필수 사용!
-<context:annotation-config />
-@Autowired
--객체를 자동주입할때 사용하는 아노테이션
- - 스캔명령을 통해 객체를 찾아서 주입하는데 타입이름으로 검색합니다(class이름, )
- - 타입을 찾아내지못하면 이름,즉 id속성값을 통해 검색
- - 생성자, 필드, 메서드에 적용가능
-	 
-#@Qualifier(bean 'id')
-- Autowired를 사용할때 동일 타입의 빈이 여러개 있을경우
-어떤 빈을 주입해야할지 선택해주는 추가 아노테이션
+<!-- dispatcher servlet설정 -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+
+
+# 2. servlet-context.xml
+
+<!-- 아노테이션 쓰기위한 자동빈주입 -->
+<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	
+	
+	<!-- 정적자원(html, css, javascript)를 절대경로로 쉽게 매핑하는 테그 -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- view resolver 빈 등록 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+	
+	<!-- 아노테이션을 사용하여 자동으로 빈 등록을 하게 해주는 설정테그 -->
+	<context:component-scan base-package="com.spring.web" />
+	
+
+
+web.xml에서 한글인코딩
+	<!-- 한글 인코딩 필터 설정(톰캣 내부의 한글처리) -->
+	<filter>
+	    <filter-name>encodingFilter</filter-name>
+	    <filter-class>
+				org.springframework.web.filter.CharacterEncodingFilter
+			</filter-class>
+	    <init-param>
+	      <param-name>encoding</param-name>
+	      <param-value>UTF-8</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>forceEncoding</param-name>
+	      <param-value>true</param-value>
+	    </init-param>
+    </filter>
+    <!-- 위에 지정한  encodingFilter이름을 모든 패턴에 적용-->
+    <filter-mapping>
+	    <filter-name>encodingFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+
+
+
+Model객체 사용하기
+	//1. Model객체를 활용하여 화면에 데이터 전송하기
+	/*
+	 @GetMapping("/test")
+	public void test(@RequestParam("age") int age, Model model) {
+		model.addAttribute("nick", "뽀삐");
+		model.addAttribute("age", age);
+	}
+	*/
+	
+	//2. @ModelAttribute를 사용한 화면의 데이터 전송처리
+	@GetMapping("/test")
+	public void test(@ModelAttribute("age") int age, Model model) {
+		model.addAttribute("nick", "뽀삐");
+		//model.addAttribute("age", age);
+	}
+	
+	//3. ModelAndView객체를 활용한 처리
+	@GetMapping("/test2")
+	public ModelAndView test2() {
+		
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("userName", "박영희");
+//		mv.setViewName("/response/test2");
+//		return mv;
+		
+		//사용법2
+		return new ModelAndView("/response/test2", "userName", "박영희");
+	}
+}
+
