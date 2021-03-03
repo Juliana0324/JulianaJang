@@ -25,3 +25,79 @@ public class DbConnectionTest {
 	}
 	
 	}
+
+
+
+//root-context 사용용도
+<!-- JDBC, DB관련 빈을 등록하고 관리하는 설정파일 -->
+<!-- JDBC, DB관련 빈을 등록하고 관리하는 설정파일 -->
+	<!-- 히카리 커넥션을 빈 등록 -->
+	<!-- class: hikariCP의 위치 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="com.mysql.oracle.jdbc.driver.OracleDriver"/>	
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521/XEPDB1" />
+      	<property name="username" value="spring" />
+      	<property name="password" value="spring" />
+   	</bean>
+   	
+   	<!-- 히카리 데이터 소스 빈 등록 -->
+	 <bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+      <constructor-arg ref="hikariConfig" />
+   </bean>
+   
+   <!-- JDBC 템플릿 클래스 빈등록 -->
+   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+   	<property name="dataSource" ref="ds"/>
+	
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	//1. 전통적 방식의 jdbc
+	private String driver ="oracle.jdbc.driver.OracleDriver";
+	private String url="jdbc:oracle:thin:@localhost:1521/XEPDB1";
+	private String uid="spring";
+	private String upw="spring";
+	
+	
+	@Override
+	public void insertScore(ScoreVO scores) {
+		System.out.println("Repository param: "+scores);
+		Connection conn= null;
+		PreparedStatement pstmt=null;
+		
+		String sql = "INSERT INTO scores (stu_name, kor, eng, math, tot, avg) "
+				+ "VALUES (?,?,?,?,?,?)";
+				
+		
+		try {
+			Class.forName(driver);
+			conn= DriverManager.getConnection(url, uid, upw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, scores.getStuName());
+			pstmt.setInt(2, scores.getKor());
+			pstmt.setInt(3, scores.getEng());
+			pstmt.setInt(4, scores.getMath());
+			pstmt.setInt(5, scores.getTotal());
+			pstmt.setDouble(6, scores.getAverage());
+			
+			pstmt.executeUpdate();
+			System.out.println("점수등록 성공");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conn.close(); pstmt.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
