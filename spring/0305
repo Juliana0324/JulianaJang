@@ -1,0 +1,140 @@
+//sql문 template 쓰는 방법
+//ScoreDAO에서
+
+@Override
+	public void deleteScore(int stuNum) {
+		String sql="DELETE FROM scores WHERE stu_id=?";
+		template.update(sql,stuNum);
+	}
+  
+  //Query 메서드
+  query(sql,new Object[] {}, new RowMapper<Type>(){
+    익명클래스
+  })
+  
+  sql=? 를 사용하는 preparedStatement사용
+  new Object[] {값, 값}
+    - sql물음표 값을 세팅할 값을 저장
+  
+  new RowMapper<Type>()
+      - 조회 결과를 ResultSet으로 읽어 Type으로 반환
+      - 익명클래스 사용
+      - mapRow()메서드를 오버라이딩해서 사용
+      
+  //기존의 sql방법
+  @Override
+	public List<ScoreVO> selectAllScores() {
+		List<ScoreVO> list = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		String sql = "SELECT * FROM scores";
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,uid,upw);
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ScoreVO vo = new ScoreVO();
+				vo.setStuId(rs.getInt("stuId"));
+				vo.setStuName(rs.getString("stu_name"));
+				vo.setKor(rs.getInt("kor"));
+				vo.setEng(rs.getInt("eng"));
+				vo.setMath(rs.getInt("math"));
+				vo.setTotal(rs.getInt("tot"));
+				vo.setAverage(rs.getDouble("avg"));
+				
+				list.add(vo);
+			}
+			
+		}catch(Exception e2) {
+			e2.printStackTrace();
+		}finally {
+			try {
+				conn.close(); pstmt.close();rs.close();
+			}catch(Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return list;
+	}
+  
+  
+  //새로이 Mapper.java class를 생성
+  
+//JDBC Template에서 ResultSet사용을 편하게 하기 위해 만드는 클래스 생성
+public class ScoreMapper implements RowMapper<ScoreVO>{
+
+	@Override
+	public ScoreVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+		ScoreVO score= new ScoreVO();
+		score.setStuId(rs.getInt("stu_id"));
+		score.setStuName(rs.getString("stu_name"));
+		score.setKor(rs.getInt("kor"));
+		score.setEng(rs.getInt("eng"));
+		score.setMath(rs.getInt("math"));
+		score.setTotal(rs.getInt("tot"));
+		score.setAverage(rs.getDouble("avg"));
+		
+		return score;
+	}
+  
+  //DAO에 로 사용하기
+ 
+	@Override
+	public List<ScoreVO> selectAllScores() {
+		String sql = "SELECT * FROM scores";
+		ScoreMapper sm = new ScoreMapper();
+		//== RowMapper<ScoreVO> sm = new ScoreMapper();
+		
+		// rowMapper = List를 리턴해줌
+		return template.query(sql, sm);
+	}
+	
+  //익명클래스 람다 사용법
+		return template.query(sql,  (rs, rowNum)->{
+				ScoreVO score= new ScoreVO();
+				score.setStuId(rs.getInt("stu_id"));
+				score.setStuName(rs.getString("stu_name"));
+				score.setKor(rs.getInt("kor"));
+				score.setEng(rs.getInt("eng"));
+				score.setMath(rs.getInt("math"));
+				score.setTotal(rs.getInt("tot"));
+				score.setAverage(rs.getDouble("avg"));
+				
+				return score;
+				});
+		}
+	
+  
+  ////////////////////////////////////////////////////////
+		//계산기 interface와 lamda식
+		Calculator sharp = new Calculator() {
+			
+			@Override
+			public int add(int n1, int n2) {
+				System.out.println("샤프 계산기의 덧셈");
+				return n1+n2;
+			}
+		};
+		System.out.println("==================");
+		System.out.println(sharp.add(10, 15));
+		
+		//람다
+		Calculator casio = (x, y) -> {
+			System.out.println("casio계산기의 덧셈!");
+			return x+y;
+		};
+		System.out.println(casio.add(100, 200));
+	}
+  
+  
+		//더 짧은 람다
+		Calculator shaomi = (x, y)-> x+y;
+		System.out.println("샤오미: "+ shaomi.add(30, 50));
+	
+	
+  
