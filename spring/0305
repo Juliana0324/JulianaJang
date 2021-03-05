@@ -1,0 +1,31 @@
+@Override
+	public ScoreVO selectOne(int stuNum) {
+		String sql = "SELECT * FROM scores WHERE stu_id=?";
+		//중간부분에 object[] 배열을 사용해야함으로 Object[]{1,2,3,4..}
+		//template.query(sql,new Object[] {stuNum}, new ScoreMapper());
+
+		//queryForObject: Single row를 리턴할때 사용
+		//query: Multi row를 리턴할때 사용
+		
+		return template.queryForObject(sql, new ScoreMapper(), stuNum);
+	}
+  
+  //mapper를 내부클래스에 등록해서 사용가능!
+  public class ScoreDAO implements IScoreDAO {
+	
+	class ScoreMapper implements RowMapper<ScoreVO>{
+		@Override
+		public ScoreVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ScoreVO score= new ScoreVO();
+			score.setStuId(rs.getInt("stu_id"));
+			score.setStuName(rs.getString("stu_name"));
+			score.setKor(rs.getInt("kor"));
+			score.setEng(rs.getInt("eng"));
+			score.setMath(rs.getInt("math"));
+			score.setTotal(rs.getInt("tot"));
+			score.setAverage(rs.getDouble("avg"));
+			
+			return score;
+		}
+		
+	}
