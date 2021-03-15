@@ -1,0 +1,102 @@
+ 	<!-- Spring Test모듈 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+    
+     <select id="getArticle" resultMap="BoardMap">
+    	SELECT * 
+    	FROM mvc_board 
+    	WHERE board_no=#{boardNo}
+    </select>
+    
+    여기서 #{boardNo}는 
+    BoardMapper에서 가져오는거!
+     == BoardVO getArticle(Int boardNo);
+    
+    
+    <!-- JUnit test-->
+    package com.spring.mvcj.board.test;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.spring.mvcj.board.model.BoardVO;
+import com.spring.mvcj.board.repository.IBoardMapper;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/mvc-config.xml"})
+public class BoardMapperTest {
+	
+	@Autowired
+	private IBoardMapper mapper;
+	
+	//게시글 등록
+	@Test
+	public void insertTest() {
+		
+		for(int i=1; i<320; i++) {
+		
+			BoardVO article = new BoardVO();
+			article.setTitle("테스트 제목: "+i);
+			article.setWriter("김텔스트"+i);
+			article.setContent("테스트중" +i);
+			mapper.insert(article);
+			
+		}
+		System.out.println("게시물 등록 성공!");
+	}
+	
+	//게시글 목록조회 테스트
+	@Test
+	public void getListTest() {
+		
+//		List<BoardVO> list=mapper.getArticleList();
+//		for(BoardVO vo: list) {
+//			System.out.println(vo);
+//		}
+		
+		mapper.getArticleList().forEach(vo -> System.out.println(vo));
+	
+	}
+	
+	@Test
+	public void getArticleTest() {
+		BoardVO article = mapper.getArticle(44);
+		System.out.println(article);
+	}
+	
+	//수정
+	@Test
+	public void updateTest() {
+		BoardVO article = new BoardVO();
+		article.setBoardNo(1);
+		article.setTitle("수정수정");
+		article.setContent("테스트 중인데 어떻게 하지");
+		mapper.update(article);
+		System.out.println("수정후 정보: "+mapper.getArticle(1));
+	}
+	
+	@Test
+	public void deleteTest() {
+		mapper.delete(3);
+		BoardVO vo= mapper.getArticle(3);
+		if(vo== null) {
+			System.out.println("# 게시물이 없습니다");
+		}
+		else {
+			
+			System.out.println("# 게시물 정보: "+ vo);
+		}
+	}
+	
+	
+}
+
+    
