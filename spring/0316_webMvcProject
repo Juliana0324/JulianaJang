@@ -1,0 +1,46 @@
+servlet-config.xml에 추가
+<!-- 정적 자원(html, css, img, js)을 절대경로로 쉽게 매핑하는 태그 -->
+		<resources mapping="/resources/**" location="/resources/" />
+		<resources mapping="/css/**" location="/resources/css/" />
+		<resources mapping="/js/**" location="/resources/js/" />
+		<resources mapping="/img/**" location="/resources/img/" />
+		<resources mapping="/scss/**" location="/resources/scss/"/>
+		<resources mapping="/vendor/**" location="/resources/vendor"/>
+
+HomeController에 넣어두기
+@GetMapping("/introduce")
+	public String introduce() {
+		return "introduce/introduce";
+	}
+  
+  
+  
+  위치: list.jsp
+  날짜 포멧팅을 위한 테그라이브러리(JSTL fmt)
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+  
+  
+
+기존의 방식:
+<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content?boardNo=${b.boardNo}' />">
+					${b.title}
+			</a>
+</td>
+
+새로운 방식
+	<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${b.boardNo}' />">
+										${b.title}
+									</a>
+								</td>
+
+//Controller-게시물 상세 조회 요청
+//pathVariable 아노테이션
+	@GetMapping("/content/{boardNo}")
+	public String content(@PathVariable Integer boardNo, Model model) {
+		System.out.println("URL: /board/content => GET");
+		BoardVO vo = service.getArticle(boardNo);
+		System.out.println("result Data: "+vo);
+		
+		model.addAttribute("article", vo);
+		return "board/content";
+	}
