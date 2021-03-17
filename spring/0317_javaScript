@@ -33,6 +33,12 @@ jquery 사용법
 2
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+//수정 완료 알림창 처리
+const msg = "${msg}";
+if(msg === "modSuccess") {
+	alert("게시물 수정 완료!");
+}
 
 //제이쿼리의 시작
 $(function() {
@@ -57,3 +63,5 @@ $(function() {
 	 });
 });
 //제이쿼리의 끝
+
+</script>
