@@ -1,0 +1,59 @@
+jquery 사용법
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<input id="modBtn">
+아이디 지정해주기
+
+	//제이쿼리의 시작
+	$(function() {
+		
+		//수정버튼 클릭 이벤트 처리
+		var modifyBtn = document.getElementById("modBtn"); //vanila js
+		
+		 var modifyBtn = $("modBtn") //jQuery방법
+	});
+	//제이쿼리의 끝
+
+
+제이쿼리: 
+
+- 선택자
+$("#테그 아이디")
+
+자주사용하는 속성 제어 함수
+val() - 테그의 값을 확인
+attr(속성, 변경값) - 테그의 내부 속성을 변경
+attr(속성 ) - 테그 속성 여부 확인
+removeAttr() - 특정 속성 제거
+focus() - 테그의 마우스 커서 위치 시킴
+1
+
+jquery 사용법
+
+2
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+//제이쿼리의 시작
+$(function() {
+	//수정 완료 알림창
+	const msg = "${msg}"
+	if(msg == "modSuccess"){
+		alert("게시물 수정완료")
+	}
+	//변수는 let, 상수는 const로 선언(ES 2015문법)
+	//delete - post방식, modify - get방식
+	const formElement=$("#formObj");
+
+	//수정버튼 클릭 이벤트 처리
+	//var modifyBtn = document.getElementById("modBtn"); //vanila js
+	
+	 var modifyBtn = $("modBtn") //jQuery방법
+	 modifyBtn.click(function() {
+		 console.log("수정버튼이 클릭됨!");
+		 formElement.attr("action", "/board/modify");
+		 formElement.attr("method", "get");
+		 formElement.submit();
+	 });
+});
+//제이쿼리의 끝
