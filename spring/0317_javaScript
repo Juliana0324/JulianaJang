@@ -65,3 +65,93 @@ $(function() {
 //제이쿼리의 끝
 
 </script>
+
+
+--Paging 처리
+SELECT * FROM mvc_board 
+ORDER BY board_no DESC 
+LIMIT 0, 30;
+//0-30개
+
+Limit 30, 10
+// 30-40개
+페이징 테스트
+@Test
+	public void pagingTest() {
+		System.out.println("=======================================");
+		mapper.getArticleListPaging(0)
+			.forEach(vo -> System.out.println(vo));
+		System.out.println("=======================================");
+	}
+
+
+
+보드서블릿에 페이징 추가 
+	@Override
+	public List<BoardVO> getArticleListPaging(int page) {
+		page = (page-1)*10;
+		return mapper.getArticleListPaging(page);
+
+	}
+	
+	
+--페이징 처리하기
+--pageVO 만들기
+package com.spring.mvcj.commons;
+
+public class PageVO {
+	private int page; //사용자가 요청한 페이지 번호
+	private int countPerPage; //한페이지당 들어갈 게시물의 수
+	
+	
+	//처음 페이지를 틀었을때 1페이지로 맞춤
+	public PageVO() {
+		this.page = 1;
+		this.countPerPage =10;
+	}
+	
+	//클라이언트가 전달한 페이지 번호를 데이터베이스의 LIMIT절에 맞는 숫자로 반환
+	//getPageStart를 이용해서 VO에서 페이징 처리
+	public int getPageStart() {
+		return (this.page - 1) * this.countPerPage;
+	}
+	
+	....
+	
+}
+
+<select id="getArticleListPaging" resultMap="BoardMap">
+    	SELECT * 
+    	FROM mvc_board 
+    	ORDER BY board_no DESC 
+    	LIMIT #{pageStart}, #{countPerPage}
+    </select>
+    
+    
+    여기사 pageStart ==> PageVO의 getPageStart => get을 빼고 P->p로 변경
+
+
+--pageVO 에서 조건 걸어주기
+//페이지에서 0보다 작을때 
+public void setPage(int page) {
+		if(page <= 0) {
+			this.page = 1;
+			return;
+		}
+		this.page = page;
+	}
+	
+	
+//페이지에서 50개 넘어갈때 
+public void setCountPerPage(int countPerPage) {
+		if(countPerPage <=0 || countPerPage > 50) {
+			this.countPerPage =10;
+			return;
+		}
+		this.countPerPage = countPerPage;
+	}
+	
+	
+	
+	
+	
