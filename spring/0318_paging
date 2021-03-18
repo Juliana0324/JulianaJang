@@ -1,0 +1,148 @@
+
+	/*
+	 ***페이징 알고리즘 만들기
+	 #1. 사용자가 보게될 페이지 화면
+	 - 한 화면에 페이지를 10개씩 끊어서 보여준다면?
+	 ex) 1,2,3,4, ... 9,10 [다음] // 
+	 
+	 -만약에 총 게시물의 수가 67개라면?
+	 ex) 1,2,3,4,5,6,7 // 이전 다음 비활성화
+	 
+	 - 총 게시물 수가 142개이고 현제 12페이지에서 사용자가 머물렀다면
+	 ex) [이전] 11 12 13 14 15 
+	 
+	 
+	 #2. 총 게시물의 수를 조회해야함
+	 - 총 게시물의 수는 DB로부터 수를 조회하는 SQL을 작성
+	  SELECT COUNT(*) FROM mvc_board;	#319개
+	  
+	  
+	 #3. 사용자가 현재 위치한 페이지를 기준으로 
+	  	끝 페이지 번호를 계산하는 로직 작성
+	  	
+	  	-만약 현재 사용자가 보고있는 페이지가 3페이지고 한화면에 
+	  	보여줄 페이지가 10페이지씩이라면?
+	  	-> 페이지 끝번호는? 10페이지
+	  	
+	  	- 만약 현재 페이지가 37페이지
+	  	한화면에 보여줄 페이지가 20페이지     > #40
+	  	
+	  	-공식: 올림(현재 위치한 페이지 번호 / 한 화면당 보여질 페이지의 수) * 한 화면당 보여질 페이지의 수 
+	  		Math.ceil ==> 올림
+	  		
+	 ///////////////////////////////////////////////////////////////////
+	 
+	 #4. 시작페이지 번호 계산하기
+	 - 현재 위치한 페이지 15페이지 이고, 한화면에 보여줄 페이지가 10페이지라면?
+	 -> 시작페이지 번호는? 11페이지
+	 
+	 - 현재 위치한 페이지가 73페이지고 , 한화면에 보여줄 페이지가 20?
+	 	-> 시작페이지: 60
+	  
+	  공식: (끝 페이지 번호 - 한화면에 보여줄 페이지의 수) +1 
+	  
+	  
+	  #5. 끝페이지 보정
+	  - 총 게시물의 수가 324개 이고, 한 페이지당 10개의 개시물을 보여준다면
+	  - 현재 나는 31페이지를 보고있고
+	  - 한 화면당 10 개씩페이지 보여주고있다
+	  - 이때 끝 페이지는? 40
+	  - 실제 페이지는? 33페이지
+	  
+	  
+	  #5-1 이전버튼 활성여부 
+	  - 언제 이전버튼을 비활성화할건가? 
+	  	= 시작페이지가 1인 부분에서 비활성
+	  - 공식: 시작페이지가 1로 구해진 시점에서 비활성화 처리. 나머지는 비활성
+	  
+	  
+	   #5-3 끝페이지 값 보정
+	   - 다음 버튼이 비활성화 되었을 때 총 게시물 수에 맞춰 끝 페이지 번호를 재보정한다
+	   - 공식: Math.ceil(총 게시물의 수/ 한페이지에 보여줄 게시물 수)
+	   
+	  #5-2 다음버튼 활성여부
+	  - 언제 다음 버튼을 비활성화? 
+	   - 공식: 보정전 끝페이지 번호 * 한페이지에 들어갈 게시물 수 >= 총게시물 수 
+	   ==> 비활성 
+	 * */
+	@Autowired
+	private IBoardMapper mapper;
+	
+	@Test
+	public void pagingAlgorithmTest() {
+		System.out.println("=========================================");
+		System.out.println("# 총 게시물의 수: "+ mapper.countArticles());
+		System.out.println("=========================================");
+	
+		
+		//끝 페이지 번호 계산 테스트
+		PageVO paging = new PageVO();
+		paging.setPage(31);
+		int displayPage = 10;
+				
+		int endPage = (int)Math.ceil(paging.getPage() / (double)displayPage) 
+								* displayPage;
+		System.out.println("끝 페이지 번호: " + endPage + "번");
+		System.out.println("===========================================");
+				
+		
+		
+		//시작 페이지
+		int beginPage = (endPage - displayPage)+1;
+		System.out.println("시작페이지 번호: " + beginPage + "번");
+		
+		//이전버튼 활성화 여부:
+		boolean isPrev = (beginPage == 1)? false : true;
+		System.out.println("이전버튼활성화 여부: "+ isPrev);
+		
+		//끝 페이지 보정
+		int temp= endPage = (int)Math.ceil(mapper.countArticles() / (double)paging.getCountPerPage());
+		
+		//재보정여부 판단
+		if(endPage >temp) {
+			endPage = temp;
+		}
+		
+		boolean isNext= (mapper.countArticles() <= (endPage* paging.getCountPerPage()))? false : true;
+		System.out.println("다음버튼 활성화 여부: "+ isNext);
+		
+		System.out.println("===========================================");
+		
+		
+		System.out.println("보정후 끝페이지: "+endPage +"페이지");
+		System.out.println("===========================================");
+		
+	}
+	
+	
+	
+	
+	
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//페이징 처리 이후 게시글 목록 불러오기 요청
+	@GetMapping("/list")
+	public String list(PageVO paging, Model model) {
+		List<BoardVO> list = service.getArticleListPaging(paging);
+
+		System.out.println("URL: /board/list GET -> result: " + list.size());
+		System.out.println("parameter(페이지 번호): "+paging.getPage() + "번");
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(paging);
+		pc.setArticleTotalCount(service.countArticles());
+		System.out.println(pc);
+		//콘솔 PageCreator [paging=PageVO [page=32, countPerPage=10], articleTotalCount=327, beginPage=31, endPage=33, prev=true, next=false, displayPageNum=10]
+
+		
+		
+		//list.forEach(article -> System.out.println(article));
+		model.addAttribute("articles", list);
+		model.addAttribute("pc", pc);
+		return "board/list";
+	}	
