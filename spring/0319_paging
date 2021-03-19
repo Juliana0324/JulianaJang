@@ -1,0 +1,115 @@
+	//게시물 상세 조회 요청
+	@GetMapping("/content/{boardNo}")
+	public String content(@PathVariable Integer boardNo, Model model
+			, @ModelAttribute("p") PageVO paging) {
+		System.out.println("URL: /board/content => GET");
+		System.out.println("parameter(글 번호): " + boardNo);
+		BoardVO vo = service.getArticle(boardNo);
+		System.out.println("Result Data: " + vo);
+		model.addAttribute("article", vo);
+		return "board/content";
+	}
+  
+  paging에서 ModelAttribute로 p를 받아와서
+  content.jsp로 넘겨준다
+  
+  content.jsp에서 id값 지정
+   <input type="button" value="목록" class="btn" id="list-btn" 
+			style="background-color: #643691; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
+      
+      
+//자바스크립트
+	//목록버튼 클릭 이벤트 처리
+		$("#list-btn").click(function() {
+			console.log("목록 버튼이 클릭됨!");
+			location.href="/board/list?page=${p.page}&countPerPage=${p.countPerPage}"
+					+ "&keyword=${p.keyword}&condition=${p.condition}";
+		});
+    
+    
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    
+   //#IBoardMapper.java  
+	//제목으로 검색기능
+	List<BoardVO> getArticleListByTitle(SearchVO search);
+  
+  
+  SearchVO 만들기
+
+public class SearchVO extends PageVO {
+
+	private String keyword;
+	private String condition;
+	
+	//아무것도 검색 안할시 기본값
+	public SearchVO() {
+		this.keyword = "";
+		this.condition="";
+	}
+	
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	public String getCondition() {
+		return condition;
+	}
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+	
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+   //BoardMapper.xml
+    <select id="getArticleListByTitle" resultMap="BoardMap">
+    	SELECT * FROM mvc_board 
+  		WHERE title LIKE CONCAT('%', #{keyword}, '%')
+	  	ORDER BY board_no DESC
+	  	LIMIT #{pageStart}, #{countPerPage}; 
+    </select>
+    
+//    CONCAT을 사용해서 병합
+
+
+///////////////////////////////////////////////////
+//제목으로 검색 이후 게시물 수 조회기능
+	Integer countArticlesByTitle();
+  
+  SQL 
+  -- 검색이후 게시물 숫자 가져오기
+select count(*) 
+from mvc_board 
+where title like '%3%';
+
+
+
+//boardController
+//검색 처리 이후 게시글 목록 불러오기 요청
+			pc.setArticleTotalCount(service.countArticlesByTitle(search));
+countArticlesByTitle로 바꿔주기
+
+
+
+
+list.jsp
+//자스 코드
+		$("#searchBtn").click(function(){
+			console.log("검색버튼이 클릭됨!");
+			const keyword= $("#keywordInput").val();
+			console.log("검색어: "+keyword);
+			
+			location.href="/board/list?keyword="+keyword;
+		});
+		
+		$("#keywordInput").keydown(function (key){
+			if(key.keyCode == 13){//13번이 enter키
+				$("#searchBtn").click();
+			}
+		});
+
+	
