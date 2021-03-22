@@ -1,0 +1,64 @@
+//BoardService
+  @Override
+	public List<BoardVO> getArticleList(SearchVO search) {
+		List<BoardVO> list = mapper.getArticleList(search);
+		
+		//1일 이내 신규글 new마크 로직
+		for(BoardVO article:list) {
+			//현재시간 읽어오기
+			long now = System.currentTimeMillis(); //밀리초로 읽기 
+			long regTime = article.getRegDate().getTime();
+			
+			if(now - regTime < 60 * 60 * 24 * 1000) {
+				article.setNewMark(true);
+			}
+		}
+		
+		return list;
+	}
+  
+  
+  
+  //list.jsp
+  <!-- 게시물이 들어갈 공간 -->
+						<c:if test="${articles.size() > 0}">
+						<c:forEach var="b" items="${articles}" >
+							<tr style="color: #ff52a0;">
+								<td>${b.boardNo}</td>
+								<td>${b.writer}</td>
+
+								<td>
+									<a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${b.boardNo}${param.page == null ? pc.makeURI(1) : pc.makeURI(param.page)}' />">
+										${b.title}
+									</a>
+									&nbsp;
+									<c:if test="${b.newMark}">
+										<span class="badge badge-pill badge-danger">new</span>
+									</c:if>
+                  
+                  
+                  
+                  
+                  
+                  
+///////////////////////////////////////////////////////////////////////////
+//조회수 게시물 상승 처리
+
+//IBoardMapper.java
+//게시물 상승 처리 추가
+	void updateViewCnt(Integer boardNo);
+
+  <update id="updateViewCnt">
+    	UPDATE mvc_board 
+    	SET view_cnt = view_cnt + 1 
+    	WHERE board_no = #{boardNo}
+    </update>
+
+
+
+//boardService
+@Override
+	public BoardVO getArticle(int boardNo) {
+		mapper.updateViewCnt(boardNo);
+		return mapper.getArticle(boardNo);
+	}
