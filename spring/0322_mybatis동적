@@ -1,0 +1,156 @@
+기존 다 삭제후
+IBoardMapper
+List<BoardVO> getArticleList(SearchVO search);
+		
+		Integer countArticles(SearchVO search);
+    
+    추가
+    
+ BoardController.java
+ 	//검색 처리 이후 게시글 목록 불러오기 요청
+		@GetMapping("/list")
+		public String list(SearchVO search, Model model) {
+
+			String condition = search.getCondition();
+			System.out.println("parameter(페이지 번호): "+search.getPage() + "번");
+			System.out.println("검색 조건: "+ condition);
+			System.out.println("검색어: "+ search.getKeyword());
+			
+			PageCreator pc = new PageCreator();
+			pc.setPaging(search);
+
+*			List<BoardVO> list= service.getArticleList(search);
+*			pc.setArticleTotalCount(service.countArticles(search));
+			
+			model.addAttribute("articles", list);
+			model.addAttribute("pc", pc);
+			return "board/list";
+
+
+수정
+
+
+
+BoardMapper.xml
+ 	<!-- 동적 SQL구문 -->
+    	<if test="condition == 'title'">
+    	WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	<if test="condition == 'writer'">
+    	WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	<if test="condition == 'content'">
+    	WHERE content LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	   <if test="condition == 'titleContent'">
+    	WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    	OR content LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+      
+      
+      
+      
+        <!-- 중복되는 동적 SQL문에 대한 처리 -->
+    <sql id="search">
+     	<!-- 동적 SQL구문 -->
+    	<if test="condition == 'title'">
+    	WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	<if test="condition == 'writer'">
+    	WHERE writer LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	<if test="condition == 'content'">
+    	WHERE content LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    	   <if test="condition == 'titleContent'">
+    	WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    	OR content LIKE CONCAT('%', #{keyword}, '%')
+    	</if>
+    </sql>
+    
+    
+    //include 테그 사용
+    
+      <select id="getArticleList" resultMap="BoardMap">
+    	SELECT * 
+    	FROM mvc_board 
+		<include refid="search" />
+    	ORDER BY board_no DESC 
+    	LIMIT #{pageStart}, #{countPerPage}
+    </select>
+    
+    
+  
+  ///////////////////////////////////////////////////////////////////////////////
+  commons/PageCreator.java
+  //URI 파라미터를 쉽게 만들어주는 유틸메서드 선언
+  // =  UriComponentsBuilder
+	public String makeURI(Integer page) {
+		UriComponents ucp = UriComponentsBuilder.newInstance()
+							.queryParam("page", page)
+							.queryParam("countPerPage", paging.getCountPerPage())
+							.queryParam("keyword", ((SearchVO)paging).getKeyword())
+							.queryParam("condition", ((SearchVO)paging).getCondition())
+							.build();
+		return ucp.toUriString();
+	}
+  
+  
+  
+  //list.jsp에서
+  //makeURI를 받아오기
+  
+  <!-- 페이지 버튼 -->
+						<c:forEach var="pageNum" begin="${pc.beginPage}" end="${pc.endPage}">
+							<li class="page-item">
+							   <a href="<c:url value='/board/list${pc.makeURI(pageNum)}'/>" class="page-link ${(pc.paging.page == pageNum) ? 'page-active' : ''}" style="margin-top: 0; height: 40px; color: pink; border: 1px solid pink;">${pageNum}</a>
+							</li>
+					    
+					    </c:forEach>
+					    
+              
+
+
+					<!-- 검색 버튼 -->
+          <!-- param으로 가져와서 만약 title을 선택시 유지되게 하기-->
+					<div class="row">
+						<div class="col-sm-2"></div>
+	                    <div class="form-group col-sm-2">
+	                        <select id="condition" class="form-control" name="condition">                            	
+	                            <option value="title" ${param.condition == 'title' ? 'selected' : ''}>제목</option>
+	                            <option value="content" ${param.condition == 'content' ? 'selected' : ''}>내용</option>
+	                            <option value="writer" ${param.condition == 'writer' ? 'selected' : ''}>작성자</option>
+	                            <option value="titleContent" ${param.condition == 'titleContent' ? 'selected' : ''}>제목+내용</option>
+	                        </select>
+	                    </div>
+                      
+                      
+
+//if로잡아주고 검색 결과가 없을때 "검색결과가 없습니다" 출력
+	<!-- 게시물이 들어갈 공간 -->
+						<c:if test="${article.size() <= 0}">
+							<tr>
+								<td colspan="5" align="center">
+									<strong>검색 결과가 없습니다!</strong>
+								</td>
+							</tr>
+						</c:if>
+						<c:if test="${articles.size() > 0}">
+						<c:forEach var="b" items="${articles}" >
+							<tr style="color: #ff52a0;">
+								<td>${b.boardNo}</td>
+								<td>${b.writer}</td>
+
+								<td><a style="margin-top: 0; height: 40px; color: orange;" href="<c:url value='/board/content/${b.boardNo}?page=${pc.paging.page}&countPerPage=${pc.paging.countPerPage}' />">
+										${b.title}
+									</a>
+								</td>
+
+								<td>
+									<fmt:formatDate value="${b.regDate}" pattern="yyyy년 MM월 dd일 a hh:mm" />	   
+								</td>
+								<td>${b.viewCnt}</td>
+							</tr>
+						</c:forEach>
+						</c:if>
+    
