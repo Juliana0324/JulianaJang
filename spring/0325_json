@@ -1,0 +1,69 @@
+	<!-- json형태로 파싱해주는 라이브러리 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.8</version>
+		</dependency>
+		
+    	/*
+	 # 	@ResponseBody
+		-리턴 데이터를 viewResolver에 전달하지 않고 
+		클라이언트에게 해당 데이터를 바로 응답하게 한다
+	 * */
+	
+	
+	@GetMapping("/hello")
+	@ResponseBody
+	public String hello() {
+		return "Hello world!";
+	}
+  
+  기존 hello world.jsp를 찾았다면
+  ResponseBody사용해서 바로 출력가능
+  
+  
+  
+  //@Controller
+@RestController //스프링 4이상부터 사용가능
+@RequestMapping("/rest")
+public class RestControllerTest {
+	/*
+	 # 	@ResponseBody
+		-리턴 데이터를 viewResolver에 전달하지 않고 
+		클라이언트에게 해당 데이터를 바로 응답하게 한다
+	 * */
+	
+	
+	@GetMapping("/hello")
+	@ResponseBody
+	public String hello() {
+		return "Hello world!";
+	}
+	
+	@GetMapping("/hobbys")
+	public List<String> hobbys(){
+		List<String> hobbys = Arrays.asList("축구", "수영", "음악감상");
+		return hobbys;
+	}
+	
+	@GetMapping("/study")
+	@ResponseBody
+	public Map<String, Object> study(){
+		Map<String, Object> subject = new HashMap<>();
+		subject.put("java", "자바");
+		subject.put("JSP", "Java Server Pages");
+		subject.put("Spring", "spring framework");
+		return subject;
+		
+	}
+	
+	@GetMapping("/person")
+	@ResponseBody
+	public Person person() {
+		Person p =new Person();
+		p.setName("김철수");
+		p.setAge(20);
+		p.setHobbys(Arrays.asList("수영", "축구", "요리"));
+		return p;
+	}
+}
