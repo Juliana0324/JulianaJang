@@ -1,0 +1,91 @@
+
+//인터셉터클래스를 만드려면 HandlerInterceptorAdapter클래스 상속
+public class TestInterceptor extends HandlerInterceptorAdapter{
+	
+	//preHandle은 특정 컨트롤러에 진입하기전에 공통처리할 내용을 작성
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+
+		System.out.println("테스트인터셉터에 preHandle이 작동!");
+		return true; //true가 리턴되면 컨트롤러로 진입, false로 리턴되면 진입실페
+	}
+	
+	//postHandle은 컨트롤러를 나갈때 공통처리해야할 내용을 작성
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		System.out.println("테스트인터셉터에 postHandle이 작동!");
+		
+		Object data = modelAndView.getModel().get("data");
+		
+		if(data != null) {
+			request.getSession().setAttribute("data", data);
+			response.sendRedirect("/test1");
+		}
+	}
+  
+  
+  //servlet-config
+  	<!-- 인터셉터 빈등록 -->
+	<beans:bean id="testInterceptor" class="com.spring.mvcj.commons.interceptor.TestInterceptor"/>
+			
+	<interceptors>
+		<interceptor>
+			<mapping path="test1"/>
+			<mapping path="test2"/>
+			<beans:ref bean="testInterceptor" />
+		</interceptor>
+	</interceptors>
+</beans:beans>
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+	<!-- 인터셉터 빈등록 -->
+	<beans:bean id="testInterceptor" class="com.spring.mvcj.commons.interceptor.TestInterceptor"/>
+	<beans:bean id="boardInterceptor" class="com.spring.mvcj.commons.interceptor.BoardInterceptor"/>
+			
+	<interceptors>
+		<interceptor>
+			<mapping path="test1"/>
+			<mapping path="test2"/>
+			<beans:ref bean="testInterceptor" />
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/write"/>
+			<mapping path="/board/modify"/>
+			<mapping path="/board/delete"/>
+			<beans:ref bean="boardInterceptor" />
+		</interceptor>
+	</interceptors>
+</beans:beans>
+
+
+//boardInterceptor
+@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		System.out.println("게시판 인터셉터 발동! : 회원인지 아닌지 판별");
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("login") == null) {
+			System.out.println("회원 인증 실패");
+			//response.sendRedirect("/");
+			//홈으로 가기
+			
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			String element = "<script>"
+					+ "alert('로그인을 하세요!')"
+					+ "location.href='/';"
+					+ "</script>";
+			out.print(element);
+			out.flush();
+			out.close();
+			return false;
+		}
+
+		return true;
+	}
+}
