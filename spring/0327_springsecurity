@@ -1,0 +1,151 @@
+		<!-- spring security 모듈 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+IUserService.java
+  //비밀번호 암호화 인코딩
+		BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+		System.out.println("암호화전: "+user.getPassword());
+		
+		//비밀번호를 암호화하여 다시 user객체에 저장
+		String securePw = encoder.encode(user.getPassword());
+		user.setPassword(securePw);
+		System.out.println("암호화 후: " +securePw);
+		mapper.register(user);
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    //내부적 디코딩
+    	@Test
+	public void loginTest() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String inputId = "abc1234";
+		String inputPw = "1234";
+		UserVO dbData = mapper.selectOne(inputId);
+		String dbPw = dbData.getPassword();
+		
+		System.out.println("입력된 비밀번호: "+inputPw);
+		System.out.println("DB에 등록된 비밀번호: "+dbPw);
+		
+//		System.out.println("비밀번호 일치?? "+ inputPw.equals(dbPw));
+		System.out.println("비번 일치? "+encoder.matches(inputPw, dbPw));
+		
+	}
+  
+  
+  
+  //UserController
+  //로그인 요청처리
+	@PostMapping("/loginCheck")
+	public String loginCheck(@RequestBody UserVO inputData) {
+		String result = null;
+		
+		/*
+		 클라이언트가 전송한 id값과 PW값을 가지고 DB에서 회원정보를 
+		 	조회해서 불러온다음 값을 비교해
+		 	1. 아이디가 없을 경ㅇ우 클라리언트 측으로 문자열 "Idfail"
+		 	2. 비밀번호가 틀렸을 경우 문자열 "pwfail"전송
+		 	3. 로그인 성공시 문자열 "logSuccess" 전송
+		 */
+		System.out.println("/user/loginCheck 요청: POST");
+		System.out.println("Parameter: "+ inputData);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		UserVO dbData = service.selectOne(inputData.getAccount());
+		
+		if(dbData != null) {
+			if(encoder.matches(inputData.getPassword(), dbData.getPassword())) {
+				result="loginSuccess";				
+			}else {
+				result="pwFail";
+			}
+			
+		}else {
+			System.out.println("아이디가 없습니다!");
+			result="Idfail";
+		}
+		
+			return result;
+	}
+  
+  
+  
+  ////////////////////////////////////////////////////////////////////////////////////////////////////
+  //회원제 
+  	@PostMapping("/loginCheck")
+	public String loginCheck(@RequestBody UserVO inputData,
+					/*HttpServletRequest request*/
+					HttpSession session) {
+		//서버에서 세션객체를 얻는방법
+		//1. HttpServletRequest객체사용
+		//HttpSession session = request.getSession();
+		
+		//2. HttpSession객체 사용
+		
+		String result = null;
+    .
+    .
+    .
+    	
+		if(dbData != null) {
+			if(encoder.matches(inputData.getPassword(), dbData.getPassword())) {
+				session.setAttribute("login", dbData);
+				result="loginSuccess";				
+			}else {
+				result="pwFail";
+			}
+			
+		}else {
+			System.out.println("아이디가 없습니다!");
+			result="Idfail";
+		}
+    
+    
+
+//header.jsp
+//login이 널이면
+<c:if test="${login == null}" >
+//<c:if test="${empty login}" >
+
+	          <li class="nav-item">
+	            <a class="nav-link js-scroll-trigger" data-toggle="modal" data-target="#log-in">LOGIN</a>
+	          </li>
+          </c:if>
+//login이 널이 아니면
+<c:if test="${login != null}" >
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#">MYPAGE</a>
+          </li>
+          
+          
+          
+          
+          
+	
+	//로그아웃 처리
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpSession session) {
+		
+		System.out.println("/user/logout 요청");
+		
+		//RestController에서도 ModelAndView 사용하면 ViewResolver잡음
+		UserVO user = (UserVO)session.getAttribute("login");
+		
+		if(user !=null) {
+			session.removeAttribute("login");
+			session.invalidate();
+		}
+		
+		return new ModelAndView("redirect:/");
+	}
+	
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+   //write.jsp
+   //작성자 쓰지 않아도 자동등록
+   <div class="form-group" hidden="hidden">
+            <label>작성자</label>
+            <input type="hidden" class="form-control" name='writer' value="${login.name}">
+          </div>
