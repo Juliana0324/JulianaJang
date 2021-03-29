@@ -1,0 +1,85 @@
+login_modal.jp
+  //로그인 버튼 클릭이벤트
+	$("#signIn-btn").click(function() {
+		if(chk1 && chk2) {
+			//ajax통신으로 서버에서 값 받아오기
+			const id = $('#signInId').val();
+			const pw = $('#signInPw').val();
+			//자동로그인
+			const autoLogin = $("input[name=autoLogin]").is(":checked");
+			//check되었나요?
+			
+			
+			console.log("id: " + id);
+			console.log("pw: " + pw);
+			console.log("auto: "+autoLogin)
+
+			const userInfo = {
+					account : id,
+					password : pw,
+					autoLogin: autoLogin
+			};
+
+
+//UserVO에 추가
+//자동로그인
+	private boolean autoLogin;
+	
+  
+//UserController에서 쿠키 생성
+//로그인 요청처리
+	@PostMapping("/loginCheck")
+	public String loginCheck(@RequestBody UserVO inputData,
+					/*HttpServletRequest request*/
+					HttpSession session,
+					HttpServletResponse response) {
+		//서버에서 세션객체를 얻는방법
+		//1. HttpServletRequest객체사용
+		//HttpSession session = request.getSession();
+		
+		//2. HttpSession객체 사용
+		
+		String result = null;
+		
+		/*
+		 클라이언트가 전송한 id값과 PW값을 가지고 DB에서 회원정보를 
+		 	조회해서 불러온다음 값을 비교해
+		 	1. 아이디가 없을 경ㅇ우 클라리언트 측으로 문자열 "Idfail"
+		 	2. 비밀번호가 틀렸을 경우 문자열 "pwfail"전송
+		 	3. 로그인 성공시 문자열 "logSuccess" 전송
+		 */
+		System.out.println("/user/loginCheck 요청: POST");
+		System.out.println("Parameter: "+ inputData);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		UserVO dbData = service.selectOne(inputData.getAccount());
+		
+		if(dbData != null) {
+			if(encoder.matches(inputData.getPassword(), dbData.getPassword())) {
+				session.setAttribute("login", dbData);
+				result="loginSuccess";	
+				
+        //90일 기준
+				long limitTime = 60 * 60 * 24 * 90;
+				
+				if(inputData.isAutoLogin()) {
+					System.out.println("자동로그인 쿠키생성중 ..");
+					Cookie loginCookie = new Cookie("loginCookie", session.getId());
+					loginCookie.setPath("/");
+					loginCookie.setMaxAge((int)limitTime);
+					
+					response.addCookie(loginCookie);
+				}
+				
+			}else {
+				result="pwFail";
+			}
+			
+		}else {
+			System.out.println("아이디가 없습니다!");
+			result="Idfail";
+		}
+		
+			return result;
+	}
+  
