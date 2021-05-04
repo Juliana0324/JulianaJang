@@ -1,0 +1,102 @@
+manage.py -> 장고 프로젝트와 코드 연결해주는 파일. 간단한 수준의 개발에서는 다루지 않습니다.
+
+mysite/ _init_.py -> 이 파일이 열려있어야 장고 프로젝트 파일들이 하나의 덩어리로 인식됩니다.
+클래스의 _init_() 과 역할이 비슷하다.
+
+mysite/settings.py -> 프로젝트 환경설정 및 언어 설정 등등 전반적 설정을 다 작성하게 됩니다.
+mysite/urls.py -> 장고 내부 페이지 접근 시 사용할 url들을 저장하는 파일입니다.
+mysite/wsgi.py -> 장고를 추후 배포할 때 설정해줘야 하는 파일
+
+슈퍼유저
+mysite=> django-migrate
+cmd 창
+D:\Com_JJW\python\mysite>python manage.py createsuperuser
+Username (leave blank to use 'chian'): admin
+Email address: admin@admin.co.kr
+Password: (python01)
+Password (again):
+Superuser created successfully.
+
+만든 슈퍼계정을 오픈한 다음
+http://127.0.0.1:8000/admin
+
+우클릭 django - create application - polls
+views.py 
+
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+
+def index(request):
+    return HttpResponse("Hello world!")
+
+url지정=URL
+polls에 urls.py생성하기
+
+'''
+path의 순서 
+"" -> 어떤 url로 경로 지저했을 때 어떤 패턴을 주시오
+views에 있는 index실행
+'''
+from django.urls import path
+from . import views
+urlpatterns = [
+        path("", views.index, name='index'),
+    ]
+
+------------------------------------------------
+mysite에있는 urls.py
+두개의 도메인 사용
+from django.contrib import admin
+from django.urls import include,path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('polls/', include('polls.urls')),
+]
+
+
+문제
+polls/ 1차 URL패턴에 새로운 패턴 추가
+1."main" -> views.py에 main이라는 함수 생성후 "메인 페이지 입니다"문구 출력
+2. "test" -> views.py에 start라는 함수 생성후 콘솔에 "테스트 중입니다 출력"
+웹 페이지에는 <h1>테그 적용한 "테스트 중에는 서비스를 사용할 수 없습니다" 출력
+
+polls urls.py에
+urlpatterns = [
+        path("", views.index, name='index'),
+        path("main", views.main, name='main'),
+        path("test", views.start, name='start'),
+    ]
+
+
+views.py에
+
+def index(request):
+    return HttpResponse("첫번째 장고 페이지 : HttpResponse 사용시 반드시  return ")
+
+def main(request):
+    return HttpResponse("메인 페이지 입니다.")
+
+def start(request):
+    print("테스트 중입니다.")
+    return HttpResponse("<h1>테스트 중에는 서비스 사용이 불가능 합니다.</h1>")
+
+
+include 사용=> admin을 제외한 모든것
+
+GET방식
+사용자의 요청받기
+def getreq(request):
+    return HttpResponse(request.GET)
+
+[ ] 안에 value값 삽입방법	: 
+def getreq(request):
+    name = request.GET['name']
+    age = request.GET['age']
+    return HttpResponse(name,age)
+
+http페이지에
+http://127.0.0.1:8000/polls/getreq?name=jjw&age=20
+사용시
+출력
