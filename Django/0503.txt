@@ -94,7 +94,7 @@ def getreq(request):
 def getreq(request):
     name = request.GET['name']
     age = request.GET['age']
-    return HttpResponse(name,age)
+    return HttpResponse(name + age)
 
 http페이지에
 http://127.0.0.1:8000/polls/getreq?name=jjw&age=20
