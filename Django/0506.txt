@@ -1,0 +1,46 @@
+def getreq(request):
+    #name = request.GET['name']
+    #age = request.GET['age']
+    #입력값이 없으면 못받아주지만 GET.get사용시 null값이여도 에러가 안남
+    name = request.GET.get('name')
+    age = request.GET.get('age')
+    return HttpResponse(name+age)
+
+이름,나이 수정
+    name = request.GET.get('name')
+    age = request.GET.get('age')
+    text = "당신의 이름은 " + str(name) + ", 나이는 " +str(age)
+    return HttpResponse(text)
+
+문제1.
+1차 url djangoq/
+2차 url getbmi로 두고
+cm 파라미터로 키를, kg 파라미터로 
+체중을 받아서 bmi 지수를 구해서 <h1>테그를 받아서 출력하는 로직
+bmi 공식
+체중 / 키(m)의 제곱
+키 175cm==> 키 1.75m
+=========================================
+mysite에 2차 url 추가
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('polls/', include('polls.urls')),
+    path('djangoq/', include('djangoq.urls')),
+]
+
+views에 
+
+from django.shortcuts import render
+from django.http import HttpResponse
+def getbmi(request):
+    cm  = float(request.GET.get('cm'))
+    kg = float(request.GET.get('kg'))
+    m = cm/100
+    bmi = kg / (m ** 2)
+    text="<h1>당신의  bmi는 "+ str(round(bmi,3))+ "입니다.</h1>"
+    return HttpResponse(text)
+
+
+http에 적기
+http://127.0.0.1:8000/djangoq/getbmi?cm=161&kg=50
+당신의 bmi는 19.289입니다.
