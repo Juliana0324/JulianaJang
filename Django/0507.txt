@@ -1,0 +1,111 @@
+문제
+1차 url djangoq/
+2차 url exchange/
+를 두고 함수 exchange 를 만들어 주세요
+이 함수는 네이버등에서 특정 국가 환율을 검색하면 환율이 나옵니다.
+환율수치를 rate변수에 저장해주시고
+won이라는 파라미터로 원화를 입력했을 때, rate인 환율에 맞춰서 환전 결과 금액을 화면에 출력
+=========================================
+def exchange(request):
+    won = request.GET.get('won')
+    rate= 1120
+    result = float(won) /rate
+    text = "원화 "+str(won)+"달러로 환전 시 "+str(round(result,3))
+    return HttpResponse(text)
+    
+
+
+전역변수
+result = 0
+def add(num):
+    global result 
+    result += num
+    return result
+
+print(add(5))		#5로 출력
+print(add(7))		# 12로 출력
+
+
+===============================================
+class 만들기
+#구조체 만드는 방법
+# 1. class 구조명: 을 적는다
+#2. 아래쪽에 변수들을 적는다. 
+#3. 구조체 변수를 만들어 사용
+class Person:
+    #묶어서 사용할 변수를 적되
+    # 필요한 자료형에 따라 "", 0 을 넣어준다 
+    name = ""
+    age = 0
+    job = ""
+    id = ""
+    
+# 클래스 (구조체) 생성 문법
+# 변수명 = 클래스 명()
+person1 = Person()
+
+#person1내부에 자료를 집어넣기 위해서는
+#person1.name = 값과 같이 
+#변수명.내부요소명으로 결정
+person1.name = "김땅콩"
+person1.age =1
+person1.job = "견과류"
+person1.id = "peanut1"
+
+print(person1.name)
+
+
+
+
+#한번에 호출
+#Person()자료 내부에 있는 자료를 출력하려면
+# 하나하나 출력하는 것보다는 한번에 출력할 수 있도록
+# 함수 만들어 주기
+def getPersonInfo(Person): 
+    print(Person.name)
+    print(Person.age)
+    print(Person.job)
+    print(Person.id)
+    
+    getPersonInfo(person1)
+    getPersonInfo(person2)
+    
+    
+
+self함수: 
+
+class Person:
+    name = ""
+    age = 0
+    job = ""
+    id = ""
+    
+    #self 함수
+    def getPersonInfo(self): 
+        print(self.name)
+        print(self.age)
+        print(self.job)
+        print(self.id)
+
+호출: 
+   person1.getPersonInfo()
+    person2.getPersonInfo()
+    
+
+=============================================
+추가 어플리케이션 만들기
+
+장고에서 사용할 패키지를 settings.py에 등록해야합니다
+등록하지않으면 설령 추가되더라도 실제 구동이 되지 않으니 반드시 이름을 적어줘야합ㄴ다
+settings.py의 INSTALLED_APPS 리스트에 'polls',(혹은 'polls.apps.PollsConfig',)
+를 추가해주세요
+
+장고모델 
+모델은 저장 정보를 정의 하는 것입니다.
+현재 설문조사 어플리케이션은 두개의 정보를 저장해야함
+
+먼저 첫번째는 질문관련 정보를 저장해야합니다
+질문정보는 질문 날짜와 질문 내용을 저장해야합니다
+
+그리고 두번쨰는 질문 정보와 더불어서 선택 내역도 저장해야합니다
+두번째 정보는 질문 정보가 연결되어있어야하고, 거기에 연결된 자료를 불러올수 있도록 질문 내역을 연결해야합니다.
