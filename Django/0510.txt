@@ -1,0 +1,144 @@
+
+polls/models.py
+
+#모든 장고 모델은 반드시 클래스 생성시 ()내부에 models.Model을
+#넣어서 만들어야 한다. 그래야 모델로 기능할 수 있다.
+
+class Question(models.Model):
+    # 변수명은 칼럼(세로줄)의 이름이 됩니다.
+    # = models..은 자료의 속성을 나타냅니다.
+    # models.CharField()는 문자열 자료임을 나타냅니다.
+    question_text = models.CharField(max_length = 200)
+
+    #pub_date라는 이름을 가진 세로줄을 만들어
+    # 이 세로줄에는 날짜 관련 정보를 저장합니다.
+    # 그래서 models.DateTimeField()를 사용합니다.
+    pub_date = models.DateTimeField('date published')
+
+
+class Choice(models.Model):
+    #ForeignKey는 외부장고와 연동할 세로줄을 의미한다
+    #ForeignKey로 생성시 다른 장고의 자료와 공유하는 
+    # 칼럼(세로줄)이 된다.
+    # on_delete는 ForeignKey를 연동된 모델의 자료가 삭제될때
+    # 함께 자료가 삭제될시 여부를 정한다.
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    # 숫자를 저장하고 싶을때는 models.IntegerField를 사용한다.
+    # 단, 저장할때 처음부터 디폴트 값을 지정해주고 싶다면
+    # default = 0 과 같이 입력되자마자 부여될 값을 정해줄 수 있다.
+    votes = models.IntegerField(default=0)
+    #votes 는 득표수
+
+===========================================
+창고 만들기(모델 만들기)
+mysite-> django-make migrations->polls
+
+콘솔->
+Migrations for 'polls':
+  polls\migrations\0001_initial.py
+    - Create model Question
+    - Create model Choice
+
+mysite-> django-> migrate
+
+============================================
+어드민 사용하기
+admin에 polls등록과정 거치기
+등록위해서는 admin.py에 polls에 해당하는 모델 작성
+
+admin.py
+from django.contrib import admin
+# 창고 저장하기
+from .models import Question
+
+admin.site.register(Question)
+
+웹에서
+http://127.0.0.1:8000/admin/polls/question/add/
+기록됨
+
+어드민에 등록하기위한 __str__함수
+admin에 보여질 정보를 model에 있는 방법:
+반드시 __str__()함수  사용
+
+model.py로 이동
+class Question(models.Model):
+    pub_date = models.DateTimeField('date published')
+    
+밑에 요거추가!=> admin페이지에서 question_text로 제목바꾸기
+    def __str__(self):
+        return self.question_text
+
+혹은
+    def __str__(self):
+        return self.pub_date
+    #업로드한 시간을 올려라
+======================================
+url 우아한 url패턴
+<int:이부분을 지정할url명칭>
+
+사용방법
+djangoq의 view에 추가
+
+#request옆에 test값 주기 
+def elegant(request, test): 
+    print(test) ==> test값인 999나온다
+    return HttpResponse("<h1>우아한  URL 테스트</h1>")
+
+urls.py에 
+urlpatterns = [
+     path("getbmi", views.getbmi),
+     path("exchange", views.exchange),
+     path("<int:test>", views.elegant),
+    ]
+
+http://127.0.0.1:8000/djangoq/999
+입력시 999==> <int:test>에서 test값
+
+#두개이상 넣고싶다면 /(슬래시)로 나눠주기
+     path("<int:number>/<int:number2>", views.elegant),
+
+views.py에 number2 추가해주기
+def elegant(request, number, number2): 
+    print(number)
+    return HttpResponse("<h1>우아한  URL 테스트</h1>")
+
+#2. 문자열로 받을때 str로 바꾸기
+path("<str:number>/<int:number2>", views.elegant),
+
+
+문제1. 환전을 우아한 url사용해서 등록하기
+urls.py에
+    path("exchange/<int:won>", views.exchange),
+
+def exchange(request, won):
+    #won = request.GET.get('won')
+    #우아한 url사용시 won값 일일이 적어줄 필요 없기 때문에
+    rate= 1120
+    result = float(won) /rate
+    text = "원화 "+str(won)+"달러로 환전 시 "+str(round(result,3))
+    return HttpResponse(text)
+    
+!! 1차 url과 2차 url 구분 꼭 해줘야함!!
+http://127.0.0.1:8000/djangoq/exchange/100000
+
+문제2. getbmi도 우아한 url사용
+def getbmi(request, cm, kg):
+    #cm  = float(request.GET.get('cm'))
+    #kg = float(request.GET.get('kg'))
+    m = cm/100
+    bmi = kg / (m ** 2)
+    text="<h1>당신의  bmi는 "+ str(round(bmi,3))+ "입니다.</h1>"
+    return HttpResponse(text)
+
+views.py
+urlpatterns = [
+     path("getbmi/<int:cm>/<int:kg>", views.getbmi),
+     path("exchange/<int:won>", views.exchange),
+     path("<str:number>/<int:number2>", views.elegant),
+    ]
+
+http://127.0.0.1:8000/djangoq/getbmi/161/50
+
