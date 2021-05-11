@@ -1,0 +1,68 @@
+render() 함수와 template의 저장
+특정 어플리케이션(예를들어 polls)의 템플릿을 저장하고싶으면 
+polls/templates/polls에 저장하면된다
+
+polls패키지에 패키지 재생성 
+이름: polls.templates.polls
+
+templates=> new=> other
+
+polls => views.py
+render형식: 
+return render(request, template_name, context, content_type, status, using)
+
+render 사용
+def htmltest(request): 
+    return render(request, "test.html")
+
+urls.py(polls)
+        path("htmltest", views.htmltest),
+    ]
+
+html 파일 연결해주기
+
+문제 2. 
+djangoq어플리케이션 내부에 render 를 이용해 화면 출력하는 로직 작성
+폴더 생성부터 파일 생성까지 모두 직접 진행
+
+
+
+꼭!!
+mysite에 setting에 
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'polls', 'djangoq',
+]
+
+
+===============================
+3. 템플릿내부에서 내부에서 파이썬 코드 사용하기
+템플릿 내부에서는 html코드와 파이썬 코드를 혼재해서 쓸 수 있습니다.
+
+{% 실행코드 %}
+{% %} 사이에는 우리가 알고 있는 대다수 파이썬 코드를 쓸 수 있습니다.
+기본적으로는 if문 이나 for문을 많이 사용
+시작점은 {%실행코드%}로 작성하고
+끝나는 지점은 {% endfor(if) %}로 작성합니다.
+endfor는 for문에 대응하는 닫는 부분이 되며, endif는 if문에 대응하는 닫는부분이 됩니다.
+
+view에
+def htmltest(request): 
+    number = range(10)
+    return render(request, "polls/test.html", {'number':number})
+# {딕셔너리: 전달하고싶은 자료}
+
+test.html에 number딕셔너리 추가
+<body>
+	<h1>render() 테스트 페이지</h1>
+	{% for i in number %}
+	<h3>render함수를 이용하면 편합니다.</h3>
+	{% endfor %}
+</body>
+</html>
