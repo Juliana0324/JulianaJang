@@ -1,0 +1,47 @@
+urlpatterns = [
+	# 스트링으로 받기도 가능
+     path("getbmi/<str:cm>/<str:kg>", views.getbmi),
+    ]
+
+#대신 float로 강제 형변환
+def getbmi(request, cm, kg):
+    m = float(cm)/100
+    bmi = float(kg) / (m ** 2)
+    text="<h1>당신의  bmi는 "+ str(round(bmi,3))+ "입니다.</h1>"
+    return HttpResponse(text)
+
+문제2.
+1차 url패턴 => djangoq/
+2차 url패턴 => <온도>/<온도 종류>
+로 만들어 온도를 입력하고 
+온도 종류에 f를 적으면 섭씨를 화씨로
+온도 종류에 c를 적으면 화씨를 섭씨로 출력
+만약 f,c가 아닌 다른 알파벳 입력시 
+"온도 표기법을 정확하게 선택해주세요" 라고 화면 출력
+
+urlpatterns = [
+     path("getbmi/<int:cm>/<int:kg>", views.getbmi),
+     path("exchange/<int:won>", views.exchange),
+     path("<str:number>/<int:number2>", views.elegant),
+     path("tconv/<str:t>/<str:m>", views.tconv),
+    ]
+
+def tconv(request, t, m):
+    tmp = float(t)
+    
+    if (m =="c"):
+        cel = (tmp -32) / 1.8
+        text="<h1>현재온도는 화씨 "+str(t)+"도이며, 섭씨"+ cel+" 입니다.</h1>"
+    
+    elif(m=="f"):
+        fel = (tmp*1.8)+32
+        text ="<h1>현재온도는 섭씨 "+str(t)+"도이며, 화씨"+ fel+ "입니다.</h1>"
+    else :
+        text = "온도 표기법을 정확하게 선택해 주세요"
+    return HttpResponse(text)
+============================================
+2. URL템플릿 활용하기
+urls.py내부에는 url패턴을 작성할 수 있었습니다.
+거기에 더해 name이라는 파라미터에 이름을 부여할 수 있었는데 이는 나중에 링크 주소등을 나타낼때 유용하게 사용
+
+3. app_name 추가하기
