@@ -1,0 +1,147 @@
+if 예문
+iftest.html
+<body>
+	{% if result% }
+	<h1>당신은 albert입니다.</h1>
+	{%endif%}
+	
+	{% if result2 %}
+	<h1>당신은 다른사람입니다.</h1>
+	{%endif%}
+	
+	
+</body>
+
+def iftest(request,name):
+    result = True
+    result2 = False
+
+    if name == "albert": 
+        result2 = False
+    else : 
+        result = False
+    return render(request,"djangoq/iftest.html",{'result':result, 'result2':result2})
+    return render(request,"djangoq/iftest.html",{'name':name})
+
+문제.
+미성년자 판별페이지 만들기
+djangoq 어플리케이션의 urls.py에 isadult/정수 패턴으로 url을 처리해주세요
+views.py내부에도 함수로 isadult라는 함수를 만들어 주세요
+이 함수느 입력받은 정수를 isadult.html파일로 전송해줍니다.
+
+전송받을 페이지에서 20 이상을 전송받았다면
+"당신은 성인입니다 주류구매가 가능합니다."
+20미만을 전송받았다면 
+"당신은 성인입니다. 주류 구매가 불가능 합니다"출력
+
+views=>
+def isadult(request,age):
+    return render(request, "djangoq/isadult.html",{'age':age})
+
+     path("isadult/<int:age>", views.isadult)
+
+
+
+===============================================
+1. 모델 자료 뷰에 로드하기
+모델은 창고이다.
+모델의 자료를 템플릿에 전달하기 위해 우선 뷰에서 자료를 꺼내야한다.
+
+뷰에서 자료꺼내는법
+모델명.objects.꺼내기 함수() 의 형태
+ex) Question모델에서 자료를 꺼낼경우 Question.objects.함수()
+     Choice모델에서 자료꺼낼때 Choice.objects.함수()
+
+뷰 내부에서 꺼낸 자료를 변수로 template에 전달가능
+ex) question_all = Question.objects.all()로 자료저장
+    render(request, "뷰파일.html", {'question_all':question._all}로 전달했을경우
+
+이렇게 꺼내온 자료들은 배열 형태를 띈다
+
+
+view==>
+
+def detail(request, question_id): 
+    return HttpResponse(
+        "The question you're looking at is %s." % question_id)
+
+def results(request, question_id): 
+    response = "The result of the question you're looking at is %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id): 
+    return HttpResponse("You're voting on question %s" %question_id)
+
+urls=>
+urlpatterns = [
+    #ex: /polls/
+        path("", views.index, name='index'),
+    #ex: /polls/5
+        path('<int:question_id>/', views.detail),
+    #ex: /polls/5/results
+        path('<int:question_id>/results/',views.results),
+    
+    #ex: /polls/5/votes
+        path('<int:question_id>/vote/', views.vote),
+        
+
+polls/view에 
+def index(request):
+    latest_question_list = Question.object.all()	==> 추가!
+    return HttpResponse("첫번째 장고 페이지 : HttpResponse 사용시 반드시  return ")
+	=> 변경:     return HttpResponse(latest_question_list)
+
+==> 어드민에서 올렸던거 그대로 출력
+My First Question Second text 세번째 글
+
+polls/polls/index.html추가
+<body>
+	{%if latest_question_list%}
+		<ul>
+			{% for question in latest_question_list %}
+			<li>{{question}}</li>
+
+			전체 다 표시
+			<li>{{question.pk}}/{{question.question_text}}/{{question.pub_date}}</li>
+			{% endfor %}
+		</ul>
+			{% else %}
+		<p>No polls are available</p>
+	{% endif %}
+</body>
+
+views.py에 
+def index(request):
+    latest_question_list = Question.objects.all()
+    return render(request, "polls/index.html",
+                  {"latest_question_list":latest_question_list})
+출력: 
+1 / My First Question / 날짜 
+2 / Second text / 날짜 
+3 / 세번째 글 / 날짜
+
+역순으로 만들기:
+for in 문을 통해 순차적 출력이 가능합니다. 
+
+꺼내기 함수
+꺼내기 함수는 너무 많은 종류가 있기 때문에 일일이 나열하기 힘들다
+
+order_by()함수: 순번을 정해서 가져온다
+order_by() 는 내부 파라미터로 문자열을 받을 수 있고, 
+order_by('칼럼명')으로 적을 경우 칼럼명을 기준으로 순서 정함
+order_by('칼럼명'): 오름차순
+order_by('-칼럼명'): 내림차순
+
+def index(request):
+    latest_question_list = Question.objects.order_by("pk")
+    return render(request, "polls/index.html",
+                  {"latest_question_list":latest_question_list})
+==> 오름차순
+
+def index(request):
+    latest_question_list = Question.objects.order_by("-pk")
+    return render(request, "polls/index.html",
+                  {"latest_question_list":latest_question_list})
+==> 내림차순
+
+get() 함수: 
