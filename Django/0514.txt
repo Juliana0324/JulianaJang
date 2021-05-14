@@ -135,3 +135,8 @@ def favorites(request):
                   'age':age})
 
 age 함수 추ㄱㅏ해주기
+
+
+
+출력시 127:0:0:1:8000/djangoq/favorite/25
+나이 25 ~~~~~~~~~~~~
