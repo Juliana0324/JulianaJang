@@ -143,5 +143,11 @@ def index(request):
     return render(request, "polls/index.html",
                   {"latest_question_list":latest_question_list})
 ==> 내림차순
+대소문자 구분:question_text
+def index(request):
+    latest_question_list = Question.objects.order_by("question_text")
+    return render(request, "polls/index.html",
+                  {"latest_question_list":latest_question_list})
 
-get() 함수: 
+
+대소문자 순서 : 아스키 코드=> A~Z, a~z, 한글..
