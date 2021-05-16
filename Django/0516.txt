@@ -1,0 +1,87 @@
+문제1 : 현재 views.py에  만들어진 get_lotto()를 이용해서
+urls.py에 /lotto/패턴으로, 그리고 템플릿 파일은 getlotto.html로 만들어
+
+템플릿에 설정되어있는 rnum변수값을 출력하게 만들어 보세요
+
+문제2: 
+로또 번호 
+    # 로또 복권 추첨 로직을 작성해 보세여
+    # 로또 복권은 1~45사이의 6개의 숫자를 추첨합니다. 
+    # 로또 복권은 중복된 숫자를 가질 수 없습니다.
+    # 힌트 * 리스트를 활용해서 리스트 안에 겹친 숫자 없이 
+    # 6개의 숫자가 저장되면 반복문을 빠져 나와 출력하게 하시오
+def get_lotto(request): 
+    lottonum = []
+    while(len(lottonum)!=6):
+        num = random.randint(1, 45)
+        if num not in lottonum:
+            lottonum.append(num)
+    
+    return render(request, "django/getlotto.html", {'lottonum':lottonum})
+
+
+2등번호는 1등 번호 6개를 먼저 뽑은 다음 
+보너스 번호로 1등 번호와 겹치지 않게 추가로 하나더 뽑는 번호입니다.
+
+문제 2-1
+1등번호: [ x, x, x, x, x, x ]
+2등 번호: x 
+와 같이 기존에 뽑아둔 6 개와는 겹치지 않는 다른하나의 숫자를 추가로 화면에 출력해주세요
+
+def get_lotto(request): 
+    lottonum = []
+    while(len(lottonum)!=6):
+        num = random.randint(1, 45)
+        if num not in lottonum:
+            lottonum.append(num)
+        
+    lottonum.sort 		#재정렬
+    snum = 0
+    while(not snum or (snum in lottonum)): 
+        snum = random.randint(1,45)
+    
+    return render(request, "django/getlotto.html", {'lottonum':lottonum, 'snum':snum})
+
+딕셔너리에는 하나만 하도록!!
+{'lottonum':lottonum, 'snum':snum}
+이렇게 해줘야함
+
+==============================================
+폼테그 안에 삽입하기
+
+정보를 보내주는 양식폼
+우리는 여태까지 폼이아닌 url을 이용한 정보전달을 했습니다.
+그러나 url을이용해 정보를 전달하는 것은 한계가 있습니다. 
+따라서 우리는 form이라 불리는 정형화된 양식을 제공해서
+ 사용자들이 우리가 요구하는 대로 정보를 보내도록 해야합니다.
+즉 form은 우리가 은행에서 계좌를 만들려고 하면 은행원들이 계좌 신청 양식을 주면서 
+"동그라미 친 부분을 작성해 주세요"라고 하듯이 
+사용자에게 "이 정보를 채워주셔야 결과물을 볼수 있습니다 "라고 얘기하는것과 같은것으로 
+봐주시면 되겠습니다
+
+폼작성 기본원리
+<form action="/polls/> 락ㅎ 하면 polls라는 url에 해당정보를 전달하겠다는 의미입니다.
+
+method="post", "get"
+post : url 정보 안남음(로그인 )
+get : url 정보 남음	(정보찾기)
+
+문제: 
+djangoq/views.py에서 
+isadult() 함수를 수정해주세요
+request.GET.get() 을 이용해
+age라는 이름으로 들어오는 자료를 age라는 변수에 받아주세여
+
+
+def isadultform(request):
+    #연결만 해주긔
+   #age까지 보낼필요없음
+    return render(request, "djangoq/isadultform.html")
+
+isadultform.html
+<body>
+	<form action="../isadult/" method="get">
+		당신의 나이는? <input type="text" name="age">
+		<input type="submit" value="제출">
+	</form>
+</body>
