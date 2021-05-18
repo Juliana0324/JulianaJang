@@ -85,3 +85,22 @@ vote 상세 투표 목록 작성
 
 <!-- 	The question you're looking at is {{question_id}}.  -->
 	<a href="{% url 'polls:index' %}"> index.html로 돌아가기</a>
+	
+	
+admin에
+from .models import Question
+from polls.models import Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
+
+
+model.py에 
+class Choice(models.Model):
+.
+.
+.
+    
+    def __str__(self):
+        return self.choice_text
+추가
