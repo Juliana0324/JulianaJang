@@ -1,0 +1,20 @@
+redirect 강제로 넘어보냄.
+
+    else:
+        selected_choice.votes += 1
+        selected_choice.choice_text = '.save()테스트'
+        selected_choice.save()
+        return HttpResponseRedirect("http://www.naver.com")
+    강제로 naver.com으로 옮겨가기
+
+
+=========================================
+from django.urls.base import reverse
+
+reverse 함수 
+        selected_choice.votes += 1
+#        selected_choice.choice_text = '.save()테스트'
+        selected_choice.save()
+        return HttpResponseRedirect(
+            reverse('polls:results', args=(question.id)))
+ㄴ
