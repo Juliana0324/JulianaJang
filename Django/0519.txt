@@ -16,5 +16,115 @@ reverse 함수
 #        selected_choice.choice_text = '.save()테스트'
         selected_choice.save()
         return HttpResponseRedirect(
-            reverse('polls:results', args=(question.id)))
-ㄴ
+            reverse('polls:result', args=(question.id)))
+
+관리자 form커스터마이징
+1. 먼저 폼을 바꾸기 위해서는 프로젝트 내부의 admin.py에서 
+작성
+class 커스터마이징 모델 (admin.ModelAdmin):
+    fieldsets = [
+        ('카테고리명', {'fields': ['칼럼명']}),
+        ('카테고리명 2(없을시 None)', {'fields':['칼럼명2']})
+        ]
+# admin페이지의 폼양식을 수정하고 싶다면 admin.py에서 새롭게 클래스를 선언한다
+# 문법은 class 클래스이름(admin.ModelAdmin):
+#     fieldset=[ ] 이며, fieldsets내부에는 각 칼럼별 특성을 적는다
+
+예시)
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['question_text']}),
+        ('Date information', {'fields':['pub_date']})
+        ]
+
+2. 추가모델은 
+class 추가모델커스터마이징(admin.StackedInline):
+	model = 모델명
+	extra = 몇줄(정수)
+
+예시 
+class ChoiceInline(admin.StackedInline):
+    model = Choice
+    extra = 3
+==========================
+==> 
+순서는 추가먼저: 
+class ChoiceInline(admin.StackedInline):
+    model = Choice
+    extra = 3
+
+class QuestionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['question_text']}),
+        ('Date information', {'fields':['pub_date']})
+        ]
+    inlines = [ChoiceInline]
+=============================================
+https://tutorial.djangogirls.org/ko/
+장고걸즈
+blog프로젝트 시작
+
+- pydeb django project - myblog 새로운 프로젝트 만들기
+- settings.py에서 
+	-서울로 바꾸기 : TIME_ZONE = 'Asia/Seoul'
+
+	- STATIC_ROOT 추가해주기 :
+	STATIC_URL = '/static/'
+	STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+	-29번? 줄에 변경
+	ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+	- DB 확인
+	DATABASES = {
+ 		   'default': {
+        			'ENGINE': 'django.db.backends.sqlite3',
+			        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+ ..
+
+- Migrate 해주기
+	....
+	  Applying sessions.0001_initial... OK
+
+
+===================================================
+모델 만들기
+
+- 어플리케이션 만들기
+우클릭- Create application - blog로 추가
+
+- settings.py에도 blog링크 추가
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    ...
+	'blog',    
+]
+
+- models.py에
+
+from django.utils import timezone
+
+class Post(models.Model):
+    author = models.ForeignKey(
+        'auth.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length = 200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(blank=True, null = True)
+    
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save 
+    
+    def __str__(self):
+        return self.title
+
+- make migration ==> blog해주고 
+- migrate
+
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions
+Running migrations:
+  Applying blog.0001_initial... OK
+
+콘솔에 출력되면 완료
