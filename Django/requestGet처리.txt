@@ -1,0 +1,86 @@
+MTV: 
+Model(DB에서 꺼내오는 부분) , 
+Template(사용자에게 실제로 보여지는 페이지) 
+View(꺼내온 자료를 사용자가 볼수 있는 페이지로 전달하는 부분)
+
+path는 고정 url을,
+re_path는 정규표현식에 의한 url을 지정가능
+
+GET방식 데이터 처리:
+좀더 구체적으로 view함수 내부에 request파라미터 통해서 GET방식으로 
+들어오는 자료수집가능
+request파라미터는 사용자의 요청 저장하는 변수
+
+key(왼쪽)는 url에 붙어서들어온 파라미터명, value는 파라미터명 (오른쪽)
+
+조회방법1. request.GET['파라미터명']으로 value값 조회
+	=> value값에 null들어오면 에러발생
+조회방법1. request.Get.get('파라미터명')
+	=> 자료가 없어도 에러발생x 
+	=> None 출력
+
+
+def getreq(request):
+    #name = request.GET['name']
+    #age = request.GET['age']
+    #입력값이 없으면 못받아주지만 GET.get사용시 null값이여도 에러가 안남
+    name = request.GET.get('name')
+    age = request.GET.get('age')
+    return HttpResponse(name+age)
+
+이름,나이 수정
+    name = request.GET.get('name')
+    age = request.GET.get('age')
+    text = "이름 : " + str(name) + ", 나이 : " +str(age)
+    return HttpResponse(text)
+
+
+문제1 : 
+1차 url djangoq/
+2차 url getbmi로 두고
+cm 파라미터로 키를, kg 파라미터로 
+체중을 받아서 bmi 지수를 구해서 <h1>테그를 받아서 출력하는 로직
+bmi 공식
+체중 / 키(m)의 제곱
+키 175cm==> 키 1.75m
+=========================================
+def getbmi(request):
+    cm = float(request.GET.get('cm'))
+    kg = float(request.GET.get('kg'))
+    m = cm/100
+    bmi = kg/(m**2)
+    text = "<h1>당신의  bmi는 " + str(round(bmi,3))+" 입니다</h1>"
+    return HttpResponse(text)
+
+
+
+문제2. 
+1차 url djangoq/
+2차 url exchange/
+를 두고 함수 exchange 를 만들어 주세요
+이 함수는 네이버등에서 특정 국가 환율을 검색하면 환율이 나옵니다.
+환율수치를 rate변수에 저장해주시고
+won이라는 파라미터로 원화를 입력했을 때, rate인 환율에 맞춰서 환전 결과 금액을 화면에 출력
+=========================================
+def exchange(request):
+    rate = float(1133.5)
+    won = request.GET.get('won')
+    change = float(won)/rate
+    text = "<h1>"+ str(won) + "원은 미국 달러로 " + str(round(change, 3))+"달러 입니다."
+    return HttpResponse(text)
+
+http://127.0.0.1:8000/djangoq/exchange/?won=2500
+2500원은 미국 달러로 2.206달러 입니다.
+
+===============================================
+class 
+
+전역변수
+result = 0
+def add(num):
+    global result 
+    result += num
+    return result
+
+print(add(5))		#5로 출력
+print(add(7))		# 12로 출력

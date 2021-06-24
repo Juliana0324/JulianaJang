@@ -1,0 +1,112 @@
+polls 추가하기
+
+우클릭 django - create application - polls
+첫번째 뷰작성
+views.py 
+첫 번째 뷰를 작성해봅시다. 《polls/view.py》를 열어 다음과 같은 파이썬 코드를 입력합니다
+
+polls/views.py¶
+from django.http import HttpResponse
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+Django에서 가장 간단한 형태의 뷰입니다. 뷰를 호출하려면 이와 연결된 URL 이 있어야 하는데, 이를 위해 URLconf가 사용됩니다.
+
+polls 디렉토리에서 URLconf를 생성하려면, urls.py라는 파일을 생성해야 합니다. 정확히 생성했다면, 앱 디렉토리는 다음과 같이 보일 겁니다.
+
+url지정=URL
+polls에 urls.py생성하기
+
+'''
+path의 순서 
+"" -> 어떤 url로 경로 지저했을 때 어떤 패턴을 주시오
+views에 있는 index실행
+'''
+
+《polls/urls.py》 파일에는 다음과 같은 코드가 포함되어 있습니다.
+
+polls/urls.py¶
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+
+------------------------------------------------
+mysite에있는 urls.py
+두개의 도메인 사용
+from django.contrib import admin
+from django.urls import include,path
+
+urlpatterns = [
+    path('admin/', admin.site.urls), 
+    path('polls/', include('polls.urls')),
+]
+
+admin.site.urls=>1차 URL이기 때문에 얘만 예외!
+include() 함수는 다른 URLconf들을 참조할 수 있도록 도와줍니다. Django가 함수 include()를 만나게 되면, URL의 그 시점까지 일치하는 부분을 잘라내고, 남은 문자열 부분을 후속 처리를 위해 include 된 URLconf로 전달합니다.
+
+include()에 숨은 아이디어 덕분에 URL을 쉽게 연결할 수 있습니다. polls 앱에 그 자체의 URLconf(polls/urls.py)가 존재하는 한, 《/polls/》, 또는 《/fun_polls/》, 《/content/polls/》와 같은 경로, 또는 그 어떤 다른 root 경로에 연결하더라도, 앱은 여전히 잘 동작할 것입니다
+
+브라우저에서 http://localhost:8000/polls/를 입력하면 index 뷰에 정의한 《Hello, world. You’re at the polls index.》 가 보일 것입니다.
+
+페이지가 보이지 않나요?
+
+에러 페이지가 표시된다면, http://localhost:8000/ 이 아니라 http://localhost:8000/polls/가 정확히 주소 창에 입력되었는지 확인하세요.
+
+
+문제
+polls/ 1차 URL패턴에 새로운 패턴 추가
+1."main" -> views.py에 main이라는 함수 생성후 
+	"메인 페이지 입니다"문구 출력
+2. "test" -> views.py에 start라는 함수 생성후 
+콘솔에 "테스트 중입니다 출력"
+웹 페이지에는 <h1>테그 적용한 "테스트 중에는 서비스를 사용할 수 없습니다" 출력
+
+polls urls.py에
+urlpatterns = [
+        path("", views.index, name='index'),
+        path("main", views.main, name='main'),
+        path("test", views.start, name='start'),
+    ]
+
+
+views.py에
+
+def index(request):
+    return HttpResponse("첫번째 장고 페이지 : HttpResponse 사용시 반드시  return ")
+
+def main(request):
+    return HttpResponse("메인 페이지 입니다.")
+
+def start(request):
+    print("테스트 중입니다.")
+    return HttpResponse("<h1>테스트 중에는 서비스 사용이 불가능 합니다.</h1>")
+
+
+include 사용=> admin을 제외한 모든것
+
+GET방식: 공개되어도 상관없는 형식
+사용자의 요청받기
+def getreq(request):
+    return HttpResponse(request.GET)
+=> 택배를 쌓아두는 역할
+택배 집하장에 있는 모든 택배를 조회하는 것과 차이 없음
+
+따라서 들어온 자료 중 내가 원하는 자료만 선별적으로 다시 조회할 필요있음
+이때 필요 : value, key
+
+[ ] 안에 value값 삽입방법	: 
+request.GET['파라미터명']
+
+def getreq(request):
+    name = request.GET['name']
+    age = request.GET['age']
+    return HttpResponse(name + age)
+
+http페이지에
+http://127.0.0.1:8000/polls/getreq?name=jjw&age=20
+사용시
+출력
+JJW20

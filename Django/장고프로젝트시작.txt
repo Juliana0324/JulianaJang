@@ -1,0 +1,36 @@
+manage.py -> 장고 프로젝트와 코드 연결해주는 파일. 간단한 수준의 개발에서는 다루지 않습니다.
+
+mysite/ _init_.py -> 이 파일이 열려있어야 장고 프로젝트 파일들이 하나의 덩어리로 인식됩니다.
+클래스의 _init_() 과 역할이 비슷하다.
+
+mysite/settings.py -> 프로젝트 환경설정 및 언어 설정 등등 전반적 설정을 다 작성하게 됩니다.
+mysite/urls.py -> 장고 내부 페이지 접근 시 사용할 url들을 저장하는 파일입니다.
+mysite/wsgi.py -> 장고를 추후 배포할 때 설정해줘야 하는 파일
+
+슈퍼유저
+mysite=> django-migrate
+cmd 창
+D:\Com_JJW\python\mysite>python manage.py createsuperuser
+Username (leave blank to use 'chian'): admin
+Email address: admin@admin.co.kr
+Password: (python01)
+Password (again):
+Superuser created successfully.
+..OK
+
+만든 슈퍼계정을 오픈한 다음
+http://127.0.0.1:8000/admin
+
+---------------------------------------------------------
+polls 추가하기
+
+우클릭 django - create application - polls
+첫번째 뷰작성
+views.py 
+첫 번째 뷰를 작성해봅시다. 《polls/view.py》를 열어 다음과 같은 파이썬 코드를 입력합니다
+
+polls/views.py¶
+from django.http import HttpResponse
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+Django에서 가장 간단한 형태의 뷰입니다. 뷰를 호출하려면 이와 연결된 URL 이 있어야 하는데, 이를 위해 URLconf가 사용됩니다.
