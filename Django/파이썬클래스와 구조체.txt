@@ -1,0 +1,97 @@
+클래스 구상하기
+1. 계산기를 여러개 만들어서 써야하는 상황이라고 하면
+2. 계산기를 하나 만들고 setting이라는 함수를 통해 계산기의 색깔과 숫자2개를 세팅합니다.
+3. 그 이후에 사칙연산 함수를 각각 만들어 해당함수를 호출할때 마다 
+세팅해놓은 숫자 두개로 사친연산을 수행하도록 한다.
+
+#구조체 만드는 방법
+# 1. class 구조명: 을 적는다
+#2. 아래쪽에 변수들을 적는다. 
+#3. 구조체 변수를 만들어 사용
+class Person:
+    #묶어서 사용할 변수를 적되
+    # 필요한 자료형에 따라 "", 0 을 넣어준다 
+    name = ""
+    age = 0
+    job = ""
+    id = ""
+    
+    #self 함수
+    #==> 호출한 주체의 이름
+    
+    #getPersonInfo 함수는 누가봐도
+    #class Person을 담당하기 때문에 이런 경우는
+    #클래스 내부에 함수까지 작성한다
+    #self키워드는 호출하는 변수 자기 자신을 자칭하는 대명사 이다.
+    def getPersonInfo(self): 
+        print(self.name)
+        print(self.age)
+        print(self.job)
+        print(self.id)
+    
+# 클래스 (구조체) 생성 문법
+# 변수명 = 클래스 명()
+person1 = Person()
+
+#person1내부에 자료를 집어넣기 위해서는
+#person1.name = 값과 같이 
+#변수명.내부요소명으로 결정
+person1.name = "김땅콩"
+person1.age = 1
+person1.job = "견과류"
+person1.id = "peanut1"
+
+print(person1.name)
+#출력결과 ==> peanut1
+
+person2 = Person()
+person2.name = "최카키"
+person2.age = "28"
+person2.job = "래퍼"
+person2.id = "choiKhakii"
+
+print(person2.name)
+print(person2.age)
+print(person2.job)
+print(person2.id)
+
+#한번에 호출
+#Person()자료 내부에 있는 자료를 출력하려면
+# 하나하나 출력하는 것보다는 한번에 출력할 수 있도록
+# 함수 만들어 주기
+person1.getPersonInfo()
+person2.getPersonInfo()
+    
+    
+==================================================
+https://docs.djangoproject.com/ko/3.2/intro/tutorial02/
+=========================================
+추가 어플리케이션 집어넣기
+장고에서 사용할 패키지를 setting.py에 등록해야합니다.
+등록하지 않는다면 설령 추가가 되어있다 하더라도 실제 구동이 되지 않으니 반드시 이름을 적어줘야합니다.
+setting.py의 INSTALLED_APPS리스트에 'polls', 혹은 'polls.apps.PollsConfig'를 추가해 주세요
+
+장고모델
+설문조사 어플리케이션은 두개의 정보를 저장해야합니다.
+먼저 첫번째는 질문관련정보 저장
+질문 정보는 질문날짜와 질문내용을 저장
+
+두번째는 질문정보와 더불어 선택내역도 저장
+두번째 정보는 질문정보가 연결되어 있어야하고, 거기에 연결된 자료를 불러올 수 있도록 질문내역을 연결
+
+migrate하기=$ python manage.py migrate
+어플리케이션은 일반적인 상황을 염두에 두었으나, 모두에게 필요한 것은 아닙니다. 만약 이것들이 필요 없다고 생각되시면, migrate 를 실행하기 전에 INSTALLED_APPS 에서 제거할 어플리케이션들을 그냥 주석처리(comment-out) 하시거나 삭제하시면 됩니다. migrate 명령은 INSTALLED_APPS 에 등록된 어플리케이션에 한하여 실행될 것입니다.
+
+
+===========================================
+창고 만들기(모델 만들기)
+모델관련 사항이 변경될 때마다 진행해줘야
+mysite-> django-make migrations->polls
+
+콘솔
+Migrations for 'polls':
+  polls\migrations\0001_initial.py
+    - Create model Question
+    - Create model Choice
+
+mysite-> django- migrate
