@@ -1,0 +1,129 @@
+render() 함수와 template의 저장
+특정 어플리케이션(예를들어 polls)의 템플릿을 저장하고싶으면 
+polls/templates/polls에 저장하면된다
+
+polls패키지에 패키지 재생성 
+이름: polls.templates.polls
+
+templates=> new=> other=> text.html
+text.html
+<body>
+	<h1>render() 테스트 페이지</h1>
+	<p> render함수를 사용하면 편합니다.</p>
+</body>
+
+
+polls => views.py
+render형식: 
+return render(request, template_name, context, content_type, status, using)
+render사용시 
+1번째: request를 사용해야함
+2번째; 경로
+template까지만 적어줘도 됨
+3번째 : 뷰내부에있는 자료를 보내주기 위해
+
+
+render 사용
+def htmltest(request): 
+    return render(request, "text.html")
+
+urls.py(polls)
+        path("htmltest", views.htmltest),
+    ]
+
+html 파일 연결해주기
+
+polls폴더 안에 html로 옮기면
+def htmltest(request):
+    return render(request, "polls/text.html")
+로 변경해주어야 함
+
+
+문제 2. 
+djangoq어플리케이션 내부에 render 를 이용해 화면 출력하는 로직 작성
+폴더 생성부터 파일 생성까지 모두 직접 진행
+
+
+
+꼭!!
+mysite에 setting에 
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'polls', 'djangoq',
+]
+
+
+===============================
+3. 템플릿내부에서 내부에서 파이썬 코드 사용하기
+템플릿 내부에서는 html코드와 파이썬 코드를 혼재해서 쓸 수 있습니다.
+
+{% 실행코드 %}
+{% %} 사이에는 우리가 알고 있는 대다수 파이썬 코드를 쓸 수 있습니다.
+기본적으로는 if문 이나 for문을 많이 사용
+시작점은 {%실행코드%}로 작성하고
+끝나는 지점은 {% endfor(if) %}로 작성합니다.
+endfor는 for문에 대응하는 닫는 부분이 되며, endif는 if문에 대응하는 닫는부분이 됩니다.
+
+view에
+def htmltest(request): 
+    number = range(10)
+    return render(request, "polls/test.html", {'number':number})
+# {딕셔너리: 전달하고싶은 자료}
+
+test.html에 number딕셔너리 추가
+<body>
+	<h1>render() 테스트 페이지</h1>
+	{% for i in number %}
+	<h3>render함수를 이용하면 편합니다.</h3>
+	{% endfor %}
+</body>
+</html>
+
+{{ 화면에 보여줄 변수 }}
+{{ }} 사이의 변수 출력시 그대로 출력
+test.html=> 
+<body>
+	<h1>render() 테스트 페이지</h1>
+	<h2>{{number}}가 전달 받은 자료 입니다.</h2>
+	
+	{%for i in number%}
+	<p> render함수를 사용하면 편합니다.</p>
+	
+	{%endfor%}
+</body>
+
+출력결과=> 
+	range(0,100)이 전달받은 자료입니다.
+
+문제.
+djangoq어플리케이션의 urls.py에 favorites라는 패턴으로, 
+views.pyㅇ에도 favorites라는 함수를 만들어 주세요
+
+다음 템플릿으로 favolist.html을 만들어 주신다음
+내부 실행문으로 favorites = [좋아하는 것1, 좋아하는 것2..]라고 넣은 다음 
+템플릿 파일에 전달 후 바복문을 이용해서 하나당 한줄 씩 출력되게 해주세여
+목록은 최소 5개 이상 넣어주세요
+<body>
+	<h1>favolist test</h1>
+	{% for i in favorites %}
+	좋아하는 것 {{i}}<br/>
+	{% endfor %}
+	
+	<h1>favorite country</h1>
+	{% for i in country %}
+	좋아하는 것 {{i}}<br/>
+	{% endfor %}
+</body>
+
+def favorites(request):
+    favorites =["여행", "피자", "독서", "야구", "늦잠"]
+    country = ['미국', '유럽', '싱가포르', '방콕', '캐나다']
+    return render(request,"djangoq/favolist.html",
+                  {'favorites':favorites,
+                  'country':country})
