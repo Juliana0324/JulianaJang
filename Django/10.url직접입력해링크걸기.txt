@@ -1,0 +1,145 @@
+index.html
+<ul>
+	{% for q in latest_question_list %}
+	<li><a href="/polls/" >{{q.question_text}}</a></li>
+	{% endfor %}
+</ul>
+
+#q로 단축
+
+127:0:0:1:8000/polls/5
+출력시=> "The question you're looking at is 5
+127:0:0:1:8000/polls/10
+출력시=> "The question you're looking at is 10
+
+번호로 내용출력하기
+<li><a href="/polls/{{q.pk}}" >{{q.question_text}}</a></li>
+링크안에 추가
+
+url더 쉽게 연결하는 방법 1.: 
+name 붙여주기
+urlpatterns = [
+    #ex: /polls/
+        path("", views.index, name='index'),
+    #ex: /polls/5
+        path('<int:question_id>/', views.detail, name="detail"),
+    #ex: /polls/5/results
+        path('<int:question_id>/results/',views.results, name="result"),
+    
+    #ex: /polls/5/votes
+        path('<int:question_id>/vote/', views.vote, name="vote"),
+        
+
+1. polls/detail.html
+<body>
+	The question you're looking at is {{question_id}}.
+</body>
+
+view.py=>render함수로 바꾸기
+기존: return HttpResponse("You're voting on question %s" %question_id)
+변경후: def detail(request, question_id): 
+    return render(request, "polls/detail.html",
+                  {'question_id':question_id})
+
+127:0:0:1:8000/polls/5
+출력시=> "The question you're looking at is 5
+
+문제1. polls/detail.html에서 index.html로 돌아가는 링크 만들기
+<body>
+	The question you're looking at is {{question_id}}.
+	<a href="/polls/"> index.html로 돌아가기</a>
+</body>
+
+name이용해서 돌아가기
+<body>
+	The question you're looking at is {{question_id}}.
+	<a href="{% url 'index' %}"> index.html로 돌아가기</a>
+</body>
+
+문제2. djangoq에서 favorites.html, htmltest2 를 이용해 
+각각 ht2, favo 라는 name을 붙여주고
+답:
+path("htmltest2", views.htmltest2, name="ht2"),
+path("favorites", views.favorites, name="favo"),
+
+서로의 페이지 하단에 서로 오갈수 있도록 name을 이용한 url링크작성
+test2.html
+<a href="{% url 'favo'%}"> favorite list 페이지로 가기</a>
+favo.html
+<a href="{% url 'ht2' %}">testhtml2 로 가기</a>
+
+================================================
+2. app_name항목을 추가통한 url카테고리화
+appname 추가시 장점은 ,A 어플리케이션에서만 url이 겹칠일이 많이 없지만 
+A,B,C 어플리케이션에서는 겹칠일이 많다. 
+path("htmltest2", views.htmltest2, name="index"),
+==> polls에도 index있고, djangoq에도 index있다
+
+
+A에 A의 라벨링, B에는 B의 라벨링, C는 C의 라벨링으로 
+라벨링 방법: 
+urls.py에
+app_name= 'polls' 추가해보기
+
+detail.html에
+<body>
+	The question you're looking at is {{question_id}}.
+==>요거추가
+	<a href="{% url 'polls:index' %}"> index.html로 돌아가기</a>
+</body>
+
+
+127:0:0:1:8000/polls/===> djangoq에 있는 index로 안간다!
+
+djangoq=> polls.index로 이동시 appname사용해서 이동 가능
+<a href="{% url 'djangoq:index' %}"> index.html로 돌아가기</a>
+
+djangoq의 index로 이동된다
+
+==========================================
+polls/index.html에서
+<body>
+	{%if latest_question_list%}
+		<ul>
+			{% for q in latest_question_list %}
+=> 이걸로변경시		<li><a href="{% url '/polls/:detail' %}" >/{{q.question_text}}</a></li>
+			
+
+에러!
+Reverse for 'detail' with ~~
+정수를 안받아왔기 때문에 !
+index.html에서 pk 가 정수기 때문에 사용하면된다
+<li><a href="{% url '/polls/:detail' q.pk%}" >
+	/{{q.question_text}}
+	</a></li>
+
+
+
+
+문제3.
+favolist.html 하단에 
+isadult() 함수를 호출 할 수 있는 패턴을 이용해
+미성년자 검사 사이로 넘어갈 수 있는 링크 만들고 
+ path("isadult/<int:age>", views.isadult, name="isadult")
+
+패턴에 필요한 숫자는 favolist함수 내부에 age라는 이름으로 25를  집어넣어 템플릿 전달
+답: 
+favolist.html
+	<a href = "{% url 'djangoq:isadult' age%} ">
+		isadult.html로 이동</a>
+
+view.py
+def favorites(request):
+    favorites =["여행", "피자", "독서", "야구", "늦잠"]
+    country = ['미국', '유럽', '싱가포르', '방콕', '캐나다']
+    age=25
+    return render(request,"djangoq/favolist.html",
+                  {'favorites':favorites,
+                  'country':country,
+                  'age':age})
+
+age 함수 추ㄱㅏ해주기
+
+
+출력시 127:0:0:1:8000/djangoq/favorite/25
+나이 25 ~~~~~~~~~~~~
