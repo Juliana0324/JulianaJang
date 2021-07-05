@@ -1,0 +1,176 @@
+post 방식:
+토지 평수 방식
+문제
+meterform 함수와 meter함수를 만들어 주세요
+meterform 함수는 폼으로 보내주는 역할을 합니다.
+
+def meterform(request): 
+    return render(request, "djangoq/meterform.html")
+
+def meter(request):
+    meter = float(request.GET.get('meter'))
+    result = meter/3.3
+    return render(request, "djangoq/meter.html",
+                  {"result":result, "meter":meter})
+    
+
+templates/djangoq내부에는
+meterform.html과  meter.html을 만들어주세요
+meterform.html은 get방식으로
+
+<title>meterform 계산기</title>
+</head>
+<body>
+	<h1>미터 -> 평 변환 계산기</h1>
+	미터로 면적을 적어주새요!<br/>
+	<form action="{% url 'djangoq:meter' %}" method="get">
+		<input type="number" step="0.1" name="meter"><br/>
+		<input submit >		
+	</form>
+</body>
+
+meter.html에 미터정보를 받아 name 속성을 meter로 부여해봅니다. 
+
+	<h1>미터 -> 평 변환 계산기</h1>
+	미터로 면적을 적어주새요!<br/>
+	<form action="{% url 'djangoq:meter' %}" method="get">
+		<input type="number" step="0.1" name="meter"><br/>
+		<input type="submit" value="변환">		
+	</form>
+
+meter정보는 3.3으로 나누어 평단위로 바꾼다음 meter.html의 화면에 출력
+
+<body>
+	<h1>{{meter}}제곱을 평단위로 고치면</h1><br/>
+	<h1>{{result}}평입니다.</h1>
+</body
+
+
+post형식으로 바꾸기
+meterform.html
+	<form action="{% url 'djangoq:meter' %}" method="post">
+==>이거 추가!	{% csrf_token %}
+		<input type="number" step="0.1" name="meter" required><br/>
+		<input type="submit" value="변환">		
+	</form>
+
+포스트로 바꿔주기
+def meter(request):
+    meter = float(request.POST.get('meter'))
+    result = meter/3.3
+    return render(request, "djangoq/meter.html",
+                  {"result":result, "meter":meter})
+
+
+문제1. isadult와 isadultform을 모두 post형식으로 바꾸세요
+
+https://docs.djangoproject.com/ko/3.2/intro/tutorial03/#a-shortcut-render
+
+=========================================
+vote 상세 투표 목록 작성
+
+https://docs.djangoproject.com/ko/3.2/intro/tutorial04/
+
+간단한 폼 만들기
+<title>detail.html</title>
+</head>
+<body>
+	<h1>{{question.question_text}}</h1>
+	
+	<form action="{% url 'polls:vote' question.id %}" method="post">
+		{% csrf_token %}
+		{% for choice in question.choice_set.all %}
+		<input type = "radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+		<label for="choice{{forloop.counter}}" value="{{choice.id}}">
+		{{choice.choice_text}} </label> <br/>
+		{% endfor %}
+		<input type="submit" value="Vote">
+	</form>
+
+<!-- 	The question you're looking at is {{question_id}}.  -->
+	<a href="{% url 'polls:index' %}"> index.html로 돌아가기</a>
+
+
+
+
+admin에
+from .models import Question
+from polls.models import Choice
+
+admin.site.register(Question)
+admin.site.register(Choice)
+
+
+
+model.py에 
+class Choice(models.Model):
+.
+.
+.
+
+1. 메인에 작성한 제목이 올라오도록    
+    def __str__(self):
+        return self.choice_text
+
+실행결과: 
+	music
+	reading
+	hamburger
+	pizza
+	chicken
+
+2.  질문제목 앞에 질문명 작성하도록
+    def __str__(self):
+        return str(self.question)+"번째 질문: "+str(self.choice_text)
+
+출력결과: 
+	My Second Question번째 질문: music
+	My Second Question번째 질문: reading
+	My First Question번째 질문: hamburger
+	My First Question번째 질문: pizza
+	My First Question번째 질문: chicken
+
+3.  질문제목 앞에 질문번호 작성하도록
+    def __str__(self):
+        return str(self.question.pk)+"번째 질문: "+str(self.choice_text)
+출력결과: 
+	2번째 질문: music
+	2번째 질문: reading
+	1번째 질문: hamburger
+	1번째 질문: pizza
+	1번째 질문: chicken
+
+
+http://127.0.0.1:8000/polls/
+==> question id에 대한 정보가 없음으로 에러발생
+
+..get()함수=> 특정 요소만 집어서 가져오기 위해사용
+pk(혹은 id)=3이라고 하면 3번째 줄에있는 자료를 넘겨달라는 뜻
+
+polls/views.py에서
+
+def detail(request, question_id):
+    #.get('칼럼명'=값)은 특정 요소만 꺼내오기 위해 사용한다
+==> 추가!    question = Question.objects.get(pk=question_id)
+    return render(request, "polls/detail.html",{'question':question})
+
+====================================================
+polls.index.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+{% if latest_question_list %}
+    <ul>
+    {% for q in latest_question_list %}
+		<li><a href="{% url 'detail' q.pk %}" >
+		{{q.question_text}}</a></li>    
+	{% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+</body>

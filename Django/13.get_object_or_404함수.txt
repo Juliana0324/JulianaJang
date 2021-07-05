@@ -1,0 +1,55 @@
+404 함수와 에러
+여태까지는 자료가 있건 없건 자료를 호출하는 명령을 수행하도록 함
+하지만  get_object_or_404()함수를 가져올 자료가 있을 때만 
+자료를 가져오고 자료없으면 에러발생.
+get의 문제점은 없는번호 입력시 에러발생
+
+
+get_object_or_404() 사용법:
+get_object_or_404(모델명,조건)
+
+views.py에 
+def vote(request, question_id): 
+	#질문이 들어온다
+    question = get_object_or_404(Question, pk= question_id)
+    try:
+        selected_choice = question.choice_set.get(
+            pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        return render(request, 'polls/detail.html',{'question':question})
+    
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect()
+    
+
+
+try~except 문
+try:
+    1/0
+    print("에러없을 때  실행 안되는 구문")
+except: 
+    print("에러없을 때 만 실행되는 구문")
+
+업데이트 도착
+1.갱신할 row(가로줄)을 연속에 가져온다
+2. 가져올 변수에 갱신내역을 적용한다
+3.갱신내용을 save()로 DB에 반영한다.
+
+문제.
+현재 votes에 1을 더하는 로직을 이용해서
+투표페이지에서 선택지에 투표를 한다음 제출하면 득표수가 1씩 올라가도록 프로그램함
+
+추가로직을 작성해 투표한 row의 선택지의 이름을
+".save() 테스트"라는 문자열로 바뀌게 해보세요
+hint: 선택지의 이름은 choice_text에 저장합니다.
+
+변경=> 
+        selected_choice.votes += 1
+        selected_choice.choice_text='.save()테스트'
+        ==> 어떤 것으로 바꿔줄까
+	ex) 메뉴선택 후 vote하면 
+	.save() 로 선택지가 변경됨
+        selected_choice.save()
+        return HttpResponseRedirect()
