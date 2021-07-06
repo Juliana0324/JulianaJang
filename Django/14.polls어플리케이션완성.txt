@@ -154,6 +154,18 @@ INSTALLED_APPS = [
 	'blog',    
 ]
 
+============================================
+Post(게시글)
+--------
+title(제목)
+text(내용)
+author(글쓴이)
+created_date(작성일)
+published_date(게시일)
+
+추가하기
+=>
+
 - models.py에
 
 from django.utils import timezone
