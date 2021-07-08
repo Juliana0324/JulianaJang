@@ -1,0 +1,264 @@
+새로운 글 2개 추가하기
+>>>from blog.models import Post
+
+>>>Post.objects.all()
+<QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>, <Post: Sample Title>]>
+
+>>>from django.contrib.auth.models import User
+
+>>>User.objects.all()
+<QuerySet [<User: admin>]>
+
+>>>me = User.objects.get(username='admin')
+>>>me
+<User: admin>
+>>>Post.objects.create(author=me, title='Favorite Food', text='Korean')
+<Post: Favorite Food>
+
+>>>Post.objects.all()
+<QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>, <Post: Sample Title>, <Post: Favorite Food>]>
+
+=====================================================
+필터링하기
+필터는 용도는 get과 비슷하지만 
+다른점은 필터는 한꺼번에 복잡한 조건하에 여러개를 가져올수 있습니다.
+
+쿼리셋의 중요한 기능은 데이터를 필터링하는 거예요. 
+예를 들어, 우리는 admin라는 사용자가 작성한 모든 글을 찾고 싶다고 해볼게요. 
+이런 경우 Post.objects.all()에서 all대신, filter를 사용합니다. 
+쿼리셋 안에 있는 괄호 안에 원하는 조건을 넣어줄 거예요. 
+지금 이 경우에는 작성자(author)가 나(me)인 조건을 넣어야겠죠. 
+이걸 장고로 표현한다면 author=me가 됩니다. 이제 이 조건이 반영된 코드를 볼까요.
+
+>>>Post.objects.filter(author=me)
+<QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>, <Post: Sample Title>, <Post: Favorite Food>, <Post: Java>]>
+
+
+칼럼명__contains   (_밑줄두개!)를 사용하면 원하는 검색결과 도출가능
+예를들어 모든 글들 중, 제목(title)에 'title'이라는 글자가 들어간 글들만을 뽑아내서 보고 싶다면요?
+
+command-line
+>>> Post.objects.filter(title__contains='Esta')
+<QuerySet [<Post: Como Esta>]>
+
+>>>Post.objects.filter(text__contains='Korean')
+<QuerySet [<Post: Favorite Food>]>
+
+
+==============================================================
+게시글 목록을 볼 수 있어요. 
+게시일(published_date)로 과거에 작성한 글을 필터링하면 목록을 불러올 수 있어요.
+
+command-line
+>>> from django.utils import timezone
+>>> Post.objects.filter(published_date__lte=timezone.now())
+<QuerySet [<Post: 1번글>, <Post: Second>]>
+
+★published_date__lte에서 
+	lte란 우측에 있는 시간보다 이전에 있는 시간이라는 뜻이에요
+
+
+안타깝게도, 파이썬 콘솔에서 추가한 게시물은 아직 보이지 않네요. 하지만 바꿀 수 있어요! 먼저 게시하려는 게시물의 인스턴스를 얻어야 해요.
+
+command-line
+>>> post = Post.objects.get(title="Sample Title")
+>>>post
+<Post: Sample Title>
+
+==> Sample Title을 post에 저장해라
+
+>>>type(post)
+<class 'blog.models.Post'>
+
+>>>type(1)
+<class 'int'>
+
+그리고 publish메서드를 사용해서 게시합시다!
+
+command-line
+>>> post.publish()
+이제 (위쪽 화살표 버튼 3번을 누르고 enter를 눌러) 다시 게시된 글의 목록을 가져와 봅시다.
+
+model.py에서 
+    
+def publish(self):
+       self.published_date = timezone.now()
+        self.save 
+    
+self는 post의 글하나하나라는 뜻입니다.
+
+    def __str__(self):
+        return self.title
+title로 정해졌기 때문에 제목으로 뜹니다.
+
+
+command-line
+>>> Post.objects.filter(published_date__lte=timezone.now())
+[<Post: Sample title>]
+
+>>>post.published_date
+datetime.datetime(2021, 7, 8, 8, 45, 16, 872394, tzinfo=<UTC>)
+
+
+
+==============================================================
+정렬하기
+퀘리셋은 객체 목록을 정렬할 수 있어요. 이제 created_date필드를 정렬해봅시다.
+
+command-line
+>>> Post.objects.order_by('created_date')
+<QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>, <Post: Sample Title>, <Post: Favorite Food>, <Post: Java>]>
+
+역순
+>>>Post.objects.order_by('-created_date')
+<QuerySet [<Post: Java>, <Post: Favorite Food>, <Post: Sample Title>, <Post: Como Esta>, <Post: Second>, <Post: 1번글>]>
+
+
+
+
+쿼리셋 연결하기
+쿼리셋들을 함께 연결(chaining)할 수 있어요.
+
+command-line
+>>> Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+이 방법은 정말 강력해 복잡한 쿼리도 작성할 수 있게 해준답니다.
+
+문제.
+현재 Post모델에서
+제목에 '장고'라는 단어가 들어간자료만 먼저 얻어온후 
+그자료를 created_Date기준으로 내림차순
+
+>>Post.objects.filter(title__contains='Django').order_by('-created_date')
+<QuerySet []>
+
+#검색결과없음
+
+
+
+
+=========================================================
+view를 통해 model자료출력후 template에 전송
+
+템플릿 동적 데이터
+블로그 글은 각각 다른 장소에 조각조각 나눠져있어요.
+ Post모델은 models.py파일에, post_list모델은 views.py파일에 있어요. 
+그리고 앞으로 템플릿도 추가해야 합니다. 
+HTML 템플릿에서 글 목록을 어떻게 보여줄까요? 
+이번 장에서는 콘텐츠(데이터베이스 안에 저장되어 있는 모델)를 가져와 템플릿에 넣어 보여주는 것을 해볼 거에요.
+
+뷰(view)는 모델과 템플릿을 연결하는 역할을 합니다. 
+post_list를 뷰에서 보여주고 이를 템플릿에 전달하기 위해서는, 모델을 가져와야 합니다. 일반적으로 뷰가 템플릿에서 모델을 선택하도록 만들어야 합니다.
+
+
+blog/views.py파일을 열어봅시다. post_list 뷰 내용을 봅시다.
+
+blog/views.py
+from django.shortcuts import render
+
+def post_list(request):
+    return render(request, 'blog/post_list.html', {})
+다른 파일에 있는 코드를 가져오는 방법, 기억나나요? 
+models.py파일에 정의된 모델을 가져올 거에요.
+
+ from .models import Post을 추가하세요.
+
+blog/views.py
+from django.shortcuts import render
+from .models import Post
+from 다음에 있는 마침표(.)는 현재 디렉토리 또는 애플리케이션을 의미합니다. 동일한 디렉터리 내 views.py, models.py파일이 있기 때문에 . 파일명 (.py확장자를 붙이지 않아도)으로 내용을 가져올 수 있습니다. 이제 Post모델을 불러봅시다.
+
+Post모델에서 블로그 글을 가져오기 위해서는 쿼리셋(QuerySet)이 필요합니다.
+
+
+문제1. 
+blog/views.py 내부의 post_list함수 내부에
+1.Post모델에서 데이터를 꺼내오시되
+	- timezone이 now이전인 데이터를 꺼내서
+	- 'published_date'로 오름차순해서 꺼내주시고 
+
+2. 꺼낸 자료를 post_list.html로 전송
+
+#답
+def post_list(request,post):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts':posts})
+
+여기서 
+from django.utils import timezone
+추가안해주면 timezone에러 발생!
+===============================================================
+
+장고 템플릿
+이제 데이터를 보여줄 차례에요! 이를 위해 장고는 내장된 템플릿 태그(template tags) 라는 유용한 기능을 제공합니다.
+
+템플릿 태그는 무엇인가요?
+HTML에 여러분은 파이썬 코드를 바로 넣을 수 없어요. 브라우져는 파이썬 코드를 이해할 수 없기 때문이에요요 브라우저는 HTML만을 알고 있어요. 알다시피 HTML는 정적이지만, 파이썬은 동적입니다.
+
+템플릿 태그는 파이썬을 HTML로 바꿔주어, 빠르고 쉽게 동적인 웹 사이트를 만들 수 있게 도와주어요. 야호!
+장고 템플릿 안에 있는 값을 출력하려면, 변수 이름 안에 중괄호를 넣어 표시해야 합니다.
+
+blog/templates/blog/post_list.html
+<body>
+        <div>
+            <h1><a href="">Django Girls Blog</a></h1>
+        </div>
+	
+		{{ posts }}
+    </body>
+
+http://127.0.0.1:8000/출력=>
+Django Girls Blog
+<QuerySet [<Post: 1번글>, <Post: Second>]>
+
+
+문제2.
+쉘 환경에서 글 2개를 각각 따로따로 
+.get()을 이용해 꺼내주신다음
+.publish()를 이용해 published_date를 입력해주세요
+
+>>from blog.models import Post
+
+>>Post.objects.get(title="Como Esta")
+<Post: Como Esta>
+>>post1 = Post.objects.get(title="Como Esta")
+>>post2= Post.objects.get(title__contains="Favorite")
+>>post1
+<Post: Como Esta>
+>>post2
+<Post: Favorite Food>
+>>post1.publish()
+>>post2.publish()
+
+
+이는 장고가 {{ posts }}를 객체 목록으로 이해하고 처리했다는 것을 의미해요. Python 시작하기 장에서 어떻게 목록을 보여줬는지 기억하고 있나요? 맞아요, for loop을 이용해서죠! 장고 템플릿에서는 이렇게 써야 합니다.
+
+blog/templates/blog/post_list.html
+{% for post in posts %}
+    {{ post }}
+{% endfor %}
+
+
+잘 작동하네요! 그런데 디자인이 별로죠. 앞에서 HTML 시작하기 했던 정적 블로그 게시글들이 보이게 만들면 참 좋을텐데 말이에요. HTML과 템플릿 태그를 섞어 사용하면 멋있게 만들 수 있어요. body를 아래와 같이 수정하세요.
+
+blog/templates/blog/post_list.html
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+		{% for post in posts %}
+		    {{ post.title }}<br/>
+		    {{ post.text }}<br/>
+		    {{ post.published_date }}<br/>
+		{% endfor %}{% endfor %}
+
+
+출력결과
+1번글
+I'm the first
+July 6, 2021, 9:58 p.m.
+
+Second
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type 
+specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+July 6, 2021, 10 p.m.
