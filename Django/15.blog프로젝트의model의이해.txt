@@ -1,0 +1,214 @@
+class Post(models.Model):
+    #author는 사용자의 createsuperuser 혹은 superuser가 만든 계정자료와
+     # 연동, 글쓴이는 자동으로 로그인한 사용자의 정보가 기입된다.
+    author = models.ForeignKey(
+        'auth.User', on_delete=models.CASCADE)
+    
+    #CharField는 글자수 제한이 없음, max_length로 길이 제한
+    title = models.CharField(max_length = 200)
+    
+   # TextField는 글자수 제한이 없는 칼럼의미
+    text = models.TextField()
+
+   # DateTimeField는 시간저장을 위한 칼럼을 의미, default는 입력하지 않을 때
+   # 자동으로 기입할 자료를 정해줌. timezone.now는 등록 당시의 서버시간
+    created_date = models.DateTimeField(default=timezone.now)
+
+    # blank=True일 경우 칼럼이 비어있어도됨, null은 null값 입력가능을 뜻함
+    published_date = models.DateTimeField(blank=True, null = True)
+
+
+============================================================
+장고관리자 설정
+admin.py
+
+from django.contrib import admin
+from .models import Post
+
+admin.site.register(Post)
+
+
+슈퍼계정입력
+properties=>D:\Com_JJW\python\myblog
+cmd창에서 진입
+
+D:\Com_JJW\python\myblog>python manage.py createsuperuser
+슈퍼계정 아이디, 비번입력
+아이디: admin
+비번: python01
+
+====================================
+myblog에 
+urls.py
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
+	#==> url이 존재하지 않는다는 것은 http://127.0.0.1:8000/번이 1차url
+]
+
+blog에도 urls.py
+==> new-> pydevModule=> urls
+추가
+from django.urls import path
+from django.urls.conf import include
+from blog import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+
+]
+1차 url설정 안해뒀기 떄문에 
+http://127.0.0.1:8000/
+입력시 바로 post_list로 연결됨
+=============================================
+https://tutorial.djangogirls.org/ko/django_views/
+장고 뷰 만들기
+
+views에 post_list추가
+def post_list(request):
+    return render(request, 'blog/post_list.html', {})
+
+
+myblog.templates.blog=>
+post_list.html 새로 만들기
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>post_list</title>
+</head>
+<body>
+	<h1>템플릿 추가완료</h1>
+	<p>HI!</p>
+	<p>It works!</p>	
+	<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>post_list</title>
+</head>
+<body>
+	<h1>템플릿 추가완료</h1>
+	<p><b>HI!</b></p>
+	<p><strong>It works!</strong></p>	
+	<ul>
+		<li>Django</li>
+		<li>Python</li>
+		<li>Big data</li>	
+	</ul>
+</body>
+</html>
+
+
+===================================================
+맞춤형 템플릿 만들기
+앞으로 좀 더 재밌어질 거에요. 나만의 템플릿을 만들어 볼 거에요! 아래 태그들을 짚고 넘어가세요.
+
+<h1>A heading</h1> - 큰 제목
+<h2>A sub-heading</h2> - 중 제목
+<h3>A sub-sub-heading</h3> - 소 제목... <h6>레벨까지 사용할 수 있습니다.
+<em>text</em> - 텍스트 기울기 (Italic)
+<strong>text</strong> - 텍스트를 두껍게(Bold)
+<br /> - 줄바꿈 (br은 스스로 닫히는 태그로 속성을 사용할 수 없습니다)
+<a href="http://djangogirls.org">link</a> - 하이퍼링크 걸기
+<ul><li>first item</li><li>second item</li></ul>- 목록 만들기
+<div></div> - 페이지 섹션
+아래 템플릿 예제가 있습니다.
+
+
+post_list.html변경
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>post_list</title>
+</head>
+<body>
+        <div>
+            <h1><a href="">Django Girls Blog</a></h1>
+        </div>
+
+        <div>
+            <p>published: 14.06.2014, 12:14</p>
+            <h2><a href="">My first post</a></h2>
+            <p>포스팅이 이런스타일로 나올것이란 예시입니다.</p>
+        </div>
+
+        <div>
+            <p>published: 14.06.2014, 12:14</p>
+            <h2><a href="">My second post</a></h2>
+            <p>포스팅 갯수가 많아져도 문제없이 같은 패턴을 유지합니다.</p>
+        </div>
+    </body>
+</html>
+
+
+이 템플릿에는 세 개의 div 섹션이 있습니다.
+
+첫 번째 div는 블로그 제목을 가지고 있어요. 머리말과 링크이지요.
+나머지 두 div는 블로그 게시일과 h2로 된 블로그 제목과 링크를가 있습니다. 두 p(문단)의 하나는 날짜를, 다른 하나는 블로그를 가리키죠.
+
+======================================================================
+우클릭-Django-Shell with django environment - ok누르기
+밑에 콘솔에 명령어 입력가능
+
+Post.objects.all()
+Traceback (most recent call last):
+  File "<input>", line 1, in <module>
+NameError: name 'Post' is not defined
+
+이런! 에러가 나타났어요. 글이 없다고 하네요. 이럴수가... 그런데 이렇게 나오는 것이 맞는 거랍니다. 이 글을 먼저 불러오는 것(import)을 잊었네요!
+
+command-line
+>>> from blog.models import Post
+간단합니다. 우리는 Post모델을 blog.models에서 불러왔어요. 이제 모든 글을 출력해봅시다.
+
+
+이제 다시 작성하면 입력됨!
+ Post.objects.all()
+
+==>콘솔에 <QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>]>나옵니다
+
+
+
+객체 생성하기
+데이터베이스에 새 글 객체를 저장하는 방법에 대해 알아봅시다.
+
+command-line
+>>> Post.objects.create(author=me, title='Sample title', text='Test')
+
+create형식:	create(칼럼명=집어넣을 자료, 칼럼명=집어 넣을 자료)
+하지만 여기에 뭔가 빼먹은 것이 하나 있어요. me(나)를 빼먹었네요. 작성자로서 User(사용자) 모델의 인스턴스를 가져와 전달해줘야 합니다. 어떻게 해야 할까요?
+me를 모르기때문에 작성이 안됨!
+
+
+먼저 User 모델을 불러옵니다. :
+
+command-line
+>>> from django.contrib.auth.models import User
+
+데이터베이스에서 user는 어떤 일을 할까요? 함께 알아봅시다. :
+
+command-line
+>>> User.objects.all()
+<QuerySet [<User: admin>]>
+슈퍼유저로 등록했었던 그 사용자군요! 이제 이 사용자의 인스턴스(instance)를 가져와 봅시다. :
+
+command-line
+>>> me = User.objects.get(username='admin')
+
+me
+<User: admin>
+그럼이제 me를 admin으로 지정해주었기 때문에 새로 추가가능!
+
+Sample Title추가해주기
+>>>Post.objects.create(author=me, title='Sample Title', text='test')
+<Post: Sample Title>
+
+Post 내용 확인하기
+>>Post.objects.all()
+<QuerySet [<Post: 1번글>, <Post: Second>, <Post: Como Esta>, <Post: Sample Title>]>
+
