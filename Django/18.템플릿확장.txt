@@ -1,0 +1,381 @@
+장고걸즈
+
+템플릿 확장하기
+장고의 또 다른 멋진 기능은 템플릿 확장(template extending) 입니다. 무슨 뜻일까요? 바로 여러분의 웹사이트 안의 서로 다른 페이지에서 HTML의 일부를 동일하게 재사용 할 수 있다는 뜻이에요.
+
+이 방법을 사용하면 동일한 정보/레이아웃을 사용하고자 할 때, 모든 파일마다 같은 내용을 반복해서 입력 할 필요가 없게 됩니다. 또 뭔가 수정할 부분이 생겼을 때, 각각 모든 파일을 수정할 필요 없이 딱 한번만 수정하면 된답니다!
+
+기본 템플릿 생성하기
+기본 템플릿은 웹사이트 내 모든 페이지에 확장되어 사용되는 가장 기본적인 템플릿입니다.
+
+blog/templates/blog/에 base.html 파일을 만들어 봅시다. :
+
+blog
+└───templates
+    └───blog
+            base.html
+            post_list.html
+그 다음 파일을 열어 post_list.html에 있는 모든 내용을 base.html에 아래 내용을 복사해 붙여넣습니다.
+blog/templates/blog/base.html
+{% load static %}
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% for post in posts %}
+                    <div class="post">
+                        <div class="date">
+                            {{ post.published_date }}
+                        </div>
+                        <h1><a href="">{{ post.title }}</a></h1>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+
+=============================================================================
+그 다음 base.html에서 <body> (<body>와 </body> 사이에 있는 모든 내용)의 모든 내용을 아래와 같이 바꿉니다. :
+
+blog/templates/blog/base.html
+<body>
+    <div class="page-header">
+        <h1><a href="/">Django Girls Blog</a></h1>
+    </div>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+{% for post in posts %}{% endfor %} 사이에 있는 모든 내용을 바꿨습니다.:
+
+blog/templates/blog/base.html
+{% block content %}
+{% endblock %}
+이 코드는 무엇을 의미일까요? 
+우리는 block을 만든 거에요! 
+템플릿 태그 {% block %}으로 HTML 내에 들어갈 수 있는 공간을 만들었어요. 
+base.html을 확장해 다른 템플릿에도 가져다 쓸 수 있게 한 거죠. 
+어떻게 동작하는지 보여 드릴게요.
+
+이제 base.html을 파일을 저장을 하고, blog/templates/blog/post_list.html 파일을 다시 엽니다. 
+{% for post in posts %}부터 {% endfor %}까지만 남기고 나머지는 전부 지우세요.
+ 그럼 아래와 같이 될 겁니다. 
+
+blog/templates/blog/post_list.html
+{% for post in posts %}
+    <div class="post">
+        <div class="date">
+            {{ post.published_date }}
+        </div>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+
+블록 태그가 base.html파일의 태그와 일치해야겠죠. 또 콘텐츠 블록에 속한 모든 코드를 포함하게 만들어야 할 거에요. 이를 위해서 {% block content %}와 {% endblock %}사이에 모든 코드를 넣으세요. 이렇게 말이죠. :
+
+blog/templates/blog/post_list.html
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+한 가지만 남았습니다. 이 두 템플릿을 연결해야해요. 지금까지 실습한 내용이 바로 확장 템플릿의 전부입니다! 확장 태그를 파일 맨 처음에 추가합니다. 아래와 같이요. :
+blog/templates/blog/post_list.html
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h1><a href="">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
+다 되었어요! 여러분의 웹사이트가 잘 작동하는지 확인해보세요. :)
+
+=========================================================
+Post에 템플릿 링크 만들기
+
+post제목 목록이 보이고 해당 링크를 클릭하면, 
+post상세 페이지로 이동하게 만들어 볼 거에요. 
+<h1><a href="">{{ post.title }}</a></h1>부분을 수정해 봅시다.
+
+blog/templates/blog/post_list.html
+<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+
+======================================================
+Post 상세 페이지 URL 만들기
+첫 게시물의 상세 페이지 URL이 http://127.0.0.1:8000/post/1/가 되게 만들 거에요.
+
+blog/urls.py파일에 URL을 만들어, 장고가 post_detail 뷰로 보내, 게시글이 보일 수 있게 해봅시다. path('post/<int:pk>/', views.post_detail, name='post_detail')코드를 blog/urls.py파일에 추가하면 아래와 같이 보일 거에요.
+
+blog/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+
+    # 127.0.0.1:8000/post/1 패턴에 해당하는 path를
+    # blog/urls.py에 작성해주세요
+    # /post/숫자를 2차 url로 작성해주세요. 1차url은 없습니다.
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+]
+
+★여기서 post/<int:pk/>/는 URL 패턴을 나타내요.
+post/란 URL이 post 문자를 포함해야 한다는 것을 말합니다. 
+
+★<int:pk>는 조금 까다롭습니다. 
+장고는 정수 값을 기대하고 이를 pk라는 변수로 뷰로 전송하는 것을 말합니다.
+
+★/은 다음에 / 가 한 번 더 와야 한다는 의미입니다.
+
+views.py에
+def post_detail(request, pk):
+    Post.objects.get(pk=pk)
+    return render(request, 'blog/post_detail.html', {'post':post})
+
+하지만 이 코드에는 문제가 있어요.
+만약 해당 primary key(pk)의 Post를 찾지 못하면 오류가 나올 거에요!
+
+우리가 원하는게 아니죠! 
+장고에는 이를 해결하기 위해 get_object_or_404라는 특별한 기능을 제공해요. 
+pk에 해당하는 Post가 없을 경우, 멋진 페이지(페이지 찾을 수 없음 404 : Page Not Found 404)를 보여줄 거에요.
+
+myblog/views.py
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+	★get_object_or_404만 post.을 사용하지않음!!
+	★get 404 기억안나면 링크: https://docs.djangoproject.com/ko/3.2/intro/tutorial03/ 
+
+    return render(request, 'blog/post_detail.html', {'post':post})
+
+잘 작동하네요! 그런데 블로그 제목 링크를 클릭하면 어떻게 되나요?
+127.0.0.1:8000/post/3
+
+이런! 또 에러가 나왔네요! 하지만 이제 어떻게 해야하는지 알고 있죠? 드디어 템플릿을 추가할 차례에요!
+=====================================================================
+Post 상세 페이지 템플릿 만들기
+
+post_detail.html만들어주기
+
+blog/templates/blog/post_detail.html
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <div class="post">
+        {% if post.published_date %}
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+        {% endif %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endblock %}
+
+
+다시 한 번 base.html을 확장한 거에요. content블록에서 블로그 글의 게시일, 제목과 내용을 보이게 만들었어요.
+
+가장 중요한 부분은 {% if ... %} ... {% endif %}라는 템플릿 태그인데, 내용이 있는지 확인할 때 사용합니다. 
+(if ... else ..구문은 Python 시작하기 장에서 배웠어요) post의 게시일(published_date)이 있는지, 없는지를 확인하는 거에요.
+
+
+==============================================================
+장고 폼
+
+장고의 모든 중요한 부분과 마찬가지로, 폼도 폼만의 forms.py.라는 파일을 만들어요.
+
+우리는 이 이름으로 blog 디렉토리 안에 파일을 만들 거에요.
+
+
+myblog/blog
+ └── forms.py
+
+
+좋아요. 이제 이 파일을 열고 아래 코드를 작성하세요. :
+
+==>blog/forms.py
+#forms.py를 이용헤 폼을 생성할 때 반듯이 아래 코드 작성
+from django import forms
+
+# Post 모델에 대한 폼을 생성하기 위해 Post 모델 로드
+from .models import Post
+
+# 모델에서 models.Model를 괄호안에 넣듯이
+# 폼생성에도 class 폼이름(forms.ModelForm): 으로 시작해야함
+
+class PostForm(forms.ModelForm):
+    
+    # 폼의 상세정보를 섷정하기 위해 class PostForm내부에
+    # class Meta를 다시만들어야함. Meta에 의해 정의한 정보대로 폼 생성됨
+    class Meta:
+        #이 폼의 타겟이 Post모델(post모델에 적재예정)
+        model = Post
+        #실제로 사용자에게 입력받을 컬럼은 title과 text만
+        # author은 자동으로 계정연동, create_date는 서버시간
+        # published_date는 퍼블리싱할때 추후입력
+        # pk는 자동으로 글하나 생성시마다 하나씩 부여
+        
+        fields= ('title','text')
+
+
+
+폼과 페이지 링크
+blog/templates/blog/base.html 파일을 열어봅시다. page-header 라는 div class에 링크를 하나 추가할 거에요.
+
+blog/templates/blog/base.html
+<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+이 새로운 뷰는 post_new입니다. 
+부트스트랩 테마에 있는 glyphicon glyphicon-plus 클래스로 더하기 기호가 보이게 되는데요.
+
+위 구문을 추가하고 나면, 이제 html 파일이 아래처럼 보일 거예요.
+
+blog/templates/blog/base.html
+{% load static %}
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <div class="page-header">
+            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+페이지를 저장하고 나서 http://127.0.0.1:8000 페이지를 새로고침 해보면, 
+NoReverseMatch이라는 에러가 나타나죠?
+
+위 코드를 보면 첫 번째로 forms model을 import 해야 하고 
+(from django import forms), 그다음으로 Post model도 import 해야 합니다. (from .models import Post).
+
+PostForm 은 이미 다들 예상 하셨듯이 우리가 만들 폼의 이름이에요. 
+그리고 장고에 이 폼이 ModelForm이라는 것을 알려줘야해요. 
+(그러면 장고가 뭔가 마술을 부릴 거에요) - forms.ModelForm은 ModelForm이라는 것을 알려주는 구문이에요.
+
+자, 이제 다음으로 class Meta가 나오는데요, 
+이 구문은 이 폼을 만들기 위해서 어떤 model이 쓰여야 하는지 장고에 알려주는 구문입니다. (model = Post).
+
+==========================================================================
+
+URL
+이제 blog/urls.py를 열고 아래 구문을 추가하겠습니다.
+
+blog/urls.py
+path('post/new', views.post_new, name='post_new'),
+전체 코드는 아래와 같을 거예요.
+
+blog/urls.py
+from django.urls import path 
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('post/<int:pk>/', views.post_detail, name='post_detail'),
+    path('post/new/', views.post_new, name='post_new'),
+]
+브라우저에 사이트를 다시 불러오면 AttributeError가 보이게 됩니다. 왜냐하면, 아직 post_new뷰를 구현하지 않았기 때문이죠. 이제 하나 더 추가해봅시다.
+
+
+
+
+post_new view
+blog/views.py파일을 열어서 from줄에 아래와 같은 코드를 추가합니다.
+
+blog/views.py
+from .forms import PostForm
+그리고 view에 추가합니다.
+
+blog/views.py
+def post_new(request):
+
+    # 만들어 놨던 폼양식을 가져오기 위해서는 
+    # 변수 = 폼양식() 를 써야한다. () 가 우측에 붙음에 주의
+    # 현재 코드는 PostForm() 양식을 따라 만들것임을 보여준다
+    form = PostForm()
+    return render(request, 'blog/post_edit.html', {'form': form})
+새 Post 폼을 추가하기 위해 PostForm() 함수를 호출하도록 하여 템플릿에 넘깁니다.
+
+
+========================================================
+템플릿
+이번에는 blog/templates/blog 디렉터리 안에 post_edit.html 파일을 생성해 폼이 작동할 수 있게 만들 거에요.
+
+먼저 폼이 보여야 합니다. 그 예로, {{ form.as_p }}로 간단히 만들 수 있어요….
+위 코드를 HTML 태그로 폼을 감싸세요. <form method="POST">...</form>
+Save 버튼이 필요합니다. 이것은 HTML 버튼으로 만들 수 있어요: <button type="submit">Save</button>
+마지막으로 <form ...>을 열어 {% csrf_token %}를 추가하세요. 
+이 작업은 폼 보안을 위해 중요하답니다! 
+이 작업을 빼먹고 저장하면 장고는 불평할 거에요.
+
+blog/templates/blog/post_edit.html
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h1>New post</h1>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <!-- 양식을 담은 변수이름이 form이므로 form.as_p
+        	다른 이름이라면 양식명.as_p라고 적는다-->
+
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+
+============== 
+이제 접속을 해봐요
+
+잠깐만요! title과 text필드에 아무거나 입력하고 저장해보세요. 어떻게 됐나요?
+
+글이 사라졌어요! 한번 더 해봐도 내가 입력한 글들은 어디론가로 사라지고는 새 글이 추가되지 않아요. 뭐가 잘못된 걸까요?
+
+여러분이 잘못한 게 없답니다. 단지 view 추가 작업이 필요할 뿐이에요.
