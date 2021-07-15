@@ -1,0 +1,258 @@
+3. RelativeLayout
+ - 위젯들이 서로간의 상대적인 배치 관계에 따라 
+    화면에 표시될 위치가 결정되도록 만들어주는 Layout
+ - 규칙기반 모델
+ - 연결선이 아닌속성을 통해 위치 지정
+ - layout_margin을통해 위치지정
+
+
+    <!--
+        android:layout_alignParent[부모뷰의 위치] = "true"
+            - 부모뷰를 타겟으로 위치 지정옵션
+
+            android:layout_to[start,End]of - 타겟뷰의
+            왼쪽 오른쪽에 붙일시 정하는 옵션
+
+            android:layout_below ="타겟아이디"
+             - 타겟뷰의 아래쪽에 위치하기 위한 속성
+
+            android:layout_above="타겟아이디"
+             - 타겟뷰의 위쪽에 위치하기 위한 속성
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안드로이드1"
+            android:textSize="20dp"
+            android:layout_toRightOf="@id/textView3"
+            />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안드로이드2"
+            android:textSize="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_alignParentEnd="true"
+            />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/textView3"
+            android:text="안드로이드3"
+            android:textSize="20dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="304dp"
+            />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안드로이드4"
+            android:textSize="20dp"
+            />
+
+
+
+===========================================================
+4. TableLayout 
+ - 자식(children) view위젯들을 테이블(행과열)로 나누어 표시하는 Layout 클래스
+ - 격자모델
+ - GridView
+ - 격자모양의 배열사용해서 화면 구성한다.
+ - HTML의 Table테그와 방식이 유사
+ - but 많이 사용안되는 레이아웃
+
+ - Grid View, List view 더많이 사용
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:stretchColumns="0,1,2"
+        >
+    <!-- 한줄에 들어가는 뷰들은 TableRow를 통해 그룹화
+          - android:layout_span="2" : 칸 합치는 속성
+
+        android:stretchColumns:
+        -줄마다 남아있는 공간을 다채우기위한 속성
+        - 인덱스 값을 지정한다.
+        -
+
+
+    -->
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="이름:"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="name input"
+            android:textSize="20dp"
+            android:layout_span="2"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="전화번호:"
+
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="hp number input"
+            android:textSize="20dp"
+
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전송"
+            android:textSize="30dp"
+
+            />
+
+
+    </TableRow>
+    <TableRow>
+        <Button
+            android:text="그냥"
+            android:layout_column="1"/>
+
+
+
+    </TableRow>
+
+
+
+    </TableLayout>
+
+=========================================================== 
+ ScrollView
+        - 화면영역을 벗어나면 스크롤 표시가 자동으로 보이게 된다.
+        - ScrollView를 다른 뷰를 감싸기만 하면 된다
+        -
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Button"/>
+	.
+	.
+	.
+	.	
+	.
+
+        </LinearLayout>
+    </ScrollView>
+
+
+=========================================================
+5. FrameLayout
+
+ - 가장 상위에 있는 하나의 뷰 또는 뷰 그룹만 보여주는 Layout
+ - 여러 개의 뷰가 중첩적으로 쌓인다.
+ - 뷰를 전환하여 보여주는 방식에서 자주사용됨
+ - 중첩되는 효과와 함께 뷰의 가시성(Visiblity) 속성을 이용해 구현
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FrameLayout Test"
+                android:textSize="25dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:background="#FFEB3B"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미지전환"
+                android:textSize="25dp"
+                android:background="#00BCD4"
+                android:onClick="onClickButton"
+                />
+            <!--
+                android:onClick : 클릭시 전환
+            -->
+
+
+
+===============================================================
+public class MainActivity extends AppCompatActivity {
+    ImageView imageView1;
+    ImageView imageView2;
+
+    boolean check = true;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        imageView1 = (ImageView)findViewById(R.id.imageView1);
+        imageView2 = (ImageView)findViewById(R.id.imageView2);
+
+        //findViewById: Id를 통해 뷰를 찾는 메소드
+        //안드로이드는 왠만한것들 상수화
+
+        // R - Resource 객체
+        // id-아이디접근
+
+    }
+
+    public void onClickButton(View v){
+        if(check){
+            check = false;
+            imageView1.setVisibility(View.VISIBLE);
+            imageView2.setVisibility(View.INVISIBLE);
+        }else{
+            check = true;
+            imageView1.setVisibility(View.INVISIBLE);
+            imageView2.setVisibility(View.VISIBLE);
+
+        }
+
+
+    }
+}
+

@@ -1,0 +1,41 @@
+activitiy_main
+
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 테그명은 클래스명이다
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    - 안드로이드에 필요한 클래스를 사용하려한다면 무조건 적혀있어야한다.
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    - 외부라이브러리를 사용할때 적는 속성
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    - 거의 모든 테그들의 필수 속성
+    - 가로와 세로 길이를 설정하는 속성
+
+    - match_parent : 남은 공간 없이 모두 채운다/ 상위의 태그에 크기를 맞춘다
+    - wrap_content : 내용의 크기에 따라 뷰의 크기를 결정
+-->
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    - android:text="Hello World!" : 화면에 보여질 텍스트를 설정하는 속성
+    - android:  안드로이드에서 기본적으로 제공하는 속성
+    - app:  외부 라이브러리 또는 직접만든 속성...
+
+
+
+1. Constraint Layout
+   - 화면의 뷰들의 위치를 상대적으로 위치할 수 있도록 하는 레이아웃
+   - 현재 화면이 전환되어도 가장 안정적으로 사용할 수 있는레이아웃
+   - 얼마전까지는 기본 레이아웃 방식은 RelativeLayout이었다
+   - 아이폰에서 사용하던 방식을 안드로이드에서 가져다 사용하게된다.
+      androidx.constraintlayout.widget.ConstraintLayout

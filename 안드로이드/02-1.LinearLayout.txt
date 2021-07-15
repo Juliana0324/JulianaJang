@@ -1,0 +1,74 @@
+2. Linear Layout
+ - 여러 view들을 가로 또는 세로로 방향을 나열할때 사용하는 layout
+ - 박스모델
+ - 한쪽 방향으로 뷰를 추가하여 화면을 구성한다
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+        <!-- LinearLayout은 우리가 설정을 잡지 않으면 디폴트로 수평이된다
+            우리가 설정을 잡아야 세로로 넣을수 있다. 왠만하면 우리가 직접설정하자
+            디폴트값(LinearLayout의 필수 속성):     android:orientation="horizontal"
+            -어느방향으로 설정할지의 옵션
+            - horizontal, vertical
+
+            android:layout_gravity - 뷰의 정렬속성
+                => center,bottom....
+
+           android:gravity="center" => 뷰안에 글자 정렬속성
+
+           Layout이 붙으면 보통 뷰 전체
+           안붙으면 뷰의 내용물
+
+            margin과 padding의 차이:
+            -layout_margin 뷰와 뷰사이의 여백
+            - padding - 뷰와 내용물의 여백
+
+            android:layout_weight ="정수값"
+             - 남아있는 공간을 자동으로 할당하는 속성
+             - 두개 이상이 있으면 두 속성의 합을 구해서 비율적으로
+             나누어주는 속성.
+             
+        -->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="버튼1"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="버튼2"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:text="버튼3"
+        />
+
+    <!--TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="ABCDEFG"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:paddinTop="100dp"
+
+        -->
+
+</LinearLayout>
