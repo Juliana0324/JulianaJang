@@ -1,0 +1,22 @@
+https://latte-is-horse.tistory.com/66
+
+1. build.gradle 첫번째꺼
+위 코드에서 dependencies의 gradle:4.1.2 버전을 4.0.2 버전으로 다운그레이드 해준다.
+
+[변경코드]
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.0.2"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+
+
+2.  gradle-wrapper.properties
+위 코드에서 gradle-6.5-bin.zip을 6.4.1로 바꿔준다.
+
+[변경코드]
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.4.1-bin.zip
+
+3. Sync Now클릭

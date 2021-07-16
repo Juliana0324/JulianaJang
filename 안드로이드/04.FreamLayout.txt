@@ -1,0 +1,267 @@
+import android.view.View;
+
+View는 인터페이스의 구성요소 : 
+	- 사진, 문장을 출력하기도 하고 버튼기능을 하기도 하며 스크롤을 제공함
+	
+뷰를 상속하는 하위클래스들 : 
+ - Textview : 텍스트를 화면에 보여주는 역할의 뷰
+    
+	android:text 
+	-뷰에서 보이는 문자열을 설정하는 속성..
+	- 한글설정시 ! 발생
+	- 모바일 상에서 설정하지 않는 언어를 사용하게 되면 문제발생 가능
+	- 안드로이드 앱상에 다른 언어를 처리하기위해 xml파일에 설정잡음
+	- 위치: res/values 폴더안에 strings.xml
+	<resources>
+    		<string name="app_name">MyBasicWidget</string>
+    		<string name = "hello">헬로우월드 !!!!</string>
+		얘 추가!
+	</resources>
+
+	activity_main.xml에 들어와서 추가하면 설정하지 않은 언어의 문자열도 에러없이 출력가능(권장!)
+	        android:text="@string/hello"
+        	        android:textSize="30sp"
+
+
+
+	- maxLines: 문자열 최대열수
+	- android:textStyle : italic , bold, normal..이씀
+	같이 사용가능 예) italic | bold
+
+
+
+ - Button
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+문제1.
+
+화면에 6개의 사진들이 보이게끔해주는데 
+두번이전  |   이전   |   다음   |   두번다음 
+으로 누르면 넘어가게
+
+
+activity_main.xml
+   <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FrameLayout Test"
+                android:textSize="25dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:background="#FFEB3B"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="두장이전"
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:background="#00BCD4"
+                app:backgroundTint="@null"
+                android:onClick="onClickButton"
+                />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이전"
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:background="#00BCD4"
+                app:backgroundTint="@null"
+                android:onClick="onClickButton"
+                />
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="다음"
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:background="#00BCD4"
+                app:backgroundTint="@null"
+                android:onClick="onClickButton"
+                />
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="두장다음"
+                android:textSize="25dp"
+                android:layout_weight="1"
+                android:background="#00BCD4"
+                app:backgroundTint="@null"
+                android:onClick="onClickButton"
+                />
+            <!--
+                android:onClick : 클릭시 전환
+            -->
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/girlwithpearl"/>
+
+            <!--
+                android:visibility - 가시성속성성
+                    - visible : 보이기
+                    - invisible: 안보이기(기본크기는 유지)
+                    - gone: 안보이기(최소화)
+           -->
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/grape"
+                android:visibility="invisible"
+                />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/imgimg"
+                android:visibility="invisible"
+                />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/loveyou"
+                android:visibility="invisible"
+                />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/uni"
+                android:visibility="invisible"
+                />
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/unnamed"
+                android:visibility="invisible"
+                />
+
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+-------------------------------------------------------------------------------------------
+public class MainActivity extends AppCompatActivity {
+    ImageView[] arr= new ImageView[6];
+    int index = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+    arr[0] =(ImageView)findViewById(R.id.imageView1);
+    arr[1] =(ImageView)findViewById(R.id.imageView2);
+    arr[2] =(ImageView)findViewById(R.id.imageView3);
+    arr[3] =(ImageView)findViewById(R.id.imageView4);
+    arr[4] =(ImageView)findViewById(R.id.imageView5);
+    arr[5] =(ImageView)findViewById(R.id.imageView6);
+
+    this.setVisible();
+    }
+
+    private void setVisible(){
+        for(int i=0;i<arr.length;i++){
+            if(i == index){
+                arr[i].setVisibility(View.VISIBLE);
+                continue;
+            }
+            arr[i].setVisibility(View.INVISIBLE);
+        }
+    }
+    public void onClickButton(View v) {
+        this.setIndex(v);
+        this.setVisible();
+    }
+
+    private void setIndex(View v){
+        switch (v.getId()){
+            case R.id.button1:
+                if(index<2){
+                    index = 6+(index - 2);
+                }else{
+                    index-=2;
+                }
+                break;
+            case R.id.button2:
+                if(index ==0){
+                    index=5;
+                }else{
+                    index--;
+                }
+                break;
+            case R.id.button3:
+                if(index == 5){
+                    index=0;
+                }else{index++;}
+                break;
+            case R.id.button4:
+                if(index > 3){
+                    index = 6-(index+2);
+                }else{index+=2;}
+                break;
+
+        }
+
+    this.setVisible();
+    }
+}
+
+
+==============================================================
+
