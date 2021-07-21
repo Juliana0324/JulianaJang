@@ -1,0 +1,329 @@
+==================================================
+GridView
+ - 격자형태로 뷰들을 ㅈㅇ렬하기 위한뷰
+ - 뷰들을 자력으로 사용할 수 없다
+ - 뷰들을 관리하기 위해 Adapter를 사용
+ - Adapter
+  - 선택위젯에서 시용하는 값의 목록을 설정할 수 있는 공통의 정보를 제공하는 클래스
+
+android:numColumns="2"
+ - X축(열)의 개수를 지정하는 속성
+
+
+activity_main.xml에 
+GridView를 작성해줍니다.
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="3"/>
+
+    </LinearLayout>
+
+
+
+
+
+============================================================
+●새로운 class생성: 
+public class ImgAdapter extends BaseAdapter {
+
+}
+●에러이유: 
+android.widget public abstract class BaseAdapter
+extends Object
+implements android.widget.ListAdapter, android.widget.SpinnerAdapter
+Common base class of common implementation for an Adapter that can be used in both ListView (by implementing the specialized ListAdapter interface) and Spinner (by implementing the specialized SpinnerAdapter interface).
+
+
+
+
+    public ImgAdapter(Context context){
+        this.context = context;
+    }
+    public int getCount(){
+        //표현하고자 하는 아이템의 갯수를 반환
+        return img.length;
+
+    }
+
+
+●아직 에러가 나는 이유는 Object getItem을 반환시켜야하기 때문입니다.
+getCount() 아래에 getItem(int position)를 추가해줍니다.
+
+    public Object getItem(int position){
+        //내가 원하는 위치에 아이템을 반환하는 메소드
+        return img[position];
+    }
+
+
+●getItemId(int)를 추가해 달라고 합니다.
+getItemId(int postion)을 오버라이딩 해줍니다.
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+return 0; 는 건들여야할 이유가 없습니다.
+
+
+●getView를 오버라이딩 시켜줍니다.
+오른쪽 클릭 후 Generate누르면 override Method에서 
+맨 오른쪽에 getView를 눌러주면 아래처럼 나옵니다.
+
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+        return null;
+    }
+
+
+모두다 Override된거라고 설정해두는것이 좋습니다.
+@Override를 클래스 위에 설정해놓습니다,
+    @Override
+    public int getCount(){
+        //표현하고자 하는 아이템의 갯수를 반환
+        return img.length;
+
+    }
+    @Override
+    public Object getItem(int position){
+        //내가 원하는 위치에 아이템을 반환하는 메소드
+        return img[position];
+    }
+
+    @Override
+    public long getItemId(int postition) {
+        return 0;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return null;
+    }
+
+
+imageAdapter제외
+
+그이후 getView에 이렇게 작성해 줍니다
+@Override
+public View getView(int position, View convertView, ViewGroup parent) {
+        //실제 아이템을 화면에 배치할때 호출 되는 메서드
+        // 현재 메서드가 바로 화면에 표현할 객체를 생성해서 반환시켜야한다
+
+        ImageView imageView = null;
+
+        if(convertView == null){
+            imageView = new ImageView(context);
+            //context==> 위에 만든 context: (화면)
+        }else{
+            imageView = (ImageView)convertView;
+            //upcasting으로 ImageView만들어주기
+        }
+        //생성된 뷰의 이미지를 설정하는 메소드
+        imageView.setImageResource(img[position]);
+
+        return imageView;
+    }
+
+
+ImageAdapter 클래스는 이렇게 작성해주면 됩니다.
+========================================================
+GridView 셋팅해주기:
+
+MainActivity에 가서 적용을 시켜줘야겠네요
+
+●MainActivity클래스 밑에 객체값을 받아줍니다
+==>    GridView gridView;
+를 추가해줍니다.
+
+●onCreate밑에
+[기존코드]
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+[변경후] 객체를 생성해줍니다.
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //객체 생성완료
+        gridView = (GridView)findViewById(R.id.gridView);
+
+        gridView.setAdapter(new ImgAdapter(context: this));
+    }
+
+
+===========================================
+사이즈별로 이미지가 다다르고 겹쳐보이기 때문에
+이미지 조절을 해줍니다,
+
+다시 ImgAdapter로 가줍니다.
+
+if()~else구문 밑에 이미지를 조절할 수 있는 메소드를 추가해줍니다.
+
+●이미지 조절을 위한 메소드
+setLayoutParams ==> 이미지 크기를 위한 메소드
+GridView.LayoutParams(width,height)
+
+[코드 추가]
+        imageView.setLayoutParams(new GridView.LayoutParams(200,200));
+
+●이미지 출력형식을 지정해주는 메소드
+Center, Fit_Center, 등등 여러개가 있지만 저는 FIT_Center로 서정해줍니다
+[코드 추가] 
+        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+
+
+●이미지뷰 간의 간격 조절 메소드
+사용방법: imageView.setPadding(left,top,right,bottom);
+
+[코드 추가] 
+        imageView.setPadding(10,10,10,10);  
+
+
+======================================================
+ListView
+ - 리스트형태로 뷰들을 정렬하기 위한 뷰
+
+새로운 파일 생성해줍니다
+ListView
+
+activity_main.xml에 아래 코드 작성해줍니다
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ListView Text"
+            android:textSize="30dp"
+            android:gravity="center"
+            />
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+    </LinearLayout>
+
+
+string.xml로 이동해 줍니다.
+리스트를 추가해 줄게요
+
+
+<string-array name="mycar">
+        <item>Morning</item>
+        <item>Avante</item>
+        <item>Foxbargan</item>
+        <item>Volvo</item>
+    </string-array>
+
+
+activity_main.xml에 mycar를 추가해줍니다
+[추가코드]
+<ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/mycar"
+            />
+
+
+자바 코드를 사용하기 위해 id를 설정한 ListView를 또하나 추가해줄게요
+<ListView
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+MainActivity.java로 넘어가 멤버변수를 설정해 주고 배열을 저장해둘게요
+    ListView listView; 
+    String[] arr= new String[]{"Morning","Avante","Foxbargan", "Volvo"};
+
+onCreate 안에 아래 코드를 작성해 주세요
+    listView = (ListView)findViewById(R.id.listView);
+
+리스트 뷰들은 배열을 가지는 Adapter로 지정하여 사용
+ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, 배열지정할 것들, 리스트뷰에 들어갈 아이템의 아이디);
+activity_list_item이란 안드로이드에서 기본적으로 제공하는 레이아웃 아이디
+여기서 에러가 난다면 이유는 TextView타입 이기 때문이다
+
+에러가 난다면 simple_list_item_1로 변경==> ListView타입
+리스트 뷰에 들어갈 아이템의 아이디
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+                android.R.layout.activity_list_item, arr);
+혹은
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+                android.R.layout.simple_list_item_1, arr);
+
+adapter연결해준다;
+        listView.setAdapter(adapter);
+
+
+[전체 변경코드]
+public class MainActivity extends AppCompatActivity {
+
+    ListView listView;
+    String[] arr= new String[]{"Morning","Avante","Foxbargan", "Volvo"};
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        listView = (ListView)findViewById(R.id.listView);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, 
+                android.R.layout.simple_list_item_1, arr);
+
+        listView.setAdapter(adapter);
+
+        
+    }
+}
+
+나중에 이벤트 처리한 후에 다시넘어와서 아이템들마다 이벤트 처리할 예정입니다.
+
+=====================================================
+에러처리
+
+- 항상 출력을 잘 사용해야한다
+- 안드로이드는 콘솔창에 System.out.println 을 제대로 사용할 수 없다
+- 오류의 위치를 확인하거나 경로들을 체크할때 로그 사용한다
+-  Log.i(String tag, String message)
+
+[코드작성]
+        Log.i("__Log: ", "onCreate실행");
+
+콘솔에 __Log: onCreate실행 나옵니다!
+
+
+[코드작성]
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, arr);
+        Log.i("__Log: ", "adapter :"+ adapter.toString());
+
+콘솔출력결과=>
+__Log: adapter: anroid.widget.ArrayAdapter@4de96b0
+
+
+[코드작성]
+listView.setAdapter(adapter);
+==> Log.i("__Log: ", "listView ID:"+ R.id.listView);
+
+
+
