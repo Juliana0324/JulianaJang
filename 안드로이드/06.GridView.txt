@@ -304,7 +304,8 @@ public class MainActivity extends AppCompatActivity {
 - 항상 출력을 잘 사용해야한다
 - 안드로이드는 콘솔창에 System.out.println 을 제대로 사용할 수 없다
 - 오류의 위치를 확인하거나 경로들을 체크할때 로그 사용한다
--  Log.i(String tag, String message)
+- 에뮬레이터 구동시 로그가 보이지 않으면 log.d로 변경해서 사용하면된다
+-  Log.i(String tag: 로그이름, String message: 출력내용)
 
 [코드작성]
         Log.i("__Log: ", "onCreate실행");
@@ -324,6 +325,4 @@ __Log: adapter: anroid.widget.ArrayAdapter@4de96b0
 [코드작성]
 listView.setAdapter(adapter);
 ==> Log.i("__Log: ", "listView ID:"+ R.id.listView);
-
-
 
