@@ -1,0 +1,356 @@
+Event 처리
+이벤트처리란, 터치, 누를때, 띌때, 등등 행동을 발생하였을때 실제로 이루어지는 작업을 처리하는 것입니다
+
+각이벤트에 맞는 Listener를 설정하여 처리하면됩니다.
+Listener란 인터페이스를 뜻합니다.
+
+우선 버튼을 두개 만들어 줄게요. 아래 코드를 작성해 주세요
+[코드]
+activity_main.xml
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RED"
+            />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BLUE"
+            />
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="TEST!!"
+        android:textSize="50dp"
+        android:gravity="center"
+        />
+    </LinearLayout>
+
+버튼1을 누르면 빨간색으로 변하고 
+버튼2 를 누르면 파랑색으로 변하게 해볼게요
+
+----------------------------------------------------------------------
+이제 자바코드를 작성해 볼게요
+MainActivity.java
+
+버튼 메소드와 텍스트뷰 메소드를 추가해주세요
+[코드]
+private Button button1, button2;
+private TextView textView;
+
+
+객체화 시키기 위해서는 onCreate안에서 
+setContentView가 실행되고 나면 객체화 되는 형식입니다. 
+버튼과 텍스트뷰를 객체화 시켜줄게요
+onCreate아래 setContentView아래에 코드작성해줍니다
+
+[ 코드 ]
+        button1 = (Button)findViewById(R.id.button1);
+        button2 =(Button)findViewById(R.id.button2);
+        textView = (TextView)findViewById(R.id.textView);
+
+
+검색된 버튼 객체에 이벤트 감시자인 Listener를 등록합니다.
+이 버튼에 대해서 어떤 이벤트를 등록 시키는데에 
+어떤 행동을 실행했을 때까지 아래의 코드가 대기 중인상태입니다.  
+
+이때 onClickListener를 이용합니다.
+리스너를 등록할때는 객체에 setOnClickListener메소드를 통해 등록합니다.
+
+button1.setOnClickListener(new View.OnClickListener() 를 작성하면 아래 코드가 오버라이딩 됩니다.
+★ View.OnClickListener() - 최신버전부터는 앞부분에 Class명.이 적힙니다.
+
+[ 코드 ]
+button1.setOnClickListener(new View.OnClickListener() {
+     @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+public void onClick에서 onClick은 
+클릭 또는 선택(Touch)시 수행되는 메소드라는 뜻입니다.
+
+이제부터 버튼1을 누르는 것에 대한 텍스트 색상을 변경하는 코드를 작성해보도록 할게요
+[ 코드 ]
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             textView.setBackgroundColor(Color.RED);
+            }
+        });
+
+
+버튼 2를 누르면 색상이 파랑색으로 변해야겠죠?
+다시 OnClickListener를 오버라이딩 하고 코드를 작성해볼게요
+
+[ 코드 ]
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setBackgroundColor(Color.BLUE);
+            }
+        });
+
+
+문제: 
+새로운 파일을 생성해볼게요 
+ButtonEventTest
+
+텍스트를 요청받아서 12321을 작성했을 떄 
+맞으면 True를 출력하도록 
+틀리면 False를 출력하도록 합니다.
+==> 거꾸로 뒤집어도 똑같은수 
+charAt을 사용할것!
+
+activity_main.xml이렇게 작성해 볼게요: 
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:layout_weight="1"
+                />
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="start"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="true"
+            android:textSize="50dp"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+
+
+MainActivity.java
+에서
+public class MainActivity extends AppCompatActivity {
+
+    private Button button1;
+    private TextView textView;
+    private EditText editText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        button1 = (Button)findViewById(R.id.button1);
+        textView = (TextView)findViewById(R.id.textView);
+        editText = (EditText)findViewById(R.id.editText);
+
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str = editText.getText().toString().trim();
+                //값받아오기: getText==> 로 받아주기 , toString으로 캐스팅 맞춰주고, trim()사용해서 안정성
+                Log.i("str : ","str");
+
+                //charAt을 사용할것
+                String str2 = "";
+                for(int i = str.length()-1;i>=0;i--){
+                    str2+=str.charAt(i);
+                }
+
+                if(str.equals(str2)){
+                    textView.setText("true");
+                }else{
+                    textView.setText("False");
+                }
+
+            }
+        });
+
+
+    }
+}
+
+위에 코드대신 StringBuffer를 사용하면 편리합니다.
+
+            @Override
+            public void onClick(View v) {
+                String str = editText.getText().toString().trim();
+
+	StringBuffer sbuf = new StringBuffer(str);
+                String str2 = sbuf.reverse().toString();
+
+                if(str.equals(str2)){
+                    textView.setText("true");
+                }else{
+                    textView.setText("False");
+                }
+
+            }
+        });
+
+=====================================================
+Touch 만들기
+activity_main을 우선 작성해줍니다.
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="result"
+            android:textSize="30dp"
+            />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Catch Event!!"
+            android:textSize="30dp"
+            android:layout_alignParentBottom="true"
+            />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:background="#FF0000"
+            android:textColor="#000000"
+            android:textSize="30dp"/>
+            />
+
+
+    </RelativeLayout>
+
+
+●MainActivity에 기본적으로 작성해줍니다.
+
+public class MainActivity extends AppCompatActivity {
+    private Button button;
+    private TextView textView,textView2;
+    private boolean check;
+//여기서 check은 기본값이 false로 설정되어있습니다.
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = (TextView)findViewById(R.id.textView);
+        textView2 = (TextView)findViewById(R.id.textView2);
+        button = (Button)findViewById(R.id.button);
+
+        
+
+    }
+
+}
+
+버튼을 OnClickListener로 오버라이딩 시켜줄게요
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(check){
+                    textView2.setText("No Event");
+                }else{
+                    textView2.setText("EVENT");
+                }
+                
+                check =!check;
+	//==> check값을 변경해줍니다
+                 
+            }
+        });
+
+false로 설정되어 있는 check값을 
+check값이 true이면 Event를 No Event로 변경
+check값이 false이면 Event라고 얘기하고 check값을 true로 변경
+
+
+★textview2를 터치할때 이벤트 처리
+==>OnTouchListener를 사용합니다.
+ [ 코드 ]
+  
+textView2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
+    }
+
+MotionEvent ==>어떤 모션을 취했느냐?
+-세가지 선택값
+1. Action_Down
+2. Action_UP
+3. Action_Move
+
+모션 상태값은 getAction( ) 메서드를 통해서 상태를 구별할 수 있습니다.
+textView2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                String msg = null; //TextView1에 출력될 문자열 result
+                int x=0; //TextView1에 출력될 문자열 result에 대한 x좌표
+                int y=0; //TextView1에 출력될 문자열 result에 대한 y좌표
+
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        //★
+		Toast.makeText(MainActivity.this,"Action_Down",Toast.LENGTH_LONG).show();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+
+                }
+
+                return false;
+            }
+        });
+
+★Toast.makeText(MainActivity.this,
+		"Action_Down",
+		Toast.LENGTH_LONG)
+		.show();
+안드로이드 알림창 사용합니다.
+MainActivity.this => 콘텍스트를 의미
+msg: "Action_Down" => 사용할 메세지
+Toast.LENGTH_LONG=> Long은 5초 동안 Short는 3초동안 유지! 
+★.show(); => 보여주기 위해서는 반드시 사용!
+
