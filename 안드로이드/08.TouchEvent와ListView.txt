@@ -1,0 +1,388 @@
+MotionEvent ==>어떤 모션을 취했느냐?
+-세가지 선택값
+1. Action_Down
+2. Action_UP
+3. Action_Move
+
+모션 상태값은 getAction( ) 메서드를 통해서 상태를 구별할 수 있습니다.
+textView2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                String msg = null; //TextView1에 출력될 문자열 result
+                int x=0; //TextView1에 출력될 문자열 result에 대한 x좌표
+                int y=0; //TextView1에 출력될 문자열 result에 대한 y좌표
+
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        //★
+		Toast.makeText(MainActivity.this,"Action_Down",Toast.LENGTH_LONG).show();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+
+                }
+
+                return false;
+            }
+        });
+
+★Toast.makeText(MainActivity.this,
+		"Action_Down",
+		Toast.LENGTH_LONG)
+		.show();
+안드로이드 알림창 사용합니다.
+MainActivity.this => 콘텍스트를 의미
+msg: "Action_Down" => 사용할 메세지
+Toast.LENGTH_LONG=> Long은 5초 동안 Short는 3초동안 유지! 
+★.show(); => 보여주기 위해서는 반드시 사용!
+
+
+● x축과 y축을 가져와볼게요
+[ 코드 ]
+	case MotionEvent.ACTION_UP:
+
+                        x=(int)event.getX();
+                        // x축의 좌표
+
+                        y=(int)event.getY();
+                        //y축의 좌표
+
+                        msg = "result : UP(x: "+x +" y: "+y+" )";
+
+                        break;
+
+	case MotionEvent.ACTION_MOVE:
+                        x=(int)event.getX();
+                        y=(int)event.getY();
+                        msg = "result : Move(x: "+x +" y: "+y+" )";
+                        break;
+
+
+● 이제 마지막으로 메세지를 출력하고 check를  리턴해줍니다.
+check의 기본값은 false였기때문에 true로 변경해줘야 
+이벤트 처리가 완료되어야 한다는 뜻입니다.
+// True=화면적용을 요구하게 된다
+// False = 이벤트처리가 완료되지않았다라는 뜻 
+
+[ 코드 ]
+textView.setText(msg);
+return check;
+
+
+[ 전체 코드 ]
+public class MainActivity extends AppCompatActivity {
+    private Button button;
+    private TextView textView,textView2;
+    private boolean check;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = (TextView)findViewById(R.id.textView);
+        textView2 = (TextView)findViewById(R.id.textView2);
+        button = (Button)findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(check){
+                    textView2.setText("No Event");
+                }else{
+                    textView2.setText("EVENT");
+                }
+
+                check =!check;
+
+            }
+        });
+        //textview2를 터치할때 이벤트 처리
+        // OnTouchListener를 사용합니다.
+
+        textView2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                String msg = null; //TextView1에 출력될 문자열 result
+                int x=0; //TextView1에 출력될 문자열 result에 대한 x좌표
+                int y=0; //TextView1에 출력될 문자열 result에 대한 y좌표
+
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        Toast.makeText(MainActivity.this,"Action_Down",Toast.LENGTH_LONG).show();
+                        msg = "result : Down";
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x=(int)event.getX();
+                        // x축의 좌표
+                        y=(int)event.getY();
+                        //y축의 좌표
+                        msg = "result : UP(x: "+x +" y: "+y+" )";
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        x=(int)event.getX();
+                        y=(int)event.getY();
+                        msg = "result : Move(x: "+x +" y: "+y+" )";
+                        break;
+
+                }
+
+                textView.setText(msg);
+                return check;
+            }
+        });
+    }
+
+}
+
+========================================================
+ListViewEvent
+새로운 파일을 생성해줍니다.
+
+activity_main을 세팅해줄게요
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ListViewEvent!"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+        <ListView
+            android:id="@+id/myList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+★            android:transcriptMode="alwaysScroll">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/addBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            />
+
+
+
+    </LinearLayout>
+
+
+새로운 코드가 나오네요 
+=> android:transcriptMode="alwaysScroll" 
+      : 아이템 추가시 buttom item 위치로 자동 스크롤하는 모드를 설정
+            
+종류: 
+○ disabled : transcriptMode ==> 사용하지 않겠다.(기본값)
+
+○  normal : 마지막아이템이 화면에 표시된 상태에서 데이터 변경을 받는 경우=> 자동스크롤...
+                    데이터 변경 메소드 - notifyDataSetChange() 가 실행된 경우
+
+○ alwaysScroll : 아이템이 화면에 표시중인 여부와 상관없이 무조건 스크롤
+
+
+
+●이제 리스트에 각 항목들을 구성할 xml파일을 만들어줄거에요
+res-layout-우클릭- layout Resourse File - 이름: list_form.xml을 만들어줄게요
+LinearLayout으로 생성해줍니다
+
+아래코드를 따라 작성해주세요
+[ 코드 ]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+★    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/list_form_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        />
+
+★ Focusability는 자식의 포커스를 해제하는 기능을 뜻합니다. 이해를 못해도 괜찮아요
+
+
+● 실행할 화면인 어댑터 class를 하나 더 생성해줄게요
+java - com.example.... - 우클릭 - MyAdapter라고 이름붙일게요
+
+기본설정은 이렇게 해줍니다.
+public class MyAdapter extends ArrayAdapter<String> 
+implements AdapterView.OnItemClickListener {
+
+	private Context context;
+    	private ArrayList<String> list;
+    	private ListView myList;
+
+
+}
+
+생성자를 설정해줍니다.
+    public  MyAdapter(Context context, int resource, ArrayList<String> list, ListView myList){
+        super(context, resource, list);
+
+        this.context = context;
+        this.list = list;
+        this.myList = myList;
+
+    }
+
+● 실제 뷰를 만드는 메소드를 생성해줄게요 
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        //★ 인플레이션: xml 레이아웃의 정의된 내용이 메모리에 객체화가 되는 과정
+        //ex) setContentView(R.layout.activity_main)
+        
+        //서비스 인플레이션 시작하기 위한 준비 과정
+        LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //인플레이션 시작- 리스트 폼을 가져온다
+        //convertView = layoutInflater.inflate(위치, 뷰그룹);
+        convertView = layoutInflater.inflate(R.layout.list_form, null);
+
+        TextView txt_form = (TextView)convertView.findViewById(R.id.list_form_txt);
+
+        String str = list.get(position);
+        //문자열값 하나를 출력해줍니다.
+
+        txt_form.setText(str);
+	
+	return  convertView;
+
+● 아직빨간줄이 안없어졌네요. 그 이유는 OnItemClickListener를 상속받아 오지 못해서인데요
+이제 상속시켜줄게요
+
+onItemClick을 오버라이딩 시켜줄게요! 
+@Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        
+    }
+
+클릭시 반응을 보기 위해서 설정해놓은것 입니다.
+빨간줄이없어졌죠. 
+
+반응을 한번 줘볼게요
+@Override
+public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(context.getApplicationContext(), list.get(position),Toast.LENGTH_LONG).show();
+    
+    }
+여기서  context는 activty_main 라는 뜻으로 7강에서 사용했던 
+Toast.makeText(MainActivity.this,"Action_Down",Toast.LENGTH_LONG).show();
+과 동일한 역할을 합니다.
+
+●리스너를 getView클래스에 추가할게요
+myList.setOnItemClickListener(this);
+
+이미 있는 곳을 얘기하는 것임으로 this로 정의해줍니다.
+
+.
+.
+.
+.
+.
+
+[ 전체 MyAdapter코드 ]
+
+public class MyAdapter extends ArrayAdapter<String>
+        implements AdapterView.OnItemClickListener {
+
+    private Context context;
+    private ArrayList<String> list;
+    private ListView myList;
+
+    public  MyAdapter(Context context, int resource, ArrayList<String> list, ListView myList){
+        super(context, resource, list);
+
+        this.context = context;
+        this.list = list;
+        this.myList = myList;
+
+    }
+
+    @NonNull
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+        //서비스 인플레이션 시작하기 위한 준비 과정
+        LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        //인플레이션 시작- 리스트 폼을 가져온다
+        //convertView = layoutInflater.inflate(위치, 뷰그룹);
+        convertView = layoutInflater.inflate(R.layout.list_form, null);
+
+        TextView txt_form = (TextView)convertView.findViewById(R.id.list_form_txt);
+
+        String str = list.get(position);
+        //문자열값 하나 출력해줍니다.
+
+        txt_form.setText(str);
+
+        myList.setOnItemClickListener(this);
+
+        return  convertView;
+
+        
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(context.getApplicationContext(), list.get(position),Toast.LENGTH_LONG).show();
+    }
+}
+
+===================================================================
+MainActivity로 돌아올게요
+
+activity_main에 정의해놓은것들을 사용해야되니까 메소드들을 적어둘게요
+    private Button addBtn;
+    private ListView myList;
+    private ArrayList<String> list;
+    private int cnt=0;
+
+    private MyAdapter adapter = null;
+
+==>private int cnt=0;
+카운트값이 필요합니다.
+
+
+
+●onCreate밑에 실행될 코드를 작성합니다,
+
+        addBtn = (Button)findViewById(R.id.addBtn);
+        myList = (ListView)findViewById(R.id.myList);
+        list = new ArrayList<String>();
+
+        adapter = new MyAdapter(MainActivity.this, R.layout.list_form,list,myList);
+// ★new MyAdapter(context, R.layout.xml파일명, list, myList);
+	
+        myList.setAdapter(adapter);
+
+
+● 버튼에 리스너 설정해서 추가해줄게요
+        
+addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //버튼 클릭시 카운트를 증가시키면서 리스트에 내용 추가
+                cnt++;
+                list.add("list : "+ cnt);
+            
+                if(myList != null){
+                    //list값이 추가될때마다 리스트 뷰를 갱신합니다.
+                    adapter.notifyDataSetChanged();
+                }
+
+
+====================================================
