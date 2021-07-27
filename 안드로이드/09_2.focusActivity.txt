@@ -1,0 +1,111 @@
+MainActivity에서만 화면구성을 해볼게요
+MyFocusActivity로 새로운 파일생성해줄게요
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+ //       setContentView(R.layout.activity_main);
+   //인플레이션 진행 없이 onCreat메소드 내에서만 화면 구성
+
+
+ROOT 레이아웃을 생성해 줄게요
+//  LinearLayout linearLayout = new LinearLayout(this==> 현재화면);
+    LinearLayout linearLayout = new LinearLayout(this);
+    linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+버튼 7개 설정후 셋팅을 해볼게요
+for(int i=0; i<7; i++){
+        Button button = new Button(this);
+        button.setId(i);
+        
+        //리스너설정
+        button.setOnClickListener();
+
+    }
+
+리스너를 설정해볼게요
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+
+
+//짝수번째에 있는 것들이 선택되면 실행!
+	if((int)v.getId() %2 != 0){
+	Toast.makeText(MainActivity.this, "get Focus!!", Toast.LENGTH_SHORT).show();
+
+
+
+버튼을 실행하도록 설정하고 나머지 설정을 더 해볼게요
+  button.setOnClickListener(onClickListener);
+        button.setText("Button"+(i+1));
+        button.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
+        button.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        button.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linearLayout.addView(button);
+}
+
+        setContentView(linearLayout);
+
+
+[ 전체 코드 ]
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+ //       setContentView(R.layout.activity_main);
+   //인플레이션 진행 없이 onCreat메소드 내에서만 화면 구성
+
+        //root Layout생성
+//  LinearLayout linearLayout = new LinearLayout(this==> 현재화면);
+    LinearLayout linearLayout = new LinearLayout(this);
+    linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+    //버튼 7개설정후 셋팅
+    for(int i=0; i<7; i++){
+        Button button = new Button(this);
+        button.setId(i);
+
+        //리스너설정
+        button.setOnClickListener(onClickListener);
+
+        button.setText("Button"+(i+1));
+        button.setTextSize(TypedValue.COMPLEX_UNIT_DIP,30);
+        button.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        button.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        linearLayout.addView(button);
+    }
+        setContentView(linearLayout);
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //짝수번째에 있는 것들이 선택되면 실행!
+            if((int)v.getId() %2 != 0){
+                Toast.makeText(MainActivity.this, "get Focus!!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+}
+
+
+★        button.setWidth(LinearLayout.LayoutParams.MATCH_PARENT);
+        button.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+이걸로 실행이 안될때
+
+        button.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+        );
+
+이걸로 사용하면됩니다.
+
+
+
+화면구성을 해볼게요

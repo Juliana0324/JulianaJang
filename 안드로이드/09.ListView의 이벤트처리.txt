@@ -1,0 +1,223 @@
+롱 클릭시 발생하는 이벤트 처리
+    ★OnItemLongClickListener 
+
+AdapterView.OnItemLongClickListener를 추가해 줍니다.
+
+public class MyAdapter extends ArrayAdapter<String>
+        implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
+
+이렇게 작성해주면 에러가 발생합니다.
+why? 필수적으로 지정해줘야하는 메소드를 지정해주지 않았기 때문인데요
+
+에러메세지: 
+android.widget 
+public abstract class AdapterView<T extends android.widget.Adapter>
+extends android.view.ViewGroup
+
+
+메소드를 오버라이딩 해서 지정해줄게요
+@Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        return false;
+    }
+
+
+★리스트 뷰의 클릭된 아이템 삭제하기
+
+삭제됐다는 메세지 출력해줄게요
+Toast.makeText(context.getApplicationContext(),list.get(position),Toast.LENGTH_SHORT).show();
+
+그리고 리스트에서 데이터를 삭제해줄게요
+list.remove(position);
+
+삭제된것 반영시켜 줄게요
+선택된 위치의 뷰를 제거하는 메소드
+myList.clearChoices();
+
+
+리스트 뷰 갱신
+        this.notifyDataSetChanged();
+
+반영시키기 위해 true로 변경해줄게요
+        return true;
+
+
+[ 코드 ]
+@Override
+    public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        //리스트 뷰의 클릭된 아이템 삭제
+        Toast.makeText(context.getApplicationContext(),list.get(position),Toast.LENGTH_SHORT).show();
+        list.remove(position);
+        
+        //삭제된것 반영
+        //선택된 위치의 뷰를 제거하는 메소드
+        myList.clearChoices();
+
+        //리스트 뷰 갱신
+        this.notifyDataSetChanged();
+
+        //반영시키기 위해 true로 변경해줄게요
+        return true;
+    }
+}
+
+
+어댑터를 연결해줄게요
+    @Override
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+.
+.
+.
+	myList.setOnItemClickListener(this);
+	★myList.setOnItemLongClickListener(this);
+
+        return  convertView;
+
+
+이제 길게 누르면 삭제될거에요
+수정으로바꿔볼게요
+
+//        list.set(index:데이트변경값)
+         list.set(position, list.get(position)+"수정");
+         this.notifyDataSetChanged();
+
+
+
+===================================================
+Layout Inflation
+ - 하나의 Activity는 두개의 파일로 이루어진다.
+ - .xml파일과 .java파일이 한 세트다
+ - 쉽게 생각할땐 .xml을 디자인 측면, 
+    java 기능적
+- setContentView메소드를 통해 .xml파일과 .Java파일을 매칭한다
+
+
+인플레이션=> 
+ - xml 레이아웃에 정의된 내용이 메모리에 객체화 되는 과정
+ - 우리가 프로젝트를 실행하게 되면 
+ 인플레이터가 xml파일의 테그들을 객체화시켜 메모리에 만들어 주고 
+ 그것을 이용하여 어플리케이션이 작동하게 됩니다.
+ - 인플레이션은 setContentView메소드가 실행되어야 가능하다
+ ★- setContentView메소드가 실행되기 전에 findViewById를 통해
+   객체를 불러오면 null값을 받기 떄문에 객체 사용불가
+
+
+activity_main을 기본적으로 설정해 둘게여
+<LinearLayout
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Layout Inflater"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:background="#aaaa00"
+            />
+        <!-- html-color-codes.info/Korean -->
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전환"
+            android:textSize="30dp"/>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+</LinearLayout>
+
+
+■ xml파일을 하나더 만들어줄게요
+res- 우클릭 - Resourse file - sub1.xml
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="레이아웃 인플레이션"
+        android:textSize="40dp"
+        android:gravity="center"/>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="button"
+        />
+
+
+■ 다시 MainActivity.java로 돌아와서 설정을 만들어 줄게요
+public class MainActivity extends AppCompatActivity {
+    private FrameLayout container;
+    private Button button;
+private TextView textView1;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        container = (FrameLayout)findViewById(R.id.container);
+        button = (Button)findViewById(R.id.button);
+
+        
+    }
+}
+
+
+버튼을 눌렀을때 인플레이션을 진행할 수 있도록 
+OnClickListener를 실행해줄게요
+
+button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+
+
+진행을 해볼게요
+button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setContentView를 사용할수 없기때문에
+                // 인플레이션을 진행할 수 있게 준비하는 객체
+                //- LayoutInflater
+                //- getSystemService :인플레이터 객체를 만들어주는 메서드
+                // - Context.LAYOUT_INFLATER_SERVICE
+                // - layout_inflater = 서비스 이름을 문자열 상수로 지정되어있다
+                LayoutInflater layoutInflater =
+                        (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                
+                //인플레이션 진행 - inflate
+                // public inflate(@LayoutRes int resourse,(@LayoutRes int resourse, 
+                //                                  android.view.ViewGroup root,
+                //                                  boolean attachToRoot))
+                
+                //int resourse - 실행할 레이아웃의 상수값
+                //android.view.ViewGroup root - 인플레이션을 진행하여 넣을 뷰의 그룹
+                //boolean attachToRoot - 전환을 언제 할지 ...true는 바로 실행
+
+                View convertView = layoutInflater.inflate(R.layout.sub1, container,true);
+
+
+버튼2는 convertView안에 포함되어있기 때문에 바로 findViewById로 하지않고 아래처ㅓ럼 해줄게요
+Button button2 = (Button)convertView.findViewById(R.id.button2);
+
+텍스트뷰도 마찬가지로 해줄게요
+textView1 = (TextView)convertView.findViewById(R.id.textView1);
+
+클릭이 되면 뜰수 있게
+button2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        textView1.setText("만들었다 .... ");
+                    }
+                });
+
