@@ -1,0 +1,435 @@
+ButtonEffect 파일을 하나 생성해줄게요
+버튼을 하나만들어 줄게요
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button1"
+            android:textSize="40dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button2"
+            android:textSize="40dp"
+            />
+    
+
+
+● 버튼 클릭 효과
+        - xml파일을 이용해 효과를 줄수 있습니다
+        - 상태값에 따라 다른 효과를 주기 위해서는 selector를 사용하여 정의 하여야합니다.
+        - selector 생성시: res폴더 클릭후에 만드는 것이 좋습니다.
+selector파일을 만들어줄게요
+이름은 burron_selector.xml => drawable에 생겼네요?
+
+버튼의 상태에 따라 다른값을 적용하려면 테그를 정의하여야합니다
+아이템을 추가해줄게요
+
+★ 버튼클릭 후
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/a_search"/>
+    
+★ 버튼클릭 전
+<item
+        android:state_pressed="false"
+        android:drawable="@drawable/b_search"
+        />
+
+
+      android:state_pressed
+        ==>  클릭이 된 상태
+      android:state_enable
+        ==> 현재 사용이 가능한 경우
+      android:state_selected
+        ==> 현재 선택이 된경우
+      android:state_focused
+        ==> 현재 포커스를 가진경우
+      android:state_checked
+        ==> 현재 check된 경우
+     -->
+
+</selector>
+
+
+다시 activity_main으로 돌아갑니다: 
+selector를 추가해줄건데요
+
+<Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button1"
+            android:textSize="40dp"
+            android:textColor="#000000"
+            android:background="@drawable/button_selector"
+            />
+
+이제 클릭을 하면 사진이 변경됩니다
+
+===============================
+이미지를 넣지않고 직접 설정 해볼게요
+button_shape1이름의 새로운 리소스파일 생성 해볼게요
+Resourse type = Drawable
+Root element = shape
+기존 selector와 다르게 shape을 사용해볼게요
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+===================
+|        rectangle: 사각형       |
+|        ring: 원	           |
+|        line : 선	           |
+|       oval : 타원	           |
+==================
+
+
+<!--투명화 -->
+    <solid
+        android:color="#00fffff"
+        />
+
+
+button_shape2이름의 똑같은 리소스파일 생성할게요
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    >
+
+    <solid
+        android:color="#fd4381"
+
+        />
+
+
+selector xml파일을 하나더 생성할게요
+selector_view.xml -Drawable- selector
+[ 코드 ]
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_pressed="true"
+        android:drawable="@drawable/button_shape2"
+        />
+    <item
+        android:state_focused="true"
+        android:drawable="@drawable/button_shape2"
+        />
+    <item
+        android:drawable="@drawable/button_shape1"
+        />
+</selector>
+
+activity_main으로 가볼게요
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button3"
+            android:textSize="40dp"
+            android:textColor="#000000"
+            android:background="@drawable/selector_view"
+
+            />
+
+버튼을 새로 생성하고 selector_view를 가져와보면
+누르면 사각형의 핑크색으로 변하는 것을 볼수 있어요
+
+------------------------------------------------------------------
+<Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button4"
+            android:textSize="40dp"
+            android:textColor="#000000"
+            android:background="?attr/selectableItemBackground"
+    />
+
+
+API 21 이상에서는 클릭효과를 주고싶은 view의 background에 
+밑에 속성을 지정하면 클릭효과가 생깁니다.
+
+android:background="?attr/selectableItemBackground"
+뷰안에 원형으로 효과가 미세하게 뒤에 나타납니다.
+android:background="?attr/selectableItemBackgroundBorderless"
+화면 전체 원형으로 나타납니다.
+
+==================================================================
+메뉴바 설정하기
+
+새로운 파일 생성해볼게요
+KeyListener
+상태바까지 요청받기!
+
+activity_main.xml 설정하기
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:hint="input"
+            />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="InputData : "
+            />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="menu"
+            />
+
+string.xml로 가서 아이템을 추가를해볼게요
+<resources>
+    <string name="app_name">MyKeyListener</string>
+    <string name="add">ADD</string>
+    <string name="Edit">Edit</string>
+    <string name="Email">Email</string>
+
+</resources>
+
+새로운 xml파일 만들어줄게요
+File name: main_menu
+Resource type: Menu
+
+menu.xml이 만들어지셨다면 메뉴에 들어갈 아이템들을 추가해줄게요
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- menu파일의 정식 명칭: main_menu.xml -->
+
+    <item
+        android:id="@+id/add"
+        android:title="@string/add"
+        />
+    <item
+        android:id="@+id/edit"
+        android:title="@string/Edit"
+        />
+    <item
+        android:id="@+id/email"
+        android:title="@string/Email"
+        />
+
+</menu>
+
+
+●MainActivity에 가서 코드작성 해볼게요
+    private EditText editText;
+    private Button button;
+    private TextView textView;
+
+
+객체를 설정해줄게요
+        editText = (EditText)findViewById(R.id.editText);
+        textView = (TextView)findViewById(R.id.textView);
+        button = (Button)findViewById(R.id.button);
+
+    }
+
+        //OnKeyListener
+        // - OnKey메소드를 재정의 하여야한다
+
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //keyCode : 키 값.. 아스키코드와 유니코드랑은 다르다
+                //KeyEvent keyEvent는 모션이벤트와 사용방법이 거의 비슷하다
+             
+
+//if문없어도 됨
+   if(event.getAction() == KeyEvent.ACTION_UP){
+                    //KeyEvent.ACTION_DOWN
+                    //키가 눌려있는지 보는것=> 예전에는 다운으로 처리하였다
+                    // 오레오 버전에서는 DOWN으로 처리하면 제대로 되질않는다
+
+                    //키가 눌려졌을떄 0~9까지의 숫자키 거르기
+                    textView.setText("InputData : "+keyCode);
+
+                    if(keyCode >= KeyEvent.KEYCODE_O && keyCode <= KeyEvent.KEYCODE_9){
+                        Toast.makeText(getApplicationContext(),"number!"+keyCode, Toast.LENGTH_LONG).show();
+                    }
+                }
+                return false;
+	//true를 반환하면 이벤트 객체가 내부적으로 항상 이벤트를 발생하고 있다고 생각.
+                //이벤트는 필요시에만 호출해야하기 떄문에
+                // 필요한 경우에만 해당 이벤트 처리를 한 후에 false를 반환함으로써
+                //항상 이벤트를 발생하고 있다는 생각을 하지 않도록 한다
+                
+            }
+        });
+
+
+    //메뉴바를 활성화시키기 위해서는
+    //onCreateOptionMenu , onOptionsItemSelected
+    // 오버라이딩 시켜야한다.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //하나의 메뉴 아이템이 선택되었을떄 현재 메소드 실행
+        switch (item.getItemId()){
+            case R.id.add:
+                textView.setText("Selected ADD");
+                break;
+            case R.id.edit:
+                textView.setText("Selected EDIT");
+                break;
+            case R.id.email:
+                textView.setText("Selected EMAIL");
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+
+[ 전체 코드 ]
+
+package com.example.mykeylistener;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editText;
+    private Button button;
+    private TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //객체 설정
+        editText = (EditText)findViewById(R.id.editText);
+        textView = (TextView)findViewById(R.id.textView);
+        button = (Button)findViewById(R.id.button);
+
+        //OnKeyListener
+        // - OnKey메소드를 재정의 하여야한다
+
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                //keyCode : 키 값.. 아스키코드와 유니코드랑은 다르다
+                //KeyEvent keyEvent는 모션이벤트와 사용방법이 거의 비슷하다
+                if(event.getAction() == KeyEvent.ACTION_UP){
+                    //KeyEvent.ACTION_DOWN
+                    //키가 눌려있는지 보는것=> 예전에는 다운으로 처리하였다
+                    // 오레오 버전에서는 DOWN으로 처리하면 제대로 되질않는다
+
+                    //키가 눌려졌을떄 0~9까지의 숫자키 거르기
+                    textView.setText("InputData : "+keyCode);
+
+                    if(keyCode >= KeyEvent.KEYCODE_O && keyCode <= KeyEvent.KEYCODE_9){
+                        Toast.makeText(getApplicationContext(),"number!"+keyCode, Toast.LENGTH_LONG).show();
+                    }
+                }
+                return false;
+                //true를 반환하면 이벤트 객체가 내부적으로 항상 이벤트를 발생하고 있다고 생각.
+                //이벤트는 필요시에만 호출해야하기 떄문에
+                // 필요한 경우에만 해당 이벤트 처리를 한 후에 false를 반환함으로써
+                //항상 이벤트를 발생하고 있다는 생각을 하지 않도록 한다
+
+
+
+            }
+        });
+
+
+    }
+    //메뉴바를 활성화시키기 위해서는
+    //onCreateOptionMenu , onOptionsItemSelected
+    // 오버라이딩 시켜야한다.
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //하나의 메뉴 아이템이 선택되었을떄 현재 메소드 실행
+        switch (item.getItemId()){
+            case R.id.add:
+                textView.setText("Selected ADD");
+                break;
+            case R.id.edit:
+                textView.setText("Selected EDIT");
+                break;
+            case R.id.email:
+                textView.setText("Selected EMAIL");
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
+
+
+버튼눌렀을떄 메뉴바 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //버튼을 누를떄 
+//                closeOptionsMenu();//메뉴바 닫기
+                openOptionsMenu(); //메뉴바 열기
+
+                //에러가 계속나오는데
+                // 테마속성을 바꾸어야 가능하다
+                //manifests에서 속성값을 변경하여야합니다.
+
+                
+                
+            }
+        });
+
+왼쪽프로젝트에서 manifest를 찾아줍니다
+테마를 변경해줘야하는데
+[ 기존 ] 코드에서
+        android:theme="@style/Theme.MyKeyListener"
+
+[ 변경 ]코드
+        android:theme="@style/Theme.Design.Light.NoActionBar">
+
+예전에는 APpCompatActivity대신 Activity를 상속받았습니다.
+다시 받아 줄게요
+
+public class MainActivity extends Activity {
+
+    private EditText editText;
+    private Button button;
+    private TextView textView;
+.
+.
+.
+.
+이제 잘 출력되는것을 볼 수 있습니다.
