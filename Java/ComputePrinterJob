@@ -1,0 +1,59 @@
+import java.util.*;
+public class ComputePrintJob {
+
+	public static void main(String[] args) {
+		 Scanner sc = new Scanner(System.in);
+	        String PaperSize;
+	        String ColorType;
+	        Integer Count;
+	        Integer asw=0;
+	        
+	        System.out.println("Choose the Paper Size: (A4,A5,Letter,Legal)");
+	        PaperSize= sc.next();
+	        
+	        
+	        System.out.println("Choose the Color Type: (Grayscale, Color)");
+	        ColorType= sc.next();
+	        
+	        System.out.println("Count the paper number: ");
+	        Count= sc.nextInt();
+	        
+	        if(PaperSize.equals("A4")){
+	            asw+=40;}
+	            if(ColorType.equals("Grayscale")) asw+=5;
+	            else asw+=25;
+	            asw *= Count;
+	        }
+	        
+	        else if(PaperSize.equals("A5")){
+	            asw+=10;
+	            if(ColorType.equals("Grayscale")) asw+=5;
+	            else asw+=25;
+	            asw *= Count;
+	        }
+	        
+	        else if(PaperSize.equals("Letter")){
+	            asw+=45;
+	            if(ColorType.equals("Grayscale")) asw+=5;
+	            else asw+=25;
+	            
+	            asw *= Count;
+	        }
+	        else if(PaperSize.equals("Legal")){
+	            asw+=30;
+	            if(ColorType.equals("Grayscale")) asw+=5;
+	            else asw+=25;
+	            asw *= Count;
+	        }
+	        
+	        if(asw%10 !=0 ) {
+	        	asw+=5;
+	        }
+	        System.out.println("Enter print job info: "+PaperSize+"  "+ColorType+"   "+Count);
+	        System.out.println("Print job cost: "+asw);
+	    }  
+		
+		
+	}
+
+
