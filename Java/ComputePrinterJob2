@@ -1,0 +1,74 @@
+import java.util.*;
+
+public class Printer {
+
+   static int computePrintJob(String paperSize, String colorType, int count) {
+
+      int paperCost = 0;
+
+      int colorCost = 0;
+
+      int totalCost = 0;
+
+      if (paperSize.equals("A4")) {
+
+         paperCost = 40;
+
+      } else if (paperSize.equals("A5")) {
+
+         paperCost = 10;
+
+      } else if (paperSize.equals("Letter")) {
+
+         paperCost = 45;
+
+      } else if (paperSize.equals("Legal")) {
+
+         paperCost = 30;
+
+      }
+
+      if (colorType.equals("Grayscale")) {
+
+         colorCost = 5;
+
+      } else if (colorType.equals("Color")) {
+
+         colorCost = 25;
+
+      }
+
+      totalCost = (paperCost + colorCost) * count;
+
+      if (totalCost % 10 == 5) {
+
+         totalCost += 5;
+
+      }
+
+      return totalCost;
+
+   }
+
+   public static void main(String[] args) {
+
+      Scanner scanner = new Scanner(System.in);
+
+      System.out.print("Enter print job info: ");
+
+      String info = scanner.nextLine(); // 만약 3개 이상의 값 치고 엔터치면 어케됨?
+
+      int firstSpace = info.indexOf(" ");
+
+      int secondSpace = firstSpace + info.substring(firstSpace + 1, info.length()).indexOf(" ") + 1;
+
+      String paperSize = info.substring(0, firstSpace);
+
+      String colorType = info.substring(firstSpace + 1, secondSpace);
+
+      int copies = Integer.parseInt(info.substring(secondSpace + 1, info.length()));
+
+      System.out.printf("Print job cost: %d\n", computePrintJob(paperSize, colorType, copies));
+   }
+
+}
