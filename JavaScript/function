@@ -1,0 +1,72 @@
+function greetings(sentence){
+    console.log('HI');
+    console.log('안녕');
+    console.log('Guten Tag');
+    console.log('Bonjour');
+    console.log('Buongiorno');
+    console.log('Konichiwha');
+    console.log(sentence);
+};
+
+//함수 호출
+greetings('Hola');
+
+///////////////////////////////////////////////
+function welcome(name) {
+    console.log("안녕하세요 "+name+"님!");
+
+};
+
+welcome('코드잇');
+welcome('김영훈');
+
+function printSquar(x){
+    console.log(x * x);
+};
+
+printSquar(2);
+printSquar(5);
+printSquar(6);
+
+
+/**
+실습과제
+100XP
+진성이는 이번에 노트북을 새로 선물 받았습니다. 전원을 켜고 확인해보니 저장 가능한 데이터의 용량이 4TB였습니다.
+
+우리가 흔히 사용하는 파일들의 용량 단위는 보통 GB 혹은 MB 단위인데요. 갑자기 2TB는 몇 GB, 몇 MB 인지 궁금해졌습니다.
+
+인터넷에 검색해보니 데이터 용량 단위는
+1MB = 1024KB
+1GB = 1024MB
+1TB = 1024GB 라고 합니다.
+
+이 정보를 참고해서 TB 단위를 입력하면 GB 단위를 출력해주는 teraToGiga 함수와 TB 단위를 입력하면 MB 단위를 출력해주는 teraToMega 함수 두 가지 함수를 작성해 주세요.
+
+각 함수는 숫자 값을 파라미터로 받고 첫 번째 줄에서는 입력받은 용량을, 두 번째 줄에서는 변환한 용량을 출력해야 합니다.
+
+함수를 잘 작성하셨다면 아래와 같이 출력되어야 합니다.
+
+출력예시
+2TB는
+2048GB 입니다.
+2TB는
+2097152MB 입니다.
+<주의> 자동 채점 과제이기 때문에, 문제의 조건에 정확히 따라주시기 바랍니다. 줄바꿈과 마침표, 띄어쓰기까지도 주의해 주세요!
+
+**/
+// 여기에 코드를 입력해 주세요.
+function teraToGiga(tera){
+  console.log(tera+"TB는");
+  console.log(tera*1024+"GB 입니다.");
+};
+
+function teraToMega(tera){
+  console.log(tera+"TB는");
+  console.log(tera*1024*1024+"MB 입니다.");
+};
+
+// TB -> GB 테스트
+teraToGiga(2);
+// TB -> MB 테스트
+teraToMega(2);
