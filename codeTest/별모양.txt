@@ -1,0 +1,67 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+     
+        int ans = 6;
+        int hei = ans*9;
+        int wid = ans *15;
+        
+        if(wid%2 ==0){
+            wid +=1;
+        }
+        
+        int cen = wid/2;
+
+        int top = hei/3;
+        int mid = top * 2;
+        int bot =top *2;
+        
+        char[][] star = new char[wid][hei];
+        
+        int start;
+        int end;
+        int startBottom;
+        int endBottom;
+        
+        start = center;
+        end = center;
+        
+        for(int i=0;i<top; i++){
+            for(int j=0; j<wid; j++){
+        if(start <= j && j<=end){
+            star[i][j] ="*";
+            
+        }else{
+            star[i][j]=" ";
+        } 
+     }
+            
+      start--;
+      end++;
+}
+        //몸통 
+        start = 0;
+        end = wid-1;
+        for(int i = top; i<mid; i++){
+        for(int j=0; j<wid; j++){
+            if(start <= j && j<= end){
+            star[i][j] ="*";
+            }else{
+            star[i][j] = " ";
+            }
+        }
+            start++;
+            end--;
+        }
+        
+        //별 다리 생성 
+        startBottom = center;
+        endBottom = center;
+        
+        for(int a = )
+        
+        
+    
+    }
+}
