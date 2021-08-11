@@ -1,0 +1,26 @@
+//null: 의도적으로 표현할때 사용하는값
+// undefined : 값이 없다는것을 확인하는값
+
+let codeit;
+console.log(codeit);
+//답 : undefined
+
+let codeit=null;
+console.log(codeit);
+//답 : null
+
+console.log(null==undefined);
+//true
+console.log(null===undefined);
+//false
+
+let cup;
+console.log(cup);   //undefined
+
+cup='물';
+console.log(cup)    //물
+
+cup="null";
+console.log(cup);//null
+
+
