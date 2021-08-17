@@ -1,0 +1,15 @@
+import java.util.stream.Stream;
+import java.util.Arrays;
+import java.util.*;
+
+public class Exercise09{
+		public static void main(String[] args){
+	        int number = 12345;
+	        int[] digits = Stream.of(String.valueOf(number).split("")).mapToInt(Integer::parseInt).toArray();
+	        
+	        Integer[] arr3 = Arrays.stream(digits).boxed().toArray(Integer[]::new);
+	        
+	        Arrays.sort(arr3,Collections.reverseOrder());
+	        System.out.println(Arrays.toString(arr3));
+	    }
+	}
