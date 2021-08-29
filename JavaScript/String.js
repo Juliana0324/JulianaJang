@@ -27,3 +27,9 @@ console.log(myString.slice(3));   //Codeit
 console.log(myString.slice());    //Hi Codeit
 
 
+//접근하려는 위치에 반환할 글자가 없는 경우 대괄호는 undefined를, charAt은 빈 문자열을 반환합니다.
+
+let str = `Hello`;
+
+console.log( str[9] ); // undefined
+console.log( str.charAt(9) ); // '' (빈 문자열)
