@@ -33,3 +33,10 @@ let str = `Hello`;
 
 console.log( str[9] ); // undefined
 console.log( str.charAt(9) ); // '' (빈 문자열)
+
+
+let myString = 'Codeit';
+
+for (let str of myString) {
+  console.log(str);
+}
