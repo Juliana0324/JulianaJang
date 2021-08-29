@@ -1,0 +1,24 @@
+let x = {name : 'Codeit'};
+let y = x;
+
+console.log(x);
+console.log(y);
+
+y.birth = 2017;
+console.log(x);
+console.log(y);
+/*
+실행결과
+{ name: 'Codeit' }
+{ name: 'Codeit' }
+{ name: 'Codeit', birth: 2017 }
+{ name: 'Codeit', birth: 2017 }
+*/
+
+
+//기본형(Primitive type)
+변수 =값
+
+//참조형(reference Type)
+//object
+변수 = 
