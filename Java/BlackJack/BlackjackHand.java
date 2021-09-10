@@ -8,6 +8,7 @@ public class BlackjackHand extends Deck{
 		super.addCard(blackjackCard);
 	}
 	
+/*
 	public int getValue() {
 		int value=0;
 		for(Card c: getCards()) {
@@ -22,6 +23,31 @@ public class BlackjackHand extends Deck{
 		return value;
 	
 	}
+	*/
+	//선생님 풀이
+	
+	public int getValue() {
+		int value=0;
+		//Ace가 몇장있나?
+		int aceCount=0;
+		
+		for(Card c: getCards()) {
+			BlackjackCard card = (BlackjackCard) c;
+			if(card.isAce()) {
+				aceCount++;
+			}
+			
+			value+=card.getValue();
+		}
+		
+		while(aceCount>0 && value>21) {
+			value-=10;
+			//몇번돌다가 aceCount=0이되면 빠져나옴
+			aceCount--;
+		}
+
+		return value;
+	}
 	
 	public boolean isBusted() {
 		if(getValue()>21) {
@@ -31,9 +57,7 @@ public class BlackjackHand extends Deck{
 	}
 	
 	public boolean isBlackjack() {
-//		if(hand.size() ==2 || hand.value==21) {
-//			return true;
-//		}
+
 		if(getCards().size()<=2 && getValue()==21) {
 			return true;
 		}
