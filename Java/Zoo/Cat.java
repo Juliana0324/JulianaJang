@@ -1,0 +1,16 @@
+package Zoo;
+
+public class Cat extends AbstractAnimal{
+	
+	public Cat(String name) {
+		super(name);
+
+	}
+	
+	@Override
+	public void cry() {
+		System.out.println("¾ß¿Ë");
+	}
+	
+	
+}
