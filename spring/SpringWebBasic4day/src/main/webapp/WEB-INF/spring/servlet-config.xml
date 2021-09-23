@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet 관련 설정 -->
+	
+	<!-- 아노테이션을 통한 자동 빈 주입 명령을 처리하는 태그 -->
+	<annotation-driven />
+
+	<!-- 정적 자원(html, css, img, js)을 절대경로로 쉽게 매핑하는 태그 -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- 뷰 리졸버 빈 등록 설정 -->
+	<!-- 
+		- 컨트롤러가 리턴한 view문자열을 해석하여 경로를 만들어서
+		  파일을 찾아 응답하는 ViewResolver의 빈 등록 코드
+		- prefix필드와 suffix필드의 setter주입을 통해
+		  컨트롤러에서 리턴된 문자열을 조립해줌.
+	 -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+		
+	<!-- 아노테이션을 사용하여 자동으로 빈 등록을 하게 해주는 설정태그 -->
+	<context:component-scan base-package="com.spring.web" />	
+	
+	
+</beans:beans>
+
+
+
+
