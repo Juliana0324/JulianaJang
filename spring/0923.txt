@@ -1,0 +1,41 @@
+request.getContextPath()  = 프로젝트 Path (컨텍스트 path) 만 가져옵니다.
+예)  http://localhost:8080/project/list.jsp
+[return] /project 
+
+request.getRequestURI() = 프로젝트 + 파일경로까지 가져옵니다.
+예)  http://localhost:8080/project/list.jsp
+[return] /project/list.jsp  
+
+String url = request.getRequestURI.split("/");
+String Name = url[url.length -1];       // list.jsp 반환
+
+request.getRequestURL() = 전체 경로를 가져옵니다. (L만 바뀜)
+예) http://localhost:8080/project/list.jsp
+[return]  http://localhost:8080/project/list.jsp
+
+request.ServletPath() = 파일명만 가져옵니다.
+예) http://localhost:8080/project/list.jsp
+[return] /list.jsp
+
+request.getRealPath("") = 서버 or 로컬 웹 애플리케이션 절대경로 가져옵니다.
+예) http://localhost:8080/projectname/list.jsp
+[return] c:\project\webapps\projectname\
+
+
+request.getScheme() = 사용하는 요청 프로토콜을 가져옵니다. https, http, ftp ...
+
+예) http://localhost:8080/project/list.jsp
+
+[return] http
+
+ 
+
+request.getServerName() = 서버이름
+
+[return] localhost
+
+ 
+
+request.getServerPort() = 서버포트
+
+[return] 8080
