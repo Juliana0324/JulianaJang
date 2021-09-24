@@ -1,0 +1,40 @@
+//Redirect처리
+	//로그인 화면 요청처리
+	@GetMapping("/login")
+	public String login() {
+		System.out.println("/login: GET요청 발셍!");
+		return "response/res-redirect-form";
+	}
+	
+	//로그인 검증 처리
+	@PostMapping("/login")
+	public String login(@ModelAttribute("userId")String id
+			,@RequestParam("userPw")String pw
+			,@RequestParam("userPwChk")String pwChk
+			,RedirectAttributes ra) {
+		
+		if(id.equals("")) {
+			ra.addFlashAttribute("msg","아이디는 필수값이에요!");
+		
+		//redirect:context값을 가지고 getMapping login으로 이동
+			return "redirect:/response/login";
+		}
+		else if(!pw.equals(pwChk)) {
+			ra.addFlashAttribute("msg","비밀번호 확인란을 체크하세요!");
+			return "redirect:/response/login";
+		} 
+		else if(id.equals("abc123") && pw.equals("1234")) {
+			return "response/res-quiz-success";
+		} else {		
+			return null;
+		}
+	}
+
+
+
+
+
+
+
+자세히알고싶으면 
+주소: https://blog.naver.com/PostView.nhn?isHttpsRedirect=true&blogId=sim4858&logNo=221007278858
