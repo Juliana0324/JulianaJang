@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>test.jsp</h2>
-	<p>지정된 별명은 ${nick}입니다. 나이는 ${age}세 입니다.</p>
+	<h3>로그인 실패</h3>
+	<p>${user.userId}는 회원이 아닙니다.</p>
 </body>
 </html>
