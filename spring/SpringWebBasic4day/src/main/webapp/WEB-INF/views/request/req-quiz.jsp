@@ -1,48 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 
+
 <%--
-	# ë¬¸ì œ
-	1. RequestControllerì— í˜„ì¬ íŒŒì¼ì„ ì—´ì–´ì£¼ëŠ” ë©”ì„œë“œ ìƒì„±
+	# ¹®Á¦
+	1. RequestController¿¡ ÇöÀç ÆÄÀÏÀ» ¿­¾îÁÖ´Â ¸Ş¼­µå »ı¼º
 	 - url: /request/quiz : GET
 	 - views: /request/req-quiz.jsp
 	 - method-name: quiz()
-	2. RequestControllerì— ì „ì†¡ëœ ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ íŒŒë¼ë¯¸í„°ë¥¼
-	  ë°›ì•„ ë¡œê·¸ì¸ì„ ì²˜ë¦¬í•˜ëŠ” ë©”ì„œë“œ ìƒì„±
+	2. RequestController¿¡ Àü¼ÛµÈ ¾ÆÀÌµğ, ºñ¹Ğ¹øÈ£ ÆÄ¶ó¹ÌÅÍ¸¦
+	  ¹Ş¾Æ ·Î±×ÀÎÀ» Ã³¸®ÇÏ´Â ¸Ş¼­µå »ı¼º
 	 - url: /request/quiz : POST
 	 - views: 
-	 	ì„±ê³µì‹œ: /request/login-success.jsp
-	 	ì‹¤íŒ¨ì‹œ: /request/login-fail.jsp
+	 	¼º°ø½Ã: /request/login-success.jsp
+	 	½ÇÆĞ½Ã: /request/login-fail.jsp
 	 - method-name: quiz()
-	3. ë¡œê·¸ì¸ ì„±ê³µì¡°ê±´: 
-	 - idê°’ì´ : abc1234 , pw: xxx4321
+	3. ·Î±×ÀÎ ¼º°øÁ¶°Ç: 
+	 - id°ªÀÌ : abc1234 , pw: xxx4321
  --%>
 
-<h3>íŒŒë¼ë¯¸í„°ê°’ ì²˜ë¦¬í•˜ê¸° ë¬¸ì œ~</h3>
 
-<form action="<c:url value='/request/quiz'/>" method="post">
-	<p>
-		# ID: <input type="text" name="userId" size="10"><br>
-		# PW: <input type="password" name="userPw" size="10"><br>
-		<input type="submit" value="ë¡œê·¸ì¸">
-	</p>
-</form>
+	<form action="/quiz" method="post">
+		<fieldset>
+			<p>
+				-ID : <input type="text" name="userId" size="10">
+				-PW : <input type="password" name="userPw" size="10">
+				<input type="submit" value="·Î±×ÀÎ">
+			</p>
+			
+		</fieldset>
+	</form>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
