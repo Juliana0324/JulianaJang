@@ -1,0 +1,58 @@
+<c:forEach var="i" begin="0" end="3">
+
+    <p><c:out value="${i}" /></p>
+
+</c:forEach>
+
+
+
+실행결과 : 
+
+0
+1
+2
+3
+
+
+1. 이름 목록을 가진  ArrayList를 출력하는 예제 입니다.
+
+// 리스트를 만들어서 모델에 넣습니다.
+
+List<String> nameList = new ArrayList<String>(Arrays.asList("홍길동", "김철수", "박영희"));
+
+model.addAttribute("nameList", nameList);
+
+
+
+<%-- JSP 페이지에서 출력합니다. --%>
+
+<c:forEach var="name" items="${nameList}" varStatus="status">
+
+    <p>${status.count} : <c:out value="${name}" /></p>
+
+</c:forEach>
+
+
+
+실행결과:
+
+1 : 홍길동
+
+2 : 김철수
+
+3 : 박영희
+
+
+
+*var   : 사용할 변수
+
+*items   : Collection객체(List, ArrayList)
+
+varStatus:     반복 index 변수
+
+begin    시작 index
+
+end   종료 index
+
+step  반복시 이동 index
+
