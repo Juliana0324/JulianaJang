@@ -30,3 +30,17 @@ Model에 ModelAttribute를 추가하면 BindingResult도 자동으로 추가된�
 
 (따라서 코틀린에서 객체안의 변수를 val키워드를 사용한다면, val로 초기화가 되어서 인자를 못받아들인다. -> 결론적으로 ModelAttribute를 사용하는 객체안의 변수는 var 키워드를 사용하자)
  
+
+
+ex>
+
+@RequestMapping(value="/board/boardPro", method=RequestMethod.POST)
+	public String boardPro(@ModelAttribute("board") BoardVO board) {
+		return "board/boardPro";
+		
+	}
+
+
+boardPro.jsp
+게시물 번호: ${board.boardNo}
+게시물 작성자: ${board.writer}
