@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.viewRepository">
+	<!-- id: repository에서 설정한 리스트의 이름 -->
+	<!-- resultType: 반환받을 값의 타입 -->
+	<!-- xml에서는 세미콜론 쓰기말기!! -->
+	<select id="allMembers" resultType="com.example.demo.vo.Members">
+		SELECT * FROM members	
+	</select>
+	
+	<insert id="insertMembers">
+		INSERT INTO members (memberId, memberName, memberAge, memberAdd, memberGender)
+		 VALUES (
+		 member_seq.NEXTVAL
+		 , #{memberName}, #{memberAge}, #{memberAdd}, #{memberGender})
+	</insert>
+
+</mapper>
