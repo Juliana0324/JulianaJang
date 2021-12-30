@@ -1,0 +1,6 @@
+rem 자바가 실행되기 위한 모든 관련된 환경변수를 저장하는 파일.
+rem env.bat파일
+
+set DEV_HOME=E:/dev
+set JAVA_HOME=E:/dev/java-11-openjdk-11.0.13-1
+set PATH=E:/dev/java-11-openjdk-11.0.13-1/bin

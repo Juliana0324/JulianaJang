@@ -1,0 +1,14 @@
+
+class Operator3 {
+	public static void main(String[] args) {
+		int i=10, j=12, k=10; 
+
+		System.out.println(i+" == "+ k + "="+ (i==k));
+		System.out.println(i+" == "+ j + "="+ (i==j));
+	
+		//부정연산자
+		System.out.println(i+" != "+ k + "="+ (i!=k));
+		System.out.println(i+" != "+ j + "="+ (i!=j));
+
+	}
+}
