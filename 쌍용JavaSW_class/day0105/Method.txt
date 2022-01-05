@@ -1,0 +1,72 @@
+Method
+ - 목적: 업무(일)을 구분하여 작성시 메소드를 만듦
+ - 중복 코드 줄일 수 있음
+ - instance 메소드 와 static메소드
+ - 다형성(polymorphism)을 지원 (같은 method를 여러개 제작 가능)
+ - 작성된 method를 호출하여 일을 수행한다
+
+ static : 객체화 없이 메소드 호출시
+ final : Override 막을때
+ synchronized : multi thread 에서 동시 호출 막을 때
+
+
+[ 작성법 ]
+1. 
+접근지정자 반환형 method명(매개 변수들(파라미터: 메소드 처리해야할 것),,,){
+	업무구현;
+}
+
+2. 호출.
+ method명( );
+
+
+● instance method :
+ - 객체화를 한 후 객체명을 통해서 호출하는 method
+ - method가 객체의 instance value를 사용하여 업무처리해야할 때 작성
+ 
+[ 작성법 ]
+접근지정자 반환형 method명(매개 변수...){
+	
+}
+
+ -어디에서나 호출 가능, 정수 값을 받아 업무처리결과를 하지만 test라는 이름의 method작성
+public void test(int param){
+
+}
+
+
+ -어디에서나 호출 가능, 문자 값을 받아 업무처리결과를 정수로 내보내는 test라는 이름의 method작성
+public int test(char param){
+	//return ;
+}
+
+ - class안에서만 호출가능, 실수값와 정수값을 받아 업무처리결과를 문자로 내보내는 foo라는 이름의 메소드 작성
+private char foo(double a, int b){
+}
+
+
+2. 객체화: 
+ 클래스명 객체명 = new 클래스명();
+
+3. 객체명을 사용하여 호출.
+ 객체명.method명(값(=arguments),,,);
+
+
+호출 예)
+ class Test{
+	public void foo(){
+		System.out.println(안녕);
+
+ 	}
+	
+	public static void main(String[] args){
+		//객체화
+		Test t = new Test();
+		t.foo();		
+
+
+	}
+
+
+
+
