@@ -1,0 +1,59 @@
+가변인수(VariableArguments)
+ - JDK 1.5부터 추가된 문법
+ - method를 호출할때 입력값의 개수를 동적으로 넣어줄 수 있는 것
+ - 입력값은 method안에 배열
+ - 매개변수를 여러개 정의할때에는 
+    반드시 가장 마지막에만 정의되어야 함
+ - va는 
+
+형식)
+ - 입력깂을 동적으로 받기 위한 매개변수 형식
+	데이터형 ... 변수명
+
+[ 작성법 ]
+public 반환형 method명(데이터형 ... 매개변수명){
+
+
+}
+
+[ 호출 ]
+ method명( );
+ method명(값 );
+
+
+ex)
+class Test{
+	public void foo(int ...param){
+	 //param => 배열로 처리(주소)
+	//참조형을 출력하면 주소가 나온다
+	
+	for(int i:param){
+		System.out.println(i)
+
+	}
+      }	
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+public void variable(int ...num) {
+	for(int i:num) {
+		System.out.print(i+" ");
+	}
+	System.out.println();
+}
+
+
+public static void main(String[] args) {
+		TestVariableArgument tva = new TestVariableArgument();
+		tva.variable(10);
+		tva.variable(10,20);
+		tva.variable(10,30,100);
+		tva.variable(10,40, 50, 700);
+	
+}
+
+
+
+
+
