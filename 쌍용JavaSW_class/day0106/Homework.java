@@ -3,48 +3,58 @@ package day0106;
 public class Homework {
 	
 	//1. 자신의 성을 문자로
-	public char initial(char c) {
-		return c;
+	public final char initial() {
+		return 'J';
 	}
 	
 	//2. 점수를 입력받아서 판정을 반환하는 method작성(0~100사이일 떄느 true를 , 아니면 false)
+	/**
+	 * 입력되는 점수의 판정
+	 * @param score
+	 * @return
+	 */
 	public boolean score(int score) {
-		if(score>=0 && score<=100) {
-			return true;
-		} else {
-			return false;
-		}
+		boolean flag = score>=0 && score<=100;
+
+		return flag;
 	}
 	
 	//3. 점수를 입력받아서 A-F구하여 반환하는 method작성(if작성)
 	public char score2(int score) {
+		char s = 'F';
 		if(score>89 && score<=100) {
-			return 'A';
-		} else if(score>79 && score<91) {
-			return 'B';
-		} else if(score>69 && score<81) {
-			return 'C';
-		} else if(score>59 && score<71) {
-			return 'D';
-		} else {
-			return 'F';
+			s = 'A';
+		} else if(score>79 && score<90) {
+			s = 'B';
+		} else if(score>69 && score<80) {
+			s = 'C';
+		} else if(score>59 && score<70) {
+			s = 'D';
 		}
+		
+		return s;
 	}
 	
-	// 4. 수업시간에 작성한 printStar 호출하여 별을 아래와 같이 출력/. 아까 TestOverload클래스 안에 printStar()를 작성했잖아요? 그 클래스의 method를 호출해서 해보시는거에요.
+	
+	/**
+	 * 별을 출력 - 고정일
+	 * 다른 클래스에 존재하는 method를 상황에 맞게 호출
+	 */
 	public void printStar() {
-		for(int i=0; i<5; i++) {
-			for(int j=0; j<i; j++) {
+		TestOverLoad tol = new TestOverLoad();		
+		for(int i=1; i<5;i++) {
+			for(int j=1; j<i+1;j++) {
 				if(i%2==0) {
-					System.out.print("☆");
+					tol.printstar(1);					
 				}else {
-					System.out.print("★");
+					tol.printstar();
 				}
-				
 			}
 			System.out.println();
 		}
-	}	
+	}
+	
+	
 	
 	//구구단을 출력하는 method를 작성
 	public void gugudan() {
@@ -61,37 +71,35 @@ public class Homework {
 	
 	public static void main(String[] args) {
 		Homework hm = new Homework();
-		System.out.println("1번: "+hm.initial('J'));
+		System.out.println("1번: "+hm.initial());
 		
-		System.out.println("2번: "+hm.score(100));
+		int score = 100;
+		boolean flag = hm.score(score);
+		System.out.println("2번: "+flag);
 		
-		System.out.println("3번: "+hm.score2(80));
+		if(flag) {
+			char gt = hm.score2(score);
+			System.out.println("3번: "+gt);			
+		}
 		
 		System.out.println("4번: ");
 		
-		TestOverLoad tol = new TestOverLoad();
-//		tol.printstar();
+		//4-1번째 풀이
+		hm.printStar();
+		
+		
+		//4-2번째 풀이
 //		System.out.println();
-//		tol.printstar(2);
-//		for(int i=0; i<3;i++) {
-//			tol.printstar();
+//		for(int i=1; i<5;i++) {
+//			if(i%2 !=0) {
+//				for(int j=0;j<i;j++) {
+//					tol.printstar();
+//				}
+//			}else {
+//				tol.printstar(i);
+//			}
+//			System.out.println();
 //		}
-//		System.out.println();
-//		tol.printstar(4);
-//		System.out.println();
-		
-		for(int i=0; i<5;i++) {
-			for(int j=0; j<i;j++) {
-				if(i%2==1) {
-					tol.printstar();					
-				}else {
-					tol.printstar(j);
-					
-				}
-			}
-			System.out.println();
-		}
-		
 		
 		
 		System.out.println();
@@ -102,3 +110,4 @@ public class Homework {
 	}
 
 }
+
