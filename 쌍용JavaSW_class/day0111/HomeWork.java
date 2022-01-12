@@ -4,19 +4,18 @@ public class HomeWork {
 	private String socialNum;
 	
 
-	//1ë²ˆ
+	//1¹ø
 	public HomeWork(String socialNum) {
 		this.socialNum = socialNum;  
 	}
 	
-	//2ë²ˆ
+	//2¹ø
 	public boolean letters() {
-	
 		return socialNum.length()==14;
 		
 	}
 	
-	//3ë²ˆ
+	//3¹ø
 	public boolean dash() {
 		return socialNum.indexOf("-") == 6;
 	}
@@ -26,7 +25,7 @@ public class HomeWork {
 	 	String fyear = socialNum.substring(7,8);
 	 	int year=Integer.valueOf(socialNum.substring(0,2));
 		
-	 	//monthë‚˜ dayì˜ ì¶œë ¥ì‹œ 0ì„ ì—†ì• ì¤˜ì•¼í•¨ìœ¼ë¡œ ì •ìˆ˜ë¡œ ë³€í™˜
+	 	//month³ª dayÀÇ Ãâ·Â½Ã 0À» ¾ø¾ÖÁà¾ßÇÔÀ¸·Î Á¤¼ö·Î º¯È¯
 		int month= Integer.valueOf(socialNum.substring(2,4));
 		int day = Integer.valueOf(socialNum.substring(4,6));
 				
@@ -43,7 +42,7 @@ public class HomeWork {
 
 	 
 		
-		String birthday = year+"ë…„ "+month+"ì›” "+day+"ì¼ ";
+		String birthday = year+"³â "+month+"¿ù "+day+"ÀÏ ";
 		
 		return birthday;
 	}
@@ -59,38 +58,23 @@ public class HomeWork {
 	}
 	
 	
-	//6. ì„±ë³„
+	//6. ¼ºº°
 	public String gender() {
 		String gender= socialNum.substring(7,8);
 		int genderFlag = Integer.parseInt(socialNum.substring(7,8));
 		
 		if(genderFlag%2 == 1) {
-			gender="ë‚¨ì„±";
+			gender="³²¼º";
 		} else {
-			gender = "ì—¬ì„±";
+			gender = "¿©¼º";
 		}
 		return gender;
 	}
 	
 	public String zodiac() {
 		int year = Integer.valueOf(birthday().substring(0,4));
-		String zodiac="";
-		switch(year%12) {
-		// 0-ì›ìˆ­ì´, 1- ë‹­, 2-ê°œ, 3- ë¼ì§€, 4-ì¥ 5-ì†Œ, 6-í˜¸ë‘ì´, 7-í† ë¼, 8-ìš©, 9-ë±€, 10-ë§, 11-ì–‘
-			case 0: zodiac = "ì›ìˆ­ì´"; break;
-			case 1: zodiac = "ë‹­"; break;
-			case 2: zodiac = "ê°œ"; break;
-			case 3: zodiac = "ë¼ì§€"; break;
-			case 4: zodiac = "ì¥"; break;
-			case 5: zodiac = "ì†Œ"; break;
-			case 6: zodiac = "í˜¸ë‘ì´"; break;
-			case 7: zodiac = "í† ë¼"; break;
-			case 8: zodiac = "ìš©"; break;
-			case 9: zodiac = "ë±€"; break;
-			case 10: zodiac = "ë§"; break;
-			default: zodiac = "ì–‘";
-		}
-		return zodiac;
+		String[] zodiacArr= {"¿ø¼şÀÌ", "´ß", "°³", "µÅÁö", "Áã", "¼Ò", "È£¶ûÀÌ", "Åä³¢", "¿ë", "¹ì", "¸»", "¾ç"};
+		return zodiacArr[year%12];
 		
 	}
 	
@@ -98,31 +82,31 @@ public class HomeWork {
 		 HomeWork hw1= new HomeWork("970324-2000000");
 		if(hw1.letters()) {
 			if(hw1.dash() ) {
-				System.out.println("ì…ë ¥ì£¼ë¯¼ë²ˆí˜¸ :"+hw1.socialNum);	
-				System.out.println("ìƒë…„ì›”ì¼: "+hw1.birthday());
-				System.out.println("ë‚˜ì´: "+hw1.age());
-				System.out.println("ì„±ë³„: "+hw1.gender());
-				System.out.println("ë : "+hw1.zodiac());
+				System.out.println("ÀÔ·ÂÁÖ¹Î¹øÈ£ :"+hw1.socialNum);	
+				System.out.println("»ı³â¿ùÀÏ: "+hw1.birthday());
+				System.out.println("³ªÀÌ: "+hw1.age());
+				System.out.println("¼ºº°: "+hw1.gender());
+				System.out.println("¶ì: "+hw1.zodiac());
 			}else {
-				System.out.println("'-' ê°€ ì •ìƒìœ„ì¹˜ì— ì—†ìŠµë‹ˆë‹¤.");
+				System.out.println("'-' °¡ Á¤»óÀ§Ä¡¿¡ ¾ø½À´Ï´Ù.");
 			}
 		}else {
-			System.out.println("ì£¼ë¯¼ë²ˆí˜¸ì˜ ê¸€ììˆ˜ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
+			System.out.println("ÁÖ¹Î¹øÈ£ÀÇ ±ÛÀÚ¼ö°¡ ´Ù¸¨´Ï´Ù.");
 		}
 		System.out.println("------------------------------------");
 		HomeWork hw2= new HomeWork("000825-3000000");
 		if(hw2.letters()) {	
-			if(hw2.dash() ) { //dash methodê°€ booleanì„ ë°˜í™˜í•˜ê¸° ë•Œë¬¸ì— ==trueì¸ì§€ë¥¼ ë¹„êµí•  í•„ìš”ëŠ” ì—†ì–´ìš”.
-				System.out.println("ì…ë ¥ì£¼ë¯¼ë²ˆí˜¸ :"+hw2.socialNum);	
-				System.out.println("ìƒë…„ì›”ì¼: "+hw2.birthday());
-				System.out.println("ë‚˜ì´: "+hw2.age());
-				System.out.println("ì„±ë³„: "+hw2.gender());
-				System.out.println("ë : "+hw2.zodiac());
+			if(hw2.dash() ) { //dash method°¡ booleanÀ» ¹İÈ¯ÇÏ±â ¶§¹®¿¡ ==trueÀÎÁö¸¦ ºñ±³ÇÒ ÇÊ¿ä´Â ¾ø¾î¿ä.
+				System.out.println("ÀÔ·ÂÁÖ¹Î¹øÈ£ :"+hw2.socialNum);	
+				System.out.println("»ı³â¿ùÀÏ: "+hw2.birthday());
+				System.out.println("³ªÀÌ: "+hw2.age());
+				System.out.println("¼ºº°: "+hw2.gender());
+				System.out.println("¶ì: "+hw2.zodiac());
 			}else {
-				System.out.println("'-' ê°€ ì •ìƒìœ„ì¹˜ì— ì—†ìŠµë‹ˆë‹¤.");
+				System.out.println("'-' °¡ Á¤»óÀ§Ä¡¿¡ ¾ø½À´Ï´Ù.");
 			}
 		}else {
-		System.out.println("ì£¼ë¯¼ë²ˆí˜¸ì˜ ê¸€ììˆ˜ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
+		System.out.println("ÁÖ¹Î¹øÈ£ÀÇ ±ÛÀÚ¼ö°¡ ´Ù¸¨´Ï´Ù.");
 	}
 		
 		

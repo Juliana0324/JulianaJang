@@ -22,5 +22,8 @@ public class Test1316 {
 		}
 		System.out.println(N);
 		
+		
+		
 	}
+	
 }
