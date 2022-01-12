@@ -1,69 +1,49 @@
 package day0111;
 
 public class HomeWork {
-	public String socialNum;;
-	boolean flag;
+	private String socialNum;
 	
 
-	//1¹ø
+	//1ë²ˆ
 	public HomeWork(String socialNum) {
 		this.socialNum = socialNum;  
-		if(letters()==true) {
-			if(dash() == true) {
-				System.out.println("ÀÔ·ÂÁÖ¹Î¹øÈ£ :"+socialNum);	
-				System.out.println("»ı³â¿ùÀÏ: "+birthday());
-				System.out.println("³ªÀÌ: "+age());
-				System.out.println("¼ºº°: "+gender());
-				System.out.println("¶ì: "+zodiac());
-			}else {
-				System.out.println("'-' °¡ Á¤»óÀ§Ä¡¿¡ ¾ø½À´Ï´Ù.");
-			}
-		}else {
-			System.out.println("ÁÖ¹Î¹øÈ£ÀÇ ±ÛÀÚ¼ö°¡ ´Ù¸¨´Ï´Ù.");
-		}
 	}
 	
-	//2¹ø
+	//2ë²ˆ
 	public boolean letters() {
-		flag = false;
-		if(socialNum.length()==14) {
-			flag=true;
-		}
-		return flag;
+	
+		return socialNum.length()==14;
 		
 	}
 	
-	//3¹ø
+	//3ë²ˆ
 	public boolean dash() {
-		flag = false;
-		if(socialNum.indexOf("-") == 6) {
-			flag = true;
-		}
-		return flag;
+		return socialNum.indexOf("-") == 6;
 	}
 	
 	//4.
 	public String birthday() {
-	 	int fyear = Integer.valueOf(socialNum.substring(7,8));
-	 	String year=socialNum.substring(0,2);
+	 	String fyear = socialNum.substring(7,8);
+	 	int year=Integer.valueOf(socialNum.substring(0,2));
 		
-	 	switch(fyear){
-		case 1:case 2:case 5:case 6:
-	       year= "19" + year;
-	       break;
-		case 3:case 4:case 7:case 8:
-		  year = "20" + year;
-		  break;
-		default:
-			year = "18"+ year;
-		}
-
-	 	//month³ª dayÀÇ Ãâ·Â½Ã 0À» ¾ø¾ÖÁà¾ßÇÔÀ¸·Î Á¤¼ö·Î º¯È¯
+	 	//monthë‚˜ dayì˜ ì¶œë ¥ì‹œ 0ì„ ì—†ì• ì¤˜ì•¼í•¨ìœ¼ë¡œ ì •ìˆ˜ë¡œ ë³€í™˜
 		int month= Integer.valueOf(socialNum.substring(2,4));
 		int day = Integer.valueOf(socialNum.substring(4,6));
-		
-		String birthday = year+"³â "+month+"¿ù "+day+"ÀÏ ";
+				
+	 	switch(fyear){
+		case "1":case "2":case "5":case "6":
+	       year= 1900 + year;
+	       break;
+		case "3":case "4":case "7":case "8":
+		  year = 2000 + year;
+		  break;
+		default:
+			year = 1800 + year;
+		}
 
+	 
+		
+		String birthday = year+"ë…„ "+month+"ì›” "+day+"ì¼ ";
 		
 		return birthday;
 	}
@@ -79,14 +59,15 @@ public class HomeWork {
 	}
 	
 	
-	//6. ¼ºº°
+	//6. ì„±ë³„
 	public String gender() {
 		String gender= socialNum.substring(7,8);
-
-		if(gender.equals("1") || gender.equals("3")) {
-			gender="³²¼º";
-		}else {
-			gender = "¿©¼º";
+		int genderFlag = Integer.parseInt(socialNum.substring(7,8));
+		
+		if(genderFlag%2 == 1) {
+			gender="ë‚¨ì„±";
+		} else {
+			gender = "ì—¬ì„±";
 		}
 		return gender;
 	}
@@ -95,28 +76,54 @@ public class HomeWork {
 		int year = Integer.valueOf(birthday().substring(0,4));
 		String zodiac="";
 		switch(year%12) {
-		// 0-¿ø¼şÀÌ, 1- ´ß, 2-°³, 3- µÅÁö, 4-Áã 5-¼Ò, 6-È£¶ûÀÌ, 7-Åä³¢, 8-¿ë, 9-¹ì, 10-¸», 11-¾ç
-			case 0: zodiac = "¿ø¼şÀÌ"; break;
-			case 1: zodiac = "´ß"; break;
-			case 2: zodiac = "°³"; break;
-			case 3: zodiac = "µÅÁö"; break;
-			case 4: zodiac = "Áã"; break;
-			case 5: zodiac = "¼Ò"; break;
-			case 6: zodiac = "È£¶ûÀÌ"; break;
-			case 7: zodiac = "Åä³¢"; break;
-			case 8: zodiac = "¿ë"; break;
-			case 9: zodiac = "¹ì"; break;
-			case 10: zodiac = "¸»"; break;
-			default: zodiac = "¾ç";
+		// 0-ì›ìˆ­ì´, 1- ë‹­, 2-ê°œ, 3- ë¼ì§€, 4-ì¥ 5-ì†Œ, 6-í˜¸ë‘ì´, 7-í† ë¼, 8-ìš©, 9-ë±€, 10-ë§, 11-ì–‘
+			case 0: zodiac = "ì›ìˆ­ì´"; break;
+			case 1: zodiac = "ë‹­"; break;
+			case 2: zodiac = "ê°œ"; break;
+			case 3: zodiac = "ë¼ì§€"; break;
+			case 4: zodiac = "ì¥"; break;
+			case 5: zodiac = "ì†Œ"; break;
+			case 6: zodiac = "í˜¸ë‘ì´"; break;
+			case 7: zodiac = "í† ë¼"; break;
+			case 8: zodiac = "ìš©"; break;
+			case 9: zodiac = "ë±€"; break;
+			case 10: zodiac = "ë§"; break;
+			default: zodiac = "ì–‘";
 		}
 		return zodiac;
 		
 	}
 	
 	public static void main(String[] args) {
-		new HomeWork("970324-2000000");
+		 HomeWork hw1= new HomeWork("970324-2000000");
+		if(hw1.letters()) {
+			if(hw1.dash() ) {
+				System.out.println("ì…ë ¥ì£¼ë¯¼ë²ˆí˜¸ :"+hw1.socialNum);	
+				System.out.println("ìƒë…„ì›”ì¼: "+hw1.birthday());
+				System.out.println("ë‚˜ì´: "+hw1.age());
+				System.out.println("ì„±ë³„: "+hw1.gender());
+				System.out.println("ë : "+hw1.zodiac());
+			}else {
+				System.out.println("'-' ê°€ ì •ìƒìœ„ì¹˜ì— ì—†ìŠµë‹ˆë‹¤.");
+			}
+		}else {
+			System.out.println("ì£¼ë¯¼ë²ˆí˜¸ì˜ ê¸€ììˆ˜ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
+		}
 		System.out.println("------------------------------------");
-		new HomeWork("000825-3000000");
+		HomeWork hw2= new HomeWork("000825-3000000");
+		if(hw2.letters()) {	
+			if(hw2.dash() ) { //dash methodê°€ booleanì„ ë°˜í™˜í•˜ê¸° ë•Œë¬¸ì— ==trueì¸ì§€ë¥¼ ë¹„êµí•  í•„ìš”ëŠ” ì—†ì–´ìš”.
+				System.out.println("ì…ë ¥ì£¼ë¯¼ë²ˆí˜¸ :"+hw2.socialNum);	
+				System.out.println("ìƒë…„ì›”ì¼: "+hw2.birthday());
+				System.out.println("ë‚˜ì´: "+hw2.age());
+				System.out.println("ì„±ë³„: "+hw2.gender());
+				System.out.println("ë : "+hw2.zodiac());
+			}else {
+				System.out.println("'-' ê°€ ì •ìƒìœ„ì¹˜ì— ì—†ìŠµë‹ˆë‹¤.");
+			}
+		}else {
+		System.out.println("ì£¼ë¯¼ë²ˆí˜¸ì˜ ê¸€ììˆ˜ê°€ ë‹¤ë¦…ë‹ˆë‹¤.");
+	}
 		
 		
 	}
