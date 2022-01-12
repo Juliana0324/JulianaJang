@@ -1,20 +1,20 @@
 package day0112;
 
 /**
- * ÀÌÂ÷¿ø ¹è¿­([Çà][¿­])
- * ÇàÀÇ¼ö : ¹è¿­¸í.length
- * ¿­ÀÇ ¼ö: ¹è¿­¸í[ÇàÀÇ¹øÈ£].length
+ * ì´ì°¨ì› ë°°ì—´([í–‰][ì—´])
+ * í–‰ì˜ìˆ˜ : ë°°ì—´ëª….length
+ * ì—´ì˜ ìˆ˜: ë°°ì—´ëª…[í–‰ì˜ë²ˆí˜¸].length
  * @author user
  *
  */
 public class UseArray2_1 {
 	
 	public void scoreProcess() {
-		String[] names = {"°­¸íÁØ","°­»ê","±èÁ¤ÇÏ","±èÇö¿ì","±èÁø¿µ"};
+		String[] names = {"ê°•ëª…ì¤€","ê°•ì‚°","ê¹€ì •í•˜","ê¹€í˜„ìš°","ê¹€ì§„ì˜"};
 		int[][] score = {{90, 94, 91},{86, 84, 71},{96,99,100},{75,76,73},{63,69, 69}};
 		
 		System.out.println("--------------------------------------------------------");
-		System.out.println("¹øÈ£\tÀÌ¸§\tÀÚ¹Ù\t¿À¶óÅ¬\tHTML\tÃÑ Á¡\tÆò±Õ");
+		System.out.println("ë²ˆí˜¸\tì´ë¦„\tìë°”\tì˜¤ë¼í´\tHTML\tì´ ì \tí‰ê· ");
 		System.out.println("--------------------------------------------------------");
 		
 		int totalScore = 0;
@@ -25,43 +25,41 @@ public class UseArray2_1 {
 				System.out.printf("%d\t",score[i][j]);
 				totalScore+= score[i][j];
 			} //end for
-			System.out.printf("%d\t%.2f\n",totalScore, (double)totalScore/score[i].length); //µ¥ÀÌÅÍÇü ‹š¹®¿¡ totalScore/score[i].length ·Î¸¸ ¾ÈµÊ
+			System.out.printf("%d\t%.2f\n",totalScore, (double)totalScore/score[i].length); //ë°ì´í„°í˜• Â‹Âšë¬¸ì— totalScore/score[i].length ë¡œë§Œ ì•ˆë¨
 			totalScore=0;
 			
 		}//end for
 		
 		
-		//////////////////////////////////////////////////[¼÷Á¦]/////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////[ ìˆ™ ì œ ]/////////////////////////////////////////////////////////////////
 		System.out.println("--------------------------------------------------------");
-		System.out.printf("ÀÀ½Ã ÀÎ¿ø [%d]¸í\n",score.length);
+		System.out.printf("ì‘ì‹œ ì¸ì› [%d]ëª…\n",score.length);
+		
 		int sum = 0;
-		
 		for(int[] i:score) {
-			for(int j: i)
-			sum+=j;
+			for(int j: i) {
+				sum+=j;				
+			}
 		}
-		//1. ÄÚµå¸¦ Á÷Á¢ ±â¼úÇØ¼­ Ã³¸®
-		System.out.printf("ÀüÃ¼ ÃÑÁ¡ [%d]Á¡, ÀüÃ¼ Æò±Õ [%.2f]\n", sum, (double)sum/(score.length*score[0].length));
+		//1. ì½”ë“œë¥¼ ì§ì ‘ ê¸°ìˆ í•´ì„œ ì²˜ë¦¬
+		System.out.printf("ì „ì²´ ì´ì  [%d]ì , ì „ì²´ í‰ê·  [%.2f]\n", sum, (double)sum/(score.length*score[0].length));
 		
-		
-		
-
-		//¼÷Á¦
-		//¾Æ·¡ÀÇ ÀÛ¾÷À» instance variable¿Í method¸¦ ÀÛ¼ºÇÏ¿© Ã³¸® °á°ú¸¦ Ãâ·Â
+		//ìˆ™ì œ
+		//ì•„ë˜ì˜ ì‘ì—…ì„ instance variableì™€ methodë¥¼ ì‘ì„±í•˜ì—¬ ì²˜ë¦¬ ê²°ê³¼ë¥¼ ì¶œë ¥
 		eachScore(score);
 		greatJava(score);
 		bestStudent(score, names);
 
 	}//UseArray2
-	
+
 	public void eachScore(int[][] score) {
-		int java = 0, oracle=0, html=0;
+		int java = 0, oracle=0, html=0;		
 		for(int i=0; i<score.length;i++) {
 			java+=score[i][0];
 			oracle+=score[i][1];
 			html+=score[i][2];
-		}
-		System.out.printf("ÀÚ¹Ù ÃÑÁ¡[%d], ¿À¶óÅ¬ ÃÑÁ¡[%d]Á¡, Html ÃÑÁ¡[%d]\n",java,oracle,html);
+		}//end for
+		System.out.printf("ìë°” ì´ì [%d], ì˜¤ë¼í´ ì´ì [%d]ì , Html ì´ì [%d]\n",java,oracle,html);
 
 	}//eachScore
 	
@@ -72,27 +70,31 @@ public class UseArray2_1 {
 				max = score[i][0];
 			}//end if
 		}//end for
+		System.out.printf("ìë°” ìµœê³ ì [%d]\n",max);
 
-		System.out.printf("ÀÚ¹Ù ÃÖ°íÁ¡[%d]\n",max);
 	}//greatJava
 	
-//	1µî¹øÈ£ [0], ÀÌ¸§[]
+	
+//	1ë“±ë²ˆí˜¸ [0], ì´ë¦„[]
 	public void bestStudent(int[][] score, String[] name) {
 		int[] totalArr = new int[score.length];
+		int max ;
 		for(int i=0; i<score.length; i++) {
 			for(int j=0; j<score[i].length; j++) {
 				totalArr[i] += score[i][j]; 
-			}
+			}//endfor
 			
-			if(totalArr[0]<totalArr[i]) {
-				System.out.printf("1µî¹øÈ£[%d], ÀÌ¸§: [%s]",i+1,name[i]);
-			}
+			max = totalArr[0];
+			if(max<totalArr[i]) {
+				max = totalArr[i];
+				System.out.printf("1ë“±ë²ˆí˜¸[%d], ì´ë¦„: [%s]\n",i+1,name[i]);
+			}//end if
 			
 		}//endfor
+	}//bestStudent
 		
 		
-		
-	}
+
 	
 	public static void main(String[] args) {
 		new UseArray2_1().scoreProcess();
