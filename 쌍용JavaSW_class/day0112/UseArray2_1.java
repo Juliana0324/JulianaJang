@@ -46,39 +46,37 @@ public class UseArray2_1 {
 		
 		//숙제
 		//아래의 작업을 instance variable와 method를 작성하여 처리 결과를 출력
-		eachScore(score);
-		greatJava(score);
-		bestStudent(score, names);
+		System.out.printf("자바 총점[%d], 오라클 총점[%d]점, Html 총점[%d]\n",eachScore(score, 0),eachScore(score, 1),eachScore(score, 2));
+		System.out.printf("자바 최고점[%d]\n",greatJava(score));
+		System.out.printf("1등번호[%d], 이름: [%s]\n",bestStudent(score)+1,names[bestStudent(score)]);
 
 	}//UseArray2
-
-	public void eachScore(int[][] score) {
-		int java = 0, oracle=0, html=0;		
-		for(int i=0; i<score.length;i++) {
-			java+=score[i][0];
-			oracle+=score[i][1];
-			html+=score[i][2];
+	
+	
+	public int eachScore(int[][] score, int num) {
+		int eachScore = 0;
+		for(int i=0; i<score.length; i++) {
+				eachScore += score[i][num];		
 		}//end for
-		System.out.printf("자바 총점[%d], 오라클 총점[%d]점, Html 총점[%d]\n",java,oracle,html);
-
+		return eachScore;
 	}//eachScore
 	
-	public void greatJava(int[][] score) {
+	public int greatJava(int[][] score) {
 		int max = score[0][0];
 		for(int i=1; i<score.length;i++) {
 			if(max<score[i][0]) {
 				max = score[i][0];
 			}//end if
 		}//end for
-		System.out.printf("자바 최고점[%d]\n",max);
-
+		return max;
+		
 	}//greatJava
 	
 	
 //	1등번호 [0], 이름[]
-	public void bestStudent(int[][] score, String[] name) {
+	public int bestStudent(int[][] score) {
 		int[] totalArr = new int[score.length];
-		int max ;
+		int max, first = 0;
 		for(int i=0; i<score.length; i++) {
 			for(int j=0; j<score[i].length; j++) {
 				totalArr[i] += score[i][j]; 
@@ -87,10 +85,10 @@ public class UseArray2_1 {
 			max = totalArr[0];
 			if(max<totalArr[i]) {
 				max = totalArr[i];
-				System.out.printf("1등번호[%d], 이름: [%s]\n",i+1,name[i]);
+				first = i;
 			}//end if
-			
 		}//endfor
+		return first;
 	}//bestStudent
 		
 		
