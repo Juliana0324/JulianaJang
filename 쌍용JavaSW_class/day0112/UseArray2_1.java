@@ -40,7 +40,8 @@ public class UseArray2_1 {
 			for(int j: i) {
 				sum+=j;				
 			}
-		}
+		}//endfor
+		
 		//1. 코드를 직접 기술해서 처리
 		System.out.printf("전체 총점 [%d]점, 전체 평균 [%.2f]\n", sum, (double)sum/(score.length*score[0].length));
 		
@@ -58,8 +59,10 @@ public class UseArray2_1 {
 		for(int i=0; i<score.length; i++) {
 				eachScore += score[i][num];		
 		}//end for
+		
 		return eachScore;
 	}//eachScore
+	
 	
 	public int greatJava(int[][] score) {
 		int max = score[0][0];
@@ -80,14 +83,14 @@ public class UseArray2_1 {
 		for(int i=0; i<score.length; i++) {
 			for(int j=0; j<score[i].length; j++) {
 				totalArr[i] += score[i][j]; 
-			}//endfor
+			}//end for
 			
 			max = totalArr[0];
 			if(max<totalArr[i]) {
 				max = totalArr[i];
 				first = i;
 			}//end if
-		}//endfor
+		}//end for
 		return first;
 	}//bestStudent
 		
