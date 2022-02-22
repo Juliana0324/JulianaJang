@@ -14,7 +14,7 @@ create table emp_work as (select empno, ename,sal, hiredate, deptno, job, mgr fr
       원본 data 7788 -> insert 8788
 */
 insert into emp_work(empno, ename,sal, hiredate,deptno,job,mgr)
-(select empno+1000, ename,sal, hiredate,deptno,job,mgr from emp where deptno=10 or deptno=30);
+(select empno+1000, ename,sal, hiredate,deptno,job,mgr from emp where deptno in(10,30));
 
 /*
 숙제 3.
@@ -23,7 +23,8 @@ insert into emp_work(empno, ename,sal, hiredate,deptno,job,mgr)
 */
 select * from emp_work;
 update emp_work
-set sal=(select sal from emp where empno=7698)+(select sal from emp where empno=7782)
+--set sal=(select sal from emp where empno=7698)+(select sal from emp where empno=7782)
+set sal=(select sum(sal) from emp where empno in(7698,7782))
 where deptno=10;
 
 /*
@@ -32,7 +33,7 @@ where deptno=10;
   입사일 : 추가되는 시점의 다음날
   */
 select * from cp_emp4;
-insert into cp_emp4(empno, ename,job,hiredate) values(3,'강명준','개발자',sysdate);
+insert into cp_emp4(empno, ename,job,hiredate) values((select max(empno)+1 from emp),'강명준','개발자',sysdate);
 
   /*
 숙제4.아래와 같은 레코드를 저장할 수 있는  sales테이블을 생성하고 레코드를 추가하세요.
@@ -65,7 +66,9 @@ commit;
 /*
 숙제 5. 상품명, 총가격, 판매건수, 판매일, 입력일 을 저장할 수 있는  sales_adjustment 테이블을 생성하세요.
 */
-create table sales_adjustment(product, price, nums, saldate) as (select product, price, nums, saldate from sales where 1=0);
+create table sales_adjustment(product, price, nums, saldate) as
+(select product, price, nums, saldate from sales where 1=0);
+
 alter table sales_adjustment add inputdate date;
 select * from sales_adjustment;
 
@@ -77,17 +80,25 @@ select * from sales_adjustment;
      마우스 , 27000,1,  위와동일
      모니터, 350000,1, 위와동일*/
 
-insert into sales_adjustment(product, price, nums, saldate,inputdate)
-values('키보드', (select sum(price) from sales where product='키보드' and saldate='2022-02-20'),
-(select count(*) sales from sales where product='키보드'  and saldate='2022-02-20'),'2022-02-20', sysdate);
+     --이문제는 그룹함수를사용하시면 편해요  => 정산은 한번에 insert작업을 하는 걸 의미해요.
+ insert into sales_adjustment(product, price, nums, saldate,inputdate)
+ (select product,sum(price),sum(nums), saldate,sysdate
+  from sales
+  where saldate='2022-02-20'
+  group by product,saldate);
 
-insert into sales_adjustment(product, price, nums, saldate,inputdate)
-values('마우스', (select sum(price) from sales where product='마우스' and saldate='2022-02-20'),
-(select count(*) sales from sales where product='마우스'  and saldate='2022-02-20'),'2022-02-20', sysdate);
 
-insert into sales_adjustment(product, price, nums, saldate,inputdate)
-values('모니터', (select sum(price) from sales where product='모니터' and saldate='2022-02-20'),
-(select count(*) sales from sales where product='모니터'  and saldate='2022-02-20'),'2022-02-20', sysdate);
+--insert into sales_adjustment(product, price, nums, saldate,inputdate)
+--values('키보드', (select sum(price) from sales where product='키보드' and saldate='2022-02-20'),
+--(select count(*) sales from sales where product='키보드'  and saldate='2022-02-20'),'2022-02-20', sysdate);
+--
+--insert into sales_adjustment(product, price, nums, saldate,inputdate)
+--values('마우스', (select sum(price) from sales where product='마우스' and saldate='2022-02-20'),
+--(select count(*) sales from sales where product='마우스'  and saldate='2022-02-20'),'2022-02-20', sysdate);
+--
+--insert into sales_adjustment(product, price, nums, saldate,inputdate)
+--values('모니터', (select sum(price) from sales where product='모니터' and saldate='2022-02-20'),
+--(select count(*) sales from sales where product='모니터'  and saldate='2022-02-20'),'2022-02-20', sysdate);
 
 select * from sales_adjustment;
 
