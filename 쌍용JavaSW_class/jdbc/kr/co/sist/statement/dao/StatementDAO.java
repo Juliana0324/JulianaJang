@@ -147,30 +147,79 @@ public class StatementDAO {
 		System.out.println("사원 조회");
 		CpEmp4SelectOneVO selectOneVO=null;
 		
+		Connection conn= null;
+		Statement stmt= null;
+		ResultSet rs=null;
+		
+		try {
+			conn= getDbConnection();
+			stmt=conn.createStatement();
+			
+			StringBuilder selectOneCpEmp = new StringBuilder();
+			selectOneCpEmp.append("SELECT ename,job,sal,comm FROM cp_emp4 WHERE empno=").append(empno);
+			rs = stmt.executeQuery(selectOneCpEmp.toString()); //rs=>는 커서의 제어권이 들어감
+			
+			if(rs.next()) {
+				//사원번호로 검색된 레코드가 존재
+				selectOneVO = new CpEmp4SelectOneVO();
+				//cursor가 존재하는 레코드가 사원칼럼의 값을 가져와서
+				selectOneVO.setEname(rs.getString("ename"));
+				selectOneVO.setJob(rs.getString("job"));
+				selectOneVO.setSal(rs.getInt("sal"));
+				selectOneVO.setComm(rs.getDouble("comm"));
+			}
+			
+			
+		} finally {
+			if(rs!=null) {rs.close();}
+			if(conn!=null) {conn.close();}
+			if(stmt!=null) {stmt.close();}
+		}
+		
 		return selectOneVO;
 	}
 	
 	public List<CpEmp4SelectAllVO> selectCpEmp4() throws SQLException{
 		System.out.println("사원 전체 조회");
 		List<CpEmp4SelectAllVO> list=new ArrayList<CpEmp4SelectAllVO>();
+		ResultSet rs=null;
+		Connection conn= null;
+		Statement stmt=null;
 		
-		Connection conn=getDbConnection();
-		Statement stmt= conn.createStatement();
-		
-		String sql="SELECT * FROM dept";
-		ResultSet rs=stmt.executeQuery(sql);
-
-		while(rs.next()) {
-			//int deptno=rs.getInt(deptno);
-			System.out.println(rs);
+		try {
+			conn=getDbConnection();
+			stmt= conn.createStatement();
+			StringBuilder selectCpEmp = new StringBuilder();
+			selectCpEmp.append("SELECT empno, ename, job,sal, comm, hiredate, to_char(hiredate,'yyyy-mm-dd') hiredate2")
+					.append(" FROM cp_emp4 ORDER BY empno");
+			
+			rs=stmt.executeQuery(selectCpEmp.toString());
+			CpEmp4SelectAllVO selectAllVO=null;
+			
+			while(rs.next()) {
+				selectAllVO= new CpEmp4SelectAllVO();
+				selectAllVO.setEmpno(rs.getInt("empno"));
+				selectAllVO.setEname(rs.getString("ename"));
+				selectAllVO.setJob(rs.getString("job"));
+				selectAllVO.setSal(rs.getInt("sal"));
+				selectAllVO.setComm(rs.getDouble("comm"));
+				selectAllVO.setHiredate(rs.getDate("hiredate"));
+				selectAllVO.setHiredate2(rs.getString("hiredate2")); //date-> to_char() -> string
+				
+				//레코드 하나를 가진 VO를 list에 추가
+				list.add(selectAllVO);
+			}
+		}finally {
+			if(rs!=null) {rs.close();}
+			if(conn!=null) {conn.close();}
+			if(stmt!=null) {stmt.close();}
 		}
-		
 		return list;
 	}
 	
 	public static void main(String[] args) throws SQLException {
 		StatementDAO sd= new StatementDAO();
-		sd.selectCpEmp4();
+		System.out.println(sd.selectCpEmp4());
 	}
 	
 }

@@ -1,11 +1,18 @@
 package kr.co.sist.statement.service;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 import kr.co.sist.statement.dao.StatementDAO;
 import kr.co.sist.statement.vo.CpEmp4InsertVO;
+import kr.co.sist.statement.vo.CpEmp4SelectAllVO;
+import kr.co.sist.statement.vo.CpEmp4SelectOneVO;
 import kr.co.sist.statement.vo.CpEmp4UpdateVO;
 
 /**
@@ -159,13 +166,70 @@ public class UseStatementService {
 	
 	public void searchOneCpEmp4() {
 		System.out.println("사원조회");
+		int tempData=Integer.parseInt(JOptionPane.showInputDialog("[조회할 사원번호를 입력해주세요.]"));
+
+		//정상적인 입력상황
+		try {
+			int empno=tempData;
+			
+			 CpEmp4SelectOneVO selectOneVO=stmtdao.selectCpEmp4(empno);
+			 StringBuilder empOutputData= new StringBuilder();
+			 empOutputData.append(empno).append("번 사원정보 조회 결과\n");
+			 
+			 if(selectOneVO==null) { //사원번호로 조회한 결과가 없음
+				 empOutputData.append("조회된 사원이 없습니다. 사원번호를 입력해주세요");
+			 }else {
+				 empOutputData.append("사원명: ").append(selectOneVO.getEname()).append("\n");
+				 empOutputData.append("연봉: ").append(selectOneVO.getSal()).append("\n");
+				 empOutputData.append("보너스: ").append(selectOneVO.getComm()).append("\n");
+				 empOutputData.append("직무: ").append(selectOneVO.getJob()).append("\n");
+			 }
+			 JOptionPane.showMessageDialog(null, new JTextArea(empOutputData.toString(), 10,50));
+		}catch(SQLException se) {
+			JOptionPane.showMessageDialog(null, "사원정보를 조회할 수 없습니다.");			
+		}catch(NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null, "사원번호는 숫자 이어야 합니다.");
+		}
+		
+		
 	}//searchOneCpEmp4
 	
 	public void searchAllCpEmp4() {
 		System.out.println("모든사원조회");
 		try {
-			stmtdao.selectCpEmp4();
+			List<CpEmp4SelectAllVO> empList=stmtdao.selectCpEmp4();
+			
+			StringBuilder outputData = new StringBuilder();
+			outputData.append("전체 사원조회 \n");
+			outputData.append("사원번호\t사원명\t직무\t연봉\t보너스\t입사일\n");
+			
+			if(empList.isEmpty()) {
+				outputData.append("조회된 사원정보가 없습니다.");
+			}
+			
+			//리스트를 반복시켜 모든정보를 출력한다
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			for(CpEmp4SelectAllVO selectAllVO:empList) {
+				//날짜처리
+				outputData
+				.append(selectAllVO.getEmpno()).append("\t")
+				.append(selectAllVO.getEname()).append("\t")
+				.append(selectAllVO.getJob()).append("\t")
+				.append(selectAllVO.getSal()).append("\t")
+				.append(selectAllVO.getComm()).append("\t")
+				.append(selectAllVO.getHiredate2()).append("\t")
+				.append(sdf.format(selectAllVO.getHiredate())).append("\n");
+			}
+
+			int cnt= empList.size();
+			outputData.append(cnt).append("건이 조회");
+			JTextArea jta= new JTextArea(outputData.toString(),15,60);
+			JScrollPane jsp= new JScrollPane(jta);
+			jsp.setBorder(new TitledBorder("전체 사원 정보 조회"));
+			JOptionPane.showMessageDialog(null, jsp);
+			
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "전체 사원조회 중 문제가 발생했습니다.");
 			e.printStackTrace();
 			
 		}

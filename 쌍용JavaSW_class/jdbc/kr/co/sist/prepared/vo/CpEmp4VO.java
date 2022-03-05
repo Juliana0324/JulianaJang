@@ -1,26 +1,25 @@
-package kr.co.sist.statement.vo;
+package kr.co.sist.prepared.vo;
 
 import java.sql.Date;
 
-public class CpEmp4SelectAllVO {
+public class CpEmp4VO {
 	private int sal, empno;
-	private String ename, job, hiredate2;
+	private String ename, job;
 	private double comm;
 	private Date hiredate;
 
-	public CpEmp4SelectAllVO() {
+	public CpEmp4VO() {
 		
 	}
 
 	
 
-	public CpEmp4SelectAllVO(int empno, int sal, String ename, String job, String hiredate2, double comm, Date hiredate) {
+	public CpEmp4VO(int empno, int sal, String ename, String job, double comm, Date hiredate) {
 		super();
 		this.empno=empno;
 		this.sal = sal;
 		this.ename = ename;
 		this.job = job;
-		this.hiredate2 = hiredate2;
 		this.comm = comm;
 		this.hiredate = hiredate;
 	}
@@ -36,20 +35,6 @@ public class CpEmp4SelectAllVO {
 	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
-
-
-
-	public String getHiredate2() {
-		return hiredate2;
-	}
-
-
-
-	public void setHiredate2(String hiredate2) {
-		this.hiredate2 = hiredate2;
-	}
-
-
 
 	public Date getHiredate() {
 		return hiredate;
@@ -94,4 +79,14 @@ public class CpEmp4SelectAllVO {
 	public void setComm(double comm) {
 		this.comm = comm;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "CpEmp4VO [sal=" + sal + ", empno=" + empno + ", ename=" + ename + ", job=" + job + ", comm=" + comm
+				+ ", hiredate=" + hiredate + "]";
+	}
+	
+	
 }
