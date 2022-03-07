@@ -107,32 +107,40 @@ public class UsePreparedStatementDAOService {
 		String job=data[1];
 		int sal=Integer.parseInt( data[2] );
 		double comm=Double.parseDouble( data[3] );
-	
+			
+		//데이터 VO에 저장하기
+		CpEmp4VO ceVO= new CpEmp4VO();
+		ceVO.setEmpno(empno);
+		ceVO.setJob(job);
+		ceVO.setSal(sal);
+		ceVO.setComm(comm);
 		
+		//3.DB작업 후 결과 얻기
+		int cnt=psDAO.updateCpEmp4(ceVO);//업데이트 작업 후 변경된 행의 갯수
 		
-//		String msg=ceuVO.getEmpno()+"번 사원은 존재하지 않습니다.";
-//		if( cnt == 1 ) {
-//			msg=ceuVO.getEmpno()+"번 사원정보가 변경되었습니다.";
-//		}//end if
-//		
-//		JOptionPane.showMessageDialog(null, msg);
-//		
-//		}catch(SQLException se) {
-//			se.printStackTrace();
-//			//다양한 예외상황처리,
-//			int errCode=se.getErrorCode();
-//			String sqlErrMsg="";
-//			switch( errCode) {
-//			case 925 : //ORA-00925
-//				sqlErrMsg="쿼리문이 잘못 되었습니다";	break;
-//			case 1438: //ORA-01438 - 숫자값이 정해진 크기보다 큰 경우.
-//				sqlErrMsg="연봉 5자리, 보너스 5자리 입니다.";break;
-//			case 12899: //ORA-12899 -문자열값이 정해진 크기보다 큰 경우.
-//				sqlErrMsg="직무는 영어9자 한글 3자 이내어야합니다.";
-//			}//end switch
-//			
-//			JOptionPane.showMessageDialog(null, sqlErrMsg);
-//			
+		String msg=empno+"번 사원은 존재하지 않습니다.";
+		if( cnt == 1 ) {
+			msg=empno+"번 사원정보가 변경되었습니다.";
+		}//end if
+		
+		JOptionPane.showMessageDialog(null, msg);
+		
+		}catch(SQLException se) {
+			se.printStackTrace();
+			//다양한 예외상황처리,
+			int errCode=se.getErrorCode();
+			String sqlErrMsg="";
+			switch( errCode) {
+			case 925 : //ORA-00925
+				sqlErrMsg="쿼리문이 잘못 되었습니다";	break;
+			case 1438: //ORA-01438 - 숫자값이 정해진 크기보다 큰 경우.
+				sqlErrMsg="연봉 5자리, 보너스 5자리 입니다.";break;
+			case 12899: //ORA-12899 -문자열값이 정해진 크기보다 큰 경우.
+				sqlErrMsg="직무는 영어9자 한글 3자 이내어야합니다.";
+			}//end switch
+			
+			JOptionPane.showMessageDialog(null, sqlErrMsg);
+			
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null, "사원번호,연봉,보너스는 숫자이어야합니다.");
 		}//end catch
@@ -145,29 +153,31 @@ public class UsePreparedStatementDAOService {
 		try {
 			//입력값 처리
 			int empno=Integer.parseInt( tempData );
-			//DB작업 수행
+			String msg=empno+"번 사원은 존재하지 않습니다.";
+
+			//DB작업 수행			
+			int cnt=psDAO.deleteCpEmp4(empno);
 			
-//			String msg=empno+"번 사원은 존재하지 않습니다.";
-//			if( cnt == 1 ) {
-//				msg=empno+"번 사원정보가 삭제되었습니다.";
-//			}//end if
-//			
-//			JOptionPane.showMessageDialog(null, msg);
-//			
-//		}catch(SQLException se) {
-//			se.printStackTrace();
-//			
-//			//다양한 예외상황처리,
-//			int errCode=se.getErrorCode();
-//			String sqlErrMsg="";
-//			
-//			switch( errCode) {
-//			case 925 : //ORA-00925
-//				sqlErrMsg="쿼리문이 잘못 되었습니다";	break;
-//			}//end switch
-//			
-//			JOptionPane.showMessageDialog(null, sqlErrMsg);
-//			
+			if( cnt == 1 ) {
+				msg=empno+"번 사원정보가 삭제되었습니다.";
+			}//end if
+			
+			JOptionPane.showMessageDialog(null, msg);
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+			
+			//다양한 예외상황처리,
+			int errCode=se.getErrorCode();
+			String sqlErrMsg="";
+			
+			switch( errCode) {
+			case 925 : //ORA-00925
+				sqlErrMsg="쿼리문이 잘못 되었습니다";	break;
+			}//end switch
+			
+			JOptionPane.showMessageDialog(null, sqlErrMsg);
+			
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null, "사원번호는 숫자로만 구성됩니다.");
 		}
@@ -182,24 +192,24 @@ public class UsePreparedStatementDAOService {
 			int empno=Integer.parseInt( tempData );
 			//DB작업
 		 
-//		 StringBuilder empOutputData=new StringBuilder();
-//		 empOutputData.append(empno).append("번 사원정보 조회 결과\n");
-//		 
-//		 if( cesoVO == null) {//사원번호로 조회한 결과가 없음.
-//			empOutputData.append("조회된 사원이 없습니다. 사원번호를 확인해주세요.");
-//		 }else{
-//			 empOutputData.append("사원명 : ").append( cesoVO.getEname()).append("\n");
-//			 empOutputData.append("연봉 : ").append( cesoVO.getSal()).append("\n");
-//			 empOutputData.append("보너스 : ").append( cesoVO.getComm()).append("\n");
-//			 empOutputData.append("직무 : ").append( cesoVO.getJob());
-//		 }//end else
-//		 
-//		 JOptionPane.showMessageDialog(null,
-//				 new JTextArea(empOutputData.toString(),10,50));
-//			
-//		}catch(SQLException se) {
-//			JOptionPane.showMessageDialog(null, "사원정보를 조회할 수 없습니다.");
-//			se.printStackTrace();
+		 CpEmp4VO ceVO=psDAO.selectOneCpEmp4(empno); //사원번호에 대한 사원하나 조회
+		 StringBuilder empOutputData=new StringBuilder();
+		 empOutputData.append(empno).append("번 사원정보 조회 결과\n");
+		 
+		 if(ceVO == null) {//사원번호로 조회한 결과가 없음.
+			empOutputData.append("조회된 사원이 없습니다. 사원번호를 확인해주세요.");
+		 }else{
+			 empOutputData.append("사원명 : ").append( ceVO.getEname()).append("\n");
+			 empOutputData.append("연봉 : ").append( ceVO.getSal()).append("\n");
+			 empOutputData.append("보너스 : ").append( ceVO.getComm()).append("\n");
+			 empOutputData.append("직무 : ").append( ceVO.getJob());
+		 }//end else
+		 
+		 JOptionPane.showMessageDialog(null,
+				 new JTextArea(empOutputData.toString(),10,50));
+		}catch(SQLException se) {
+			JOptionPane.showMessageDialog(null, "사원정보를 조회할 수 없습니다.");
+			se.printStackTrace();
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null, "사원번호는 숫자이어야합니다.");
 		}//end catch
@@ -207,43 +217,43 @@ public class UsePreparedStatementDAOService {
 	}//searchOneCpEmp4
 	
 	public void searchAllCpEmp4() {
-//		try {
+		try {
 		//모든 레코드를 조회한다. 
+			List<CpEmp4VO> empList= psDAO.selectAllCpEmp4();
 			
 		StringBuilder outputData=new StringBuilder();
 		outputData.append("전체사원 조회\n");
 		outputData.append("사원번호\t사원명\t직무\t연봉\t보너스\t입사일\n");
 		
 		//조회된 결과가 없을 때 보여줄 내용
-//		if( empList.isEmpty() ) {
-//			outputData.append("조회된 사원정보가 없습니다.");
-//		}//end if
-//		
+		if( empList.isEmpty() ) {
+			outputData.append("조회된 사원정보가 없습니다.");
+		}//end if
+		
 //		//리스트를 반복시켜 모든 정보를 출력한다. 
 //		//날짜처리
-//		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-//		for(CpEmp4SelectAllVO cesaVO : empList) {
-//			outputData
-//			.append(cesaVO.getEmpno()).append("\t")
-//			.append(cesaVO.getEname()).append("\t")
-//			.append(cesaVO.getJob()).append("\t")
-//			.append(cesaVO.getSal()).append("\t")
-//			.append(cesaVO.getComm()).append("\t")
-//			.append(cesaVO.getHiredate2()).append("\t")
-//			.append(sdf.format(cesaVO.getHiredate())).append("\n");
-//		}//end for
-//		outputData.append(empList.size()).append("명 조회");
-//		
-//		JTextArea jta=new JTextArea(outputData.toString(),15,60);
-//		JScrollPane jsp=new JScrollPane(jta);
-//		jsp.setBorder( new TitledBorder("전체사원 정보 조회") );
-//		
-//		JOptionPane.showMessageDialog(null, jsp);
-//		
-//		} catch (SQLException e) {
-//			JOptionPane.showMessageDialog(null, "전체 사원 조회 중 문제 발생.");
-//			e.printStackTrace();
-//		}//end catch
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		for(CpEmp4VO ceVO : empList) {
+			outputData
+			.append(ceVO.getEmpno()).append("\t")
+			.append(ceVO.getEname()).append("\t")
+			.append(ceVO.getJob()).append("\t")
+			.append(ceVO.getSal()).append("\t")
+			.append(ceVO.getComm()).append("\t")
+			.append(sdf.format(ceVO.getHiredate())).append("\n");
+		}//end for
+		outputData.append(empList.size()).append("명 조회");
+		
+		JTextArea jta=new JTextArea(outputData.toString(),15,60);
+		JScrollPane jsp=new JScrollPane(jta);
+		jsp.setBorder( new TitledBorder("전체사원 정보 조회") );
+		
+		JOptionPane.showMessageDialog(null, jsp);
+		
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "전체 사원 조회 중 문제 발생.");
+			e.printStackTrace();
+		}//end catch
 		
 	}//searchAllCpEmp4
 	
