@@ -68,6 +68,7 @@ public class TableDAO {
 				
 				//같은 이름의 VO를 여러개 관리하기위해 LIST추가
 				list.add(ceVO);
+				
 			}
 		}finally {
 			dc.close(rs, pstmt, conn);
