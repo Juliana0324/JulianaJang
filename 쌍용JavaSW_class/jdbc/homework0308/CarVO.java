@@ -3,6 +3,7 @@ package homework0308;
 public class CarVO {
 	private String country, maker,model, carOption;
 	private int carYear,price;
+	
 	public String getCountry() {
 		return country;
 	}
