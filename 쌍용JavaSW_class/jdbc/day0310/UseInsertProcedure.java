@@ -4,6 +4,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import kr.co.sist.dao.DbConnection;
 
@@ -44,6 +45,8 @@ public class UseInsertProcedure {
 		
 		return rVO;
 	}
+
+	
 	public static void main(String[] args) {
 		UseInsertProcedure uip= new UseInsertProcedure();
 		ProcedureVO pVO = new ProcedureVO();

@@ -42,3 +42,26 @@ var b varchar2(500);
 exec update_test_proc(1,30,'test@test.com', :a, :b);
 
 print a;
+
+---------------------delete-test_prc---------------------------------------------
+select * from test_procedure;
+
+--프로시저 실행(직접실행)
+var cnt number;
+var msg varchar2(400);
+
+exec delete_test_proc(60,:cnt,:msg);
+
+rollback;
+
+--------------------select-all-test-prc-------------------------------------------------
+var cur refcursor;
+
+--프로시저 실행
+exec select_all_proc(:cur);
+print cur;
+
+-------------------select-proc-------------------------------------------------------
+var cur refcursor;
+
+exec select_num_proc(0,:cur);
