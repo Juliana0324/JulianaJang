@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="" method="get">
+<label> 기본텍스트: </label> <input type="text" value="기본텍스트"/><br>
+<label> 기본텍스트: </label> <input type="text" size="10" value="기본텍스트" /><br>
+<!-- readonly는 값변경 불가,  백엔드로 전송 -->
+<label> readonly: </label> <input type="text" size="10" value="기본텍스트" name="read" readonly/><br>
+<label> disabled: </label> <input type="text" size="10" value="기본텍스트" name="dis" disabled="disabled"/><br>
+
+
+<label>최대 입력글자수</label><input type="text" size="10" value="기본텍스트" maxlength="10"/><br>
+<label> 비밀번호: </label> <input type="password" name="pass" maxlength="10"/><br>
+<label> 이메일: </label> <input type="email" value="test@naver.com" name="email"/><br>
+<label> 비밀번호: </label> <input type="password" value=""/><br>
+<label>체크박스</label>
+<br>
+바나나: <input type="checkbox" name="과일" value="bannana" checked="checked"/>
+사과: <input type="checkbox" name="과일" value="apple" />
+포도: <input type="checkbox" name="과일" value="grape" />
+
+
+<br>
+남자 <input type="radio" name="gender" value="남"/> <br>
+여자 <input type="radio" name="gender" value="여"/>
+<br/>
+파일 : <input type="file">
+<br/>
+<input type="submit" value="입력">
+<input type="reset" value="초기화">
+</form>
+</body>
+</html>
