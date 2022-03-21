@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+</head>
+<body>
+
+<h1 align ="center">회원가입</h1>
+<table border="0">
+<tr>
+	<td id="left"><span class="redColor">*</span> 아이디</td>
+	<td><input type="text" class="inputBox"/></td>
+	<td width ="80" colspan="3"><input type="button" value="ID 중복확인" class="btn"/></td>
+</tr>
+<tr>
+	<td id="left"><span class="redColor">*</span>비밀번호</td>
+	<td><input type="password"  class="inputBox"/></td>
+	<td colspan="2">비밀번호 확인<input type="password"  class="inputBox"/>*8~12자의 영문,숫자 특수문자 3가지를 조합하여 입력</td>
+</tr>
+
+<tr>
+	<td id="left"><span class="redColor">*</span>이름</td>
+	<td colspan="4"><input type="text"  class="inputBox"/></td>
+</tr>
+
+<tr>
+	<td id="left"><span class="redColor">*</span> 생일</td>
+	<td colspan="4"><input type="date"  class="inputBox"/></td>
+</tr>
+<tr>
+	<td id="left">&nbsp;&nbsp;연락처</td>
+	<td colspan="4"><input type="tel"  class="inputBox"/></td>
+</tr>
+
+<tr>
+	<td id="left"><span class="redColor">*</span> 휴대폰</td>
+	<td><input type="tel"  class="inputBox"/></td>
+	<td colspan="3"><input type="checkbox" name="수신확인" value="수신"/>수신</td>
+</tr>
+
+<tr>
+	<td id="left"><span class="redColor">*</span> 이메일</td>
+	<td><input type="email" class="inputBox"/></td>
+	<td colspan="3">@ <input type="text" list="data" placeholder="선택해주세요"  class="inputBox"/>
+		<datalist id="data">
+		 <option value="google.com"/>
+		 <option value="daum.net">
+		 <option value="net.com">
+		 <option value="naver.com">
+		 <option value="hotmail.com">
+		 <option value="직접입력">
+		</datalist>
+	<input type="checkbox" name="수신확인" value="수신" class="inputBox"/>수신
+</td>
+</tr>
+
+<tr>
+	<td id="left" style="height: 35px"><span class="redColor">*</span> 성별</td>
+	<td colspan="3"><input type="radio" value="남자"/>남자<input type="radio" value="여자"/>여자
+</tr>
+
+<tr>
+	<td id="left">&nbsp;&nbsp;소재지</td>
+	<td colspan="3">
+		<select size="1" class="inputBox">
+			<option value="none">--선택해주세요.--</option>
+			<option value="서울">서울</option>
+			<option value="경기">경기</option>
+			<option value="강원">강원</option>
+			<option value="충청도">충청도</option>
+			<option value="경상도">경상도</option>
+			<option value="전라도">전라도</option>
+			<option value="제주도">제주도</option>
+		</select>
+	</td>
+</tr>
+
+<tr>
+	<td id="left"><span class="redColor">*</span> 우편번호</td>
+	<td><input type="text"  class="inputBox"></td>
+	<td colspan="2"><input type="button" value="우편번호검색" class="btn"/></td>
+</tr>
+
+<tr>
+	<td id="left" rowspan="2"><span class="redColor">*</span> 주소</td>
+	<td colspan="3"><input type="text"  class="inputBox" style="width:500px"></td> 
+</tr>
+
+<tr>
+	<td id="left" colspan="3"><input type="text"  class="inputBox"  style="width:500px"></td> 
+</tr>
+<tr>
+</tr>
+</table>
+<input type="submit" value="확인" class="btn" style="width: 100px"/> &nbsp;&nbsp;&nbsp;
+<input type="reset" value="취소" class="btn" style="width: 100px"/>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+#login {
+	margin-top: 30px;
+	font-family: 돋움;
+	font-weight: bold;
+	font-size: 40px;
+	text-align: center;
+}
+#log_tab {
+	margin-top:50px;
+	margin-left:500px;
+	margin-right:100px;
+	font-family: 돋움;
+	font-size: 15px;
+	border-collapse: collapse;
+	float:left;
+}
+.top {
+	border-bottom: 3px solid black;
+}
+#userid, #name {
+	margin-top: 10px;
+}
+#userid,#userpw,#name, #order_num, #order_pass {
+	width: 300px;
+	height:30px;
+	font-size:15px;
+	padding:10px;
+}
+#login_btn {
+	margin-top: 15px;
+	width: 330px;
+	height:50px;
+	text-align: center;
+	color:white;
+	font-weight:bold;
+	background-color: #333;
+}
+#bottom {
+	padding-top: 50px;
+}
+
+a {
+	text-decoration:none;
+	color : #333;
+	font-weight: bold;
+}
+
+#order {
+	margin-top:70px;
+	font-family: 돋움;
+	font-size: 15px;
+	border-collapse: collapse;
+}
+#order_btn {
+	margin-top: 15px;
+	width: 330px;
+	height:50px;
+	text-align: center;
+	color:#333;
+	font-weight:bold;
+	background-color: white;
+}
+</style>
+</head>
+<body>
+<h2 id="login">로그인</h2>
+<table id="log_tab">
+<tr class="top">
+	<td><h2>회원 로그인</h2></td>
+</tr>
+<tr>
+	<td><input type="text" id="userid" placeholder="아이디"/></td>
+</tr>
+<tr>
+	<td><input type="password" id="userpw" placeholder="비밀번호"/></td>
+</tr>
+<tr>
+	<td><input type="submit" id="login_btn" value="로그인"/></td>
+</tr>
+<tr>
+	<td id="bottom"><a href="member_form.html">회원가입</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">아이디찾기</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#">비밀번호찾기</a></td>
+</tr>
+</table>
+
+<table id="order">
+	<tr class="top">
+		<td><h2>비회원 주문조회</h2></td>
+	</tr>
+	<tr>
+		<td><input type="text" id="name" placeholder="주문자명"/></td>
+	</tr>
+	<tr>
+		<td><input type="text" id="order_num" placeholder="하이픈(-)포함"/></td>
+	</tr>
+	<tr>
+		<td><input type="password" id="order_pass" placeholder="주문비밀번호"/></td>
+	</tr>
+	<tr>
+	<td><input type="submit" id="order_btn" value="비회원 주문 조회"/></td>
+</tr>
+</table>
+</body>
+</html>
