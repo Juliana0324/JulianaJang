@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#wrap {height: 1200px; width: 1000px; margin: 30px auto;}
+#header {height: 200px; background-color: white;}
+#container {position:relative; 
+	height: 800px; background-color: #D8E0EE}
+#ad {position:absolute; top: 500px; left: 30px;
+	width: 600px; height: 200px;  background-color: #333;}
+#loginbox {
+		position: absolute; top:60px; left: 550px;
+		height: 300px; width: 400px; background-color: #86A3C3; }
+#side_banner {position:fixed; top: 250px; left: 1000px;
+	width: 112px; height: auto;}
+
+#footer {height: 200px; width: 1000px; background-color: #7268a6;}
+</style>
+</head>
+<body>
+<div id="wrap"> <!-- wrap(1000(w) * 1200(h))  -->
+	<div id="header"> header(1000(w) * 200(h))  </div>
+	<div id="container"> <!--  container(1000(w) * 800(h))  -->
+		<div id="ad"> ad(600(w) * 200(h))  </div>
+		<div id="loginbox">loginbox(400(w) * 300(h))  </div>
+		<div id="side_banner"><img src="imgs/sidebanner.PNG"/></div>
+	</div>
+	<div id="footer">footer(1000(w) * 200(h))  </div>
+</div>
+</body>
+</html>

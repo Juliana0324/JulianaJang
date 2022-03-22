@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.147/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+div {border:1px solid #333; width: 300px; height:200px;}
+#fixed {position: fixed; top:30px; left:340px; background-color: #0000ff;} /*relative의 영향을 받지 않는다*/
+#abs {position: absolute; top:240px; left:340px; background-color: red;} /*relative의 영향을 받는다*/
+#rel {position: relative; top:540px; left:340px;}
+</style>
+</head>
+<body>
+<div id="rel">relative
+	<div id="fixed">fixed</div>
+	<div id="abs">absolute</div>
+	</div>
+</body>
+</html>
