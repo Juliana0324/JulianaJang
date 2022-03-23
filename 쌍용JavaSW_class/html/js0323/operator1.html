@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<script type="text/javascript">
+//단항 연산자
+// ~!+-++--
+let num=3;
+//자바스크립트 영역임으로 html테그 사용불가
+
+//document.write(num);<br/>
+
+document.write("<h2>"+~num+"</h2><br>");
+num=true;
+let num2=false;
+document.write("<h2> !true: "+!num+"</h2><br>");
+document.write("<h2> !false: "+!num2+"</h2><br>");
+
+num=3;
+num2=-23;
+document.write("<h2> 3+23="+num+num2+"</h2><br>");
+
+++num;
+document.write("<h2> 전위 연산후: "+(num)+"</h2><br>");
+num++
+document.write("<h2> 후위 연산후: "+(num)+"</h2><br>");
+
+var result=0;
+result= ++num;
+document.write("전위연산 후 result: "+result+", num: "+num+"<br>");
+var result=0;
+result= num++;
+document.write("후위연산 후 result: "+result+", num: "+num+"<br>");
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

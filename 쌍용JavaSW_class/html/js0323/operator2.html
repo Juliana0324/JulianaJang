@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+.bgcolor{
+	background-color: #E6E6E6;
+}
+table {border-spacing: 0px; border: 1px solid #333;}
+td {border: 1px solid #333; padding: 5px; width:100px; text-align: center;}
+
+</style>
+<script type="text/javascript">
+document.write("<table>");
+for(var i=0; i<10; i++){
+	document.write("<tr"+ (i%2==0?" class='bgcolor'":"")+">");
+		document.write("<td>"+ (i+1)+"</td>");
+	document.write("</tr>");
+}
+document.write("</table>");
+
+</script>
+</head>
+<body>
+</body>
+</html>
