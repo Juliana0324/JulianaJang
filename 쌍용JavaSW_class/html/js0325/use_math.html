@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+function useMath(){
+	let num=-325;
+	console.log(num+"의 절대값: "+Math.abs(num));
+	
+	num=10.5;
+	console.log(num+"반올림: "+Math.round(num));
+	console.log(num+"정수로 : "+parseInt(num));
+	console.log(num+"올림: "+Math.ceil(num));
+	console.log(num+"내림: "+Math.floor(num));
+
+	//난수
+	var ran= Math.random(); //0.0000-0.9999
+	console.log("발생한 난수"+ran);
+	console.log("범위 난수"+ran*10);
+	console.log("범위 난수중 정수"+parseInt(ran*10));
+}
+</script>
+</head>
+<body>
+<input type="button" value="Math사용" class="btn" onclick="useMath()"/>
+</body>
+</html>

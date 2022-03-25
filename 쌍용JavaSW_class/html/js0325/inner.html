@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+div{width:500px; height: 200px; border:1px solid #333;}
+</style>
+<script type="text/javascript">
+function useInnerHtml() {
+	var divNode=document.getElementById("a");
+	//console.log(divNode);
+	//InnerHTML속성을 사용하여 변경
+	divNode.innerHtml="<strong>날씨흐림</strong><marquee scrollamount='10'><img src='http://localhost/html_prj/js0325/img/weather.png'/></marquee>"
+}
+
+</script>
+</head>
+<body>
+<input type="button" value="click" class="inputbox" onclick="useInnerHtml()"/>
+	<div id="a">
+	
+	</div>
+<input type="button" value="click" class="inputbox" id="b" onclick="useInnerHtml()"/>
+</body>
+</html>

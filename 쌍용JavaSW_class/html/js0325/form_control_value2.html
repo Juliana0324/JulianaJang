@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+input,select,textarea {margin-top:10px;}
+#output {margin-top:20px ; border:2px solid #333; width: 400px; height: 200px; overflow:auto;}
+</style>
+<script type="text/javascript">
+function getValue(){
+	var obj=document.frm;
+	//2.form의 name을 이용해 form안에 form control로 접근
+	var data="<ul>";
+	
+	data+="<li><strong>text:</strong>"+obj.text.value+"</li>";
+	data+="<li><strong>password:</strong>"+obj.pass.value+"</li>";
+	data+="<li><strong>hidden:</strong>"+obj.hid.value+"</li>";
+	//크롬은 사용자 경로를 보안상 변경하여 보여줌
+	data+="<li><strong>file:</strong>"+obj.file.value+"</li>";
+	data+="<li><strong>check:</strong>"+obj.chk.value+"</li>";
+	data+="<li><strong>rad:</strong>"+obj.rad.value+"</li>";
+	data+="<li><strong>date:</strong>"+obj.date.value+"</li>";
+	data+="<li><strong>select:</strong>"+obj.sel.value+"</li>";
+	
+	var text = (obj.ta.value).replaceAll("\n", "<br/>");
+	data+="<li><strong>textarea: </strong>"+text+"</li>";	
+	
+	data+="</ul>";
+	//값 출력테그 얻기
+	var divNode= document.getElementById("output");
+	divNode.innerHTML=data;
+}
+
+function getCheckedValue(){
+	
+}
+
+function getSelectedValue(){
+	
+}
+</script>
+</head>
+<body>
+<div>
+	<form name="frm">
+	<strong>name 속성의 이름이 유일할 때 값얻기 </strong><br/>
+	<label>text</label><input type="text" name="text" class="inputBox"/><br>
+	<label>password</label><input type="password" name="pass" class="inputBox"/><br>
+	<label>hidden</label><input type="hidden" name="hid" value="히든테그값"/><br>
+	<label>file</label><input type="file" name="file" class="inputBox"/><br>
+	<label>checkbox</label><input type="checkbox" name="chk" value="체크박스"/><br>
+	<label>radio</label><input type="radio" name="rad" value="라디오"/><br>
+	<label>date</label><input type="date" name="date" class="inputBox"/><br>
+	<label>select</label>
+	<select name="sel" class="inputBox">
+		<option value="sel1">sel1</option>
+		<option value="sel2">sel2</option>
+		<option value="sel3">sel3</option>
+	</select>
+	<br/>
+	<label>textarea</label><textarea class="inputBox" style="width:300px; height:150px" name="ta"></textarea><br>
+	<input type="button" value="값 얻기" class="btn" onclick="getValue()"/><br>
+	</form>
+</div>
+<div id="output"></div>
+</body>
+</html>

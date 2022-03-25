@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+body{
+	margin: 10px;
+}
+div {
+	margin-top:10px;
+	width:500px; height:300px;
+	border: 1px solid #333; 
+}
+</style>
+<script type="text/javascript">
+	function verify() {
+		var obj= document.frm;
+		var output="";
+		
+		let name = obj.name.value;
+		let first =  obj.first.value;
+		let last=obj.last.value;
+		let secNum=first+ last;
+		
+		if(name==""){
+			alert("이름 필수 입력");
+			return;
+		}else if(secNum.length !=13 || first=="" || last==""){
+			alert("주민번호 필수 입력");
+			return;
+		}
+		
+		var arr = secNum.split("");
+		var valArr=[2,3,4,5,6,7,8,9,2,3,4,5];
+		var cnt=0;
+		for(var i=0; i<arr.length-1; i++){
+			cnt+= arr[i]*valArr[i];
+		}
+
+		let val= cnt%11;
+		val = 11-val;
+		val %= 10;
+		var msg="무효";
+		if(val==arr[12]){
+			msg= "유효";
+		}
+		
+		let year=parseInt(secNum.substring(0, 2)), gender="", country="";
+		console.log(last.substr(0, 1));
+		switch (parseInt(last.substr(0, 1))) {
+		case 1:
+			year+= 1900; gender="남자"; country="내국인";break;
+		case 2:
+			year+= 1900; gender="여자"; country="내국인";break;
+		case 3: 
+			year+= 2000; gender="남자"; country="내국인"; break;
+		case 4: 
+			year+= 2000; gender="여자"; country="내국인"; break;
+		case 5: 
+			year+= 1900; gender="남자"; country="외국인"; break;
+		case 6: 
+			year+= 1900; gender="여자"; country="외국인"; break;
+		case 7: 
+			year+= 2000; gender="남자"; country="외국인"; break;
+		case 8: 
+			year+= 2000; gender="여자"; country="외국인"; break;
+		case 9: 
+			year+= 1800; gender="남자"; country="내국인"; break;
+		default:
+			year+= 1800; gender="여자"; country="내국인"; break;
+		}
+		
+		let zodiac="";
+		switch(year%12){
+		case 0: zodiac="원숭이"; break;
+		case 1: zodiac="닭";break;
+		case 2: zodiac="개";break;
+		case 3: zodiac="돼지";break;
+		case 4: zodiac="쥐";break;
+		case 5: zodiac="소";break;
+		case 6: zodiac="호랑이";break;
+		case 7: zodiac="토끼";break;
+		case 8: zodiac="용";break;
+		case 9: zodiac="뱀";break;
+		case 10: zodiac="말";break;
+		default: zodiac="양";
+		}
+
+		output+=name+"님 <br/>";
+		output+="주민번호: "+first+"-"+last+"<br/>";
+		output+= "태어난 해: "+ year+"<br/>";
+		output+= "생년월일: "+secNum.substr(2, 2)+"월 "+secNum.substr(4, 2)+"일 <br/>";
+		output+= "성별: "+gender+"<br/>";
+		output+= "띠: "+zodiac+"<br/>";
+		output+= "국적: "+country+"<br/>";
+		
+		var divNode= document.getElementById("output");
+		divNode.innerHTML=output;
+	}
+</script>
+</head>
+<body>
+<form name="frm">
+	<label>이름</label><input type="text" name="name"/><br/>
+	<label>주민번호</label><input type="text" name="first"/>-<input type="password" name="last"/>
+	<br/>
+	<input type="button" value="입력" onclick="verify()"/>
+</form>
+<div id="output"></div>
+</body>
+</html>

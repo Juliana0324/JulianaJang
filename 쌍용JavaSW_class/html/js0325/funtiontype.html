@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+	function typeA(){
+		alert("고정일");
+	}
+	function typeB(name){
+		alert("가변일: 매개변수값: "+name);
+	}
+	function typeC(){
+		return "고정값";
+	}
+	function typeD(name){
+		return "가변값: "+name;
+	}
+	
+	function callTypeA(){
+		typeA();
+	}
+	
+	function callTypeB(){
+		typeB("장정우");
+	}
+	
+	function callTypeC(){
+		alert(typeC());
+	}
+	
+	function callTypeD(){
+		alert(typeD("장정우"));
+	}
+	
+	function typeE(name="익명", age=0){
+		console.log(name+", "+age);
+	}
+	function callTypeE(){
+		typeE("권용현", 25);
+		typeE();
+	}
+	</script>
+</head>
+<body>
+	<input type="button" value="고정일" class="btn" onclick="callTypeA()"/>
+	<input type="button" value="가변일" class="btn" onclick="callTypeB()"/>
+	<input type="button" value="고정값" class="btn" onclick="callTypeC()"/>
+	<input type="button" value="가정값" class="btn" onclick="callTypeD()"/>
+	<input type="button" value="매개변수 초기값" class="btn" onclick="callTypeE()"/>
+</body>
+</html>

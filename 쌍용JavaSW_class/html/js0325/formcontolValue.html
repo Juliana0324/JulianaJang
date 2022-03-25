@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+div {border: 1px solid #333; width:300px; height:300px; float:left;}
+</style>
+<script type="text/javascript">
+function useId(){
+	var name=document.getElementById("name").value;
+	var flag=document.getElementById("flag").value;
+	
+	alert("이름: "+name+ ", flag: "+flag);
+}
+
+function useName(){
+//	var name=window.document.frm.name.value;
+//	var flag=document.getElementById("flag").value;
+	var obj= window.document.frm;
+	var name=obj.name.value;
+	var flag=obj.flag.value;
+	
+	alert("이름: "+name+ ", flag: "+flag);
+}
+</script>
+</head>
+<body>
+<div>
+<strong>id속성을 사용한 값얻기</strong>
+<label>이름</label><input type="text" id="name"/><br/>
+<label>저장</label><input type="checkbox" id="flag" value="저장"/> 저장 <br/>
+<input type="button" value="값 얻기" class="btn" onclick="useId()"/>
+</div>
+<div>
+<strong>name속성을 ㅅ용한 값얻기</strong>
+<form name="frm">
+<label>이름</label>
+<input type="text" name="name" class="inputBox"><br/>
+<input type="checkbox" name="flag" value="저장"/> SAVE<br/>
+<input type="button" name="값 얻기" value="btn" onclick="useName()"/><br/>
+</form>
+
+</div>
+
+</body>
+</html>
