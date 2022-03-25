@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	function test(){
+		alert("기명함수");
+	}
+	
+	var test2= function(){
+		alert("무기명 함수");
+	}
+
+	test2();
+</script>
+</head>
+<body onload="var a='테스트'; for(vari=0; i<10;i++){alert(a)}">
+	<input type="button" value="기명함수" onclick="test()">
+	<input type="button" value="무기명함수" onclick="test2()">
+	
+	<a href="javascript:test()">영역변경</a>
+	<img src="img/blood_a.PNG" onmouseover="test()"/>
+	<input type="text" onkeydown="test()" placeholder="입력">
+</body>
+</html>

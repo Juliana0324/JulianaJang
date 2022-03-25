@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+let arr= new Array();
+function addnames() {
+	var name= prompt("이름을 입력해주세요","이름");
+	arr.push(name);
+	console.log(arr);
+}
+function print(){
+	document.write("<table><tr>");
+	
+	for(var i=0; i<arr.length; i++){
+		document.write("<td>"+arr[i]+"</td>");
+	}
+	document.write("</tr></table>");
+}
+</script>
+</head>
+<body>
+<input type="button" value="이름 입력" onclick="addnames()"/>
+<input type="button" value="이름 출력" onclick="print()"/>
+</body>
+</html>

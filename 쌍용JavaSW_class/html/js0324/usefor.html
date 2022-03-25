@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+select {width: 100px;}
+table {border: 1px solid #333;}
+#color {
+background-color: #cdcdcd;
+}
+</style>
+<script type="text/javascript">
+	for(var i=1; i<=6; i++){
+		document.write("<h"+i+">안녕하세요</h"+i+"><br>");
+	}
+	
+	document.write("<select>");
+	for(var i=10; i<=100; i+=10){
+		document.write("<option id='"+i+"'>"+i+"</option>");
+	}
+	document.write("</select><br/>");
+	document.write("<table cellspacing='5px'>");
+	for(var i=2; i<10; i++){
+		if(i%2==1){
+		document.write("<tr id='color'>");
+		}else{
+		document.write("<tr>");
+		}
+		for(var j=1; j<10; j++){
+			document.write("<td>"+i+" * "+j+" = "+ (i*j)+"</td>");			
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+	
+	
+	document.write("<table cellspacing='5px'>");
+	let bgColor="";
+	for(var i=1; i<10; i++){
+		document.write("<tr>");
+		for(var j=2; j<10; j++){
+			bgColor="#FFFFFF";
+			if(j%2==1){
+				bgColor="#CDCDCD";				
+			}
+			document.write("<td style='background-color:"+bgColor+"'>"+j+" * "+ i+" = "+(i*j)+"</td>");
+		}
+		document.write("</tr>");
+		
+	}
+	document.write("</table>");
+	
+	for(var i=0; i<6; i++){
+		for(var j=0; j<i; j++){
+		document.write("<img src='../common/imgs/h.png'/>");
+			
+		}
+	document.write("<br/>");
+	}
+</script>
+</head>
+<body>
+</body>
+</html>

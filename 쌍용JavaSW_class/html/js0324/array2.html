@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+	var arr = new Array();
+	
+	arr[0]=new Array();
+	arr[1]=new Array();
+	arr[2]=new Array();
+	
+	arr[0][0]=10;
+	arr[0][1]=20;
+	arr[0][2]=30;
+	arr[0][3]=40;
+	
+	arr[2]=[90,100,120,130];
+	
+	for(var i=0; i<arr.length;i++){
+		document.write("arr["+i+"] 열의 수: "+arr[i].length+"<br/>");
+	}
+	
+	document.write("<table border='1'>");
+	for(var i=0; i<arr.length;i++){
+		document.write("<tr>");
+			document.write("<td style='width:80px'>"+i+"행</td>");
+		for(var j=0; j<arr[1].length;j++){
+			document.write("<td style='width:100px'>"+arr[i][j]+"</td>");
+		}
+		document.write("</tr>");
+	}
+	document.write("</table>");
+</script>
+</head>
+<body>
+</body>
+</html>

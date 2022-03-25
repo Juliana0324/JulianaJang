@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+//혈액형 별 특징
+var bloodType= prompt("혈액형을 입력하시오","A,B,AB,O");
+let msg="",tooltip="";
+switch(bloodType){
+case "A":msg="blood_a.PNG"; tooltip="타인에대한 배려";break;
+case "B":msg="blood_b.PNG"; tooltip="다들 예라고 말할때 아니오라고 말할 수 있음";break;
+case "AB":msg="blood_ab.PNG"; tooltip="감정절제 능력"; break;
+case "O":msg="blood_o.PNG"; tooltip="개그본능 "; break;
+default :msg="default.PNG"; tooltip="인간이 아님";break;
+}
+
+document.write("<img src='img/"+msg+"' title='"+tooltip+"'/>");
+
+</script>
+
+</head>
+<body>
+</body>
+</html>

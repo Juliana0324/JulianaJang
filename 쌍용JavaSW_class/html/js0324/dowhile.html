@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+let i=0;
+while(i<11){
+	document.write("<input type='radio' name='score' value='"+i+"'"+
+			(i==0?"checked='checked'":"")+"/><b>"+i+"점</b> &nbsp;");
+	i++;
+}
+document.write("<br/>");
+i=1;
+do{
+	document.write(i+" ");
+	i+=2;
+}while(i<101);
+</script>
+
+</head>
+<body>
+</body>
+</html>

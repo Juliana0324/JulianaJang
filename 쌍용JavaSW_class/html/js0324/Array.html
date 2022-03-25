@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+var array= new Array();
+document.write(typeof(array));
+document.write("<br/>");
+array[0] =2022;
+array[1] ="년";
+array[2] =3.24;
+array[3] ="일";
+array[30] ="아아ㅏㅇ";
+
+//값사용
+document.write(array);
+document.write("<br/>");
+document.write("방의 개수: "+array.length+"<br/>");
+
+for(var i=0; i<array.length; i++){
+	document.write(array[i]);
+}
+document.write("<br/>");
+document.write("<hr/>");
+
+//배열의 초기화
+var arr2=[2022,"년", 3,"월",24,"일", false];
+document.write("<ol type='1'>");
+for(var i=0; i<arr2.length; i++){
+	if(arr2[i]=="월"){
+		document.write(i +"번째에 월이 있습니당<br/>");
+	}
+//	document.write("<li> array["+i+"]: "+arr2[i]+"</li>");
+}
+document.write("indexOf 월: "+arr2.indexOf("월"));
+document.write("</ol>");
+
+var arr3=["자바","오라클","자바스크립트","오라클","Oracle","자바"];
+document.write(arr3+"에서 오라클 인덱스: <br/>"+ arr3.indexOf("오라클"));
+document.write("<br/>");
+document.write(arr3+"에서 오라클 인덱스: <br/>"+ arr3.indexOf("오라클",arr3.indexOf("오라클")+1));
+document.write("<br/>");
+
+//1번 오라클 삭제
+//arr3.splice(1,2);
+
+//2자바스크립트 삭제
+if(arr3.indexOf("자바스크립트")!=-1){
+	arr3.splice(arr3.indexOf("자바스크립트"),1);
+}
+document.write(arr3+"<br/>");
+document.write("<hr/>");
+
+let arr4=[1,2,3,,,arr3,4,5,6];
+document.write(arr4+"<br/>");
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

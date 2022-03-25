@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#numDiv {
+	width: 150px;
+	height:150px;
+	font-weight:bold; font-size:30px;
+	text-align: center;
+}
+</style>
+<script type="text/javascript">
+	var name=prompt("이름을 입력해 주세요","이름");
+	document.write("<div>이름 <span id='nameDiv'>"+name+"</span><br/>");
+	if(name=="강명준"){
+		document.write("<img src='http://localhost/html_prj/js0323/imgs/adult.png'/>");
+		document.write("</div>");
+	} 	
+	
+	//else if
+	var num= prompt("숫자를 입력해 주세요","0");
+	let bgColor="";
+	let fontColor="";
+	if(num%2==1){
+		bgColor="#ff0000";
+		fontColor="#0000ff"
+	}else{
+		bgColor="#000000";
+		fontColor="#FFFF00";
+	}
+	document.write("<div id='numDiv' style='background-color:"+bgColor+"; color:"+fontColor+";'>"+num+"</div><br/>");
+	
+	let img="";
+	if(name=="강명준"){
+		img="../js0323/imgs/child.png";
+	}else if(name=="박설진"||name=="신유철"||name=="김진영"){
+		img="../js0323/imgs/adult.png";
+	}else{
+		img="../common/imgs/right.png";		
+	}
+	document.write("<div><img src='"+img+"'/><span>"+name+"</span></div>");
+</script>
+</head>
+<body>
+</body>
+</html>
