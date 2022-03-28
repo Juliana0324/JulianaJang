@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.147/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+function getRadioValue(){
+	var obj= document.frm;
+	
+	//control 얻기
+/* 	alert(obj.gender[0].value+" / "+obj.gender[1].value);
+	alert(obj.gender[0].checked+" / "+obj.gender[1].checked); */
+	var gender;
+	for(var i=0; i<obj.gender.length;i++){
+		if(obj.gender[i].checked){
+			gender=obj.gender[i].value;
+		}
+	}
+	
+	if(typeof(gender)=="undefined"){
+		alert("성별을 선택해주세요");
+		return;
+	}
+	
+	var divNode=document.getElementById("output");
+	divNode.innerHTML=gender;
+}
+
+function getCheckBoxValue() {
+	var obj=document.frm;
+	
+	var hobby;
+	for(var i=0; i<obj.hobby.length; i++){
+		if(obj.hobby[i].checked){
+			hobby+=obj.hobby[i].value + ", ";
+		};
+	}
+	if(typeof(hobby)=="undefined"){
+		hobby="취미업ㅅ음";
+		
+		
+	}
+	
+	var divNode=document.getElementById("output");
+	divNode.innerHTML=hobby;
+}
+
+function getSelectValue(){
+	  // 1. form 객체 얻기
+	   var obj = document.frm;
+	   // 2. 반복 ( option이 여러개 )
+	   var value ="";
+/* 	   for(var i = 0; i < obj.domain.length; i++){
+	      //alert(obj.domain[i].selected);
+	      if(obj.domain[i].selected){
+	         value = obj.domain[i].value;
+	         break;
+	      } // end if
+	   } // end for
+	    */
+	    
+	   value=obj.domain[obj.domain.selectedIndex].value;
+
+	   // 선택된 도메인을 div출력
+	   var divNode = document.getElementById("output");
+	   divNode.innerHTML= value;
+	} // getSelectValue
+
+</script>
+</head>
+<body>
+<form action="" name="frm">
+<div>
+<strong>checked 속성</strong>
+<label>성별</label>
+<input type="radio" value="남자" name="gender"/>남자
+<input type="radio" value="여자" name="gender"/>여자
+<input type="button" value="라디오 값 얻기" class="btn" onclick="getRadioValue()"/>
+<br/>
+<label>취미</label><br/>
+<input type="checkbox" value="요리" name="hobby"/>요리<br/>
+<input type="checkbox" value="등산" name="hobby"/>등산<br/>
+<input type="checkbox" value="라이딩" name="hobby"/>라이딩<br/>
+<input type="checkbox" value="게임" name="hobby"/>게임<br/>
+<input type="checkbox" value="음악감상" name="hobby"/>음악감상<br/>
+
+<input type="button" value="라디오 값 얻기" class="btn" onclick="getCheckBoxValue()"/><br/>
+
+<select name="domain">
+	<option value="none">직접입력</option>
+	<option value="gmail.com">지메일</option>
+	<option value="daum.net">다음</option>
+	<option value="naver.com">네이버</option>
+</select>
+<input type="button" value="셀렉트 값 얻기" class="btn" onclick="getSelectValue()"/>
+</div>
+<div>
+<table>
+	
+</table>
+</div>
+</form>
+<div id="output"></div>
+</body>
+</html>

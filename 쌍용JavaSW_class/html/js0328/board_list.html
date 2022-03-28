@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+table{border-top:1px solid #0000FF; border-bottom: 1px solid #0000FF; margin-left:50px; border-spacing:0px; text-align:center;}
+th{border-top:1px solid #0000FF; border-bottom:1px solid #0000FF; height:50px;}
+td{border-top:1px solid #dfdfdf; vertical-align:middle;}
+input{width:100px; height:40px; background-color:#3B4890; color:#FFFFFF; font-size:15px; font-weight:bold; margin-top:15px;
+margin-left:50px;}
+span{font-size:15px; color:#bfbfbf; font-weight : bold; margin-left:10px;}
+img{height:25px; }
+.title{text-align:left;  height:35px; line-height: 35px; display: block; vertical-align: center;}
+a{text-decoration:none; color:#000000;}
+a:hover{font-weight:bold; color:#0000FF;}
+#numTitle {width: 50px;}
+</style>
+<script type="text/javascript">
+function check(){
+	var obj=document.frm;
+	
+	for(var i=0; i<obj.num.length; i++){
+		obj.num[i].checked= obj.flag.checked;
+	}
+	
+}
+
+</script>
+</head>
+<body>
+<form name="frm">
+<table>
+<thead>
+<tr>
+	<th id="numTitle"><input type="checkbox" name="flag" onclick="check()"></th>
+	<th width="300px">제목</th>
+	<th width="150px">글쓴이</th>
+	<th width="100px">작성일</th>
+	<th width="100px">조회</th>
+	<th width="100px">추천</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td><input type="checkbox" name="num" value="1"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.daum.net/"  target="_new">멜로스의 대화</a> <span>[261]</span></td><td>중랑천중랑장</td><td>10:18</td><td>9574</td><td>139</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="2"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.daum.net/" target="_new">오이 지옥</a> <span>[1047]</span></td><td>환타스틱프렌즈</td><td>03.17</td><td>56912</td><td>1451</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="3"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.daum.net/" target="_new">절치부심 초콜릿 미쿠 피규어 제작기 [스압]</a> <span>[504]</span></td><td>스파게티코드</td><td>03.17</td><td>144226</td><td>156</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="4"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.daum.net/" target="_new">한복 화보 스크래치(칼로 긁는 기법) 소묘</a> <span>[249]</span></td><td>bittersweet</td><td>03.16</td><td>31369</td><td>292</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="5"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.naver.com/" target="_new">[단편] 꿈에서 스윙스 만날 썰</a><span>[400]</span></td><td>vus</td><td>03.16</td><td>40645</td><td>943</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="6"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.naver.com/" target="_new">코시국 터키여행 / 1. 출국 - 이스탄불 도착</a> <span>[150]</span></td><td>ㅇㅇ</td><td>03.15</td><td>16556</td><td>108</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="7"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.naver.com/" target="_new">시선 가는대로 담아봤엉</a> <span>[225]</span></td><td>우훗</td><td>03.15</td><td>20547</td><td>254</td>
+</tr>
+<tr>
+	<td><input type="checkbox" name="num" value="8"/></td><td class="title"><img src="http://211.63.89.148/html_prj/common/images/icon.png"/> <a href="https://www.google.com/" target="_new">토종어 사육을 해본다면 이녀석</a> <span>[428]</span></td><td>Banseol</td><td>03.14</td><td>34389</td><td>219</td>
+</tr>
+</tbody>
+</table>
+
+<input type="button" value="전체글"/>
+</form>
+</body>
+</html>

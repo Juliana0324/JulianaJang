@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+div {margin-left: 10px;}
+</style>
+<script type="text/javascript">
+	function setValue(){
+		//1. 폼얻기
+		var obj=document.frm;
+		//2. 폼으로 control객체 접근하여 값 설정
+		obj.text.value="텍스트에 값 설정";
+		obj.password.value="패스워드에 값 설정";
+		obj.hidden.value="hidden에 값 설정";
+		//obj.file.value="file에 값 설정"; //파일은 설정안됨
+		obj.date.value="2022-03-28";
+		/* obj.textarea.value="textarea에 값 설정"; */
+		
+		//img는 src속성으로 변경
+		obj.img.src="../common/imgs/google_logo.png";
+		obj.textarea.value=obj.img.src;
+	}
+	
+	function setStatus(){
+		var obj=document.frm;
+		
+		obj.gender[1].checked=true;
+		obj.hobby[2].checked=true;
+		
+		
+	}
+</script>
+</head>
+<body>
+<form name="frm">
+<div>
+	<strong>value설정</strong><br/>
+	
+	<label>text</label><input type="text" name="text"/><br/>
+	<label>password</label><input type="password" name="password"/><br/>
+	<label>hidden</label><input type="hidden" name="hidden"/><br/>
+	<label>date</label><input type="date" name="date"/><br/>
+	<!-- file은 값을 설정할 수 없다 -->
+	<label>file</label><input type="file" name="file"/><br/>
+	<label>textarea</label><textarea class="inputBox" name="textarea" style="width:300px;height:100px;"></textarea><br/>
+	<img src="../common/imgs/daum_logo.png" name="img"/><br/>
+	<input type="button" value="값설정" class="btn" onclick="setValue()"/><br/>
+</div>
+<div>
+	<strong>상태변환</strong> <br/>
+	<label>성별</label> <br/><input type="radio" name="gender" value="남자"/>남자 <br/>
+	<input type="radio" name="gender" value="여자"/>여자<br/>
+	<input type="button" value="상태 변경" class="btn" onclick="setStatus()"/><br/>
+</div>
+<div>
+<label>취미</label><br/>
+<input type="checkbox" value="요리" name="hobby"/>요리<br/>
+<input type="checkbox" value="등산" name="hobby"/>등산<br/>
+<input type="checkbox" value="라이딩" name="hobby"/>라이딩<br/>
+<input type="checkbox" value="게임" name="hobby"/>게임<br/>
+<input type="checkbox" value="음악감상" name="hobby"/>음악감상<br/>
+
+<input type="button" value="라디오 값 얻기" class="btn" onclick="setStatus()"/><br/>
+</div>
+</form>
+</body>
+</html>
