@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	//이벤트 등록코드
+	document.getElementById("confirmBtn").addEventListener("click", useConfirm);
+
+	document.getElementById("url").addEventListener("change", useLocation);
+	
+	
+}//onload
+
+//이벤트 처리코드
+function useConfirm() {
+	var value=confirm("글을 삭제하시겠습니까?");
+	if(value){
+		alert("글이 삭제되었습니다.");
+	}else{
+		alert("삭제가 취소되었습니다.");
+	}
+}
+
+function useLocation() {
+	var sel=document.frm.url;
+	
+	//이동할 사이트를 선택하시겠습니까?가 아니였을때 실행되도록
+	if(sel.selectedIndex ==0){
+		return;
+	}
+	if(confirm(sel.value+"으로 이동하겠습니까?")){
+//		location.href="http://"+sel.value;
+		
+		//로딩된 url을 치환하기때문에 뒤로가기 불가
+		window.location.replace="http://"+sel.value;
+	}	
+	
+}
+
+</script>
+</head>
+<body>
+<input type="button" value="confirm dialog" class="btn" id="confirmBtn"/><br/>
+
+<form name="frm">
+<select id="url" name="url" class="inputBox">
+	<option value="none">--이동할 사이트를 선택--</option>
+	<option value="google.com">구글</option>
+	<option value="daum.net">다음</option>
+	<option value="naver.com">네이버</option>
+	<option value="youtube.com">유튜브</option>
+</select>
+</form>
+</body>
+</html>

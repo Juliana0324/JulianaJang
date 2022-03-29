@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#left {width: 100px; height: 50px; border:1px solid #323; }
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("area").addEventListener("keyup", keyEvt);
+}
+
+function keyEvt(evt){
+	var textElement=document.getElementById("area");
+	var output;
+	
+	var cnt=200;
+	if(textElement.value.length<=-1){
+		alert("200자 이상을 출력하실 수 없습니다!.");
+		return;
+	}
+	cnt-=textElement.value.length;
+	var divNode = document.getElementById("left");
+	divNode.innerHTML=output;
+}
+</script>
+</head>
+<body>
+<textarea id="area" name="area" style="width:500px; height:300px;"></textarea>
+<div id="left"></div>
+</body>
+</html>

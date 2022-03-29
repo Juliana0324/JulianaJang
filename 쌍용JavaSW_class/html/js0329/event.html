@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+
+</style>
+<script type="text/javascript">
+/* function testEvt() { */
+/* 	var btn= document.getElementById("anonymous");
+	alert(btn); */
+	
+	//onload이벤트가 발생했을때 버튼에 이벤트를 등록하여 처리 anonymous function방식으로
+
+window.onload=function(){
+	document.getElementById("anonymous").onclick= function() {
+		var obj=document.frm;
+		var textVal= obj.text.value;
+		alert(textVal);
+	}//onclick
+	
+	//addEventListener()함수. 이벤트는 on빼고 사용
+	//함수명을 넣을 때에는 addEventListener함수안에서 입력된 함수를 호출할 수 있도록 
+	//매개 변수에 함수명만 전달해 준다(first class function - 함수기호() 사용하지 않도록 한다)
+	document.getElementById("named").addEventListener("click", getTextValue);
+}//window.onload
+
+function getTextValue(){
+	var obj=document.frm1;
+	alert("입력값: "+obj.text.value);
+}
+</script>
+</head>
+<!--  <body onload="testEvt()">-->
+<body>
+<form action="" name="frm">
+	<label>텍스트</label><input type="text" name="text" class="inputBox"/><br/>
+	<input type="button" value="무기명함수 사용" class="btn" id="anonymous"/>
+</form>
+<form action="" name="frm1">
+	<label>텍스트</label><input type="text" name="text" class="inputBox"/><br/>
+	<input type="button" value="이벤트리스너 사용" class="btn" id="named"/>
+</form>
+</body>
+</html>
