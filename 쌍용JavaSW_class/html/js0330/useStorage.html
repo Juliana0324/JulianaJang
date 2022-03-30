@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+var jsonObj={msg:"hell",age:20};
+alert(jsonObj.msg+"/" + jsonObj.age )
+
+
+	window.onload=function(){
+		document.getElementById("btn").addEventListener("click", setValue);
+		setData();
+	}
+	
+	function setData(){
+		var name= localStorage.getItem("name");
+		if(name!= null){
+		var obj = document.frm;
+		obj.name.value=name;
+		obj.saveFlag.checked=localStorage.getItem("saveFlag");
+		}
+	}
+	function setValue() {
+		var obj= document.frm;
+		if(!obj.saveFlag.checked){
+			localStorage.clear();
+			return;
+		}
+		localStorage.setItem("name", obj.name.value);
+		localStorage.setItem("saveFlag", obj.saveFlag.value);
+	}
+
+	
+</script>
+</head>
+<body>
+<form name="frm">
+<input type="text" name="name" class="inputBox" id="name"/>
+<input type="checkbox" name="saveFlag"/>저장<br/>
+<input type="button" value="입력" class="btn" id="btn"/>
+</form>
+</body>
+</html>

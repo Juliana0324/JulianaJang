@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("useJsonArr").addEventListener("click", useJsonArr);
+}
+
+function useJsonArr() {
+	var jsonArr=[{name:"정인선", age:20}, {name:"장정우", age:26},
+		{name:"전민정", age:21},
+		{age:23,name:"권용현"} //데이터 순서 상관없음
+		];
+
+	//jsonArray값얻기
+	var output= "<table border='1'><tr><th>이름</th><th>나이</th></tr>"
+	
+	for(var i=0; i<jsonArr.length;i++){
+		//반복되는 현재방의 값을 얻어와서 
+		output+= "<tr><td>"+jsonArr[i].name+"</td><td>"+jsonArr[i].age+"</td></tr>";		
+	}
+	
+	output+= "</table>"
+	
+	document.getElementById("output").innerHTML=output;
+}
+
+</script>
+</head>
+<body>
+<a href="#void" id="useJsonArr">배열</a>
+<div id="output"></div>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("setSesValue").addEventListener("click", setSesValue);
+	document.getElementById("setGetValue").addEventListener("click", setGetValue);
+	document.getElementById("setRemoveValue").addEventListener("click", setRemoveValue);
+	document.getElementById("setCleValue").addEventListener("click", setCleValue);
+	
+	document.getElementById("setLocValue").addEventListener("click", locValue);
+	document.getElementById("setLocGetValue").addEventListener("click", locGetValue);
+	document.getElementById("setLocRemoveValue").addEventListener("click", locRemoveValue);
+	document.getElementById("setLocCleValue").addEventListener("click", locCleValue);
+}
+
+function setSesValue() {
+	sessionStorage.setItem("name", "세션이름");
+	sessionStorage.setItem("age", 20);
+}
+
+function setGetValue() {
+	//스토리지에서 값을 얻기
+ 	var name= sessionStorage.getItem("name");
+ 	var age= sessionStorage.getItem("age");
+ 	
+ 	document.getElementById("output").innerHTML="<b>세션스토리지</b>: "+name+" \ "+age;
+}
+
+function setRemoveValue() {
+	sessionStorage.removeItem("name");
+}
+function setCleValue() {
+	sessionStorage.clear();
+	
+}
+
+
+function locValue() {
+	localStorage.setItem("name", "세션이름");
+	localStorage.setItem("age", 20);
+}
+
+function locGetValue() {
+	//스토리지에서 값을 얻기
+ 	var name= localStorage.getItem("name");
+ 	var age= localStorage.getItem("age");
+ 	
+ 	document.getElementById("output").innerHTML="<b>세션스토리지</b>: "+name+" \ "+age;
+}
+function locRemoveValue() {
+	localStorage.removeItem("age");
+}
+function locCleValue() {
+	localStorage.clear();
+}
+</script>
+</head>
+<body>
+<div>
+<!-- 값이 닫고난 다음에는 추가되지않는다 -->
+<strong>session Storage</strong>
+<input type="button" value="값설정" class="btn" id="setSesValue"/>
+<input type="button" value="값 가져오기" class="btn" id="setGetValue"/>
+
+<input type="button" value="값 삭제" class="btn" id="setRemoveValue"/>
+<input type="button" value="값 완전삭제" class="btn" id="setCleValue"/>
+</div>
+
+<div>
+<strong>Local Storage</strong>
+<input type="button" value="값설정" class="btn" id="setLocValue"/>
+<input type="button" value="값 가져오기" class="btn" id="setLocGetValue"/>
+<input type="button" value="값 삭제" class="btn" id="setLocRemoveValue"/>
+<input type="button" value="값 완전삭제" class="btn" id="setLocCleValue"/>
+</div>
+<div id="output"></div>
+</body>
+</html>

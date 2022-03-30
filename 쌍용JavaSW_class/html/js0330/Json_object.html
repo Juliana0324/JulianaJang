@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("jsonStringBtn").addEventListener("click", useString);
+	document.getElementById("jsonObjBtn").addEventListener("click", useJson);
+}
+
+function useString() {
+	//문자열로 제이슨 오브젝트 생성
+	//1. JsonObj 형태의 문자열 생성.
+	var data="{name: '테스트', age:25, flag:true, func:function(){alert('되냐?')}}";
+	var jsonObj = eval("("+data+")");
+	
+	document.getElementById("output").innerHTML=jsonObj+" / "+jsonObj.age+" / "+ jsonObj.name+" / "+jsonObj.flag;
+	//alert(jsonObj.func); 함수를 값으로 가지고 있으면 함수의 내용을 그대로 출력
+
+	jsonObj.func();
+
+}
+function useJson() {
+	var jsonObj={name:"테스트1", age:30, flag:true, 
+			func: function(){
+				var date = new Date();
+				return date.getFullYear();
+			}};
+//	alert(jsonObj.name);
+
+	//값 추가:
+	jsonObj.address= "서울시 강남구 역삼동";
+	
+	jsonObj.zipcode= function(){
+		return 12345;
+	};
+	
+	document.getElementById("output").innerHTML= "이름"+ jsonObj.name+", 나이: "+jsonObj.age+"<br/> flag: "+jsonObj.flag+"<br/>"
+	+"추가된 값: <br/> 주소: "+jsonObj.address+", 우편번호: "+jsonObj.zipcode()+", 현재 년도: "+jsonObj.func();
+	
+	//같은 이름으로 추가하면 같은이룸 덮어쓰기
+	jsonObj.name= "장정우";
+	//값삭제
+	alert("삭제전 이름: "+jsonObj.name);
+	
+	delete jsonObj.name;
+	alert("삭제 후 이름: "+jsonObj.name);
+	
+}
+</script>
+</head>
+<body>
+<input type="button" value="문자열형식" class="btn" id="jsonStringBtn"/>
+<input type="button" value="Json객체형식" class="btn" id="jsonObjBtn"/>
+<div id="output"></div>
+</body>
+</html>

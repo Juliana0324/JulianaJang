@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+window.onload = function() {
+	document.getElementById("cnt").addEventListener("click", histCnt);
+	document.getElementById("go").addEventListener("click", histGo);
+	document.getElementById("back").addEventListener("click", histBack);
+	document.getElementById("go1").addEventListener("click", histGo1);
+	document.getElementById("back1").addEventListener("click", histBack1);
+}
+
+function histCnt() {
+	alert("브라우저 히스토리 갯수: "+history.length);
+}
+
+function histGo() {
+	history.go(1);
+}
+function histGo1() {
+	history.go(2);
+}
+function histBack() {
+	history.back();
+	
+}
+function histBack1() {
+	history.go(-2);
+	
+}
+</script>
+</head>
+<body>
+<input type="button" value="히스토리 수" class="btn" id="cnt"/>
+<input type="button" value="앞으로" class="btn" id="go"/>
+<input type="button" value="뒤로" class="btn" id="back"/>
+<input type="button" value="2개뒤로" class="btn" id="go1"/>
+<input type="button" value="2개뒤로" class="btn" id="back1"/>
+</body>
+</html>

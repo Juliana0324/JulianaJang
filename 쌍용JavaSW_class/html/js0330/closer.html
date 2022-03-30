@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<script type="text/javascript">
+//권한을 변경해준다
+window.onload=function(){
+	document.getElementById("btn1").addEventListener("click", useCloser1);
+	document.getElementById("btn2").addEventListener("click", useCloser2);
+	document.getElementById("btn3").addEventListener("click", useCloser3);
+}
+
+function useCloser1(){
+	var data=({name:"정인선",age:"20", addr:function(){
+		return "서울시 강남구 역삼동";
+	}});
+	
+	alert(data.name+" \ "+data.age+" \ "+data.addr());
+}
+function useCloser2(){
+	//중괄호를 가진 클로저 사용
+	var test = function() {
+		var name1="테스트";
+		var fun1= function(){
+			return "무기명 함수";
+		}
+		function addr() {
+			return "서울시";
+		}
+		return {na:name1, anony:fun1, address:addr};
+	}
+//	alert(test.name1)
+//   alert(test.addr())//함수안의 함수는 외부에서 접근할 수 없다
+
+	alert(test().na+" / "+test().anony+" / "+test().address);
+}
+function useCloser3(){
+	//중괄호를 가진 클로저 사용
+	var test = function() {
+		var name1="테스트";
+		var fun1= function(){
+			return "무기명 함수";
+		}
+		function addr() {
+			return "서울시";
+		}
+		return {na:name1, anony:fun1, address:addr};
+	}(); //무기명함수 호출. test변수에는 closure가 리턴됨
+
+	alert(test.na+" / "+test.anony+" / "+test.address);
+}
+</script>
+</head>
+<body>
+<input type="button" value="closure1" class="btn" id="btn1"/>
+<input type="button" value="closure2" class="btn" id="btn2"/>
+<input type="button" value="closure3" class="btn" id="btn3"/>
+
+</body>
+</html>
