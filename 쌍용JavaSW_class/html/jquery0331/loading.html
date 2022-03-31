@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+//순서 2번: 바디 정보가 모두 실행한 뒤 실행됨 
+$(window).load(function() {
+	alert("window load");
+});
+
+//1번: 바디가 먼저 실행된 후 코드가 실행되어야 바디 테그안에있는 테그에 접근이 가능하다
+//생략가능: $(document).ready(function() {
+$(function(){
+	alert("document ready");
+});
+</script>
+</head>
+<body>
+</body>
+</html>

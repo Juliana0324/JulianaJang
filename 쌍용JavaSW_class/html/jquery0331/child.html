@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#backDiv { width:355px; height:205px; margin : 0px auto; position: relative;
+background:#FFFFFF url(http://localhost/html_prj/common/imgs/id_background.png) no-repeat;}
+#idBox{position: absolute; top:80px; left:50px;}
+</style>
+<script type="text/javascript">
+window.onload=function(){
+	document.getElementById("dupBtn").addEventListener("click", searchId);
+}
+
+function searchId() {
+	var obj=document.cFrm;
+	var output="<strong>"+obj.id.value+"<strong>는 사용가능합니다."
+		+"<a href='#void' onclick=\"sendId('"+obj.id.value+"')\">사용</a>";
+		
+	document.getElementById("dupResult").innerHTML=output;
+}
+function sendId(id) {
+	opener.window.document.pForm.id.value=id;
+	self.close();
+}
+</script>
+</head>
+<body>
+<div id="backDiv"></div>
+<div id="idBox">
+<form action="" name="cFrm">
+	<label>아이디</label>
+	<input type="text" name="id" id="id" class="inputBox"/>
+	<input type="button" value="중복확인" class="btn" id="dupBtn"/>
+	<div><span id="dupResult"></span></div>
+</form>
+</div>
+</body>
+</html>

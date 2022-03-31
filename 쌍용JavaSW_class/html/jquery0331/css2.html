@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+.text {font-weight: bold; font-size: 20px; color:#B2C7D9;}
+.newInput {font-size: 20px; font-weight: bold;}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function() {
+		//클래스 제거제거
+		$(".text").removeClass("text");
+	});
+	
+	$("#btn1").click(function() {
+/* 		$("#id").removeClass("newInput");
+		$("#id").addClass("newInput"); */
+		$("#id").removeClass("newInput").addClass("newInput");
+		
+	});
+	
+}); //ready
+</script>
+</head>
+<body>
+<input type="button" value="클래스 제거" id="btn" class="btn"/>
+<input type="button" value="클래스 추가" id="btn1" class="btn"/>
+<ul>
+	<li class="text">spring 벚꽃</li>
+	<li>summer 별</li>
+	<li class="text">fall 달</li>
+	<li>winter 눈</li>
+</ul>
+<label>아이디</label><input type="text" name="id" id="id" class="inputBox"/>
+</body>
+</html>

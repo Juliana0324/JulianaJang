@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#div {width: 300px; height:150px; background-color: #E1ECF3; border:1px solid #333}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#btn").click(function(){
+		let output="";
+		output+= "넓이:"+$("#div").css("width")+"<br/>"
+		output+= "높이:"+$("#div").css("height")+"<br/>"
+		output+= "바닥색:"+$("#div").css("background-color")+"<br/>"
+		
+		let hei
+		$("#output").html(output);
+		
+	});
+	
+	$("#btn1").click(function() {
+		//아이디가 div2인 테그에 css속성 설정
+		$("#div2").css("border","2px solid #ff0000");
+		$("#div2").css("width","50%");
+		$("#div2").css("height","200px");
+		$("#div2").css("background","#FFFFF url(../common/imgs/headerimg.jpg)");
+	});
+});
+</script>
+</head>
+<body>
+<div id="div">
+</div>
+<input type="button" value="속성값" id="btn" class="btn"/>
+<input type="button" value="속성값설정" id="btn1" class="btn"/>
+<div id="output"></div>
+
+<div id="div2"></div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+table {
+	margin: 0px auto;
+	font-size: 20px; 
+}
+
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+window.onload=function(){
+	var arr = [{num: "111-111", addr: "서울시 강남구 역삼동"}, 
+		{num: "111-112", addr: "서울시 동대문구 동대문동"}, 
+		{num: "111-223", addr: "부천시 소사동"}
+		];
+	var output= "<table border='1'><tr><th>우편번호</th><th>주소</th></tr>"	
+	for(var i=0; i<arr.length; i++){
+		output+= "<tr><td><a href='#void' id='num"+i+"' value='"+arr[i].num+"'>"+arr[i].num
+		+"</a></td><td><a href='#void' id='addr"+i+"' value='"+arr[i].addr+"'>"+arr[i].addr+"</a></td></tr>";		
+	}
+	
+	output+= "</table>";
+	document.getElementById("output").innerHTML=output;
+	
+	var values="#";
+	for(var i=0; i<arr.length; i++){
+		values+="num"+i;
+	
+		$(function() {
+			$(values).click(function() {
+				alert(document.values.value);
+				});
+			})
+	}
+};
+
+
+</script>
+
+</head>
+<body>
+<div id="output">
+
+</div>
+</body>
+</html>

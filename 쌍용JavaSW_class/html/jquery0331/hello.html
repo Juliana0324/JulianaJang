@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- jquery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+//js코드와 jquery코드
+//$().ready;
+window.onload=function(){
+	document.getElementById("btn").addEventListener("click", jsClick);
+
+	$("#btn1").click(function() {
+		//alert("jquery Click");
+		jqClick();
+	});
+}
+
+function jsClick(){
+	alert("jsCliick");
+}
+
+function jqClick(){
+	
+}
+
+
+</script>
+</head>
+<body>
+<input type="button" class="btn" value="클릭" id="btn"/>
+<input type="button" class="btn" value="제이쿼리클릭" id="btn1"/>
+</body>
+</html>

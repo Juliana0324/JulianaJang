@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style type="text/css">
+span {color:red;}
+table {margin:30px;
+	margin-left:300px;
+	width:70%;
+	border:1px solid #444444;
+	}
+th { text-align: left;}
+td {padding-left:50px;
+}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	
+	$("#popup").click(function () {
+		var pWin=window.open("child.html", "idDupWin", "width=500, height=250, top="+(window.screenX+200)+", left="+(window.screenY+100));
+		pWin.window.document.cFrm.id.value= document.pForm.id.value;		
+	})
+	
+	$("#passCheck").focusout(function() {
+		if($("#password").val() != $("#passCheck").val()){
+			alert("비밀번호가 다릅니다.");
+		}
+	});
+	
+	$("#postBtn").click(function() {
+		var pWin=window.open("postChild.html", _blank, "width=500, height=250, top="+(window.screenX+200)+", left="+(window.screenY+100));
+	
+	})
+})
+</script>
+</head>
+<body>
+	<h2 style="text-align:center;">회원가입</h2>
+<form name="pForm">
+	<table cellpadding="10" cellspacing="0">
+	<tr>
+		<th><span id="star">* </span>아이디</th>
+		<td><input type="text" name="id" id="getId"/> <input type="button" value="ID 중복확인" class="btn" id="popup"/></td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>비밀번호</th>
+		<td><input type="password" id="password"/>&nbsp;&nbsp;비밀번호 확인 <input type="password" id="passCheck"/>&nbsp;&nbsp;* 8~12자의 영문, 숫자, 특수문자, 3가지를 조합하여 입력</td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>이름</th>
+		<td><input type="text"/></td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>생일</th>
+		<td><input type="date"/></td>
+	</tr>
+	<tr>
+		<th>&nbsp;연락처</th>
+		<td><input type="number"/></td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>휴대폰</th>
+		<td><input type="number"/>&nbsp;<input type="checkbox" value="take"/> 수신</td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>이메일</th>
+		<td><input type="email"/> @ <select name="email">
+			<option>선택해주세요</option>
+			<option value="google">google.com</option>
+			<option value="daum">daum.net</option>
+			<option value="nate">nate.com</option>
+			<option value="naver">naver.com</option>
+			<option value="hotmail.com">hotmail.com</option>
+			<option value="own">직접입력</option>
+		</select></td>
+	</tr>
+	
+	<tr>
+		<th><span id="star">* </span>성별</th>
+		<td><input type="radio" name="gender" value="man" /> 남자
+		<input type="radio" name="gender" value="woman"/> 여자
+		</td>
+	</tr>
+		<tr>
+		<th>&nbsp;&nbsp;소재지</th>
+		<td><select name="city">
+			<option>선택해주세요</option>
+			<option value="seoul">서울</option>
+			<option value="gyunggi">경기도</option>
+			<option value="gangwon">강원도</option>
+			<option value="chungchun">충청도</option>
+			<option value="gyungsang">경상도</option>
+			<option value="junla">전라도</option>
+			<option value="jeju">제주도</option>
+		</select></td>
+		
+	</tr>
+	<tr>
+		<th><span id="star">* </span>우편번호</th>
+		<td><input type="text" readonly/> <input type="button" value="우편번호검색" id="postBtn" name="postBtn" class="btn"></td>
+	</tr>
+	<tr>
+		<th><span id="star">* </span>주소</th>
+		<td><input type="text"/><br/><input type="text"/></td>
+	</tr>
+	</table>
+	<input type="submit" value="확인" style="margin-left:800px;width:80px; height:30px; background-color:black; color:white; font-weight: bold; "/> 
+	<input type="reset" value="취소" style="width:80px; height:30px; background-color:white; font-weight: bold;"/>
+</form>
+	
+</body>
+</html>
+</html>

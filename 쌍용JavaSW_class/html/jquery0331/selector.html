@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#div {width: 100px; height: 100px; border: 1px solid #333;}
+.border {border: 1px solid #333;}
+td {border-bottom:1px solid #333}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#div").css("background-color","#FF0000");
+	
+	/* class selector */
+	$(".size").css("font-size", "20px");
+	$("span").css("color","#0000ff");
+	
+	//multiple selector
+	//$("span", "li").css("color","#0000ff");
+
+	//attribute selector(name selector)  [속성명=값]
+//	$("[type='text']").css("background-color", "#FF0000");	
+	$("[name='name']").css("background-color", "#FF0000");	
+	
+	//id셀렉터와 같지 않음: 전체 조회! 느림
+	$("[id='name']").css("background-color", "#FF0000");
+	
+	//sub selector
+	$("li > span").css("text-decoration", "underline");
+	
+	$("tr:even").css("background-color", "#7893ae");
+	
+}); //ready
+
+
+</script>
+</head>
+<body>
+<div id="div"></div>
+<ul>
+	<li class="size">1. 크몽을 벤티 마킹한 오미크몽</li>
+	<li>2. 바다이야기를 능가할 <span>바다사자</span></li>
+	<li class="size">3. 네이버 미술관을 벤치마킹한 미술관</li>
+</ul>
+<div>
+오늘은 <span>JQuery</span>를 학습중! <br/>
+내일은 <span>금요일</span>입니다.
+</div>
+<label>이름</label><input type="text" name="name" id="name" class="inputBox"/>
+<br/>
+<label>아이디</label><input type="text" name="id" id="id" class="inputBox"/>
+
+<div>
+	<ol>
+		<li>id selector</li>
+		<li><span>class selector</span></li>
+		<li>tag selector</li>
+		<li><span>attribute selector</span></li>
+		<li>sub selector</li>
+	</ol>
+	
+	<ul>
+		<li><span>spring</span></li>
+		<li>summer</li>
+		<li>fall</li>
+		<li>winter</li>
+	</ul>
+</div>
+<div>
+<img src="../js0328/imgs/dice_5.png"/>
+</div>
+
+<table style="width:300px; height: 100px;">
+	<tr>
+		<td>1</td><td>2</td><td>3</td>
+	</tr>
+		<tr>
+		<td>4</td><td>5</td><td>6</td>
+	</tr>
+		<tr>
+		<td>7</td><td>8</td><td>9</td>
+	</tr>
+	<tr>
+		<td>10</td><td>11</td><td>12</td>
+	</tr>
+</table>
+</body>
+</html>

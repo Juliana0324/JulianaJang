@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	$("#btnHide").click(function() {
+		$("#img").hide();
+	});
+	$("#btnShow").click(function() {
+		$("#img").show();
+	});
+	$("#btnToggle").click(function() {
+		$("#img").toggle();
+	});
+	
+	//값이 바뀌면
+	$("#email2").change(function(){
+		let email2 = $("#email2").val();
+		if(email2 != "N/A"){
+			$("#email3").val("");
+
+			if(email2!= "none"){
+			//focus function
+			$("#email3").val(email2);
+			}
+			$("#email3").focus();
+			
+		}
+	});//change
+	
+	$("#email1").change(function() {
+		alert("값이 변경되었을때");
+	});
+	
+}); //ready
+</script>
+</head>
+<body>
+<div style="height: 260px; width:300px;">
+<img src="../js0324/img/blood_a.PNG" id="img"/>
+</div>
+<input type="button" value="숨기기" id="btnHide" class="btn"/>
+<input type="button" value="보이기" id="btnShow" class="btn"/>
+<!-- <input type="button" value="상태반전" id="btnToggle" class="btn"/> -->
+<a href="#void" id="btnToggle">상태반전</a>
+<div>
+<input type="text" name="email1" id="email1" class="inputBox">@<select name="email2" id="email2" class="inputBox">
+<option value="N/A">----메일선택----</option>
+<option value="hotmail.com">핫메일</option>
+<option value="gmail.com">지메일</option>
+<option value="daum.net">다음</option>
+<option value="naver.com">네이버</option>
+<option value="none">직접입력</option>
+</select>
+<input type="text" name="email3" id="email3" class="inputBox"/>
+</div>
+
+<div>
+<label>커서가 들어왔을때</label>
+<input type="text" name="name" id="nameIn" class="inputBox"/>
+<label>커서가 들어왔을때</label>
+<input type="text" name="name" id="nameIn" class="inputBox"/>
+</div>
+</body>
+</html>
