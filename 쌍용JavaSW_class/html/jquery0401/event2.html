@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+input {margin-bottom: 20px;}
+#output {color: red; font-size: 30px; font-weight: bold;}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+var cnt=0;
+$(function(){
+	$("#in").focusin(function(){
+		cnt++;
+		$("#output").html("<strong>"+cnt+"번 커서가 들어갔음</strong>");
+	})
+	
+	$("#out").focusout(function(){
+		$("#output").html("<strong>커서가 나갔음</strong>");
+	})
+	
+	$("#out2").blur(function(){
+		$("#output").html("<strong>blur</strong>");
+	})
+	
+	$("#mover").mouseover(function() {
+		$("#img").hide();
+	})
+	
+	$("#mout").mouseout(function() {
+		$("#img").show();
+	})
+	
+	$("#hover").hover(function() {
+		$("#output").html("마우스 포인터가 들어왔음")
+	},
+	function(){
+		$("#output").html("마우스나감")
+	}
+	)
+	
+	$("#move").mousemove(function(evt) { //evt: jquery에서 할당하ㅡ는 마우스객체
+		$("#output").html("마우스 포인터 x좌표 y좌표: "+evt.pageX+" / "+evt.pageY);
+	})
+	
+	$("#kup").keyup(function(evt) {
+		$("#output").html("키가 올라왔음: "+evt.which+$(""));
+	})
+	
+	$("#kdown").keyup(function(evt) {
+		$("#output").html("키가 눌렸음: "+evt.keyCode);
+	})
+});
+</script>
+</head>
+<body>
+<img src="../common/imgs/daum_logo.png" id="img"/><br/>
+<label>커서focus</label><input type="text" id="in" class="inputBox"/>
+<label>커서 out</label><input type="text" id="out" class="inputBox"/>
+<label>커서 blur</label><input type="text" id="out2" class="inputBox"/>
+<div id="output">
+</div>
+
+<label>마우스 포인터가 ㅇㄹ라올때</label>
+<input type="button" id="mover" class="btn" value="포인터올림"/><br/>
+
+<label>마우스 포인터가 나갔을때</label>
+<input type="button" id="mout" class="btn" value="포인터나감"/><br/>
+
+<label>hover</label>
+<input type="button" id="hover" class="btn" value="호버"/><br/>
+
+<input type="text" id="kdown" class="btn" value="키다운"/><br/>
+<input type="text" id="kup" class="btn" value="키업"/><br/>
+
+<img src="../js0324/img/blood_a.PNG" id="move"/><br/>
+</body>
+</html>

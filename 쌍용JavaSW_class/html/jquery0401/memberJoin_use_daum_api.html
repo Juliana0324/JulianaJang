@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#zipBtn").click(function() {
+		zipcodePop();
+	});//click
+});
+
+function zipcodePop(){
+	window.open("searchZip.html", "sz", "width=500, height=250, top="+(window.screenX+200)+", left="+(window.screenY+100));
+}
+</script>
+</head>
+<body>
+<form name="frm">
+<label>우편번호</label>
+<input type="text" name="zipcode" readonly="readonly" class="inputBox" style="width:70px"/>
+<input type="button" value="우편번호 검색" id="zipBtn" class="btn"/><br/>
+<label>주소</label>
+<input type="text" name="addr1" readonly="readonly" class="inputBox" style="width:300px"/><br/>
+<label>상세주소</label>
+<input type="text" name="addr2" class="inputBox" style="width:300px"/>
+</form>
+
+
+
+</body>
+</html>

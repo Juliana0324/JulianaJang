@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+function sendZip(zipcode, addr) {
+	var pObj=opener.window.document.frm;
+	pObj.zipcode.value=zipcode;
+	pObj.addr1.value=addr;
+	
+	self.close();
+}
+</script>
+</head>
+<body>
+<div>
+<h2>우편번호 검색</h2>
+<table border="1">
+	<tr>
+		<th width="70">우편번호</th>
+		<th width="320">주소</th>
+	</tr>
+	<tr>
+		<th width="70"><a href="#void" onclick="sendZip('111-111', '서울시 강남구 역삼동')">111-111</a></th>
+		<th width="320">서울시 강남구 역삼동</th>
+	</tr>
+	<tr>
+		<th width="70"><a href="#void" onclick="sendZip('111-111', '서울시 강남구 역삼동')">111-112</a></th>
+		<th width="320">서울시 동대문구 동대문동</th>
+	</tr>
+	<tr>
+		<th width="70"><a href="#void" onclick="sendZip('111-111', '서울시 강남구 역삼동')">111-123</a></th>
+		<th width="320">부천시 원미구 소사동</th>
+	</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#radioBtn").click(function() {
+/* 		alert($("[value='남자']").is(":checked"));
+		alert($("[value='여자']").is(":checked")); */
+		
+		alert($("[name='gender']:checked").val());
+	})
+	
+	$("#btn1").click(function () {
+		var checkedData="", cnt=0;
+		$("[name='hobby']").each(function(idx, el) {
+//			alert(idx+"/"+ +$(el).is(":checked")+"/"+$(el).val());
+			
+			if($(el).is(":checked")){
+				cnt++;
+				checkedData+= $(el).val()+" ";
+			}
+		});
+		alert("선택한 취미:"+checkedData)
+	
+		//선택한 체크박스 갯수
+		alert("선택한 취미 갯수:"+cnt)
+		
+		//
+		var len=$("[name='hobby']:checked").length;
+		alert("선택한 취미 갯수:"+len)
+		
+		
+		//확ㅇ;ㄴ된 체크박스만 담아 반복
+		var value="";
+		$("[name='hobby']:checked").each(function(idx, el) {
+			value+= $(el).val()+" ";
+		});
+		alert("선택한 값: "+value);
+	});
+	
+});//ready
+
+</script>
+</head>
+<body>
+<input type="radio" value="남자" name="gender"/>남자 <br/>
+<input type="radio" value="여자" name="gender"/>여자 <br/>
+<input type="button" value="btn" id="radioBtn" class="btn" />
+<br/>
+
+<input type="checkbox" value="독서" name="hobby"/>독서<br/>
+<input type="checkbox" value="영화감상" name="hobby"/>영화감상<br/>
+<input type="checkbox" value="음악감상" name="hobby"/>음악감상<br/>
+<input type="checkbox" value="등산" name="hobby"/>등산<br/>
+<input type="button" value="값얻기" id="btn1" class="btn"/><br/>
+</body>
+</html>

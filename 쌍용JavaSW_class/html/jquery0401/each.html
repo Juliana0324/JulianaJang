@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#btn").click(function() {
+		var arr=["백반", "짜장면","볶음밥","해장국","돈가스","라면"];
+		//each는 반복을 수행
+		//select를 사요ㅛㅇ하면 찾아낸 배열 반복=> 배열과 반복문 합침
+		$.each(arr, function(idx, el) {
+			alert(idx+" / "+el+" / "+arr[idx]);
+		});
+	});
+});
+</script>
+</head>
+<body>
+<input type="button" value="배열반복" class="btn" id="btn"/>
+</body>
+</html>
