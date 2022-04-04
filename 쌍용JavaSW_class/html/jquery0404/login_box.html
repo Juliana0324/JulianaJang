@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here.</title>
+<!-- 공통 CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.130/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+ table { margin: 0px auto; }
+ #warningBox{font-weight: bold; font-size: 20px; color:red; margin: 0px auto; }
+</style>
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#id").keydown(function(evt) {
+		enterKey(evt.which);
+	});
+	$("#passwd").keydown(function(evt) {
+		enterKey(evt.which);
+	});
+	
+	$("#btn").click(function(){
+		chkNull();
+	})
+});
+
+function enterKey(keycode){
+	if(keycode==13){
+		chkNull();
+	}	
+}
+
+function chkNull() {
+	if($("#id").val() ==""){
+		$("#warningBox").show();
+		$("#warningBox").html("아이디 입력필수");
+		$("#id").focus();
+		return;
+		}
+	
+	if($("#passwd").val() ==""){
+		$("#warningBox").show();
+		$("#warningBox").html("비밀번호 입력필수");
+		$("#passwd").focus();
+		return;
+		}
+	
+//	window.open("http://daum.net", "daum");
+
+	//location을 이용한 페이지 이동-> 백엔드로 전솧ㅇ되지 않음
+	//location.href="login_process.jsp";
+	//document.frm.submit();
+	
+	//jquery코드
+	//$("form").submit(); //tag select
+	//$("[name='frm'").submit(); //tag select
+	$("#frm").submit();
+}
+</script>
+</head>
+<body>
+<form action="loginprocess.jsp" method="get" name="frm" id="frm">
+<table>
+<tr>
+<td colspan="2" style="text-align: center;"><h1>로그인</h1></td>
+</tr>
+<tr>
+ <td><input type="text" name="id" id="id" class="inputBox" placeholder="아이디" 
+ 	tabindex="1" 
+  style="width: 300px;height:40px;font-size: 24px; text-align: center;font-weight: bold;"/></td>
+ <td rowspan="2">
+  	<input type="button" id="btn" class="btn"  value="로그인"  tabindex="3"
+ 	style="height: 86px; width: 100px;font-size: 22px; font-weight: bold;"/></td>
+
+<!--  자스에서 유효성 검증을 수행한후 페이지를 이동해야하면 submit을 사용하면 안됨
+	<input type="submit" id="btn" class="btn"  value="로그인"  tabindex="3"
+ 	style="height: 86px; width: 100px;font-size: 22px; font-weight: bold;"/></td> -->
+</tr>
+<tr>
+ <td> 	
+ <input type="password" name="passwd" id="passwd" class="inputBox" 
+ tabindex="2"
+ placeholder="비밀번호"  style="width: 300px;height:40px;font-size: 24px; text-align: center;font-weight: bold;"/></td>
+</tr>
+</table>
+<div id="warningBox">아아아</div>
+</form>
+</body>
+</html>

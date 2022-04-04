@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	//속성변경
+	//attr : 한번 설정되면 두번 변경되지 않음  
+	//prop : 메모리쪽에 생성되어서 변경가능
+	$("#btnAttr").click(function() {
+		$("#text").attr("value", "클릭되었습니다.")	
+/* 		$("#text").prop("value", "클릭되었습니다.")	 */
+		$("#text").attr("class", "inputBox")	
+	});
+	
+	function male(){
+	$("#btnM").click(function() {
+		$("#m").prop("checked", true);
+	});//btnM
+	}
+	
+	function female(){
+	$("#btnf").click(function() {
+		$("#f").prop("checked", true);
+	});//btnf
+	}
+	
+	$("#ssn1").keyup(function() {
+		if($("#ssn1").val().length==6){
+			$("#ssn2").focus();
+		}
+	});
+	
+	var first= $("#ssn2").val().charAt(0);
+	$("#ssn2").focusout(function() {
+		if($("#ssn2").val().length==7){
+			var genderid= first%2==0? "#f": "#m";
+			
+			$(genderid).prop("checked", true);
+		}
+	});
+})
+</script>
+</head>
+<body>
+<input type="button" value="속성추가" class="btn" id="btnAttr"/><br>
+<input type="text" name="text" id="text"/><br>
+
+<label>성별 선택</label><br>
+<input type="button" value="남자 설정" class="btn" id="btnM"/><br>
+<input type="button" value="여자 설정" class="btn" id="btnf"/><br>
+<label>주민번호 선택</label><br>
+<input type="text" name="ssn1" id="ssn1" maxlength="6" class="inputBox" /> -
+<input type="password" name="ssn2" id="ssn2" maxlength="6" class="inputBox"/><br/>
+<label>성별 선택</label>
+<input type="radio" name="gender" id="m"/>남자 <br/>
+<input type="radio" name="gender" id="f"/>여자 <br/>
+
+</body>
+</html>

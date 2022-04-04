@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#output {color:red; font-weight: bold; }
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#fadeOut").click(function() {
+		$("#img").fadeIn(1500);
+		/* $("#img").fadeOut(1500, function() {
+			alert("숨기기완료")
+		}); */
+	});//fadeOut
+	
+	$("#fadeIn").click(function() {
+		//$("#img").fadeOut(1500);
+		$("#img").fadeOut(1500, function() {
+			alert("보이기 완료")
+		});
+	})//fadeIn
+	
+	$("#fadeInOut").click(function() {
+		//$("#img").fadeOut(1500);
+		$("#img").toggle(1400);
+	})//fadeIn
+	
+	$("#btn").click(function() {
+		for(var i=0; i<8; i++){
+			$("#output").fadeToggle(500);
+		}
+			$("#output").fadeOut(500);
+		
+	})
+	
+})
+</script>
+</head>
+<body>
+<div>
+<img src="../js0324/img/blood_a.PNG" id="img"/>
+</div>
+<input type="button" value="숨기기" class="btn" id="fadeOut"/>
+<input type="button" value="보이기" class="btn" id="fadeIn"/>
+<input type="button" value="숨기기/보이기" class="btn" id="fadeInOut"/>
+<input type="button" value="깜빡" class="btn" id="btn"/>
+
+<div id="output">안녕</div>
+</body>
+</html>

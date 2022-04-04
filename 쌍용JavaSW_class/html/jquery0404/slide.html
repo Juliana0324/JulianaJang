@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#slideUp").click(function() {
+		$("#img").slideUp(100, function() {
+			alert("완료후 동작");
+		});
+	});//slideup
+	
+	$("#slideDown").click(function() {
+		$("#img").slideDown(1000, function() {
+			alert("완료후 펼치기");
+		});
+	});//slideDown
+	
+	$("#slideToggle").click(function() {
+		$("#img").slideToggle(1000);
+	});//slideDown
+})
+</script>
+</head>
+<body>
+<div>
+<img src="../js0324/img/blood_a.PNG" id="img"/>
+</div>
+<input type="button" value="펼쳐보이기" class="btn" id="slideDown"/>
+<input type="button" value="말아올리기" class="btn" id="slideUp"/>
+<input type="button" value="보이기" class="btn" id="slideToggle"/>
+</body>
+</html>
