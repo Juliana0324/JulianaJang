@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  
+    <script>
+  $(function() {
+	  $( "#datepicker" ).datepicker({
+		  dateFormat: "yy-mm-dd",
+		  appendText: "(yyyy-mm-dd)",
+		  dayNames:["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+    	  dayNamesMin:["일", "월","화","수", "목", "금","토"],
+    	  monthNamesShort: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ]
+		});
+  });
+  </script>
+</head>
+<body>
+<p>Date: <input type="text" id="datepicker"></p>
+</body>
+</html>

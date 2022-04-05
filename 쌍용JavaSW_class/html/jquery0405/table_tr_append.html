@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#tab {border:1px solid #333; border-spacing: 0px; width: 300px;}
+th, td {border:1px solid #333; height: 25px}
+
+#numTitle {width:100px}
+#ageTitle {width:200px}
+#nameTitle {width:120px}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	var cnt=1;
+	$("#btnAdd").click(function() {
+		var name=$("#name").val();
+		var age = $("#age").val();
+		var tr="<tr><td>"+cnt+"/"+$("#tab tbody tr").length+"</td><td>"+name+"</td><td>"+age+"</td></tr>"
+		$("#tab tbody").append(tr);
+		
+		$("#name").val("");
+		$("#age").val("");
+		cnt++;
+	})
+	
+	$("#btnRemove").click(function() {
+		$("#tab tbody tr:last").remove();
+	})
+});
+</script>
+</head>
+<body>
+<div id="inputFrm">
+<label>이름</label>
+<input type="text" name="name" class="inputBox" id="name" autofocus="autofocus"/>
+<label>나이</label>
+<input type="text" name="age" class="inputBox" id="age"/>
+<input type="button" class="btn" value="츄가" id="btnAdd"/>
+<input type="button" class="btn" value="삭제" id="btnRemove"/>
+</div>
+<div id="tab">
+<table>
+<thead>
+	<tr>
+		<th id="numTitle">번호</th>
+		<th id="nameTitle">이름</th>
+		<th id="ageTitle">나이</th>
+	</tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+</body>
+</html>

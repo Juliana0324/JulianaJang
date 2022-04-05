@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	$("#getValue").click(function() {
+		var val="<strong>"+$("#subject").val()+"</strong>";
+//		$("#output").html(val)
+		$("#output").text(val)
+	})
+	
+	$("#setValue").click(function() {
+//		alert($("#subject option").length);
+
+		$("#subject option:eq(0)").prop("selected", true);
+	})
+})
+</script>
+</head>
+<body>
+<input type="button" class="btn" id="getValue" value="값얻기"/>
+<input type="button" class="btn" id="setValue" value="값설정"/>
+<br><br>
+<select id="subject">
+	<option value="java">Java</option>
+	<option value="oracle">Oracle</option>
+	<option value="jdbc">JDBC</option>
+	<option value="css">Css</option>
+
+</select>
+<div id="output"></div>
+</body>
+</html>

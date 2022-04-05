@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="http://localhost/html_prj/common/css/main_20220321.css">
+<style type="text/css">
+#inputWrap {width: 600px; margin: 0px auto}
+#control {width: 690px; text-align: right; padding-right: 0px;}
+.licenseWrap{border:1px solid #333; margin-bottom: 10px}
+</style>
+<!-- JQuery CDN -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var cnt=1;
+	$("#btnAppend").click(function() {
+	/*	var temp= "<div class='licenseWrap'><label>자격증</label>"
+		+"<input type='text' name='license' class='inputBox' style='width: 400px'/></div>"; */
+		//자격증 추가는 5개 까지만 가능
+		
+		if($(".licenseWrap").length >5){
+			alert("자격증은 5개보다 많을 수 없습니다");
+			return;
+		}
+		var temp= "<div class='licenseWrap'>"+$(".licenseWrap").html()+"</div>";
+		$("#inputWrap").append(temp);
+		
+	})
+	
+	$("#imgBtnRemove").click(function() {
+		if($(".licenseWrap").length<2){
+			alert("자격증은 하나 이상");
+			return;
+		}
+		$("#inputWrap div:last").remove();
+	});
+	$("#btnRemove").click(function() {
+		$("#weekDiv").remove();
+	});
+	
+	$("#btnFirstRemove").click(function() {
+		$("#weekDiv strong:first").remove();
+	});
+	
+	$("#btnLastRemove").click(function() {
+		$("#weekDiv strong:last").remove();
+	});
+	$("#btnEqRemove").click(function() {
+		$("#weekDiv strong:eq(4)").remove();
+	});
+})
+
+</script>
+</head>
+<body>
+<div id="inputWrap">
+<div id="control">
+	<a href="#"><img src="../common/imgs/plus.png" id="btnAppend" title="추가"/></a>
+	<a href="#"><img src="../common/imgs/minus.png" id="imgBtnRemove" title="삭제"/></a>
+</div>
+</div>
+<div class="licenseWrap">
+<label>자격증</label>
+	<input type="text" name="license" class="inputBox" style="width: 200px"/>
+</div>
+
+<input type="button" value="삭제" class="btn" id="btnRemove" style="height:35px;"/>
+<input type="button" value="삭제2" class="btn" id="btnLastRemove" style="height:35px;"/>
+<input type="button" value="삭제3" class="btn" id="btnFirstRemove" style="height:35px;"/>
+<input type="button" value="삭제4" class="btn" id="btnEqRemove" style="height:35px;"/>
+<div id="weekDiv">
+<strong>오늘은 월요일 입니다.</strong>
+<strong>오늘은 화요일 입니다.</strong>
+<strong>오늘은 수요일 입니다.</strong>
+<strong>오늘은 목요일 입니다.</strong>
+<strong>오늘은 금요일 입니다.</strong>
+<strong>오늘은 토요일 입니다.</strong>
+<strong>오늘은 일요일 입니다.</strong>
+</div>
+</body>
+</html>
