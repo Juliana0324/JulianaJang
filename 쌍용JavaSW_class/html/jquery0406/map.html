@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8>
+<title>Insert title here.</title>
+<!-- 공통CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.147/html_prj/common/css/main_20220321.css"/>
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b7db9b52de02288b6df9c82fcc4316e"></script>
+<script>
+$(function(){
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(37.499327, 127.033214), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+   // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+   var map = new kakao.maps.Map(mapContainer, mapOption); 
+});
+</script>
+</head>
+<body>
+<div id="map" style="width:70%;height:700px;"></div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=UTF-8>
+<title>Insert title here.</title>
+<!-- 공통CSS -->
+<link rel="stylesheet" type="text/css" href="http://211.63.89.147/html_prj/common/css/main_20220321.css"/>
+<style type="text/css">
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0b7db9b52de02288b6df9c82fcc4316e"></script>
+<script>/* 안되는 이유는 아까 모니터링 때문에 포트가 바뀌어서 안되요 지금은 5109포트인데 등록해놓은 ttp://localhost 이 경로는 80입니다. 그래서 모니터링을 종료하셔야
+ 둘다 80으로 일치되어 지도가 열립니다.*/
+$(function(){
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 
+// 마커를 표시할 위치와 title 객체 배열입니다 
+var positions = [
+    {
+        title: '순대국집', 
+        latlng: new kakao.maps.LatLng(33.498908, 127.0333466)
+    },
+    {
+        title: '탄 돈가스', 
+        latlng: new kakao.maps.LatLng(37.450936, 127.0345676)
+    },
+    {
+        title: '제주은희네 - 해장국', 
+        latlng: new kakao.maps.LatLng(37.498260, 127.031548)
+    },
+    {
+        title: '남 오삼불고기',
+        latlng: new kakao.maps.LatLng(37.4984803, 127.035633)
+    }
+];
+
+// 마커 이미지의 이미지 주소입니다
+var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+    
+for (var i = 0; i < positions.length; i ++) {
+    
+    // 마커 이미지의 이미지 크기 입니다
+    var imageSize = new kakao.maps.Size(24, 35); 
+    
+    // 마커 이미지를 생성합니다    
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        map: map, // 마커를 표시할 지도
+        position: positions[i].latlng, // 마커를 표시할 위치
+        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+        image : markerImage // 마커 이미지 
+    });
+}
+});
+</script>
+</head>
+<body>
+<div id="map" style="width:70%;height:700px;"></div>
+</body>
+</html>

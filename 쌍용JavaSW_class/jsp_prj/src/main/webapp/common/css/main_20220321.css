@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/* 공통 디자인 */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code,
+	form, fieldset, legend, textarea, p, th, td, input, select, button {
+	margin: 0px;
+	padding: 0px;
+}
+
+fieldset, img {
+	border: 0px;
+}
+
+dl, ul, ol, li {
+	list-style: none;
+}
+
+input, select, textarea, button {
+	border-radius: 0px;
+	vertical-align: middle;
+}
+
+body {
+	background: #FFFFFF
+}
+
+body, th, td, input, select, textarea, button {
+	font-size: 13px;
+	font-family: 'Malgun Gothic', '맑은 고딕', dotum, '돋움', sans-serif;
+	color: #333;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #119eff;
+	text-decoration: underline;
+}
+
+address, caption, code {
+	font-style: normal;
+	font-weight: normal;
+}
+/* 숨김, 보임 */
+.show {
+	display: block;
+}
+
+.hide {
+	display: none;
+}
+
+.redColor {
+	color: #FF0000
+}
+/* 입력상자 */
+.inputBox {
+	border: 1px solid #e9e9e9;
+	background-color: #FFFFFF;
+	height: 35px;
+}
+
+/* 버튼 */
+.btn {
+	border: 1px solid #E9E9E9;
+	background-color: #F5F5F5;
+	height: 37px;
+	cursor: pointer;
+	padding-left: 5px;
+	padding-right: 5px
+}
