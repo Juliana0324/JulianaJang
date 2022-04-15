@@ -32,6 +32,9 @@ $(function() {
 <span id="history" >
 <%=request.getParameter("url") %>
 </span>
+
+<h2>요청객체 : <%=request%></h2>
+<h2>응답객체: <%=response%></h2>
 <ul>
 <%
 Enumeration<String> en= request.getHeaderNames();

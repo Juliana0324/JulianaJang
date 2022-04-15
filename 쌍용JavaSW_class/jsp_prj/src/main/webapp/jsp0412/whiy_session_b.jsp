@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="요청된 값을 받아 보여주는 페이지"
+    info="요청된 값을 세션에 보내줌"
+    session="true"
     %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +28,7 @@ $(function() {
 <body>
 <%
 String name=request.getParameter("name");
+
 %>
 <%=name %>님 안녕하세요!
 

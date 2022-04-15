@@ -1,15 +1,14 @@
-<%@page import="java.util.Random"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    errorPage="is_error_page.jsp"%>
+    info="여러 jsp를 끼워넣어 보여줄때(디자인)"
+    %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="http://211.63.89.147/jsp_
-
-prj/common/css/main_20220321.css"/>
+<link rel="stylesheet" type="text/css" href="http://211.63.89.147/jsp_prj/common/css/main_20220321.css"/>
 <!-- bootstrap CDN -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -27,12 +26,13 @@ $(function() {
 </style>
 </head>
 <body>
-<%
-	if(new Random().nextBoolean()){
-		throw new Exception("예외 강제발생");
-		
-	}
-%>
-정상적인 상황에서 제공할 페이지
+<div>
+외부 JSP
+<div>
+<c:import url="http://localhost/jsp_prj/jsp0415/jstl_import.jsp"/>
+<%--변수 공유x --%>
+</div>
+외부 JSP
+</div>
 </body>
 </html>

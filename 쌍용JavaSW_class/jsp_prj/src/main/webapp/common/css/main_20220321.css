@@ -63,7 +63,7 @@ address, caption, code {
 }
 
 /* 버튼 */
-.btn {
+.localBtn {
 	border: 1px solid #E9E9E9;
 	background-color: #F5F5F5;
 	height: 37px;
