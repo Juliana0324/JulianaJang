@@ -1,13 +1,11 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    info="매개변수로 요청하기"
+    
     %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://211.63.89.147/jsp_prj/common/css/main_20220321.css"/>
@@ -20,33 +18,28 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	$("#btn").click(function() {
-		//var param="name="+$("#name").val()+"&bYear="+$("#bYear").val();
-		$.ajax({
-			url:"param_ajax.jsp?",
-			//data:param,
-			data:{name:$("#name").val(), bYear:$("#bYear").val()},
 	
-			async:true,
-			dataType:"json",
-			error:function(xhr){
-				$("#output").html("잠시후 다시 시도해 주세요 <br/>"+ xhr.status+ " "+ xhr.statusText);
-				for(var i=0; i<3; i++){
-					$("#output").fadeOut(1000).fadeIn(1000);
-				}
+	$("#btn").click(function() {
+		var name=$("#name").val();
+		/*단일 노드 파싱  */
+		$.ajax({
+			url:"http://localhost/jsp_prj/xml0426/xml_data.jsp",
+			data: {"name":name},
+			type:"post",
+			dataType:"xml",
+			error: function(xhr) {
+				alert(xhr.status+ "/ "+xhr.statusText);
 			},
-			
-			success:function(jsonObj){
-				var output="";
-				output+="<strong>"+jsonObj.name+"</strong>";
-				output+="<strong>"+jsonObj.year+"</strong>";
-				output+="<marquee scrollamount='50'>"+jsonObj.age+"</marquee>";
-				
-				$("#output").html(output);
+			success:function(xml){
+				$("#outputMsg").html($(xml).find("today").text());
 			}
 			
+			
 		});//ajax
+		
+		
 	});//click
+	
 });//ready
 </script>
 <style type="text/css">
@@ -54,24 +47,13 @@ $(function() {
 </style>
 </head>
 <body>
-
 <div>
-<label>이름</label>
-<input type="text" name="name" id="name" class="inputBox"/><br/>
-<label>태어난 해</label>
-<select name="bYear" id="bYear">
-<%
-	int nowYear=Calendar.getInstance().get(Calendar.YEAR);
-	
-	pageContext.setAttribute("nowYear", nowYear);
-%>
-<c:forEach var="year" begin="1950" end="${nowYear}" step="1">
-	<option value="${year}"><c:out value="${year}"/></option>
-</c:forEach>
-</select>
-<input type="button" value="입력" class="btn btn-dark" id="btn"/>
+<input type="text" name="name" class="inputBox" id="name" placeholder="이름" autofocus="autofocus"/>
+<input type="button" value="입력" class="btn btn-info" id="btn"/><br/>
+
 </div>
-<div id="output"></div>
+
+<div id="outputMsg"></div>
 
 </body>
 </html>

@@ -1,13 +1,9 @@
-<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-    info="매개변수로 요청하기"
-    %>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="http://211.63.89.147/jsp_prj/common/css/main_20220321.css"/>
@@ -21,31 +17,23 @@
 <script type="text/javascript">
 $(function() {
 	$("#btn").click(function() {
-		//var param="name="+$("#name").val()+"&bYear="+$("#bYear").val();
-		$.ajax({
-			url:"param_ajax.jsp?",
-			//data:param,
-			data:{name:$("#name").val(), bYear:$("#bYear").val()},
-	
-			async:true,
-			dataType:"json",
+		$.ajax( {
+			url:"http://localhost/jsp_prj/xml0426/xml_data2.jsp",
+			type:"get",
+			dataType:"xml",
 			error:function(xhr){
-				$("#output").html("잠시후 다시 시도해 주세요 <br/>"+ xhr.status+ " "+ xhr.statusText);
-				for(var i=0; i<3; i++){
-					$("#output").fadeOut(1000).fadeIn(1000);
-				}
+				alert(xhr.status+"/"+xhr.statusText);
 			},
-			
-			success:function(jsonObj){
-				var output="";
-				output+="<strong>"+jsonObj.name+"</strong>";
-				output+="<strong>"+jsonObj.year+"</strong>";
-				output+="<marquee scrollamount='50'>"+jsonObj.age+"</marquee>";
+			success:function(xml){
+				var output="<ul>";
+				$(xml).find("title").each(function(idx, titleNode) {
+					output+="<li>"+$(titleNode).text()+"</li>";
+				});
 				
+				output+="</ul>";
 				$("#output").html(output);
 			}
-			
-		});//ajax
+		}); //ajax
 	});//click
 });//ready
 </script>
@@ -54,24 +42,10 @@ $(function() {
 </style>
 </head>
 <body>
-
 <div>
-<label>이름</label>
-<input type="text" name="name" id="name" class="inputBox"/><br/>
-<label>태어난 해</label>
-<select name="bYear" id="bYear">
-<%
-	int nowYear=Calendar.getInstance().get(Calendar.YEAR);
-	
-	pageContext.setAttribute("nowYear", nowYear);
-%>
-<c:forEach var="year" begin="1950" end="${nowYear}" step="1">
-	<option value="${year}"><c:out value="${year}"/></option>
-</c:forEach>
-</select>
-<input type="button" value="입력" class="btn btn-dark" id="btn"/>
+<input type="button" class="btn btn-info" id="btn" value="값얻기"/>
 </div>
-<div id="output"></div>
-
+<div id="output">
+</div>
 </body>
 </html>

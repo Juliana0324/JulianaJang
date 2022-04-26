@@ -78,6 +78,7 @@ $(function() {
 				console.log("문제발생"+xhr.status+", "+xhr.statusText);
 			},
 			success:function(data){				
+				//alert(data); //JSON: Object   /  text: text   --> 응답되는 형태에 따라 다름
 				$("#result").html(data.name+"\t"+data.age);
 			}
 		});
