@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 부서는 부서명, 위치, 부서번호로 구성된다. -->
+<depts>
+	<dept>
+		<deptno>10</deptno>
+		<dname>개발부</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>20</deptno>
+		<dname>영업부</dname>
+		<loc>대전</loc>
+	</dept>
+	<dept>
+		<deptno>30</deptno>
+		<dname>총무부</dname>
+		<loc>서울</loc>
+	</dept>
+	<dept>
+		<deptno>40</deptno>
+		<dname>해외영업부</dname>
+		<loc/>
+	</dept>
+</depts>
+<!-- 
+	[{deptno:10, dname:"개발",loc:"서울"},
+	{deptno:20, dname:"영업",loc:"대전"},
+	{deptno:10, dname:"개발",loc:"서울"}
+	]
+ -->

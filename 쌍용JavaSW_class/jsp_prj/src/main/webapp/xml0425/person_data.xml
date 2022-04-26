@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  -->
+<persons>
+	<person>
+		<name>황성준</name>
+		<age>25</age>
+		<addr>서울시 강남구 역삼동</addr>
+	</person>
+	<person>
+		<name>신유철</name>
+		<age>26</age>
+		<addr>서울시 강북구 수유동</addr>
+	</person>
+	<person>
+		<!-- WellFormed XML은 작성 규칙만 준수하여 만들면 된다 -->	
+		<age>20</age>
+		<name>강산</name>
+		<addr>서울시 동대문 동대문동</addr>
+		<addr>경기도 부천시</addr>
+		<email>kang@test.com</email>
+	</person>
+</persons>

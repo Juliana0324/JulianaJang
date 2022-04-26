@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emps>
+  <pubDate>2022-04-25</pubDate>
+  <description>조회된 사원정보 제공</description>
+  <language>ko</language>
+  <resultFlag>true</resultFlag>
+  <emp>
+    <empno>7521</empno>
+    <ename>WARD</ename>
+    <job>SALESMAN</job>
+    <sal>1250</sal>
+    <hiredate>1981-02-22 일요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7566</empno>
+    <ename>JONES</ename>
+    <job>MANAGER</job>
+    <sal>2975</sal>
+    <hiredate>1981-04-02 목요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7654</empno>
+    <ename>MARTIN</ename>
+    <job>SALESMAN</job>
+    <sal>1250</sal>
+    <hiredate>1981-09-28 월요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7698</empno>
+    <ename>BLAKE</ename>
+    <job>MANAGER</job>
+    <sal>2850</sal>
+    <hiredate>1981-05-01 금요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7782</empno>
+    <ename>CLARK</ename>
+    <job>MANAGER</job>
+    <sal>2450</sal>
+    <hiredate>1981-06-09 화요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7788</empno>
+    <ename>SCOTT</ename>
+    <job>ANALYST</job>
+    <sal>3000</sal>
+    <hiredate>1987-04-19 일요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7839</empno>
+    <ename>KING</ename>
+    <job>PRESIDENT</job>
+    <sal>5000</sal>
+    <hiredate>1981-11-17 화요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7844</empno>
+    <ename>TURNER</ename>
+    <job>SALESMAN</job>
+    <sal>1500</sal>
+    <hiredate>1981-09-08 화요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7876</empno>
+    <ename>ADAMS</ename>
+    <job>CLERK</job>
+    <sal>1100</sal>
+    <hiredate>1987-05-23 토요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7900</empno>
+    <ename>JAMES</ename>
+    <job>CLERK</job>
+    <sal>950</sal>
+    <hiredate>1981-12-03 목요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7902</empno>
+    <ename>FORD</ename>
+    <job>ANALYST</job>
+    <sal>3000</sal>
+    <hiredate>1981-12-03 목요일 00:00:00</hiredate>
+  </emp>
+  <emp>
+    <empno>7934</empno>
+    <ename>MILLER</ename>
+    <job>CLERK</job>
+    <sal>1300</sal>
+    <hiredate>1982-01-23 토요일 00:00:00</hiredate>
+  </emp>
+</emps>
