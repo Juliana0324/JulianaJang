@@ -1,0 +1,5 @@
+서버 설정:
+
+	<Context docBase="mvc_prj2" path="/mvc_prj2" reloadable="true" source="org.eclipse.jst.jee.server:mvc_prj2">
+		<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="10" maxTotal="20" maxWaitMillis="-1" name="jdbc/mvc2" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@211.63.89.147:1521:orcl" username="scott"/>
+	</Context>

@@ -21,6 +21,7 @@ $(function() {
 <style type="text/css">
 
 </style>
+
 </head>
 <body>
 <a href="../controller.do?name=ctl">controller.do로 서블릿 요청</a><br/>
