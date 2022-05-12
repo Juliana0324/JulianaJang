@@ -19,7 +19,19 @@ $(function() {
 	$("#btnPost").click(function() {
 		$("#postFrm").submit();
 	});
+	
 });//ready
+
+function sendFrm(flag){
+	//form테그의 action을 변경가능: document.폼이름.method="GET"|"POST"
+	var method="GET";
+	if(flag==1){
+		method="POST"
+	}
+	document.frm.method=method;
+	
+	document.frm.submit();
+}
 </script>
 <style type="text/css">
 	
@@ -42,18 +54,83 @@ $(function() {
 			<input type="submit" value="Multi-POST요청" id="btnPost" class="btn btn-warning"/>
 		</form>
 		</li>
+		<li>다른 URL요청</li>
+		<li><a href="a.do">a.do</a></li>
+		<li><a href="b.do">b.do</a></li>
+		<li><a href="c.do">c.do</a></li>
 		<li>----------------------------------</li>
-		<li>응답페이지 처리</li>
+		<li>응답페이지 처리: 요청명과 jsp명이 같을때<br/>
+		<a href="void_return.do">jsp=요청명</a>
+		</li>
+		
 		<li><strong>응답페이지 처리(views하위 폴더)</strong>
 		<a href="sub_result.do">요청</a>
 		</li>
 		<li>forward</li>
 		<li>redirect</li>
 		<li>----------------------------------</li>
-		<li>Web Parameter 요청(HttpServletRequest)</li>
-		<li>Web Parameter 요청(단일형)</li>
-		<li>Web Parameter 요청(VO)</li>
-		<li>HttpSession</li>
+		<li><a href="request_info.do">접속자 정보받기</a></li>
+		<li>Web Parameter 요청(HttpServletRequest)
+			<a href="use_request.do?name=test&age=20&lang=java&lang=c/c%2B%2B&lang=Python">요청</a>
+		</li>
+		<li>Web Parameter 요청(단일형)
+			<a href="single_param.do?name=test&age=20&lang=java&lang=c/c%2B%2B&lang=Python">요청</a>
+		</li>
+		<li>Web Parameter 요청(VO)
+			<a href="vo_param.do?name=test&age=20&lang=java&lang=c/c%2B%2B&lang=Python">요청</a>
+		</li>
+		<li>
+			web parameter 한글 처리<br/>
+			<form action="vo_param.do" name="frm">
+				<label>이름</label> <input type="text" name="name" class="inputBox"/><br/>
+				<label>나이</label> <input type="text" name="age" class="inputBox"/><br/>
+				<label>언어</label> 
+				<input type="checkbox" name="lang" value="자바"/>자바<br/>
+				<input type="checkbox" name="lang" value="자바스크립트"/>자스 <br/>
+				<input type="checkbox" name="lang" value="파이썬"/>파이썬<br/>
+				<input type="checkbox" name="lang" value="c언어"/>C언어<br/>
+				<input type="button" value="Get전송" onclick="sendFrm(0)" class="btn btn-info"/>
+				<input type="button" value="Post전송" onclick="sendFrm(1)" class="btn btn-info"/>
+			</form>
+		</li>
+		<li>
+		redirect이동
+			<a href="day0512/do_move.do">do요청(Controller)</a>
+		</li>
+		<li>
+		redirect이동
+			<a href="day0512/jsp_move.do">jsp요청(Controller)</a>
+		</li>
+		<li>
+		forward이동
+			<a href="day0512/forward_a.do">do요청(Controller 직접요청)</a>
+		</li>
+		<li>
+		forward이동
+			<a href="day0512/forward_b.do">do요청(Controller)</a>
+		</li>
+		<li>
+			include<br/>
+			<a href="day0512/include_views.do">WEB-INF/views</a>
+		</li>
+		<li>
+		include<br/>
+			<a href="day0512/include_webapp.do">do</a>
+		</li>
+		
+		
+		<li>HttpSession<br/>
+			<a href="day0512/session.do">HttpSession</a>
+		</li>
+		<li>HttpSession<br/>
+			<a href="day0512/session.do">@SessionAttribute설정</a>
+		</li>
+		<li>HttpSession<br/>
+			<a href="day0512/session.do">@SessionAttribute 값얻기</a>
+		</li>
+		<li>HttpSession<br/>
+			<a href="day0512/session.do">@SessionAttribute 삭제</a>
+		</li>
 		<li>Cookie사용</li>
 		<li>AJAX</li>
 	</ul>
