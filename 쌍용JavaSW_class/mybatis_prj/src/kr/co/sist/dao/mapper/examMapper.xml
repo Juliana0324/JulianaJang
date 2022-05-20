@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.dao.examMapper">
+
+<!-- MyTab 테이블에 레코드 추가 -->
+<insert id="insertMyTab" parameterType="kr.co.sist.vo.MyTabVO">
+ 	insert into my_tab(id,name,email,input_date,age) 
+ 	 values(#{ id }, #{ name } , #{ email }, sysdate, #{ age } )
+</insert>
+<!-- 아이디와 이메일을 가지고 이름 과 나이를 변경 -->
+<update id="updateMyTab" parameterType="kr.co.sist.vo.MyTabVO" >
+<![CDATA[
+	update	my_tab
+	set		name=#{ name }, age=#{ age }
+	where	id=#{ id } and email=#{ email }  
+]]>
+</update>
+<!-- 아이디를 입력받아 삭제. : 값이 하나인 경우 parameterType="단일형" 을 설정할 수 있다. -->
+<delete id="deleteMyTab" parameterType="String">
+	delete from my_tab where id=#{ id }
+</delete>
+
+
+</mapper>
