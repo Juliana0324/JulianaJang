@@ -204,6 +204,15 @@ function sendReq1(){
 	<a href="day0516/use_exception.do">요청 예외 처리</a>
 </li>
 
+<li>
+	<a href="day0518/di.do">DI도입</a>
+</li>
+<li>
+	<a href="day0518/di2.do">DI도입(annotation)</a>
+</li>
+<li>
+	<a href="mybatis/mybatis_index.do">MyBatis사용</a>
+</li>
 </ul>
 </div>
 </body>

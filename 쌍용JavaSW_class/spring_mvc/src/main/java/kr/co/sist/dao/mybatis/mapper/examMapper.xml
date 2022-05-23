@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.dao">
+ <!-- 칼럼 하나에 행하나 조회(Single Column Single Row) dept테이블에서 부서번호를 입력받아 부서명 조회
+ 	String dname = SqlSession.selectOne("scsr", 10)
+ -->
+ <select id="scsr" resultType="String" parameterType="int">
+	select dname 
+	from dept 
+	where deptno=#{deptno}	
+ </select>
+</mapper>
