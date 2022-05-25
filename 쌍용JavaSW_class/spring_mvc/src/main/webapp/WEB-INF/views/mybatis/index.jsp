@@ -28,14 +28,14 @@ $(function() {
 <body>
 <ul>
 	<li><a href="day0523/scsrFrm.do">칼럼 하나에 행하나 조회</a></li>
-	<li><a href="#void">칼럼 하나에 여러행 조회</a></li>
-	<li><a href="#void">칼럼 여러개 행하나 조회</a></li>
-	<li><a href="#void">칼럼 여러개 여러행 조회</a></li>
-	<li><a href="#void"> < 조회</a></li>
-	<li><a href="#void"> > 조회</a></li>
-	<li><a href="#void"> like </a></li>
-	<li><a href="#void"> subquery</a></li>
-	<li><a href="#void"> union </a></li>
+	<li><a href="day0524/scmrFrmProcess.do">칼럼 하나에 여러행 조회</a></li>
+	<li><a href="day0524/mcsrFrmProcess.do">칼럼 여러개 행하나 조회</a></li>
+	<li><a href="day0524/mcmrFrmProcess.do">칼럼 여러개 여러행 조회</a></li>
+	<li><a href="day0524/ltFrmProcess.do"> < 조회</a></li>
+	<li><a href="day0525/gtFrmProcess.do"> > 조회</a></li>
+	<li><a href="day0525/likeFrmProcess.do"> like </a></li>
+	<li><a href="day0525/subquery.do"> subquery</a></li>
+	<li><a href="day0525/union.do"> union</a></li>
 	<li><a href="#void"> join</a></li>
 	<li><a href="#void"> subquery + join</a></li>
 	<li><a href="#void"> 테이블명이 동적일때</a></li>

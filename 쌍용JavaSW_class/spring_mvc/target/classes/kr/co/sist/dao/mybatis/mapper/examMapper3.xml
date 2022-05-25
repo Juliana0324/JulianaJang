@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.dao.exam3">
+
+  <!-- >의 사용
+  	XML작성 규칙에 공백을 허용하기 때문에 Error가 발생하지 않는다
+  	but! 사용해주는 것이 좋디 
+  	List<EmpDomain> ed = ss.selectList("greaterthan", 10);
+   -->
+  <select id="greaterThan" resultType="ed" parameterType="int">
+  	select empno, ename, sal, hiredate, deptno 
+  	from emp
+  	<!-- 
+	1.   	where sal &gt; #{sal}
+	
+	2. 		<![CDATA[
+  			where sal > #{sal}
+  			]]>
+	  	where sal &gt; #{sal}
+  	 -->
+		<![CDATA[
+  			where sal > #{sal}
+  			]]>  	
+  </select>
+  
+  <!-- like 조회 
+  	Oracle like 특수문자는 '%'는 JDBC에 bind변수 ? 와 함께 사용되면 java에서 bind변수를 인식하지 못한다
+  	%를 붙여 일반문자로 변환한 다음 ('%')||를 사용하여 Java의 bund변수와 연동
+  	where 칼럼명 like '%'||#{변수명}||'%'
+  	car model 테이블에서 입력된 옵션이 있는 차량의 모델명, 년식, 가격, 옵션을 조회
+  	
+   -->
+  <select id="like" resultType="md" parameterType="String">
+  	select model, car_year, price, car_option, to_char(hiredate, 'yyyy-mm-dd') hiredate, car_img
+  	from car_model
+  	<!-- 
+  	where car_option like '% #{car_option} %'	
+  	 -->
+  	where car_option like UPPER('%'||#{car_option}||'%')	
+  	
+  </select>
+  
+  <!-- 문제 carModel 테이블에서 전체 차량건수-->
+  <select id="selectCarCnt" resultType="int">
+
+  	select COUNT(model) cnt from car_model
+  	
+  </select>
+  
+  <!-- carModel 테이블에서 입력된 시작번호와 끝번호 사이에 해당하는 차량을 마지막에 입력된 차량순서로 조회
+  		조회칼럼 차량의 이미지, 모델명, 년식, 가격, 옵션 입력일 조회
+   -->
+   <!-- resultMap: 칼럼과 세터를 미리 매핑시킨다 -->
+   <resultMap type="md" id="mdResult">
+   	<result column="MODEL" property="model"/>   
+   	<result column="CAR_YEAR" property="car_year"/>   
+   	<result column="PRICE" property="price"/>   
+   	<result column="CAR_OPTION" property="car_option"/>   
+   	<result column="HIREDATE" property="hiredate"/>   
+   	<result column="CAR_IMG" property="car_img"/>   
+   </resultMap>
+   
+	<select id="subquery" resultMap="mdResult" parameterType="boardVO">
+	select  model, car_year, price, car_option, to_char(hiredate, 'yyyy-mm-dd') hiredate, car_img
+	from (select row_number()over(order by hiredate desc) rnum, model, car_year, price, car_option, hiredate, car_img
+		from car_model)
+	where rnum between #{startNum} and #{endNum}					
+	</select>
+	  
+	  <!-- union테이블을 아래로 붙여 검색
+	  cp_emp3 테이블과 cp_emp4테이블을 합쳐서 보여줄때 
+	  사원번호, 사원명, 직무 조회 -->
+	<select id="union" resultType="ed">
+	select empno, ename, job from cp_emp3
+	union 
+	select empno, ename, job from cp_emp4
+	
+	</select>
+	  
+	  
+</mapper>

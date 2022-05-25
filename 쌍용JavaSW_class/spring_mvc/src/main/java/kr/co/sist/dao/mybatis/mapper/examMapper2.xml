@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.sist.dao">
+ <!-- 칼럼 하나에 행 여러개 조회(Single Column Multi Row) 
+ emp테이블ㅇ[서 부서번호 입력받아 사원명 조회
+ List<String> list = SqlSession.selectList("scmr", 10)
+ -->
+ <select id="scmr" resultType="String" parameterType="int">
+	select ename
+	from emp 
+	where deptno=#{deptno}	
+ </select>
+ 
+  <!-- 칼럼 여러개 행하나 조회(Multi column SingleRow) 칼럼 여러개 = Domain
+  emp테이블에서 사원번호에 해당하는 사원번호, 사원명, 입사일, 부서번호를 조회
+  EmpDomain ed = ss.selectOne("mscr", 7788);
+  -->
+  <select id="mcsr" resultType="kr.co.sist.domain.mybatis.EmpDomain" parameterType="Integer">
+  	select empno, ename, hiredate, deptno 
+  	from emp
+  	where empno = #{empno}
+  </select>
+  
+  <!-- 중복 쿼리문의 선언: 모든 쿼리문 작성 가능 -->
+  <sql id="dupEmp">
+	select empno, ename, hiredate, deptno 
+  	from emp
+  </sql>
+  
+  
+  <!-- 칼럼 여러개 행 조회(Multi column multy Row) 칼럼 여러개 = Domain
+  emp테이블에서 부서번호에 해당하는 사원번호, 사원명, 입사일, 부서번호를 조회
+	List<EmpDomain> ed = ss.selectList("mcmr", 10);
+  -->
+   <select id="mcmr" resultType="ed" parameterType="Integer">
+     <include refid="dupEmp"/>
+     where   deptno=#{ deptno }
+  </select>
+  
+  
+  <!-- <의 사용 
+  emp테이블에서  입력된 연봉 이해 연봉을 수령에 해당하느 사원들의 사원번호 사원명, 입사일 부서번홀를 조회
+  List<EmpDomain> ed = ss.selectList("lessThan", 40000) -->
+  <select id="lessThan" resultType="ed" parameterType="int">
+  	select empno, ename, sal, hiredate, deptno 
+  	from emp
+  	<!-- 
+	  	where sal &lt; #{sal}
+  	 -->
+  	<![CDATA[
+  	where sal < #{sal}
+  	]]>
+  	
+  </select>
+  
+  
+</mapper>

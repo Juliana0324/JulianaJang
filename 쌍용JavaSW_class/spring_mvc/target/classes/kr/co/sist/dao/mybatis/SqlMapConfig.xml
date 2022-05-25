@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 <properties resource="properties/database.properties"/>
+<typeAliases>
+	<typeAlias type="kr.co.sist.domain.mybatis.EmpDomain" alias="ed"/>
+	<typeAlias type="kr.co.sist.domain.mybatis.ModelDomain" alias="md"/>
+	<typeAlias type="kr.co.sist.vo.BoardVO" alias="boardVO"/>
+</typeAliases>
   <environments default="development">
     <environment id="development">
       <transactionManager type="JDBC"/>
@@ -17,5 +22,7 @@
   </environments>
   <mappers>
     <mapper resource="kr/co/sist/dao/mybatis/mapper/examMapper.xml"/>
+    <mapper resource="kr/co/sist/dao/mybatis/mapper/examMapper2.xml"/>
+    <mapper resource="kr/co/sist/dao/mybatis/mapper/examMapper3.xml"/>
   </mappers>
 </configuration>
